@@ -54,6 +54,12 @@ userController.getAll = async (req, res) => {
           attributes: { exclude: ["password"] },
           where: filters,
         });
+        if (filteredUsers.length === 0) {
+            return res.json({
+                success: true,
+                message: "No existen usuarios con estos filtros",
+              });
+        }
   
         return res.json({
           success: true,
