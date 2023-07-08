@@ -1,4 +1,4 @@
-const { User } = require("../../models");
+const { User } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -34,7 +34,7 @@ authController.register = async (req, res) => {
       name: name,
       email: email,
       password: newPassword,
-      password_validation: "True",
+      password_validation: true,
       role_id: 1,
       user_status: "Active",
     });
