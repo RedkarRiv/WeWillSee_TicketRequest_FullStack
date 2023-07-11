@@ -228,6 +228,9 @@ adminController.getAllTickets = async (req, res) => {
             },
           ],
         },
+        {
+            model: Category,
+        }
       ],
     });
 
@@ -256,6 +259,7 @@ adminController.getAllCategories = async (req, res) => {
           {
             model: FAQ,
           },
+          
         ],
       });
   

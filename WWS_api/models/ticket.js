@@ -12,12 +12,15 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Ticket.belongsTo(models.SAT, { foreignKey: "SAT_assigned"});
       Ticket.belongsTo(models.User, { foreignKey: "requester"});
-        }
+      Ticket.belongsTo(models.Category, { foreignKey: "ticket_category_id"});
+    }
+        
+        
   }
   Ticket.init({
     requester: DataTypes.INTEGER,
     SAT_assigned: DataTypes.INTEGER,
-    category_id: DataTypes.INTEGER,
+    ticket_category_id: DataTypes.INTEGER,
     comments_id: DataTypes.INTEGER,
     ticket_status: DataTypes.STRING,
     ticket_timeline: DataTypes.DATEONLY,

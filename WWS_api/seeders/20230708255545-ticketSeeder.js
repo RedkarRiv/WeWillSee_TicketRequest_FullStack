@@ -8,7 +8,7 @@ module.exports = {
         id: 1,
         requester: 1,
         SAT_assigned: 1,
-        category_id: 1,
+        ticket_category_id: 1,
         comments_id: 1,
         ticket_status: "Active",
         ticket_timeline: new Date(),

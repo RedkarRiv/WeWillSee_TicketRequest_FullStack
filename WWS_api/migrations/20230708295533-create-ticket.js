@@ -23,7 +23,7 @@ module.exports = {
           key: "id"
         }
       },
-      category_id: {
+      ticket_category_id: {
         type: Sequelize.INTEGER
       },
       comments_id: {
