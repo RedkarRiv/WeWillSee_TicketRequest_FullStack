@@ -10,12 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Category.belongsTo(models.Theme,{ foreignKey: "theme_id", targetKey: "id"});
+      Category.hasMany(models.FAQ, { foreignKey: "category_id"});
+
     }
   }
   Category.init({
     category_name: DataTypes.STRING,
-    FAQ_id: DataTypes.INTEGER,
     theme_id: DataTypes.INTEGER,
     category_status: DataTypes.STRING
   }, {

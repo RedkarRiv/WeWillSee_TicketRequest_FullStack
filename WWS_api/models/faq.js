@@ -10,11 +10,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      FAQ.hasOne(models.Category, { foreignKey: "id"});
     }
   }
   FAQ.init({
-    FAQ_category: DataTypes.STRING,
+    category_id: DataTypes.INTEGER,
     question: DataTypes.STRING,
     answer: DataTypes.STRING,
     FAQ_status: DataTypes.STRING

@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     theme_status: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Themes',
+    modelName: 'Theme',
     timestamps: false,
   });
   return Theme;

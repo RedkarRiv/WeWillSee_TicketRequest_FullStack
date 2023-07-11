@@ -12,11 +12,12 @@ module.exports = {
       category_name: {
         type: Sequelize.STRING
       },
-      FAQ_category: {
-        type: Sequelize.STRING
-      },
       theme_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references:{
+          model: "Themes",
+          key: "id"
+        }
       },
       category_status: {
         type: Sequelize.STRING
