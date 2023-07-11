@@ -211,4 +211,37 @@ userController.inactivateOne = async (req, res) => {
   }
 };
 
+userController.activateOne = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const userCheck = await User.findByPk(userId);
+
+    if (!userCheck) {
+      return res.json({
+        success: true,
+        message: "El usuario no existe",
+      });
+    }
+    const inactivateUser = await User.update(
+      { user_status: "Activate" },
+      {
+        where: {
+          id: userId,
+        },
+      }
+    );
+    return res.json({
+      success: true,
+      message: "El usuario ha sido activado",
+      data: inactivateUser,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "El usuario no ha podido ser activado",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = userController;
