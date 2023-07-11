@@ -136,6 +136,61 @@ adminController.activateOneSAT = async (req, res) => {
     }
   };
 
+  adminController.inactivateOneByAdmin = async (req, res) => {
+    try {
+      const userId = req.params.id;
+  
+      const inactivateUser = await User.update(
+        { user_status: "Inactive" },
+        {
+          where: {
+            id: userId,
+          },
+        }
+      );
+      return res.json({
+        success: true,
+        message: "El usuerio ha sido desactivado por el admin",
+        data: inactivateUser,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "El usuario no ha podido ser desactivado por el admin",
+        error: error.message,
+      });
+    }
+  };
+  
+  adminController.activateOneByAdmin = async (req, res) => {
+      try {
+        const userId = req.params.id;
+    
+        const activateUser = await User.update(
+            { user_status: "Active" },
+          {
+            where: {
+              id: userId,
+            },
+          }
+        );
+        return res.json({
+          success: true,
+          message: "El usaurio ha sido activado por el admin",
+          data: activateUser,
+        });
+      } catch (error) {
+        return res.status(500).json({
+          success: false,
+          message: "El usuario no ha podido ser activado por el admin",
+          error: error.message,
+        });
+      }
+    };
+
+
+
+
 adminController.getAllSAT = async (req, res) => {
   try {
     const allSATs = await SAT.findAll({

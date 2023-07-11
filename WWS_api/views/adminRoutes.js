@@ -8,5 +8,7 @@ router.post('/newSAT', auth, isAdmin,  adminController.SATregister);
 router.delete('/deleteSAT/:id', auth, isAdmin,  adminController.SATdelete);
 router.get('/inactivateSAT/:id', auth, isAdmin,  adminController.inactivateOneSAT);
 router.get('/activateSAT/:id', auth, isAdmin,  adminController.activateOneSAT);
+router.get('/inactivateUser/:id', auth, isAdmin,  adminController.inactivateOneByAdmin);
+router.get('/activateUser/:id', auth, isAdmin,  adminController.activateOneByAdmin);
 
 module.exports = router;
