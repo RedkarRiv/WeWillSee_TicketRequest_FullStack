@@ -230,6 +230,11 @@ adminController.getAllTickets = async (req, res) => {
         },
         {
             model: Category,
+            include: [
+                {
+                    model: Theme,
+                }
+            ]
         }
       ],
     });
