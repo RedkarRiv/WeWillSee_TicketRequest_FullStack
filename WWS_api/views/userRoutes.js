@@ -8,6 +8,5 @@ router.post('/update', auth,  userController.updateUser);
 router.get('/all', auth, isAdmin,  userController.getAll);
 router.delete('/destroy/:id', auth, isAdmin,  userController.deleteOne);
 router.get('/all/filter', auth, isAdmin, userController.getAll);
-router.get('/allSATs', auth, isAdmin,  userController.getAllSAT);
 
 module.exports = router;

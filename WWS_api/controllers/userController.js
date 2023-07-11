@@ -177,30 +177,6 @@ userController.deleteOne = async (req, res) => {
   }
 };
 
-userController.getAllSAT = async (req, res) => {
-  try {
-      const allSATs = await SAT.findAll({
-        include: [
-          {
-            attributes: { exclude: ["password"] },
-            model: User,
-          },
-        ],
 
-
-      });
-      return res.json({
-        success: true,
-        message: "Datos de SATs recuperados",
-        data: allSATs,
-      });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "Los datos no han podido ser recuperados",
-      error: error.message,
-    });
-  }
-};
 
 module.exports = userController;
