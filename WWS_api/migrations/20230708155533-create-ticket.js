@@ -10,10 +10,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       requester: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references:{
+          model: "Users",
+          key: "id"
+        }
       },
-      SAT: {
-        type: Sequelize.INTEGER
+      SAT_assigned: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: "SATs",
+          key: "id"
+        }
       },
       category_id: {
         type: Sequelize.INTEGER

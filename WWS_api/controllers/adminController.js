@@ -1,4 +1,4 @@
-const { User, Role, SAT } = require("../models");
+const { User, Role, SAT, Ticket } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -111,85 +111,82 @@ adminController.inactivateOneSAT = async (req, res) => {
 };
 
 adminController.activateOneSAT = async (req, res) => {
-    try {
-      const SATId = req.params.id;
-  
-      const inactivateSAT = await SAT.update(
-        { sat_status: "Active" },
-        {
-          where: {
-            id: SATId,
-          },
-        }
-      );
-      return res.json({
-        success: true,
-        message: "El SAT ha sido activado",
-        data: inactivateSAT,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        message: "El SAT no ha podido ser activado",
-        error: error.message,
-      });
-    }
-  };
+  try {
+    const SATId = req.params.id;
 
-  adminController.inactivateOneByAdmin = async (req, res) => {
-    try {
-      const userId = req.params.id;
-  
-      const inactivateUser = await User.update(
-        { user_status: "Inactive" },
-        {
-          where: {
-            id: userId,
-          },
-        }
-      );
-      return res.json({
-        success: true,
-        message: "El usuerio ha sido desactivado por el admin",
-        data: inactivateUser,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        message: "El usuario no ha podido ser desactivado por el admin",
-        error: error.message,
-      });
-    }
-  };
-  
-  adminController.activateOneByAdmin = async (req, res) => {
-      try {
-        const userId = req.params.id;
-    
-        const activateUser = await User.update(
-            { user_status: "Active" },
-          {
-            where: {
-              id: userId,
-            },
-          }
-        );
-        return res.json({
-          success: true,
-          message: "El usaurio ha sido activado por el admin",
-          data: activateUser,
-        });
-      } catch (error) {
-        return res.status(500).json({
-          success: false,
-          message: "El usuario no ha podido ser activado por el admin",
-          error: error.message,
-        });
+    const inactivateSAT = await SAT.update(
+      { sat_status: "Active" },
+      {
+        where: {
+          id: SATId,
+        },
       }
-    };
+    );
+    return res.json({
+      success: true,
+      message: "El SAT ha sido activado",
+      data: inactivateSAT,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "El SAT no ha podido ser activado",
+      error: error.message,
+    });
+  }
+};
 
+adminController.inactivateOneByAdmin = async (req, res) => {
+  try {
+    const userId = req.params.id;
 
+    const inactivateUser = await User.update(
+      { user_status: "Inactive" },
+      {
+        where: {
+          id: userId,
+        },
+      }
+    );
+    return res.json({
+      success: true,
+      message: "El usuerio ha sido desactivado por el admin",
+      data: inactivateUser,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "El usuario no ha podido ser desactivado por el admin",
+      error: error.message,
+    });
+  }
+};
 
+adminController.activateOneByAdmin = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    const activateUser = await User.update(
+      { user_status: "Active" },
+      {
+        where: {
+          id: userId,
+        },
+      }
+    );
+    return res.json({
+      success: true,
+      message: "El usaurio ha sido activado por el admin",
+      data: activateUser,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "El usuario no ha podido ser activado por el admin",
+      error: error.message,
+    });
+  }
+};
 
 adminController.getAllSAT = async (req, res) => {
   try {
@@ -205,6 +202,39 @@ adminController.getAllSAT = async (req, res) => {
       success: true,
       message: "Datos de SATs recuperados",
       data: allSATs,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Los datos no han podido ser recuperados",
+      error: error.message,
+    });
+  }
+};
+
+adminController.getAllTickets = async (req, res) => {
+  try {
+    const allTickets = await Ticket.findAll({
+      include: [
+        {
+          model: User,
+        },
+
+        {
+          model: SAT,
+          include: [
+            {
+              model: User,
+            },
+          ],
+        },
+      ],
+    });
+
+    return res.json({
+      success: true,
+      message: "Todos los tickets recuperados",
+      data: allTickets,
     });
   } catch (error) {
     return res.status(500).json({

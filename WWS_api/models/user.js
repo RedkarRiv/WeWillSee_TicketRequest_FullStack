@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.belongsTo(models.Role, { foreignKey: "role_id", targetKey: "id" });
       User.hasOne(models.SAT, { foreignKey: 'user_id',  onDelete: 'CASCADE'});
+      User.hasMany(models.Ticket, { foreignKey: "requester"});
 
     }
   }

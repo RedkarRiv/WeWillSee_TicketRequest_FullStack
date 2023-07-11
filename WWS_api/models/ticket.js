@@ -10,12 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-    }
+      Ticket.belongsTo(models.SAT, { foreignKey: "SAT_assigned"});
+      Ticket.belongsTo(models.User, { foreignKey: "requester"});
+        }
   }
   Ticket.init({
     requester: DataTypes.INTEGER,
-    SAT: DataTypes.INTEGER,
+    SAT_assigned: DataTypes.INTEGER,
     category_id: DataTypes.INTEGER,
     comments_id: DataTypes.INTEGER,
     ticket_status: DataTypes.STRING,

@@ -10,5 +10,6 @@ router.get('/inactivateSAT/:id', auth, isAdmin,  adminController.inactivateOneSA
 router.get('/activateSAT/:id', auth, isAdmin,  adminController.activateOneSAT);
 router.get('/inactivateUser/:id', auth, isAdmin,  adminController.inactivateOneByAdmin);
 router.get('/activateUser/:id', auth, isAdmin,  adminController.activateOneByAdmin);
+router.get('/tickets/all', auth, isAdmin,  adminController.getAllTickets);
 
 module.exports = router;
