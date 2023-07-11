@@ -63,26 +63,52 @@ adminController.SATregister = async (req, res) => {
 };
 
 adminController.SATdelete = async (req, res) => {
-    try {
-      const SATId = req.params.id;
-      const deleteSAT = await SAT.destroy({
+  try {
+    const SATId = req.params.id;
+    const deleteSAT = await SAT.destroy({
+      where: {
+        id: SATId,
+      },
+    });
+    return res.json({
+      success: true,
+      message: "El SAT ha sido eliminado",
+      data: deleteSAT,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "El SAT no ha podido ser eliminado",
+      error: error.message,
+    });
+  }
+};
+
+adminController.inactivateOneSAT = async (req, res) => {
+  try {
+    const SATId = req.params.id;
+
+    const inactivateSAT = await SAT.update(
+      { sat_status: "Inactive" },
+      {
         where: {
           id: SATId,
         },
-      });
-      return res.json({
-        success: true,
-        message: "El SAT ha sido eliminado",
-        data: deleteSAT,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        message: "El SAT no ha podido ser eliminado",
-        error: error.message,
-      });
-    }
-  };
+      }
+    );
+    return res.json({
+      success: true,
+      message: "El usuario ha sido desactivado",
+      data: inactivateSAT,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "El usuario no ha podido ser desactivado",
+      error: error.message,
+    });
+  }
+};
 
 adminController.getAllSAT = async (req, res) => {
   try {
@@ -107,6 +133,5 @@ adminController.getAllSAT = async (req, res) => {
     });
   }
 };
-
 
 module.exports = adminController;

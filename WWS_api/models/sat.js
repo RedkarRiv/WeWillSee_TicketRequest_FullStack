@@ -14,7 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   SAT.init({
-    user_id: DataTypes.INTEGER
+    user_id: DataTypes.INTEGER,
+    sat_status: DataTypes.STRING
+
   }, {
     sequelize,
     modelName: 'SAT',
