@@ -311,18 +311,17 @@ adminController.newTheme = async (req, res) => {
     const themeName = req.body.new_theme_name;
 
     const checkTheme = await Theme.findAll({
-        where: {
-            theme_name : themeName
-        }
-    })
+      where: {
+        theme_name: themeName,
+      },
+    });
 
     if (checkTheme.length > 0) {
-        return res.status(200).json({
-            success: true,
-            message: "Ya existe un tema con ese nombre",
-          });
+      return res.status(200).json({
+        success: true,
+        message: "Ya existe un tema con ese nombre",
+      });
     }
-
 
     const newTheme = await Theme.create({
       theme_name: themeName,
@@ -346,45 +345,86 @@ adminController.newTheme = async (req, res) => {
 };
 
 adminController.newCategory = async (req, res) => {
-    try {
-      const newCategoryName = req.body.new_category_name;
-  const newCategoryTheme = req.body.theme;
+  try {
+    const newCategoryName = req.body.new_category_name;
+    const newCategoryTheme = req.body.theme;
 
-      const checkCategory = await Category.findAll({    
-          where: {
-              category_name : newCategoryName
-          }
-      })
-  
-      if (checkCategory.length > 0) {
-          return res.status(200).json({
-              success: true,
-              message: "Ya existe una categoria con ese nombre",
-            });
-      }
-  
-  
-      const newCategory = await Category.create({
+    const checkCategory = await Category.findAll({
+      where: {
         category_name: newCategoryName,
-        theme_id: newCategoryTheme,
+      },
+    });
 
-        category_status: "Active",
-      });
-  
+    if (checkCategory.length > 0) {
       return res.status(200).json({
         success: true,
-        message: "La categoria ha sido creada con exito",
-        data: {
-          newThemeDATA: newCategory,
-        },
-      });
-    } catch (error) {
-      return res.status(404).json({
-        success: false,
-        message: "No ha sido posible crear el tema",
-        error: error.message,
+        message: "Ya existe una categoria con ese nombre",
       });
     }
-  };
+
+    const newCategory = await Category.create({
+      category_name: newCategoryName,
+      theme_id: newCategoryTheme,
+
+      category_status: "Active",
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "La categoria ha sido creada con exito",
+      data: {
+        newThemeDATA: newCategory,
+      },
+    });
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      message: "No ha sido posible crear el tema",
+      error: error.message,
+    });
+  }
+};
+
+adminController.newFAQ = async (req, res) => {
+  try {
+    const newFAQCategory = req.body.category_id;
+    const newFAQquestion = req.body.question;
+    const newFASanswer = req.body.answer;
+
+    const checkFAQ = await FAQ.findAll({
+      where: {
+        question: newFAQquestion,
+      },
+    });
+
+    if (checkFAQ.length > 0) {
+      return res.status(200).json({
+        success: true,
+        message: "Ya existe un FAQ con esa consulta",
+      });
+    }
+
+    const newFAQ = await FAQ.create({
+      category_id: newFAQCategory,
+      question: newFAQquestion,
+      answer: newFASanswer,
+      FAQ_status: "Active",
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "El FAQ ha sido creada con exito",
+      data: {
+        newFAQDATA: newFAQ,
+      },
+    });
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      message: "No ha sido posible crear el FAQ",
+      error: error.message,
+    });
+  }
+};
 
 module.exports = adminController;
