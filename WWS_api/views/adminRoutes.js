@@ -12,5 +12,6 @@ router.get('/inactivateUser/:id', auth, isAdmin,  adminController.inactivateOneB
 router.get('/activateUser/:id', auth, isAdmin,  adminController.activateOneByAdmin);
 router.get('/tickets/all', auth, isAdmin,  adminController.getAllTickets);
 router.get('/categories/all', auth, isAdmin,  adminController.getAllCategories);
+router.post('/new_theme', auth, isAdmin,  adminController.newTheme);
 
 module.exports = router;

@@ -1,4 +1,13 @@
-const { User, Role, SAT, Ticket, Theme, FAQ, Category, Message } = require("../models");
+const {
+  User,
+  Role,
+  SAT,
+  Ticket,
+  Theme,
+  FAQ,
+  Category,
+  Message,
+} = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -235,19 +244,23 @@ adminController.getAllTickets = async (req, res) => {
               model: Theme,
             },
             {
-                model: FAQ,
-            }
+              model: FAQ,
+            },
           ],
         },
         {
-            model: Message,
-            include: [
+          model: Message,
+          include: [
+            {
+              model: User,
+              include: [
                 {
-                    model: User,
-                }
-            ]
-          },
-  
+                  model: Role,
+                },
+              ],
+            },
+          ],
+        },
       ],
     });
 
@@ -288,6 +301,45 @@ adminController.getAllCategories = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Los datos no han podido ser recuperados",
+      error: error.message,
+    });
+  }
+};
+
+adminController.newTheme = async (req, res) => {
+  try {
+    const themeName = req.body.new_theme_name;
+
+    const checkTheme = await Theme.findAll({
+        where: {
+            theme_name : themeName
+        }
+    })
+
+    if (checkTheme.length > 0) {
+        return res.status(200).json({
+            success: true,
+            message: "Ya existe un tema con ese nombre",
+          });
+    }
+
+
+    const newTheme = await Theme.create({
+      theme_name: themeName,
+      theme_status: "Active",
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "El tema se ha creado con exito",
+      data: {
+        newThemeDATA: newTheme,
+      },
+    });
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      message: "No ha sido posible crear el tema",
       error: error.message,
     });
   }

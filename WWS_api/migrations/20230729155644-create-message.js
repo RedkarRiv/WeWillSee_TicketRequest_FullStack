@@ -2,40 +2,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Tickets', {
+    await queryInterface.createTable('Messages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      requester: {
+      ticket_id: {
+        type: Sequelize.INTEGER,
+      },
+      comment_user_id: {
         type: Sequelize.INTEGER,
         references:{
           model: "Users",
           key: "id"
         }
       },
-      SAT_assigned: {
-        type: Sequelize.INTEGER,
-        references:{
-          model: "SATs",
-          key: "id"
-        }
-      },
-      ticket_category_id: {
-        type: Sequelize.INTEGER
-      },
-      comments_id: {
-        type: Sequelize.INTEGER
-      },
-      ticket_status: {
-        type: Sequelize.STRING
-      },
-      ticket_timeline: {
-        type: Sequelize.DATEONLY
-      },
-      reassigned: {
+      message_content: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -49,6 +33,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Tickets');
+    await queryInterface.dropTable('Messages');
   }
 };
