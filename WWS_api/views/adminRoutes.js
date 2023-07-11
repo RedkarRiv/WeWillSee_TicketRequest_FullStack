@@ -7,5 +7,6 @@ router.get('/allSATs', auth, isAdmin,  adminController.getAllSAT);
 router.post('/newSAT', auth, isAdmin,  adminController.SATregister);
 router.delete('/deleteSAT/:id', auth, isAdmin,  adminController.SATdelete);
 router.get('/inactivateSAT/:id', auth, isAdmin,  adminController.inactivateOneSAT);
+router.get('/activateSAT/:id', auth, isAdmin,  adminController.activateOneSAT);
 
 module.exports = router;

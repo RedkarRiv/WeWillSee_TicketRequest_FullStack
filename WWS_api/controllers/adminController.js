@@ -98,17 +98,43 @@ adminController.inactivateOneSAT = async (req, res) => {
     );
     return res.json({
       success: true,
-      message: "El usuario ha sido desactivado",
+      message: "El SAT ha sido desactivado",
       data: inactivateSAT,
     });
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "El usuario no ha podido ser desactivado",
+      message: "El SAT no ha podido ser desactivado",
       error: error.message,
     });
   }
 };
+
+adminController.activateOneSAT = async (req, res) => {
+    try {
+      const SATId = req.params.id;
+  
+      const inactivateSAT = await SAT.update(
+        { sat_status: "Active" },
+        {
+          where: {
+            id: SATId,
+          },
+        }
+      );
+      return res.json({
+        success: true,
+        message: "El SAT ha sido activado",
+        data: inactivateSAT,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "El SAT no ha podido ser activado",
+        error: error.message,
+      });
+    }
+  };
 
 adminController.getAllSAT = async (req, res) => {
   try {
