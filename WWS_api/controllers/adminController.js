@@ -229,13 +229,16 @@ adminController.getAllTickets = async (req, res) => {
           ],
         },
         {
-            model: Category,
-            include: [
-                {
-                    model: Theme,
-                }
-            ]
-        }
+          model: Category,
+          include: [
+            {
+              model: Theme,
+            },
+            {
+                model: FAQ,
+            }
+          ],
+        },
       ],
     });
 
@@ -254,32 +257,31 @@ adminController.getAllTickets = async (req, res) => {
 };
 
 adminController.getAllCategories = async (req, res) => {
-    try {
-      const allCategories = await Category.findAll({
-        include: [
-          {
-            model: Theme,
-          },
-  
-          {
-            model: FAQ,
-          },
-          
-        ],
-      });
-  
-      return res.json({
-        success: true,
-        message: "Todas las categorias recuperados",
-        data: allCategories,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        message: "Los datos no han podido ser recuperados",
-        error: error.message,
-      });
-    }
-  };
+  try {
+    const allCategories = await Category.findAll({
+      include: [
+        {
+          model: Theme,
+        },
+
+        {
+          model: FAQ,
+        },
+      ],
+    });
+
+    return res.json({
+      success: true,
+      message: "Todas las categorias recuperados",
+      data: allCategories,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Los datos no han podido ser recuperados",
+      error: error.message,
+    });
+  }
+};
 
 module.exports = adminController;
