@@ -13,5 +13,6 @@ router.get('/activateUser/:id', auth, isAdmin,  adminController.activateOneByAdm
 router.get('/tickets/all', auth, isAdmin,  adminController.getAllTickets);
 router.get('/categories/all', auth, isAdmin,  adminController.getAllCategories);
 router.post('/new_theme', auth, isAdmin,  adminController.newTheme);
+router.post('/new_category', auth, isAdmin,  adminController.newCategory);
 
 module.exports = router;

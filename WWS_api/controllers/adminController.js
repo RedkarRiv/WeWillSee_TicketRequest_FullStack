@@ -345,4 +345,46 @@ adminController.newTheme = async (req, res) => {
   }
 };
 
+adminController.newCategory = async (req, res) => {
+    try {
+      const newCategoryName = req.body.new_category_name;
+  const newCategoryTheme = req.body.theme;
+
+      const checkCategory = await Category.findAll({    
+          where: {
+              category_name : newCategoryName
+          }
+      })
+  
+      if (checkCategory.length > 0) {
+          return res.status(200).json({
+              success: true,
+              message: "Ya existe una categoria con ese nombre",
+            });
+      }
+  
+  
+      const newCategory = await Category.create({
+        category_name: newCategoryName,
+        theme_id: newCategoryTheme,
+
+        category_status: "Active",
+      });
+  
+      return res.status(200).json({
+        success: true,
+        message: "La categoria ha sido creada con exito",
+        data: {
+          newThemeDATA: newCategory,
+        },
+      });
+    } catch (error) {
+      return res.status(404).json({
+        success: false,
+        message: "No ha sido posible crear el tema",
+        error: error.message,
+      });
+    }
+  };
+
 module.exports = adminController;
