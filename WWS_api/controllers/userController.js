@@ -1,4 +1,4 @@
-const { User, Role } = require("../models");
+const { User, Role, SAT } = require("../models");
 const userController = {};
 const bcrypt = require("bcrypt");
 const checkEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -26,6 +26,7 @@ userController.getOne = async (req, res) => {
     });
   }
 };
+
 userController.getAll = async (req, res) => {
   try {
     const filters = {};
@@ -171,6 +172,32 @@ userController.deleteOne = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "El usuario no ha podido ser eliminado",
+      error: error.message,
+    });
+  }
+};
+
+userController.getAllSAT = async (req, res) => {
+  try {
+      const allSATs = await SAT.findAll({
+        include: [
+          {
+            attributes: { exclude: ["password"] },
+            model: User,
+          },
+        ],
+
+
+      });
+      return res.json({
+        success: true,
+        message: "Datos de SATs recuperados",
+        data: allSATs,
+      });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Los datos no han podido ser recuperados",
       error: error.message,
     });
   }
