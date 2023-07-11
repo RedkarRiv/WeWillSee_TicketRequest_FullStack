@@ -1,4 +1,4 @@
-const { User, Role, SAT, Ticket, Theme, FAQ, Category } = require("../models");
+const { User, Role, SAT, Ticket, Theme, FAQ, Category, Message } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -239,6 +239,15 @@ adminController.getAllTickets = async (req, res) => {
             }
           ],
         },
+        {
+            model: Message,
+            include: [
+                {
+                    model: User,
+                }
+            ]
+          },
+  
       ],
     });
 

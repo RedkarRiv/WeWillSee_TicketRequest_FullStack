@@ -12,8 +12,11 @@ module.exports = {
       ticket_id: {
         type: Sequelize.INTEGER
       },
-      user_id: {
+      comment_user_id: {
         type: Sequelize.INTEGER
+      },
+      message_content: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
