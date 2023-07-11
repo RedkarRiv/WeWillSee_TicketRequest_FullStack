@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Template extends Model {
+  class SAT extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,13 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Template.init({
-    SAT_id: DataTypes.INTEGER,
-    template_title: DataTypes.STRING,
-    template_description: DataTypes.STRING
+  SAT.init({
+    user_id: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Template',
+    modelName: 'SAT',
   });
-  return Template;
+  return SAT;
 };

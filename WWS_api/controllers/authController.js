@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Role } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -38,6 +38,10 @@ authController.register = async (req, res) => {
       role_id: 1,
       user_status: "Active",
     });
+
+    const role = await Role.findByPk(newUser.role_id);
+await newUser.setRole(role);
+
     return res.status(200).json({
         success: true,
         message: "La cuenta se ha creado con exito",
@@ -57,6 +61,7 @@ authController.login = async (req, res) => {
   try {
     const email = req.body.email;
     const password = req.body.password;
+
     const user = await User.findOne({
       where: {
         email: email,
@@ -78,7 +83,6 @@ authController.login = async (req, res) => {
         message: "Contraseña incorrecta",
       });
     }
-
     const token = jwt.sign(
       {
         userId: user.id,
@@ -101,7 +105,7 @@ authController.login = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "El usuario no ha podido logearse",
-      error: error.menssage,
+      error: error
     });
   }
 };
