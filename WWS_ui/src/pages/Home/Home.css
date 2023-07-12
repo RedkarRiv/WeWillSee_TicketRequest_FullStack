@@ -1,5 +1,40 @@
-.saludo {
-    width: 10em;
-    height: 10em;
-    color: black;
+.homeBackground {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: rgb(106, 208, 255);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.credentialSlide {
+  height: 100vh;
+  width: 35%;
+  background-color: rgb(14, 47, 69);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageSlide {
+  height: 100vh;
+  width: 65%;
+  background-color: green;
+}
+
+
+
+
+@media (max-width: 768px) {
+  .imageSlide {
+    height: 0;
+    width: 0;
+  }
+
+  .credentialSlide {
+    width: 100%;
+  }
 }
