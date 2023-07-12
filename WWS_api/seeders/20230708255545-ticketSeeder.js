@@ -6,6 +6,8 @@ module.exports = {
     return queryInterface.bulkInsert("Tickets", [
       {
         id: 1,
+        ticket_title: "Esto es el titulo del ticket",
+        ticket_description: "Esto es la descripción del ticket",
         requester: 1,
         SAT_assigned: 1,
         ticket_category_id: 1,

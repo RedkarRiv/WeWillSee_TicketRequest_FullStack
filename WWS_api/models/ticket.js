@@ -20,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
         
   }
   Ticket.init({
+    ticket_title: DataTypes.STRING,
+    ticket_description: DataTypes.STRING,
     requester: DataTypes.INTEGER,
     SAT_assigned: DataTypes.INTEGER,
     ticket_category_id: DataTypes.INTEGER,

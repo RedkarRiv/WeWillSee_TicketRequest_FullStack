@@ -1,62 +1,68 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Tickets', {
+    await queryInterface.createTable("Tickets", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+      },
+      ticket_title: {
+        type: Sequelize.STRING,
+      },
+      ticket_description: {
+        type: Sequelize.STRING,
       },
       requester: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: "Users",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       SAT_assigned: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: "SATs",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       ticket_category_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: "Categories",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       comments_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: "Messages",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       ticket_status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       ticket_timeline: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.DATEONLY,
       },
       reassigned: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Tickets');
-  }
+    await queryInterface.dropTable("Tickets");
+  },
 };
