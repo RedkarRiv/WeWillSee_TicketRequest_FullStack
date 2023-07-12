@@ -40,6 +40,19 @@ background-repeat: no-repeat;
     background-position: center;
 }
 
+
+.notAccountRegist {
+    font-weight: bold;
+    color: rgb(2, 217, 255);
+    user-select: none;
+    cursor: pointer;
+  }
+  
+  .forgottPassword {
+    user-select: none;
+  }
+  
+
 .buttonLogin {
     width: 5em;
     height: auto;
@@ -51,17 +64,17 @@ background-repeat: no-repeat;
     padding-left: 0.5em;
     padding-top: 0.2em;
     padding-bottom: 0.2em;
-    font-weight: bold;
+    font-weight: 650;
     user-select: none;
     cursor: pointer;
+    font-size: 90%;
 }
 
-.buttonLogin:hover {
-    background-color: rgb(255, 98, 0);
-}
+
 
 .buttonLogin:active {
-transform: scale(0.9);}
+transform: scale(0.9);
+}
 
 @media (max-width: 768px) {
   .imageSlide {

@@ -19,13 +19,8 @@
   user-select: none;
 }
 
-.notAccountRegist {
-  font-weight: bold;
-  color: rgb(2, 217, 255);
-  user-select: none;
-  cursor: pointer;
-}
-
-.forgottPassword {
-  user-select: none;
+@media (max-width: 768px) {
+  .loginCard {
+    width: 75%;
+  }
 }

@@ -10,11 +10,12 @@ export const Home = () => {
         <div className="logoContainer mb-3">
         </div>
         <LoginCard />
+        <div className="buttonLogin  mt-2 mb-3">Enviar</div>
+
         <div className="forgottPassword mt-1 mb-1">
           ¿No tienes cuenta todavía?
         </div>
         <div className="notAccountRegist mt-1 mb-1"> Registrate</div>
-        <div className="buttonLogin  mt-3">Enviar</div>
       </div>
 
       <div className="imageSlide"></div>
