@@ -3,7 +3,6 @@
   min-height: 100vh;
   background-color: rgb(106, 208, 255);
   margin: 0;
-  padding: 0;
   overflow-x: hidden;
   display: flex;
   flex-direction: row;
@@ -19,6 +18,8 @@
   justify-content: center;
   align-items: center;
   color: white;
+  padding-bottom: 5%;
+
 }
 
 .imageSlide {
@@ -39,8 +40,28 @@ background-repeat: no-repeat;
     background-position: center;
 }
 
+.buttonLogin {
+    width: 5em;
+    height: auto;
+    background-color: #FF914D;
+    color:black;
+    border-radius: 0.3em;
+    text-align: center;
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    font-weight: bold;
+    user-select: none;
+    cursor: pointer;
+}
 
+.buttonLogin:hover {
+    background-color: rgb(255, 98, 0);
+}
 
+.buttonLogin:active {
+transform: scale(0.9);}
 
 @media (max-width: 768px) {
   .imageSlide {
