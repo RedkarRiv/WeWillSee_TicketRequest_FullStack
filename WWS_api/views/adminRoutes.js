@@ -12,6 +12,7 @@ router.get('/inactivateUser/:id', auth, isAdmin,  adminController.inactivateOneB
 router.get('/activateUser/:id', auth, isAdmin,  adminController.activateOneByAdmin);
 router.get('/tickets/all', auth, isAdmin,  adminController.getAllTickets);
 router.get('/categories/all', auth, isAdmin,  adminController.getAllCategories);
+router.get('/themes/all', auth, isAdmin,  adminController.getAllThemes);
 router.post('/new_theme', auth, isAdmin,  adminController.newTheme);
 router.post('/new_category', auth, isAdmin,  adminController.newCategory);
 router.post('/new_faq', auth, isAdmin,  adminController.newFAQ);

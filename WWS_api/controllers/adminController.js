@@ -306,6 +306,30 @@ adminController.getAllCategories = async (req, res) => {
   }
 };
 
+adminController.getAllThemes = async (req, res) => {
+    try {
+      const allThemes = await Theme.findAll({
+        include: [
+          {
+            model: Category,
+          },
+        ],
+      });
+  
+      return res.json({
+        success: true,
+        message: "Todas los temas recuperados",
+        data: allThemes,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Los datos no han podido ser recuperados",
+        error: error.message,
+      });
+    }
+  };
+
 adminController.newTheme = async (req, res) => {
   try {
     const themeName = req.body.new_theme_name;
@@ -343,6 +367,8 @@ adminController.newTheme = async (req, res) => {
     });
   }
 };
+
+
 
 adminController.newCategory = async (req, res) => {
   try {
@@ -385,6 +411,8 @@ adminController.newCategory = async (req, res) => {
   }
 };
 
+
+
 adminController.newFAQ = async (req, res) => {
   try {
     const newFAQCategory = req.body.category_id;
@@ -426,5 +454,7 @@ adminController.newFAQ = async (req, res) => {
     });
   }
 };
+
+
 
 module.exports = adminController;
