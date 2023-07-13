@@ -1,7 +1,7 @@
 .homeBackground {
   width: 100vw;
   min-height: 100vh;
-  background-color: rgb(184, 215, 229);
+  background-color: rgb(141, 162, 172);
   margin: 0;
   overflow-x: hidden;
   display: flex;
@@ -77,7 +77,7 @@
 .buttonLogin:active {
   transform: scale(0.9);
 }
-
+/* MEDIA PARA VERSION MOVIL */
 @media (max-width: 768px) {
   .imageSlide {
     height: 0;

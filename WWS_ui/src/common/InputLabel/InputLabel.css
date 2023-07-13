@@ -10,12 +10,14 @@
   text-align: center;
 }
 
+/* PSEUDO-CLASSES */
+
 .InputLabel::placeholder {
   text-align: center;
 }
 
 .InputLabel:focus {
-  background-color: rgb(62, 62, 65);
+  background-color: rgb(94, 94, 97);
   outline: none;
   color: white;
 }

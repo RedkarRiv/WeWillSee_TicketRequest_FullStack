@@ -1,5 +1,5 @@
 .loginCard {
-  width: 45%;
+  width: 50%;
   color: white;
   display: flex;
   flex-direction: column;
@@ -18,6 +18,8 @@
   font-size: 130%;
   user-select: none;
 }
+
+/* MEDIA PARA VERSION MOVIL */
 
 @media (max-width: 768px) {
   .loginCard {
