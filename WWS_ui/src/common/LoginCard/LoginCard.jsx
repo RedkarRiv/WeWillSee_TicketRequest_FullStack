@@ -7,7 +7,7 @@ export const LoginCard = () => {
     <>
       <div className="loginCard">
         <div className="loginContainer">
-          <div className="loginTitle mb-2">E-Mail</div>
+          <div className="loginTitle mb-2">E-mail</div>
           <div className="inputDesign">
             <InputLabel
               type="email"

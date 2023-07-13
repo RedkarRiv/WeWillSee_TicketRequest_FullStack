@@ -7,15 +7,16 @@ export const Home = () => {
   return (
     <div className="homeBackground">
       <div className="credentialSlide">
-        <div className="logoContainer mb-3">
-        </div>
+        <div className="logoContainer mb-3"></div>
         <LoginCard />
         <div className="buttonLogin  mt-2 mb-3">Enviar</div>
 
-        <div className="forgottPassword mt-1 mb-1">
-          ¿No tienes cuenta todavía?
+        <div className="d-flex">
+          <div className="notAccountRegistTitle mt-1 mb-1 me-2">
+            ¿No tienes cuenta todavía?
+          </div>
+          <div className="notAccountRegist mt-1 mb-1"> Registrate.</div>
         </div>
-        <div className="notAccountRegist mt-1 mb-1"> Registrate</div>
       </div>
 
       <div className="imageSlide"></div>
