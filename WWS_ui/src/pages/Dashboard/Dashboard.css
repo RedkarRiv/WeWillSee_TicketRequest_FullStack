@@ -22,6 +22,11 @@
 @media (max-width: 768px) {
   .profileBar {
     max-height: 20vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
   }
 }
 
@@ -32,12 +37,82 @@
 }
 
 .profileAvatarContainer {
-  height: 30%;
+  height: 25%;
 }
 
 @media (max-width: 768px) {
   .profileAvatarContainer {
     height: 100%;
+
   }
 }
 
+.buttonDesign {
+  background-color: #2f32d6;
+  color: WHITE;
+  border-radius: 1em;
+  text-align: center;
+  padding-right: 1em;
+  padding-left: 1em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  font-weight: 600;
+  user-select: none;
+  cursor: pointer;
+  font-size: 80%;
+  margin: 0.5em;
+  width: 8em;
+}
+
+.buttonDesignNew {
+  background-color: #ef3c0f;
+  color: WHITE;
+  border-radius: 1em;
+  text-align: center;
+  padding-right: 1em;
+  padding-left: 1em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  font-weight: 600;
+  user-select: none;
+  cursor: pointer;
+  font-size: 80%;
+  margin: 0.5em;
+  width: 8em;
+
+}
+
+.buttonDesign:active {
+  transform: scale(0.9);
+}
+.buttonDesignNew:active {
+  transform: scale(0.9);
+}
+
+.userTitle {
+  font-size: 90%;
+  font-weight: 600;
+}
+
+.logoutDesign {
+font-size: 70%;
+font-weight: 500;
+user-select: none;
+cursor: pointer;
+text-align: center;
+}
+
+@media (max-width:768px) {
+  .userTitle {
+    font-size: 70%;
+  }
+  .logoutDesign {
+    font-size: 50%;
+  }
+  .buttonDesign {
+    font-size: 70%;
+  }
+  .buttonDesignNew {
+    font-size: 70%;
+  }
+}
