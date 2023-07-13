@@ -9,6 +9,16 @@
   background-color: rgb(210, 206, 206);
   border-radius: 0.5em;
 }
+
+.profileAvatar {
+  border-radius: 50%;
+  height: 12vh;
+  width: 12vh;
+  background-size: contain;
+  background-position: center;
+  margin: 0;
+}
+
 @media (max-width: 768px) {
   .profileBar {
     max-height: 20vh;
@@ -19,4 +29,10 @@
   height: 90vh;
   background-color: rgb(210, 206, 206);
   border-radius: 0.5em;
+}
+
+@media (max-width: 768px) {
+  .profileAvatarContainer {
+    height: 100%;
+  }
 }
