@@ -31,8 +31,13 @@
   border-radius: 0.5em;
 }
 
+.profileAvatarContainer {
+  height: 30%;
+}
+
 @media (max-width: 768px) {
   .profileAvatarContainer {
     height: 100%;
   }
 }
+
