@@ -20,7 +20,7 @@ export const Dashboard = () => {
             <div className="logoutDesign">Logout</div>
           </div>
           <div className="profileButtons d-flex flex-column justify-content-center align-items-center pt-md-3">
-            <div className="buttonDesign">Mi perfil</div>
+            <div className="buttonDesign">Mis datos</div>
             <div className="buttonDesign">Mis tickets</div>
             <div className="buttonDesignNew">New ticket</div>
           </div>

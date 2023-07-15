@@ -49,7 +49,7 @@
 }
 
 .buttonDesign {
-  background-color: #2f32d6;
+  background-color: #0a0c90;
   color: WHITE;
   border-radius: 0.3em;
   text-align: center;
@@ -66,7 +66,7 @@
 }
 
 .buttonDesignNew {
-  background-color: #3bbd0c;
+  background-color: #257d06;
   color: WHITE;
   border-radius: 0.3em;
   text-align: center;
@@ -85,8 +85,14 @@
 .buttonDesign:active {
   transform: scale(0.9);
 }
+.buttonDesign:hover {
+  background-color: #1a1eec;
+}
 .buttonDesignNew:active {
   transform: scale(0.9);
+}
+.buttonDesignNew:hover {
+  background-color: #35b906;
 }
 
 .userTitle {
@@ -101,6 +107,10 @@
   user-select: none;
   cursor: pointer;
   text-align: center;
+}
+
+.logoutDesign:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
@@ -188,4 +198,3 @@
 .categoryLabelDesign:active {
   transform: scale(0.9);
 }
-
