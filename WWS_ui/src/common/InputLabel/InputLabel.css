@@ -16,12 +16,14 @@
   text-align: center;
 }
 
-.InputLabel:focus {
-  background-color: rgb(94, 94, 97);
-  outline: none;
-  color: white;
-}
 
 .InputLabel:focus::placeholder {
   color: rgb(223, 220, 220);
+}
+
+.InputLabel:focus {
+  background-color: rgb(22, 31, 56);
+  outline: none;
+  box-shadow: inset 0px -0.2em orange;
+  color:white;
 }
