@@ -28,7 +28,7 @@ export const Dashboard = () => {
         <Col className="dashboardContainer col-md-9 col-sm-12 my-1">
           <Container fluid className="p-0 m-0 d-flex justify-content-center w-100 h-100">
             <Row className="d-flex justify-content-around align-items-around w-100 p-5">
-              <Col className="themeContainer col-12 col-md-3 my-1 d-flex flex-column mb-4">
+              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
                 <div className="d-flex flex-row w-100">
                   <div className="themeContainerTitle">MARKETING</div>
                   <div className="dropdownButtonTheme px-2">▼</div>
@@ -43,7 +43,7 @@ export const Dashboard = () => {
                   </div>
                 </div>
               </Col>
-              <Col className="themeContainer col-12 col-md-3 my-1 d-flex flex-column mb-4">
+              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
                 <div className="d-flex flex-row w-100">
                   <div className="themeContainerTitle">OFIMATICA</div>
                   <div className="dropdownButtonTheme px-2">▼</div>
@@ -58,7 +58,7 @@ export const Dashboard = () => {
                   </div>
                 </div>
               </Col>
-              <Col className="themeContainer col-12 col-md-3 my-1 d-flex flex-column mb-4">
+              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
                 <div className="d-flex flex-row w-100">
                   <div className="themeContainerTitle">COMERCIAL</div>
                   <div className="dropdownButtonTheme px-2">▼</div>
@@ -73,7 +73,7 @@ export const Dashboard = () => {
                   </div>
                 </div>
               </Col>
-              <Col className="themeContainer col-12 col-md-3 my-1 d-flex flex-column mb-4">
+              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
                 <div className="d-flex flex-row w-100">
                   <div className="themeContainerTitle">PROVEEDORES</div>
                   <div className="dropdownButtonTheme px-2">▼</div>
@@ -88,7 +88,7 @@ export const Dashboard = () => {
                   </div>
                 </div>
               </Col>
-              <Col className="themeContainer col-12 col-md-3 my-1 d-flex flex-column mb-4">
+              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
                 <div className="d-flex flex-row w-100">
                   <div className="themeContainerTitle">PROVEEDORES</div>
                   <div className="dropdownButtonTheme px-2">▼</div>
@@ -103,7 +103,7 @@ export const Dashboard = () => {
                   </div>
                 </div>
               </Col>
-              <Col className="themeContainer col-12 col-md-3 my-1 d-flex flex-column mb-4">
+              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
                 <div className="d-flex flex-row w-100">
                   <div className="themeContainerTitle">PROVEEDORES</div>
                   <div className="dropdownButtonTheme px-2">▼</div>
@@ -118,7 +118,7 @@ export const Dashboard = () => {
                   </div>
                 </div>
               </Col>
-              <Col className="themeContainer col-12 col-md-3 my-1 d-flex flex-column mb-4">
+              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
                 <div className="d-flex flex-row w-100">
                   <div className="themeContainerTitle">PROVEEDORES</div>
                   <div className="dropdownButtonTheme px-2">▼</div>
@@ -133,7 +133,7 @@ export const Dashboard = () => {
                   </div>
                 </div>
               </Col>
-              <Col className="themeContainer col-12 col-md-3 my-1 d-flex flex-column mb-4">
+              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
                 <div className="d-flex flex-row w-100">
                   <div className="themeContainerTitle">PROVEEDORES</div>
                   <div className="dropdownButtonTheme px-2">▼</div>
@@ -148,7 +148,7 @@ export const Dashboard = () => {
                   </div>
                 </div>
               </Col>
-              <Col className="themeContainer col-12 col-md-3 my-1 d-flex flex-column mb-4">
+              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
                 <div className="d-flex flex-row w-100">
                   <div className="themeContainerTitle">PROVEEDORES</div>
                   <div className="dropdownButtonTheme px-2">▼</div>
@@ -163,7 +163,7 @@ export const Dashboard = () => {
                   </div>
                 </div>
               </Col>
-              <Col className="themeContainer col-12 col-md-3 my-1 d-flex flex-column mb-4">
+              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
                 <div className="d-flex flex-row w-100">
                   <div className="themeContainerTitle">PROVEEDORES</div>
                   <div className="dropdownButtonTheme px-2">▼</div>
