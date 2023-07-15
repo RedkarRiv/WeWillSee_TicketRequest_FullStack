@@ -6,7 +6,7 @@ import { Col, Container, Row } from "react-bootstrap";
 export const Dashboard = () => {
   return (
     <Container fluid className="p-0 m-0 d-flex">
-      <Row className="dashboardBackground d-flex flex-column flex-md-row justify-content-center align-items-center px-1 m-0">
+      <Row className="dashboardBackground d-flex flex-column flex-md-row justify-content-center align-items-start px-1 m-0 pt-md-5">
         <Col className="profileBar col-md-2 col-sm-12 my-1 mx-md-1 d-flex flex-md-column flex-sm-row">
           <div className="profileAvatarContainer d-flex  flex-column  m-0 pt-md-3 align-items-sm-center justify-content-sm-center align-items-md-center justify-content-md-start">
             <div className="m-0 d-flex p-1 justify-content-center align-items-center">
