@@ -163,6 +163,21 @@ export const Dashboard = () => {
                   </div>
                 </div>
               </Col>
+              <Col className="themeContainer col-12 col-md-3 my-1 d-flex flex-column mb-4">
+                <div className="d-flex flex-row w-100">
+                  <div className="themeContainerTitle">PROVEEDORES</div>
+                  <div className="dropdownButtonTheme px-2">▼</div>
+                </div>
+                <div className="w-100">
+                  <div className="categoryList w-100 d-flex flex-column justify-content-center align-items-center pt-2">
+                    <div className="categoryLabelDesign">Categoria 1</div>
+                    <div className="categoryLabelDesign">Categoria 2</div>
+                    <div className="categoryLabelDesign">Categoria 3</div>
+                    <div className="categoryLabelDesign">Categoria 4</div>
+                    <div className="categoryLabelDesign">Categoria 5</div>
+                  </div>
+                </div>
+              </Col>
             </Row>
           </Container>
         </Col>
