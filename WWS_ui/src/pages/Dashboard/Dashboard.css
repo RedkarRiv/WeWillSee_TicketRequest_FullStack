@@ -6,7 +6,7 @@
 
 .profileBar {
   height: 90vh;
-  background-color: rgb(210, 206, 206);
+  background-color: rgb(239, 239, 239);
   border-radius: 0.5em;
 }
 
@@ -32,7 +32,7 @@
 
 .dashboardContainer {
   height: 90vh;
-  background-color: rgb(210, 206, 206);
+  background-color: rgb(239, 239, 239);
   border-radius: 0.5em;
 }
 
@@ -43,14 +43,13 @@
 @media (max-width: 768px) {
   .profileAvatarContainer {
     height: 100%;
-
   }
 }
 
 .buttonDesign {
   background-color: #2f32d6;
   color: WHITE;
-  border-radius: 1em;
+  border-radius: 0.3em;
   text-align: center;
   padding-right: 1em;
   padding-left: 1em;
@@ -65,9 +64,9 @@
 }
 
 .buttonDesignNew {
-  background-color: #ef3c0f;
+  background-color: #3bbd0c;
   color: WHITE;
-  border-radius: 1em;
+  border-radius: 0.3em;
   text-align: center;
   padding-right: 1em;
   padding-left: 1em;
@@ -79,7 +78,6 @@
   font-size: 80%;
   margin: 0.5em;
   width: 8em;
-
 }
 
 .buttonDesign:active {
@@ -92,17 +90,18 @@
 .userTitle {
   font-size: 90%;
   font-weight: 600;
+  user-select: none;
 }
 
 .logoutDesign {
-font-size: 70%;
-font-weight: 500;
-user-select: none;
-cursor: pointer;
-text-align: center;
+  font-size: 70%;
+  font-weight: 500;
+  user-select: none;
+  cursor: pointer;
+  text-align: center;
 }
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
   .userTitle {
     font-size: 70%;
   }
@@ -116,3 +115,72 @@ text-align: center;
     font-size: 70%;
   }
 }
+
+.themeContainer {
+  height: auto;
+  background-color: #ef3c0f;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 0.3em;
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+.themeContainerTitle {
+  width: 85%;
+  padding-left: 15%;
+  font-weight: bold;
+  user-select: none;
+}
+
+@media (max-width: 992px) {
+  .themeContainerTitle {
+    font-size: 90%;
+  }
+}
+@media (min-width: 1200px) {
+  .themeContainerTitle {
+    font-size: 100%;
+  }
+}
+
+.dropdownButtonTheme {
+  display: flex;
+  width: 15%;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+}
+
+.dropdownButtonTheme:active {
+  transform: scale(0.9);
+}
+.categoryList {
+  justify-content: start;
+  align-items: start;
+  font-size: 80%;
+  user-select: none;
+  cursor: pointer;
+}
+
+.categoryLabelDesign {
+  font-size: auto;
+  margin: 0.3em;
+  width: 70%;
+  border-radius: 0.3em;
+  background-color: rgba(0, 0, 0, 0.224);
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+
+.categoryLabelDesign:hover {
+  background-color: rgba(255, 255, 255, 0.224);
+}
+
+.categoryLabelDesign:active {
+  transform: scale(0.9);
+}
+
