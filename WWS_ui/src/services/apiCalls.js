@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const root = "localhost:7000/";
+const root = "http://localhost:7000/";
 
 
 export const loginMe = async (credentials) => {

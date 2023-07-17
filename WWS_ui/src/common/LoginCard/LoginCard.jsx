@@ -2,7 +2,10 @@ import React, {useState} from "react";
 import "./LoginCard.css";
 import { InputLabel } from "../../common/InputLabel/InputLabel";
 import { CheckError } from "../../services/useful";
-
+import { useDispatch, useSelector } from "react-redux";
+import { login, userDataCheck } from "../../pages/userSlice";
+import { loginMe } from "../../services/apiCalls";
+import jwt_decode from "jwt-decode";
 
 export const LoginCard = () => {
 
@@ -15,6 +18,33 @@ export const LoginCard = () => {
     emailError: "",
     passwordError: "",
   });
+
+  const dispatch = useDispatch();
+  const credentialsRdx = useSelector(userDataCheck);
+
+
+
+  
+  const logMe = (e) => {
+    console.log(credentials)
+    e.preventDefault();
+    loginMe(credentials)
+      .then((resultado) => {
+        let decoded = jwt_decode(resultado.data.token);
+        let datosBackend = {
+          token: resultado.data.token,
+          user: decoded,
+        };
+
+        dispatch(login({ credentials: datosBackend }));
+        console.log("esto son las credentialsRDX");
+        console.log(datosBackend);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 
   const InputHandler = (e) => {
     console.log(credentials)
@@ -73,6 +103,13 @@ export const LoginCard = () => {
           </div>
         </div>
       </div>
+      <div
+          className="buttonLogin  mt-2 mb-3"
+          onClick={(e) => logMe(e)}
+          type="submit"
+        >
+          Enviar
+        </div>
     </>
   );
 };
