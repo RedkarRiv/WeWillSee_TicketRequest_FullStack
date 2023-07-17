@@ -19,7 +19,6 @@ export const RegisterCard = () => {
   });
 
   const InputHandler = (e) => {
-    console.log(newCredentials);
     setNewCredentials((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -27,7 +26,6 @@ export const RegisterCard = () => {
   };
 
   const InputCheck = (e, password) => {
-    console.log(newCredentialsError);
     let mensajeError = CheckError(e.target.name, e.target.value, password);
 
     setNewCredentialsError((prevState) => ({
