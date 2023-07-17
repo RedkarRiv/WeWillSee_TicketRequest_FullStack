@@ -28,3 +28,8 @@
   box-shadow: inset 0px -0.2em orange;
   color:white;
 }
+
+.errorDesign {
+  border: red 0.1em solid;
+  color: red
+}

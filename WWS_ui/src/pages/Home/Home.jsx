@@ -34,9 +34,9 @@ export const Home = () => {
       <div className="credentialSlide">
         <div className="logoContainer logoContainerRegister"></div>
         <RegisterCard />
-        <div className="buttonLogin buttonRegister my-2">Enviar</div>
+        <div className="buttonLogin mt-2 mb-3">Enviar</div>
         <div className="d-flex aboutCredentials">
-          <div className="notAccountRegistTitle my-2 me-2">
+          <div className="notAccountRegistTitle mt-1 mb-1 me-2">
             ¿Ya tienes cuenta?
           </div>
           <div
