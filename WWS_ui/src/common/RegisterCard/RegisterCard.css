@@ -1,0 +1,29 @@
+.registerCard {
+    width: 50%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .registerContainer {
+    width: 100%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+  
+  .registerTitle {
+    font-size: 130%;
+    user-select: none;
+  }
+  
+  /* MEDIA PARA VERSION MOVIL */
+  
+  @media (max-width: 768px) {
+    .registerCard {
+      width: 75%;
+    }
+  }
+  

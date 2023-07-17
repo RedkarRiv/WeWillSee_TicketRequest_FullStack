@@ -10,7 +10,7 @@
 }
 
 .credentialSlide {
-  height: 100vh;
+  min-height: 100vh;
   width: 35%;
   background-color: rgb(14, 47, 69);
   display: flex;
@@ -22,7 +22,7 @@
 }
 
 .imageSlide {
-  height: 100vh;
+  min-height: 100vh;
   width: 65%;
   background: url(../../img/SATteamBackground.jpg);
   background-size: cover;
@@ -87,4 +87,9 @@
   .credentialSlide {
     width: 100%;
   }
+}
+
+.registerSlide {
+  height: 100%;
+  width: 100%;
 }

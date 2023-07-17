@@ -6,6 +6,7 @@ export const InputLabel = ({
   placeholder,
   name,
   classDesign,
+  Length,
   functionHandler,
   onBlurFunction,
 }) => {
@@ -16,6 +17,7 @@ export const InputLabel = ({
         type={type}
         placeholder={placeholder}
         name={name}
+        maxLength={Length}
         onChange={(e) => functionHandler(e)}
         onBlur={(e) => onBlurFunction(e)}
       />
