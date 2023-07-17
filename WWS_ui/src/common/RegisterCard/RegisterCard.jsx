@@ -7,8 +7,8 @@ export const RegisterCard = () => {
     <>
       <div className="registerCard">
 
-      <div className="registerContainer">
-          <div className="registerTitle mb-2">Nombre</div>
+      <div className="registerContainer mb-1">
+          <div className="registerTitle mb-1">Nombre</div>
           <div className="inputDesign">
             <InputLabel
               type="name"
@@ -19,8 +19,8 @@ export const RegisterCard = () => {
           </div>
         </div>
 
-        <div className="registerContainer">
-          <div className="registerTitle mb-2">E-mail</div>
+        <div className="registerContainer mb-1">
+          <div className="registerTitle mb-1">E-mail</div>
           <div className="inputDesign">
             <InputLabel
               type="email"
@@ -30,8 +30,8 @@ export const RegisterCard = () => {
           </div>
         </div>
 
-        <div className="registerContainer">
-          <div className="registerTitle mb-2">Password</div>
+        <div className="registerContainer mb-1">
+          <div className="registerTitle mb-1">Password</div>
           <div className="inputDesign">
             <InputLabel
               type="password"
@@ -42,8 +42,8 @@ export const RegisterCard = () => {
         </div>
 
 
-        <div className="registerContainer">
-          <div className="registerTitle mb-2">Repite tu Password</div>
+        <div className="registerContainer mb-1">
+          <div className="registerTitle mb-1">Repite tu Password</div>
           <div className="inputDesign">
             <InputLabel
               type="password"

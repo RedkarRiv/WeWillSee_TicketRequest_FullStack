@@ -2,7 +2,7 @@
   padding: 0.5em;
   height: 100%;
   width: 90%;
-  font-size: 1em;
+  font-size: 100%;
   border-radius: 0.5em;
   background-color: white;
   border: rgb(91, 91, 95) inset 0.15em;
@@ -19,6 +19,7 @@
 
 .InputLabel:focus::placeholder {
   color: rgb(223, 220, 220);
+  font-size: auto;
 }
 
 .InputLabel:focus {
