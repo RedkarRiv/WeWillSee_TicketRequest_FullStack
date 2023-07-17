@@ -1,4 +1,4 @@
-export const CheckError = (name, value, password1) => {
+export const CheckError = (name, value, password) => {
     switch (name) {
       case "email":
       case "e-mail":
@@ -15,7 +15,7 @@ export const CheckError = (name, value, password1) => {
         }
         return "";
       case "doubleCheckPassword":
-        if (value !== password1) {
+        if (value !== password) {
           return "Las dos contraseñas tienen que ser iguales.";
         }
         return "";

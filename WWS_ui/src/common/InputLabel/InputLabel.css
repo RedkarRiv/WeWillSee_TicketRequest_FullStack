@@ -30,6 +30,5 @@
 }
 
 .errorDesign {
-  border: red 0.1em solid;
-  color: red
+  box-shadow: inset 0px -0.2em rgb(255, 0, 0);
 }
