@@ -104,6 +104,8 @@ export const RegisterCard = () => {
           </div>
         </div>
       </div>
+      <div className="buttonLogin mt-4 mb-4">Enviar</div>
+
     </>
   );
 };

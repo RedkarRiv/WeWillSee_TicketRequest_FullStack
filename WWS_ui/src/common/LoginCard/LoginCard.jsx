@@ -104,7 +104,7 @@ export const LoginCard = () => {
         </div>
       </div>
       <div
-          className="buttonLogin  mt-2 mb-3"
+          className="buttonLogin  mt-4 mb-4"
           onClick={(e) => logMe(e)}
           type="submit"
         >
