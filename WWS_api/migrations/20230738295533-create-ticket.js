@@ -44,13 +44,17 @@ module.exports = {
         },
       },
       ticket_status: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "TicketStatuses",
+          key: "id",
+        },
       },
       ticket_timeline: {
         type: Sequelize.DATEONLY,
       },
       reassigned: {
-        type: Sequelize.STRING,
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,

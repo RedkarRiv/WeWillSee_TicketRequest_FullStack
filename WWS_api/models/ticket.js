@@ -26,9 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     SAT_assigned: DataTypes.INTEGER,
     ticket_category_id: DataTypes.INTEGER,
     comments_id: DataTypes.INTEGER,
-    ticket_status: DataTypes.STRING,
+    ticket_status: DataTypes.INTEGER,
     ticket_timeline: DataTypes.DATEONLY,
-    reassigned: DataTypes.STRING
+    reassigned: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Ticket',

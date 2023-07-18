@@ -3,18 +3,22 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.bulkInsert("Tickets", [
+    return queryInterface.bulkInsert("TicketStatuses", [
       {
         id: 1,
-        ticket_title: "Esto es el titulo del ticket",
-        ticket_description: "Esto es la descripción del ticket",
-        requester: 1,
-        SAT_assigned: 1,
-        ticket_category_id: 1,
-        comments_id: 1,
-        ticket_status: 1,
-        ticket_timeline: new Date(),
-        reassigned: false,
+        status_name: "En proceso",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: 2,
+        status_name: "Cerrada",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: 3,
+        status_name: "Anulada",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
