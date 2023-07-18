@@ -1,4 +1,4 @@
-const { User, Role, SAT } = require("../models");
+const { User, Role, SAT, Theme, Category } = require("../models");
 const userController = {};
 const bcrypt = require("bcrypt");
 const checkEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -180,5 +180,30 @@ userController.activateOne = async (req, res) => {
     });
   }
 };
+
+userController.getAllThemesByUser = async (req, res) => {
+  try {
+    const allThemes = await Theme.findAll({
+      include: [
+        {
+          model: Category,
+        },
+      ],
+    });
+
+    return res.json({
+      success: true,
+      message: "Todas los temas recuperados",
+      data: allThemes,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Los datos no han podido ser recuperados",
+      error: error.message,
+    });
+  }
+};
+
 
 module.exports = userController;

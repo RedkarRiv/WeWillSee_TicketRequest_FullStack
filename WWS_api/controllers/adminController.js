@@ -370,29 +370,6 @@ adminController.getAllCategories = async (req, res) => {
   }
 };
 
-adminController.getAllThemes = async (req, res) => {
-    try {
-      const allThemes = await Theme.findAll({
-        include: [
-          {
-            model: Category,
-          },
-        ],
-      });
-  
-      return res.json({
-        success: true,
-        message: "Todas los temas recuperados",
-        data: allThemes,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        message: "Los datos no han podido ser recuperados",
-        error: error.message,
-      });
-    }
-  };
 
 adminController.newTheme = async (req, res) => {
   try {
@@ -432,7 +409,29 @@ adminController.newTheme = async (req, res) => {
   }
 };
 
+adminController.getAllThemes = async (req, res) => {
+  try {
+    const allThemes = await Theme.findAll({
+      include: [
+        {
+          model: Category,
+        },
+      ],
+    });
 
+    return res.json({
+      success: true,
+      message: "Todas los temas recuperados",
+      data: allThemes,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Los datos no han podido ser recuperados",
+      error: error.message,
+    });
+  }
+};
 
 adminController.newCategory = async (req, res) => {
   try {

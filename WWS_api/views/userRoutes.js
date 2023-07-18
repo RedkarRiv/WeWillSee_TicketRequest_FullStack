@@ -8,5 +8,8 @@ router.post('/update', auth,  userController.updateUser);
 router.get('/inactivate', auth,  userController.inactivateOne);
 router.get('/activate', auth,  userController.activateOne);
 router.delete('/destroy/:id', auth, isAdmin,  userController.deleteOne);
+router.get('/themes', auth,  userController.getAllThemesByUser);
+
+
 
 module.exports = router;
