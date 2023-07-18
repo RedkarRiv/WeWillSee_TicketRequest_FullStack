@@ -18,7 +18,7 @@ export const CheckError = (name, value, password) => {
       }
       if (!/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{4,}$/.test(value)) {
         return "El password no tiene el formato correcto.";
-      }
+      } 
       return "";
     case "doubleCheckPassword":
         if ((value === "")) {

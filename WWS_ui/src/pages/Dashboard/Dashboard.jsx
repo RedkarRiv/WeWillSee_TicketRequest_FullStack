@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Dashboard.css";
 import { Col, Container, Row } from "react-bootstrap";
 
 export const Dashboard = () => {
+  const [showCategories, setShowCategories] = useState(false);
 
+  const ToggleCategories = () => {
+    setShowCategories(!showCategories);
+  };
 
+  const categoriesList = {
+    label1: "category1",
+    label2: "category2",
+    label3: "category3",
+    label4: "category4",
+    label5: "category5",
+    label6: "category6",
+  };
 
-
-
-
-
-  
-    return (
+  return (
     <Container fluid className="p-0 m-0 d-flex">
       <Row className="dashboardBackground d-flex flex-column flex-md-row justify-content-center align-items-start px-1 m-0 pt-md-5">
         <Col className="profileBar col-md-2 col-sm-12 my-1 mx-md-1 d-flex flex-md-column flex-sm-row  pt-md-4 pb-md-4">
@@ -33,157 +40,30 @@ export const Dashboard = () => {
             <div className="buttonDesignNew">New ticket</div>
           </div>
         </Col>
-        <Col className="dashboardContainer col-md-9 col-sm-12 my-1">
-          <Container fluid className="p-0 m-0 d-flex justify-content-center w-100 h-100">
+        <Col className="dashboardContainer col-md-9 col-sm-12 my-1 d-flex justify-content-center align-items-center">
+          <Container
+            fluid
+            className="p-0 m-0 d-flex justify-content-center w-100 h-100"
+          >
             <Row className="d-flex justify-content-around align-items-around w-100 p-5">
               <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
-                <div className="d-flex flex-row w-100">
+                <div
+                  className="d-flex flex-row w-100"
+                  onClick={ToggleCategories}
+                >
                   <div className="themeContainerTitle">MARKETING</div>
                   <div className="dropdownButtonTheme px-2">▼</div>
                 </div>
                 <div className="w-100">
-                  <div className="categoryList w-100 d-flex flex-column justify-content-center align-items-center pt-2">
-                    <div className="categoryLabelDesign">Categoria 1</div>
-                    <div className="categoryLabelDesign">Categoria 2</div>
-                    <div className="categoryLabelDesign">Categoria 3</div>
-                    <div className="categoryLabelDesign">Categoria 4</div>
-                    <div className="categoryLabelDesign">Categoria 5</div>
-                  </div>
-                </div>
-              </Col>
-              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
-                <div className="d-flex flex-row w-100">
-                  <div className="themeContainerTitle">OFIMATICA</div>
-                  <div className="dropdownButtonTheme px-2">▼</div>
-                </div>
-                <div className="w-100">
-                  <div className="categoryList w-100 d-flex flex-column justify-content-center align-items-center pt-2">
-                    <div className="categoryLabelDesign">Categoria 1</div>
-                    <div className="categoryLabelDesign">Categoria 2</div>
-                    <div className="categoryLabelDesign">Categoria 3</div>
-                    <div className="categoryLabelDesign">Categoria 4</div>
-                    <div className="categoryLabelDesign">Categoria 5</div>
-                  </div>
-                </div>
-              </Col>
-              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
-                <div className="d-flex flex-row w-100">
-                  <div className="themeContainerTitle">COMERCIAL</div>
-                  <div className="dropdownButtonTheme px-2">▼</div>
-                </div>
-                <div className="w-100">
-                  <div className="categoryList w-100 d-flex flex-column justify-content-center align-items-center pt-2">
-                    <div className="categoryLabelDesign">Categoria 1</div>
-                    <div className="categoryLabelDesign">Categoria 2</div>
-                    <div className="categoryLabelDesign">Categoria 3</div>
-                    <div className="categoryLabelDesign">Categoria 4</div>
-                    <div className="categoryLabelDesign">Categoria 5</div>
-                  </div>
-                </div>
-              </Col>
-              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
-                <div className="d-flex flex-row w-100">
-                  <div className="themeContainerTitle">PROVEEDORES</div>
-                  <div className="dropdownButtonTheme px-2">▼</div>
-                </div>
-                <div className="w-100">
-                  <div className="categoryList w-100 d-flex flex-column justify-content-center align-items-center pt-2">
-                    <div className="categoryLabelDesign">Categoria 1</div>
-                    <div className="categoryLabelDesign">Categoria 2</div>
-                    <div className="categoryLabelDesign">Categoria 3</div>
-                    <div className="categoryLabelDesign">Categoria 4</div>
-                    <div className="categoryLabelDesign">Categoria 5</div>
-                  </div>
-                </div>
-              </Col>
-              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
-                <div className="d-flex flex-row w-100">
-                  <div className="themeContainerTitle">PROVEEDORES</div>
-                  <div className="dropdownButtonTheme px-2">▼</div>
-                </div>
-                <div className="w-100">
-                  <div className="categoryList w-100 d-flex flex-column justify-content-center align-items-center pt-2">
-                    <div className="categoryLabelDesign">Categoria 1</div>
-                    <div className="categoryLabelDesign">Categoria 2</div>
-                    <div className="categoryLabelDesign">Categoria 3</div>
-                    <div className="categoryLabelDesign">Categoria 4</div>
-                    <div className="categoryLabelDesign">Categoria 5</div>
-                  </div>
-                </div>
-              </Col>
-              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
-                <div className="d-flex flex-row w-100">
-                  <div className="themeContainerTitle">PROVEEDORES</div>
-                  <div className="dropdownButtonTheme px-2">▼</div>
-                </div>
-                <div className="w-100">
-                  <div className="categoryList w-100 d-flex flex-column justify-content-center align-items-center pt-2">
-                    <div className="categoryLabelDesign">Categoria 1</div>
-                    <div className="categoryLabelDesign">Categoria 2</div>
-                    <div className="categoryLabelDesign">Categoria 3</div>
-                    <div className="categoryLabelDesign">Categoria 4</div>
-                    <div className="categoryLabelDesign">Categoria 5</div>
-                  </div>
-                </div>
-              </Col>
-              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
-                <div className="d-flex flex-row w-100">
-                  <div className="themeContainerTitle">PROVEEDORES</div>
-                  <div className="dropdownButtonTheme px-2">▼</div>
-                </div>
-                <div className="w-100">
-                  <div className="categoryList w-100 d-flex flex-column justify-content-center align-items-center pt-2">
-                    <div className="categoryLabelDesign">Categoria 1</div>
-                    <div className="categoryLabelDesign">Categoria 2</div>
-                    <div className="categoryLabelDesign">Categoria 3</div>
-                    <div className="categoryLabelDesign">Categoria 4</div>
-                    <div className="categoryLabelDesign">Categoria 5</div>
-                  </div>
-                </div>
-              </Col>
-              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
-                <div className="d-flex flex-row w-100">
-                  <div className="themeContainerTitle">PROVEEDORES</div>
-                  <div className="dropdownButtonTheme px-2">▼</div>
-                </div>
-                <div className="w-100">
-                  <div className="categoryList w-100 d-flex flex-column justify-content-center align-items-center pt-2">
-                    <div className="categoryLabelDesign">Categoria 1</div>
-                    <div className="categoryLabelDesign">Categoria 2</div>
-                    <div className="categoryLabelDesign">Categoria 3</div>
-                    <div className="categoryLabelDesign">Categoria 4</div>
-                    <div className="categoryLabelDesign">Categoria 5</div>
-                  </div>
-                </div>
-              </Col>
-              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
-                <div className="d-flex flex-row w-100">
-                  <div className="themeContainerTitle">PROVEEDORES</div>
-                  <div className="dropdownButtonTheme px-2">▼</div>
-                </div>
-                <div className="w-100">
-                  <div className="categoryList w-100 d-flex flex-column justify-content-center align-items-center pt-2">
-                    <div className="categoryLabelDesign">Categoria 1</div>
-                    <div className="categoryLabelDesign">Categoria 2</div>
-                    <div className="categoryLabelDesign">Categoria 3</div>
-                    <div className="categoryLabelDesign">Categoria 4</div>
-                    <div className="categoryLabelDesign">Categoria 5</div>
-                  </div>
-                </div>
-              </Col>
-              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
-                <div className="d-flex flex-row w-100">
-                  <div className="themeContainerTitle">PROVEEDORES</div>
-                  <div className="dropdownButtonTheme px-2">▼</div>
-                </div>
-                <div className="w-100">
-                  <div className="categoryList w-100 d-flex flex-column justify-content-center align-items-center pt-2">
-                    <div className="categoryLabelDesign">Categoria 1</div>
-                    <div className="categoryLabelDesign">Categoria 2</div>
-                    <div className="categoryLabelDesign">Categoria 3</div>
-                    <div className="categoryLabelDesign">Categoria 4</div>
-                    <div className="categoryLabelDesign">Categoria 5</div>
-                  </div>
+                  {showCategories && (
+                    <div className="categoryList w-100 d-flex flex-column justify-content-center align-items-center pt-2">
+                      {Object.values(categoriesList).map((category, index) => (
+                        <div key={index} className="categoryLabelDesign">
+                          {category}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </Col>
             </Row>
