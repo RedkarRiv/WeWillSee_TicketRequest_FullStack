@@ -4,10 +4,21 @@ import "./Dashboard.css";
 import { Col, Container, Row } from "react-bootstrap";
 
 export const Dashboard = () => {
-  const [showCategories, setShowCategories] = useState(false);
+  // ABRIR Y CERRAR TODOS LOS DROPDOWNS
+  // const [showCategories, setShowCategories] = useState(false);
 
-  const ToggleCategories = () => {
-    setShowCategories(!showCategories);
+  // const ToggleCategories = () => {
+  //   setShowCategories(!showCategories);
+  // };
+  // ABRIR Y CERRAR UN DROPDOWN
+
+  const [categoryStates, setCategoryStates] = useState({});
+
+  const toggleCategory = (category) => {
+    setCategoryStates((prevState) => ({
+      ...prevState,
+      [category]: !prevState[category],
+    }));
   };
 
   const categoriesList = {
@@ -48,14 +59,60 @@ export const Dashboard = () => {
             <Row className="d-flex justify-content-around align-items-around w-100 p-5">
               <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
                 <div
-                  className="d-flex flex-row w-100"
-                  onClick={ToggleCategories}
-                >
+                  className="d-flex flex-row w-100 dropdownClick justify-content-center align-items-center"
+                  onClick={() => toggleCategory("MARKETING")}
+                  >
+                  <div className="logoCategory"></div>
+
                   <div className="themeContainerTitle">MARKETING</div>
                   <div className="dropdownButtonTheme px-2">▼</div>
                 </div>
                 <div className="w-100">
-                  {showCategories && (
+                  {categoryStates["MARKETING"] && (
+                    <div className="categoryList w-100 d-flex flex-column justify-content-center align-items-center pt-2">
+                      {Object.values(categoriesList).map((category, index) => (
+                        <div key={index} className="categoryLabelDesign">
+                          {category}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </Col>
+              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
+                <div
+                  className="d-flex flex-row w-100 dropdownClick justify-content-center align-items-center"
+                  onClick={() => toggleCategory("INFORMATICA")}
+                >
+                  <div className="logoCategory"></div>
+
+                  <div className="themeContainerTitle">INFORMATICA</div>
+                  <div className="dropdownButtonTheme px-2">▼</div>
+                </div>
+                <div className="w-100">
+                {categoryStates["INFORMATICA"] && (
+                    <div className="categoryList w-100 d-flex flex-column justify-content-center align-items-center pt-2">
+                      {Object.values(categoriesList).map((category, index) => (
+                        <div key={index} className="categoryLabelDesign">
+                          {category}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </Col>
+              <Col className="themeContainer col-12 col-md-3 d-flex flex-column mb-4">
+                <div
+                  className="d-flex flex-row w-100 dropdownClick justify-content-center align-items-center"
+                  onClick={() => toggleCategory("LOGISTICA")}
+                >
+                  <div className="logoCategory"></div>
+
+                  <div className="themeContainerTitle">LOGISTICA</div>
+                  <div className="dropdownButtonTheme px-2">▼</div>
+                </div>
+                <div className="w-100">
+                {categoryStates["LOGISTICA"] && (
                     <div className="categoryList w-100 d-flex flex-column justify-content-center align-items-center pt-2">
                       {Object.values(categoriesList).map((category, index) => (
                         <div key={index} className="categoryLabelDesign">

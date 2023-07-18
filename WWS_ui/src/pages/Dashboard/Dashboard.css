@@ -143,7 +143,7 @@
 
 .themeContainerTitle {
   width: 85%;
-  padding-left: 15%;
+  padding-left: 5%;
   font-weight: bold;
   user-select: none;
 }
@@ -155,7 +155,8 @@
 }
 @media (min-width: 1200px) {
   .themeContainerTitle {
-    font-size: 100%;
+    font-size: 140%;
+    padding: 0.2em;
   }
 }
 
@@ -164,7 +165,8 @@
   width: 15%;
   justify-content: center;
   user-select: none;
-  cursor: pointer;
+  font-size: 80%;
+  padding-right: 1em;
 }
 
 .dropdownButtonTheme:active {
@@ -197,4 +199,19 @@
 
 .categoryLabelDesign:active {
   transform: scale(0.9);
+}
+
+.dropdownClick {
+  cursor: pointer;
+user-select: none;
+}
+
+.logoCategory {
+  width: 5em;
+  height: 5em;
+  background: url(../../img/logoWhiteWWS.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 2em;
 }
