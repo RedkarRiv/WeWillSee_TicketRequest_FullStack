@@ -155,7 +155,7 @@
 }
 @media (min-width: 1200px) {
   .themeContainerTitle {
-    font-size: 140%;
+    font-size: 120%;
     padding: 0.2em;
   }
 }
@@ -204,6 +204,8 @@
 .dropdownClick {
   cursor: pointer;
 user-select: none;
+height: 100%;
+
 }
 
 .logoCategory {
@@ -215,3 +217,5 @@ user-select: none;
   background-position: center;
   padding: 2em;
 }
+
+
