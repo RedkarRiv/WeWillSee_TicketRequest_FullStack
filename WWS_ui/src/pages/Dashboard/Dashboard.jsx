@@ -2,32 +2,25 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Dashboard.css";
 import { Col, Container, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
 import { userDataCheck } from "../../pages/userSlice";
-import { bringThemes } from "../../services/apiCalls";
+import { bringThemes, getOneUser } from "../../services/apiCalls";
+import { useDispatch, useSelector } from "react-redux";
+import { userout } from "../../pages/userSlice";
+import { useNavigate } from "react-router-dom";
 
 export const Dashboard = () => {
-  const categoriesList = {
-    label1: "category1",
-    label2: "category2",
-    label3: "category3",
-    label4: "category4",
-    label5: "category5",
-    label6: "category6",
-  };
   const credentialsRdx = useSelector(userDataCheck);
   const [themeData, setThemeData] = useState([]);
-
+  const [userData, setUserData] = useState({});
   const credentialCheck = credentialsRdx?.credentials?.token;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const TakeAllThemes = () => {
     console.log(credentialCheck);
     bringThemes(credentialCheck)
       .then((resultado) => {
-        console.log("Esto es el resultado de traer los Themes");
-        console.log(resultado);
-        console.log("------Themes-----");
-        console.log(resultado?.data?.data);
         setThemeData(resultado);
       })
       .catch((error) => {
@@ -38,9 +31,32 @@ export const Dashboard = () => {
   useEffect(() => {
     TakeAllThemes();
   }, []);
-  console.log("------ThemesData-----");
 
-  console.log(themeData.data?.data);
+  const getMyProfile = () => {
+    getOneUser(credentialCheck)
+      .then((resultado) => {
+        if (resultado.data.message == "Token invalido") {
+          navigate("/");
+          return;
+        } else {
+          setUserData(resultado.data.data);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    if (!credentialsRdx) {
+      navigate("/");
+      return;
+    }
+    getMyProfile();
+  }, [credentialsRdx]);
+
+  const logOut = () => {
+    dispatch(userout());
+    navigate("/");
+  };
 
   return (
     <Container fluid className="p-0 m-0 d-flex">
@@ -54,8 +70,10 @@ export const Dashboard = () => {
                 className="profileAvatar"
               />
             </div>
-            <div className="userTitle pt-md-2">Requester Name</div>
-            <div className="logoutDesign">Logout</div>
+            <div className="userTitle pt-md-2">{userData.name}</div>
+            <div className="logoutDesign" onClick={() => logOut()}>
+              Logout
+            </div>
           </div>
           <div className="profileButtons d-flex flex-column justify-content-center align-items-center pt-md-3">
             <div className="buttonDesign">Mis datos</div>
@@ -74,7 +92,7 @@ export const Dashboard = () => {
                   <div className="d-flex flex-row w-100 dropdownClick justify-content-center align-items-center px-2">
                     <div className="logoCategory"></div>
                     <div className="themeContainerTitle">
-                      {theme.theme_name}
+                      {theme.theme_name.toUpperCase()}
                     </div>
                   </div>
                   <div className="w-100 dropdownContainer">

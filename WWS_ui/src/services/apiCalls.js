@@ -18,3 +18,11 @@ export const bringThemes = async (credentialCheck) => {
     },
   });
 };
+
+export const getOneUser = async (credentialCheck) => {
+  return await axios.get(`${root}user/myprofile`, {
+    headers: {
+      authorization: "Bearer " + credentialCheck,
+    },
+  });
+};

@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, userDataCheck } from "../../pages/userSlice";
 import { loginMe } from "../../services/apiCalls";
 import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 export const LoginCard = () => {
+  const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({
     email: "",
@@ -39,6 +41,7 @@ export const LoginCard = () => {
         dispatch(login({ credentials: datosBackend }));
         console.log("esto son las credentialsRDX");
         console.log(datosBackend);
+        navigate("/dashboard")
       })
       .catch((error) => {
         console.log(error);

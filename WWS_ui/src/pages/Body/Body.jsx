@@ -10,7 +10,6 @@ export const Body = () => {
         <Route path="*" element={<Navigate to="/" />} />
         <Route path="/" element={<Home/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
-
       </Routes>
     </>
   );
