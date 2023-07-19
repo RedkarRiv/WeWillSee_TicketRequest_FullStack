@@ -35,7 +35,7 @@ export const CategoriesCard = () => {
         Object.values(themeData.data.data).map((theme, index) => (
           <Col
             key={index}
-            className="themeContainer col-md-12 col-lg-3 d-flex flex-column mb-sm-4"
+            className="themeContainer col-md-12 col-lg-3 d-flex flex-column mb-sm-4 mt-lg-4"
           >
             <div className="d-flex flex-row w-100 dropdownClick justify-content-center align-items-center px-2">
               <div className="logoCategory"></div>

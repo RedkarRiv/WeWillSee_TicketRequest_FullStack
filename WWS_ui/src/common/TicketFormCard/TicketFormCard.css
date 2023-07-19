@@ -26,7 +26,7 @@
 }
 
 .inputFormDesign {
-  border: rgb(91, 91, 95) inset 0.05em;
+  border: rgba(91, 91, 95, 0.498) inset 0.05em;
 }
 
 .inputFormDesign:focus,
@@ -50,6 +50,13 @@
   font-size: 100%;
   border-radius: 0.5em;
   background-color: white;
-  border: rgb(91, 91, 95) inset 0.15em;
+  border: rgba(91, 91, 95, 0.469) inset 0.05em;
   padding: 0.5em;
 }
+
+@media (min-width: 992px) {
+    .ticketFormCardContainer {
+        width: 60%;
+    }
+  }
+  

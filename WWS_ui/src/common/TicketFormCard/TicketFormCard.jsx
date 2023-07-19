@@ -32,12 +32,53 @@ export const TicketFormcard = () => {
     }));
   };
   return (
-    <MDBRow className="d-flex justify-content-center align-items-center h-100">
+    <MDBRow className="ticketFormCardContainer d-flex justify-content-center align-items-center p-0">
       <MDBCol>
-        <MDBCard className="p-4">
+        <MDBCard className="p-2 px-4">
           <MDBRow className="">
             <MDBCol lg="12">
               <MDBCardBody className="text-black d-flex flex-column justify-content-center m-0 p-0">
+                <MDBRow>
+                  <MDBCol
+                    md="12"
+                    className="mt-3 d-flex justify-content-center h3"
+                  >
+                    Nuevo ticket
+                  </MDBCol>
+                </MDBRow>
+                <MDBRow>
+                  <MDBCol md="12" className="mt-3">
+                    <InputLabel
+                      type="text"
+                      placeholder="Tema"
+                      name="title"
+                      classDesign={
+                        credentialsError.emailError === ""
+                          ? "inputFormDesign"
+                          : "errorDesign"
+                      }
+                      functionHandler={(e) => InputHandler(e)}
+                      onBlurFunction={(e) => InputCheck(e)}
+                    />
+                  </MDBCol>
+                </MDBRow>
+
+                <MDBRow>
+                  <MDBCol md="12" className="mt-3">
+                    <InputLabel
+                      type="text"
+                      placeholder="Categoría"
+                      name="title"
+                      classDesign={
+                        credentialsError.emailError === ""
+                          ? "inputFormDesign"
+                          : "errorDesign"
+                      }
+                      functionHandler={(e) => InputHandler(e)}
+                      onBlurFunction={(e) => InputCheck(e)}
+                    />
+                  </MDBCol>
+                </MDBRow>
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
                     <InputLabel
@@ -45,14 +86,15 @@ export const TicketFormcard = () => {
                       placeholder="Titulo del ticket"
                       name="title"
                       classDesign={
-                        credentialsError.emailError === "" ? "inputFormDesign" : "errorDesign"
+                        credentialsError.emailError === ""
+                          ? "inputFormDesign"
+                          : "errorDesign"
                       }
                       functionHandler={(e) => InputHandler(e)}
                       onBlurFunction={(e) => InputCheck(e)}
                     />
                   </MDBCol>
                 </MDBRow>
-
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
                     <textarea
@@ -60,16 +102,15 @@ export const TicketFormcard = () => {
                       placeholder="Descripción del ticket"
                       name="comment"
                       className={
-                        credentialsError.emailError === "" ? "commentDesign" : "errorDesign"
+                        credentialsError.emailError === ""
+                          ? "commentDesign"
+                          : "errorDesign"
                       }
                       functionHandler={(e) => InputHandler(e)}
                       onBlurFunction={(e) => InputCheck(e)}
                     />
                   </MDBCol>
                 </MDBRow>
-
-
-
 
                 <MDBRow className="d-flex justify-content-center my-3">
                   <div className="buttonSendTicket">Enviar ticket</div>
