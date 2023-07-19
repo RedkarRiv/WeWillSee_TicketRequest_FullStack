@@ -55,11 +55,11 @@ export const TicketFormcard = () => {
 
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
-                    <InputLabel
-                      type="text"
+                    <textarea
+                      type="textarea"
                       placeholder="Descripción del ticket"
                       name="comment"
-                      classDesign={
+                      className={
                         credentialsError.emailError === "" ? "commentDesign" : "errorDesign"
                       }
                       functionHandler={(e) => InputHandler(e)}

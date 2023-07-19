@@ -44,11 +44,12 @@
 }
 
 .commentDesign {
-    min-height: 2em;
-    width: 100%;
-    display: flex;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-  
-  
+  min-height: 8em;
+  max-height: 16em;
+  width: 100%;
+  font-size: 100%;
+  border-radius: 0.5em;
+  background-color: white;
+  border: rgb(91, 91, 95) inset 0.15em;
+  padding: 0.5em;
+}
