@@ -2,36 +2,12 @@ import React, { useState } from "react";
 import { MDBCard, MDBCardBody, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import "./TicketFormCard.css";
 import { InputLabel } from "../InputLabel/InputLabel";
+import { useSelector } from "react-redux";
+import { userDataCheck } from "../../pages/userSlice";
 import { CheckError } from "../../services/useful";
+import { ticketMe } from "../../services/apiCalls";
 
-export const TicketFormcard = () => {
-  const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [credentialsError, setCredentialsError] = useState({
-    emailError: "",
-    passwordError: "",
-  });
-  const InputHandler = (e) => {
-    console.log(credentials);
-    setCredentials((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const InputCheck = (e) => {
-    console.log(credentialsError);
-    let mensajeError = CheckError(e.target.name, e.target.value);
-
-    setCredentialsError((prevState) => ({
-      ...prevState,
-      [e.target.name + "Error"]: mensajeError,
-    }));
-  };
-
+export const TicketFormcard = (category_id) => {
   const [faqItems, setFaqItems] = useState([
     {
       question: "Esto es una pregunta del FAQ1",
@@ -53,6 +29,7 @@ export const TicketFormcard = () => {
       isOpen: false,
     },
   ]);
+
   const toggleAnswer = (index) => {
     setFaqItems((prevFaqItems) => {
       const updatedFaqItems = prevFaqItems.map((faqItem, i) => {
@@ -63,6 +40,45 @@ export const TicketFormcard = () => {
       });
       return updatedFaqItems;
     });
+  };
+  const [credentialsError, setCredentialsError] = useState({
+    title: "",
+    description: "",
+  });
+  const InputCheck = (e) => {
+    console.log(credentialsError)
+    let mensajeError = CheckError(e.target.name, e.target.value);
+
+    setCredentialsError((prevState) => ({
+      ...prevState,
+      [e.target.name + "Error"]: mensajeError,}));
+  };
+
+  const credentialsRdx = useSelector(userDataCheck);
+  const credentialCheck = credentialsRdx?.credentials?.token;
+
+  const [newTicket, setNewTicket] = useState({
+    title: "",
+    description: "",
+    categoryId: category_id ?? 2,
+  });
+
+  const InputHandler = (e) => {
+    console.log(newTicket)
+    setNewTicket((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const ticketMeHandler = () => {
+    ticketMe(credentialCheck, newTicket)
+      .then((resultado) => {
+        console.log(resultado);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -112,11 +128,7 @@ export const TicketFormcard = () => {
                       type="text"
                       placeholder="Tema"
                       name="title"
-                      classDesign={
-                        credentialsError.emailError === ""
-                          ? "inputFormDesign"
-                          : "errorDesign"
-                      }
+                      classDesign="inputFormDesign"
                       functionHandler={(e) => InputHandler(e)}
                       onBlurFunction={(e) => InputCheck(e)}
                     />
@@ -128,12 +140,8 @@ export const TicketFormcard = () => {
                     <InputLabel
                       type="text"
                       placeholder="Categoría"
-                      name="title"
-                      classDesign={
-                        credentialsError.emailError === ""
-                          ? "inputFormDesign"
-                          : "errorDesign"
-                      }
+                      name="category"
+                      classDesign="inputFormDesign"
                       functionHandler={(e) => InputHandler(e)}
                       onBlurFunction={(e) => InputCheck(e)}
                     />
@@ -146,11 +154,7 @@ export const TicketFormcard = () => {
                       type="text"
                       placeholder="Titulo del ticket"
                       name="title"
-                      classDesign={
-                        credentialsError.emailError === ""
-                          ? "inputFormDesign"
-                          : "errorDesign"
-                      }
+                      classDesign="inputFormDesign"
                       functionHandler={(e) => InputHandler(e)}
                       onBlurFunction={(e) => InputCheck(e)}
                     />
@@ -161,15 +165,11 @@ export const TicketFormcard = () => {
                     <textarea
                       type="textarea"
                       placeholder="Descripción del ticket"
-                      name="comment"
+                      name="description"
                       maxLength={500}
-                      className={
-                        credentialsError.emailError === ""
-                          ? "commentDesign"
-                          : "errorDesign"
-                      }
-                      functionHandler={(e) => InputHandler(e)}
-                      onBlurFunction={(e) => InputCheck(e)}
+                      className="commentDesign"
+                      onChange={(e) => InputHandler(e)}
+                      onBlur={(e) => InputCheck(e)}
                     />
                   </MDBCol>
                 </MDBRow>
@@ -179,11 +179,7 @@ export const TicketFormcard = () => {
                       type="file"
                       accept=".jpg, .png, .pdf"
                       name="data"
-                      classDesign={
-                        credentialsError.emailError === ""
-                          ? "inputFormDesign fileInputDesign"
-                          : "errorDesign"
-                      }
+                      classDesign="inputFormDesign"
                       functionHandler={(e) => InputHandler(e)}
                       onBlurFunction={(e) => InputCheck(e)}
                     />
@@ -191,7 +187,12 @@ export const TicketFormcard = () => {
                 </MDBRow>
 
                 <MDBRow className="d-flex justify-content-center mt-4">
-                  <div className="buttonSendTicket">Enviar ticket</div>
+                  <div
+                    className="buttonSendTicket"
+                    onClick={() => ticketMeHandler()}
+                  >
+                    Enviar ticket
+                  </div>
                 </MDBRow>
               </MDBCardBody>
             </MDBCol>

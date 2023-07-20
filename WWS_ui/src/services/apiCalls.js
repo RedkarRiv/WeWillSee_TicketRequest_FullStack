@@ -26,3 +26,13 @@ export const getOneUser = async (credentialCheck) => {
     },
   });
 };
+
+
+export const ticketMe = async (credentialCheck, newTicketData) => {
+return await axios.post(`${root}user/tickets/new`,newTicketData, {
+  headers: {
+    authorization: "Bearer " + credentialCheck,
+  },
+
+});
+}

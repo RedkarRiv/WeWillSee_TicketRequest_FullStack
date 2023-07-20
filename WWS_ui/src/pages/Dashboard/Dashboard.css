@@ -127,3 +127,96 @@
     font-size: 70%;
   }
 }
+
+
+.themeContainer {
+  height: auto;
+  background-color: rgb(63, 84, 98);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 0.3em;
+  padding: 0.5em;
+  padding-bottom: 1.5em;
+  margin: 0.5em;
+}
+
+.themeContainerTitle {
+  width: 85%;
+  font-weight: bold;
+  user-select: none;
+  padding-left: 5%;
+}
+
+@media (max-width: 992px) {
+  .themeContainerTitle {
+    font-size: 120%;
+    padding-right: 1em;
+  }
+}
+@media (min-width: 1200px) {
+  .themeContainerTitle {
+    font-size: 120%;
+    padding: 0.2em;
+    padding-right: 1em;
+  }
+}
+
+.dropdownButtonTheme {
+  display: flex;
+  width: 15%;
+  justify-content: center;
+  user-select: none;
+  font-size: 80%;
+  padding-right: 1em;
+}
+
+.dropdownButtonTheme:active {
+  transform: scale(0.9);
+}
+.categoryList {
+  justify-content: start;
+  align-items: start;
+  font-size: 80%;
+  user-select: none;
+  cursor: pointer;
+}
+
+.categoryLabelDesign {
+  font-size: auto;
+  margin: 0.3em;
+  width: 70%;
+  border-radius: 0.3em;
+  background-color: rgba(0, 0, 0, 0.601);
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+
+.categoryLabelDesign:hover {
+  background-color: rgba(255, 255, 255, 0.515);
+  color: black;
+  font-weight: bold;
+  transform: scale(1.05);
+}
+
+.categoryLabelDesign:active {
+  transform: scale(0.9);
+}
+
+.dropdownClick {
+  cursor: pointer;
+  user-select: none;
+  height: 100%;
+}
+
+.logoCategory {
+  width: 5em;
+  height: 5em;
+  background: url(../../img/logoWhiteWWS.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 2em;
+}

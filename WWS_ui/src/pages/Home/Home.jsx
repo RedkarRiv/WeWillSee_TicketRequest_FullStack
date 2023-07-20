@@ -4,7 +4,6 @@ import "./Home.css";
 import { LoginCard } from "../../common/LoginCard/LoginCard";
 import { RegisterCard } from "../../common/RegisterCard/RegisterCard";
 
-
 export const Home = () => {
   const [credentialsShow, setCredentialsSow] = useState(true);
 
@@ -13,7 +12,7 @@ export const Home = () => {
       <div className="credentialSlide">
         <div className="logoContainer mb-3"></div>
         <LoginCard />
-      
+
         <div className="d-flex">
           <div className="notAccountRegistTitle mt-1 mb-1 me-2">
             ¿No tienes cuenta todavía?

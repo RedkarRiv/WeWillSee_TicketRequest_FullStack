@@ -28,7 +28,6 @@ export const CategoriesCard = () => {
   }, []);
 
 
-
   return (
     <>
       {themeData?.data?.data &&
@@ -46,7 +45,8 @@ export const CategoriesCard = () => {
             <div className="w-100 dropdownContainer">
               <div className="categoryList d-flex flex-column justify-content-center align-items-center pt-2">
                 {Object.values(theme?.Categories).map((category, index) => (
-                  <div key={index} className="categoryLabelDesign">
+                  <div key={index} className="categoryLabelDesign" onClick={() => setTicketFormShow(!ticketFormShow)}
+                  >
                     {category.category_name}
                   </div>
                 ))}
