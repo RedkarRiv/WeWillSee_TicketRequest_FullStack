@@ -521,6 +521,8 @@ adminController.getTicketsCountByEmployee = async (req, res) => {
     const ticketCounts = await Ticket.findAll({
       attributes: ['SAT_assigned', [sequelize.fn('COUNT', 'id'), 'count']],
       group: 'SAT_assigned',
+      order: sequelize.literal('count ASC'),
+      limit: 1, 
     });
     return res.status(200).json({
       success: true,

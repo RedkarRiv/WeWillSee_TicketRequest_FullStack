@@ -1,4 +1,4 @@
-const { User, Role, SAT, Theme, Category, Ticket } = require("../models");
+const { User, Role, SAT, Theme, Category, Ticket, sequelize } = require("../models");
 const userController = {};
 const bcrypt = require("bcrypt");
 const checkEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -26,7 +26,6 @@ userController.getOne = async (req, res) => {
     });
   }
 };
-
 
 userController.updateUser = async (req, res) => {
   try {
@@ -207,29 +206,36 @@ userController.getAllThemesByUser = async (req, res) => {
 
 userController.newTicketByUser = async (req, res) => {
   try {
+    const ticketCounts = await Ticket.findAll({
+      attributes: ["SAT_assigned", [sequelize.fn("COUNT", "id"), "count"]],
+      group: "SAT_assigned",
+      order: sequelize.literal("count ASC"),
+      limit: 1,
+    });
 
-const ticketTitle = req.body.title
-const ticketDescription = req.body.description
-const requesterId = req.userId
-// const SATassigned= ""
-const categoryId = req.body.categoryId
-const ticketTimeline = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
-
-
-
+    const ticketTitle = req.body.title;
+    const ticketDescription = req.body.description;
+    const requesterId = req.userId;
+    const categoryId = req.body.categoryId;
+    const ticketTimeline = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
+    
+console.log("esto es el ticketCounts")
+console.log(ticketCounts)
 
     const newTicket = await Ticket.create({
-     ticket_title:ticketTitle,
-     ticket_description:ticketDescription,
-     requester: requesterId,
-     SAT_assigned: 1,
-     ticket_category_id: categoryId,
-     ticket_status: 1,
-     ticket_timeline: ticketTimeline,
-     reassigned: false,
-     createdAt: new Date(),
-     updatedUp: new Date()
+      ticket_title: ticketTitle,
+      ticket_description: ticketDescription,
+      requester: requesterId,
+      SAT_assigned: ticketCounts[0]?.SAT_assigned,
+      ticket_category_id: categoryId,
+      ticket_status: 1,
+      ticket_timeline: ticketTimeline,
+      reassigned: false,
+      createdAt: new Date(),
+      updatedUp: new Date(),
     });
+    console.log("esto es el SAT_assigned-------------------------------")
+    console.log(newTicket.SAT_assigned)
 
     return res.json({
       success: true,
@@ -244,7 +250,5 @@ const ticketTimeline = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
     });
   }
 };
-
-
 
 module.exports = userController;
