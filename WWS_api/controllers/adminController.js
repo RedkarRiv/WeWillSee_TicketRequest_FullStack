@@ -7,7 +7,7 @@ const {
   FAQ,
   Category,
   Message,
-  sequelize
+  sequelize,
 } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -199,68 +199,68 @@ adminController.activateOneByAdmin = async (req, res) => {
 };
 
 adminController.getAllUsers = async (req, res) => {
-    try {
-      const filters = {};
-      const query = req.query;
-  
-      if (Object.keys(query).length > 0) {
-        if (query.name) {
-          filters.name = {
-            [Op.like]: `%${query.name}%`,
-          };
-        }
-  
-        if (query.email) {
-          filters.email = {
-            [Op.like]: `%${query.email}%`,
-          };
-        }
-        if (query.role_id) {
-          filters.role_id = {
-            [Op.like]: `%${query.role_id}%`,
-          };
-        }
-  
-        const filteredUsers = await User.findAll({
-          attributes: { exclude: ["password"] },
-          where: filters,
-        });
-        if (filteredUsers.length === 0) {
-          return res.json({
-            success: true,
-            message: "No existen usuarios con estos filtros",
-          });
-        }
-  
+  try {
+    const filters = {};
+    const query = req.query;
+
+    if (Object.keys(query).length > 0) {
+      if (query.name) {
+        filters.name = {
+          [Op.like]: `%${query.name}%`,
+        };
+      }
+
+      if (query.email) {
+        filters.email = {
+          [Op.like]: `%${query.email}%`,
+        };
+      }
+      if (query.role_id) {
+        filters.role_id = {
+          [Op.like]: `%${query.role_id}%`,
+        };
+      }
+
+      const filteredUsers = await User.findAll({
+        attributes: { exclude: ["password"] },
+        where: filters,
+      });
+      if (filteredUsers.length === 0) {
         return res.json({
           success: true,
-          message: "Datos de usuarios filtrados recuperados",
-          data: filteredUsers,
-        });
-      } else {
-        const allUsers = await User.findAll({
-          include: [
-            {
-              attributes: { exclude: ["id"] },
-              model: Role,
-            },
-          ],
-        });
-  
-        return res.json({
-          success: true,
-          message: "Datos de todos los usuarios recuperados",
-          data: allUsers,
+          message: "No existen usuarios con estos filtros",
         });
       }
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        message: "Los datos no han podido ser recuperados",
-        error: error.message,
+
+      return res.json({
+        success: true,
+        message: "Datos de usuarios filtrados recuperados",
+        data: filteredUsers,
+      });
+    } else {
+      const allUsers = await User.findAll({
+        include: [
+          {
+            attributes: { exclude: ["id"] },
+            model: Role,
+          },
+        ],
+      });
+
+      return res.json({
+        success: true,
+        message: "Datos de todos los usuarios recuperados",
+        data: allUsers,
       });
     }
-  };
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Los datos no han podido ser recuperados",
+      error: error.message,
+    });
+  }
+};
 
 adminController.getAllSAT = async (req, res) => {
   try {
@@ -515,25 +515,5 @@ adminController.newFAQ = async (req, res) => {
     });
   }
 };
-
-adminController.getTicketsCountByEmployee = async (req, res) => {
-  try {
-    const ticketCounts = await Ticket.findAll({
-      attributes: ['SAT_assigned', [sequelize.fn('COUNT', 'id'), 'count']],
-      group: 'SAT_assigned',
-      order: sequelize.literal('count ASC'),
-      limit: 1, 
-    });
-    return res.status(200).json({
-      success: true,
-      message: "Número de tickets / SAT",
-      data: ticketCounts,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error al realizar la consulta" });
-  }
-};
-
 
 module.exports = adminController;

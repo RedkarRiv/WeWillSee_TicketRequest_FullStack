@@ -234,9 +234,6 @@ console.log(ticketCounts)
       createdAt: new Date(),
       updatedUp: new Date(),
     });
-    console.log("esto es el SAT_assigned-------------------------------")
-    console.log(newTicket.SAT_assigned)
-
     return res.json({
       success: true,
       message: "Ticket creado con existo",

@@ -15,7 +15,6 @@ router.get('/allSATs', auth, isAdmin,  adminController.getAllSAT);
 router.get('/tickets/all', auth, isAdmin,  adminController.getAllTickets);
 router.get('/categories/all', auth, isAdmin,  adminController.getAllCategories);
 router.get('/themes/all', auth, isAdmin,  adminController.getAllThemes);
-router.get('/ticketsbyemployee', auth,  adminController.getTicketsCountByEmployee);
 
 router.post('/new_theme', auth, isAdmin,  adminController.newTheme);
 router.post('/new_category', auth, isAdmin,  adminController.newCategory);
