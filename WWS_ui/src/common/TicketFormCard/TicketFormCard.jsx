@@ -77,12 +77,14 @@ export const TicketFormcard = () => {
                     <MDBRow className="d-flex justify-content-center align-items-center">
                       <MDBCol
                         md="12"
-                        className={`mt-1 d-flex justify-content-center FAQquestionDesign ${
+                        className={`mt-1 d-flex justify-content-between FAQquestionDesign ${
                           item.isOpen ? "active" : ""
                         }`}
                         onClick={() => toggleAnswer(index)}
                       >
+                        <div className="px-md-3">▾</div>
                         {item.question}
+                        <div className="px-md-3">▾</div>
                       </MDBCol>
                     </MDBRow>
 
@@ -98,82 +100,6 @@ export const TicketFormcard = () => {
                     )}
                   </div>
                 ))}
-
-                {/* <MDBRow className="d-flex justify-content-center align-items-center">
-                  <MDBCol
-                    md="12"
-                    className="mt-1 d-flex justify-content-center FAQquestionDesign"
-                    onClick={toggleAnswer}
-                  >
-                    Esto es una pregunta del FAQ{" "}
-                  </MDBCol>
-                </MDBRow>
-
-                {isOpen && (
-                  <MDBRow className="d-flex justify-content-center align-items-start">
-                    <MDBCol
-                      md="12"
-                      className="d-flex justify-content-center FAQanswerDesign"
-                    >
-                      Esto es una respuesta del FAQ Esto es una respuesta del
-                      Esto es una respuesta del FAQ Esto es una respuesta del
-                      Esto es una respuesta del FAQ Esto es una respuesta del
-                      Esto es una respuesta del FAQ Esto es una respuesta del
-                      Esto es una respuesta del FAQ Esto es una respuesta del
-                      FAQ{" "}
-                    </MDBCol>
-                  </MDBRow>
-                )}
-                <MDBRow className="d-flex justify-content-center align-items-center">
-                  <MDBCol
-                    md="12"
-                    className="mt-1 d-flex justify-content-center FAQquestionDesign"
-                    onClick={toggleAnswer}
-                  >
-                    Esto es una pregunta del FAQ{" "}
-                  </MDBCol>
-                </MDBRow>
-
-                {isOpen && (
-                  <MDBRow className="d-flex justify-content-center align-items-start">
-                    <MDBCol
-                      md="12"
-                      className="d-flex justify-content-center FAQanswerDesign"
-                    >
-                      Esto es una respuesta del FAQ Esto es una respuesta del
-                      Esto es una respuesta del FAQ Esto es una respuesta del
-                      Esto es una respuesta del FAQ Esto es una respuesta del
-                      Esto es una respuesta del FAQ Esto es una respuesta del
-                      Esto es una respuesta del FAQ Esto es una respuesta del
-                      FAQ{" "}
-                    </MDBCol>
-                  </MDBRow>
-                )}
-                                <MDBRow className="d-flex justify-content-center align-items-center">
-                  <MDBCol
-                    md="12"
-                    className="mt-1 d-flex justify-content-center FAQquestionDesign"
-                    onClick={toggleAnswer}
-                  >
-                    Esto es una pregunta del FAQ{" "}
-                  </MDBCol>
-                </MDBRow>
-
-                {isOpen && (
-                  <MDBRow className="d-flex justify-content-center align-items-start">
-                    <MDBCol
-                      md="12"
-                      className="d-flex justify-content-center FAQanswerDesign"
-                    >
-                      Esto es una respuesta del FAQ Esto es una respuesta del
-                      Esto es una respuesta del FAQ Esto es una respuesta del
-                      Esto es una respuesta del FAQ Esto es una respuesta del
-                      Esto es una respuesta del FAQ Esto es una respuesta del
-                      Esto es una respuesta del FAQ Esto es una respuesta del
-                      FAQ{" "}
-                    </MDBCol>
-                  </MDBRow>
-                )} */}
                 <MDBRow>
                   <MDBCol
                     md="12"

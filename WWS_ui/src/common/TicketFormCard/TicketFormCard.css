@@ -66,7 +66,6 @@
   color: white;
   padding: 0.3em;
   padding-bottom: 0.4em;
-
   border-radius: 0.3em;
   font-weight: bold;
 }
@@ -88,3 +87,9 @@
   align-items: center;
   text-align: center;
 }
+
+@media (max-width: 576px) {
+    .FAQquestionDesign {
+        font-size: 90%;
+    }
+  }
