@@ -36,6 +36,17 @@ module.exports = {
       user_status: "Active",
       createdAt: new Date(),
       updatedAt: new Date()
+    },
+    {
+      id: 4,
+      name: 'SAT2 Demo',
+      email: 'sat2@sat.com',
+      password: '$2b$08$kFBKlQrIu2lZ6W6LJ1mR/.yVJLxQD2G6V/BJnNrhwcn9/DRSwlW7C',
+      password_validation: true,
+      role_id: 2,
+      user_status: "Active",
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
   ]);
   },
