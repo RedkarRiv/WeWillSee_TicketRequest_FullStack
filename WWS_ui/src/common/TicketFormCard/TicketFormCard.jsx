@@ -44,11 +44,13 @@ export const TicketFormcard = () => {
         <MDBCard className="p-2 px-4">
           <MDBRow className="">
             <MDBCol lg="12">
-              <MDBCardBody className="text-black d-flex flex-column justify-content-center m-0 p-0">
-                <MDBRow>
+              <MDBCardBody className="d-flex flex-column justify-content-center">
+
+
+                <MDBRow className="d-flex justify-content-center align-items-center">
                   <MDBCol
                     md="12"
-                    className="mt-3 d-flex justify-content-center h5"
+                    className="mt-3 d-flex justify-content-center FAQquestionDesign"
                     onClick={toggleAnswer}
                   >
                     Esto es una pregunta del FAQ{" "}
@@ -56,12 +58,17 @@ export const TicketFormcard = () => {
                 </MDBRow>
 
                 {isOpen && (
-                  <MDBRow>
+                  <MDBRow className="d-flex justify-content-center align-items-start">
                     <MDBCol
                       md="12"
-                      className="mt-3 d-flex justify-content-center"
+                      className="d-flex justify-content-center FAQanswerDesign"
                     >
+                      Esto es una respuesta del FAQ Esto es una respuesta del                     
                       Esto es una respuesta del FAQ Esto es una respuesta del
+                      Esto es una respuesta del FAQ Esto es una respuesta del
+                      Esto es una respuesta del FAQ Esto es una respuesta del
+                      Esto es una respuesta del FAQ Esto es una respuesta del
+
                       FAQ{" "}
                     </MDBCol>
                   </MDBRow>
@@ -131,6 +138,7 @@ export const TicketFormcard = () => {
                       type="textarea"
                       placeholder="Descripción del ticket"
                       name="comment"
+                      maxLength={500}
                       className={
                         credentialsError.emailError === ""
                           ? "commentDesign"
@@ -149,7 +157,7 @@ export const TicketFormcard = () => {
                       name="data"
                       classDesign={
                         credentialsError.emailError === ""
-                          ? "inputFormDesign"
+                          ? "inputFormDesign fileInputDesign"
                           : "errorDesign"
                       }
                       functionHandler={(e) => InputHandler(e)}

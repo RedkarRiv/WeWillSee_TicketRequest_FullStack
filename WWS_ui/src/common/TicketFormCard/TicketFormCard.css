@@ -55,8 +55,35 @@
 }
 
 @media (min-width: 992px) {
-    .ticketFormCardContainer {
-        width: 60%;
-    }
+  .ticketFormCardContainer {
+    width: 60%;
   }
-  
+}
+
+.FAQquestionDesign {
+  width: 100%;
+  background-color: rgb(14, 47, 69);
+  color: white;
+  padding: 0.3em;
+  padding-bottom: 0.4em;
+
+  border-radius: 0.3em;
+  font-weight: bold;
+}
+
+.FAQanswerDesign {
+  margin-top: -0.4em;
+  width: 100%;
+  background-color: rgb(30, 97, 141);
+  color: white;
+  border-radius: 0.3em;
+  padding: 0.5em;
+}
+
+
+.fileInputDesign {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
