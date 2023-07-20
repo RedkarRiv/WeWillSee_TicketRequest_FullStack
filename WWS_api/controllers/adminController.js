@@ -7,6 +7,7 @@ const {
   FAQ,
   Category,
   Message,
+  sequelize
 } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -370,7 +371,6 @@ adminController.getAllCategories = async (req, res) => {
   }
 };
 
-
 adminController.newTheme = async (req, res) => {
   try {
     const themeName = req.body.new_theme_name;
@@ -474,8 +474,6 @@ adminController.newCategory = async (req, res) => {
   }
 };
 
-
-
 adminController.newFAQ = async (req, res) => {
   try {
     const newFAQCategory = req.body.category_id;
@@ -518,6 +516,22 @@ adminController.newFAQ = async (req, res) => {
   }
 };
 
+adminController.getTicketsCountByEmployee = async (req, res) => {
+  try {
+    const ticketCounts = await Ticket.findAll({
+      attributes: ['SAT_assigned', [sequelize.fn('COUNT', 'id'), 'count']],
+      group: 'SAT_assigned',
+    });
+    return res.status(200).json({
+      success: true,
+      message: "Número de tickets / SAT",
+      data: ticketCounts,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al realizar la consulta" });
+  }
+};
 
 
 module.exports = adminController;

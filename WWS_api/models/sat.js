@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class SAT extends Model {
     /**
@@ -10,16 +8,23 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      SAT.belongsTo(models.User, { foreignKey: "user_id", targetKey: "id", onDelete: 'CASCADE' });
+      SAT.belongsTo(models.User, {
+        foreignKey: "user_id",
+        targetKey: "id",
+        onDelete: "CASCADE",
+      });
+      SAT.hasMany(models.Ticket, { foreignKey: "id" });
     }
   }
-  SAT.init({
-    user_id: DataTypes.INTEGER,
-    sat_status: DataTypes.STRING
-
-  }, {
-    sequelize,
-    modelName: 'SAT',
-  });
+  SAT.init(
+    {
+      user_id: DataTypes.INTEGER,
+      sat_status: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "SAT",
+    }
+  );
   return SAT;
 };
