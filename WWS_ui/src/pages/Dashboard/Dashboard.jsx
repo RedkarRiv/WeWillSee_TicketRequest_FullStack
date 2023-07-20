@@ -81,7 +81,7 @@ export const Dashboard = () => {
           <div className="profileButtons d-flex flex-column justify-content-center align-items-center pt-md-3">
             <div className="buttonDesign">Mis datos</div>
             <div className="buttonDesign">Mis tickets</div>
-            <div className="buttonDesignNew">New ticket</div>
+            <div className="buttonDesignNew" onClick={() => setTicketFormShow(!ticketFormShow)}>New ticket</div>
           </div>
         </Col>
         <Col className="dashboardContainer col-lg-9 col-md-12 my-1 d-flex justify-content-center align-items-start p-0">
