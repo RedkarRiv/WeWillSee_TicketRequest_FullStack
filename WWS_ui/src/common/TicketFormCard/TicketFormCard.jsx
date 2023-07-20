@@ -72,44 +72,42 @@ export const TicketFormcard = () => {
           <MDBRow className="">
             <MDBCol lg="12">
               <MDBCardBody className="d-flex flex-column justify-content-center">
-                {faqItems.map((item, index) => (
-                  <div key={index}>
-                    <MDBRow className="d-flex justify-content-center align-items-center">
-                      <MDBCol
-                        md="12"
-                        className={`mt-1 d-flex justify-content-between FAQquestionDesign ${
-                          item.isOpen ? "active" : ""
-                        }`}
-                        onClick={() => toggleAnswer(index)}
-                      >
-                        <div className="px-md-3">▾</div>
-                        {item.question}
-                        <div className="px-md-3">▾</div>
-                      </MDBCol>
-                    </MDBRow>
-
-                    {item.isOpen && (
-                      <MDBRow className="d-flex justify-content-center align-items-start">
-                        <MDBCol
-                          md="12"
-                          className="d-flex justify-content-center FAQanswerDesign"
-                        >
-                          {item.answer}
-                        </MDBCol>
-                      </MDBRow>
-                    )}
-                  </div>
-                ))}
-                <MDBRow>
-                  <MDBCol
-                    md="12"
-                    className="mt-3 d-flex justify-content-center h3"
-                  >
+                <MDBRow className="mb-3">
+                  <MDBCol md="12" className="d-flex justify-content-center h3">
                     Nuevo ticket
                   </MDBCol>
                 </MDBRow>
                 <MDBRow>
-                  <MDBCol md="12" className="mt-3">
+                  {faqItems.map((item, index) => (
+                    <div key={index}>
+                      <MDBRow className="d-flex justify-content-center align-items-center">
+                        <MDBCol
+                          md="12"
+                          className={`mt-1 d-flex justify-content-between FAQquestionDesign ${
+                            item.isOpen ? "active" : ""
+                          }`}
+                          onClick={() => toggleAnswer(index)}
+                        >
+                          <div className="px-md-3">▾</div>
+                          {item.question}
+                          <div className="px-md-3">▾</div>
+                        </MDBCol>
+                      </MDBRow>
+
+                      {item.isOpen && (
+                        <MDBRow className="d-flex justify-content-center align-items-start">
+                          <MDBCol
+                            md="12"
+                            className="d-flex justify-content-center FAQanswerDesign"
+                          >
+                            {item.answer}
+                          </MDBCol>
+                        </MDBRow>
+                      )}
+                    </div>
+                  ))}
+
+                  <MDBCol md="12" className="mt-5">
                     <InputLabel
                       type="text"
                       placeholder="Tema"
@@ -192,7 +190,7 @@ export const TicketFormcard = () => {
                   </MDBCol>
                 </MDBRow>
 
-                <MDBRow className="d-flex justify-content-center my-3">
+                <MDBRow className="d-flex justify-content-center mt-4">
                   <div className="buttonSendTicket">Enviar ticket</div>
                 </MDBRow>
               </MDBCardBody>

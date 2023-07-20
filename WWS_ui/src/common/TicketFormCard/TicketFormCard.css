@@ -56,6 +56,12 @@
 
 @media (min-width: 992px) {
   .ticketFormCardContainer {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ticketFormCardContainer {
     width: 60%;
   }
 }
@@ -68,6 +74,12 @@
   padding-bottom: 0.4em;
   border-radius: 0.3em;
   font-weight: bold;
+  user-select: none;
+  cursor: pointer;
+}
+
+.FAQquestionDesign:hover {
+  background-color: rgb(12, 64, 98);
 }
 
 .FAQanswerDesign {
@@ -77,9 +89,12 @@
   color: white;
   border-radius: 0.3em;
   padding: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
   display: none;
+  font-size: 85%;
+  user-select: none;
 }
-
 
 .fileInputDesign {
   display: flex;
@@ -89,7 +104,10 @@
 }
 
 @media (max-width: 576px) {
-    .FAQquestionDesign {
-        font-size: 90%;
-    }
+  .FAQquestionDesign {
+    font-size: 90%;
   }
+  .FAQanswerDesign {
+    font-size: 70%;
+  }
+}
