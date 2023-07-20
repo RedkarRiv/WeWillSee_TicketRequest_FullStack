@@ -31,7 +31,7 @@
 
 .inputFormDesign:focus,
 .commentDesign:focus {
-  background-color: rgba(222, 222, 235, 0.564);
+  background-color: rgba(241, 241, 246, 0.564);
   outline: none;
   box-shadow: inset 0px -0.1em rgb(21, 54, 84);
   color: black;
@@ -72,12 +72,13 @@
 }
 
 .FAQanswerDesign {
-  margin-top: -0.4em;
+  margin-top: -0.35em;
   width: 100%;
   background-color: rgb(30, 97, 141);
   color: white;
   border-radius: 0.3em;
   padding: 0.5em;
+  display: none;
 }
 
 

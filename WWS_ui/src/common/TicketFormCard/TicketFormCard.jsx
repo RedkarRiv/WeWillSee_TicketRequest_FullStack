@@ -32,10 +32,37 @@ export const TicketFormcard = () => {
     }));
   };
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [faqItems, setFaqItems] = useState([
+    {
+      question: "Esto es una pregunta del FAQ1",
+      answer:
+        "Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del",
+      isOpen: false,
+    },
+    {
+      question: "Esto es una pregunta del FAQ2",
+      answer:
+        "Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del",
+      isOpen: false,
+    },
 
-  const toggleAnswer = () => {
-    setIsOpen(!isOpen);
+    {
+      question: "Esto es una pregunta del FAQ3",
+      answer:
+        "Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del",
+      isOpen: false,
+    },
+  ]);
+  const toggleAnswer = (index) => {
+    setFaqItems((prevFaqItems) => {
+      const updatedFaqItems = prevFaqItems.map((faqItem, i) => {
+        if (i === index) {
+          return { ...faqItem, isOpen: !faqItem.isOpen };
+        }
+        return faqItem;
+      });
+      return updatedFaqItems;
+    });
   };
 
   return (
@@ -45,12 +72,37 @@ export const TicketFormcard = () => {
           <MDBRow className="">
             <MDBCol lg="12">
               <MDBCardBody className="d-flex flex-column justify-content-center">
+                {faqItems.map((item, index) => (
+                  <div key={index}>
+                    <MDBRow className="d-flex justify-content-center align-items-center">
+                      <MDBCol
+                        md="12"
+                        className={`mt-1 d-flex justify-content-center FAQquestionDesign ${
+                          item.isOpen ? "active" : ""
+                        }`}
+                        onClick={() => toggleAnswer(index)}
+                      >
+                        {item.question}
+                      </MDBCol>
+                    </MDBRow>
 
+                    {item.isOpen && (
+                      <MDBRow className="d-flex justify-content-center align-items-start">
+                        <MDBCol
+                          md="12"
+                          className="d-flex justify-content-center FAQanswerDesign"
+                        >
+                          {item.answer}
+                        </MDBCol>
+                      </MDBRow>
+                    )}
+                  </div>
+                ))}
 
-                <MDBRow className="d-flex justify-content-center align-items-center">
+                {/* <MDBRow className="d-flex justify-content-center align-items-center">
                   <MDBCol
                     md="12"
-                    className="mt-3 d-flex justify-content-center FAQquestionDesign"
+                    className="mt-1 d-flex justify-content-center FAQquestionDesign"
                     onClick={toggleAnswer}
                   >
                     Esto es una pregunta del FAQ{" "}
@@ -63,17 +115,65 @@ export const TicketFormcard = () => {
                       md="12"
                       className="d-flex justify-content-center FAQanswerDesign"
                     >
-                      Esto es una respuesta del FAQ Esto es una respuesta del                     
                       Esto es una respuesta del FAQ Esto es una respuesta del
                       Esto es una respuesta del FAQ Esto es una respuesta del
                       Esto es una respuesta del FAQ Esto es una respuesta del
                       Esto es una respuesta del FAQ Esto es una respuesta del
-
+                      Esto es una respuesta del FAQ Esto es una respuesta del
                       FAQ{" "}
                     </MDBCol>
                   </MDBRow>
                 )}
+                <MDBRow className="d-flex justify-content-center align-items-center">
+                  <MDBCol
+                    md="12"
+                    className="mt-1 d-flex justify-content-center FAQquestionDesign"
+                    onClick={toggleAnswer}
+                  >
+                    Esto es una pregunta del FAQ{" "}
+                  </MDBCol>
+                </MDBRow>
 
+                {isOpen && (
+                  <MDBRow className="d-flex justify-content-center align-items-start">
+                    <MDBCol
+                      md="12"
+                      className="d-flex justify-content-center FAQanswerDesign"
+                    >
+                      Esto es una respuesta del FAQ Esto es una respuesta del
+                      Esto es una respuesta del FAQ Esto es una respuesta del
+                      Esto es una respuesta del FAQ Esto es una respuesta del
+                      Esto es una respuesta del FAQ Esto es una respuesta del
+                      Esto es una respuesta del FAQ Esto es una respuesta del
+                      FAQ{" "}
+                    </MDBCol>
+                  </MDBRow>
+                )}
+                                <MDBRow className="d-flex justify-content-center align-items-center">
+                  <MDBCol
+                    md="12"
+                    className="mt-1 d-flex justify-content-center FAQquestionDesign"
+                    onClick={toggleAnswer}
+                  >
+                    Esto es una pregunta del FAQ{" "}
+                  </MDBCol>
+                </MDBRow>
+
+                {isOpen && (
+                  <MDBRow className="d-flex justify-content-center align-items-start">
+                    <MDBCol
+                      md="12"
+                      className="d-flex justify-content-center FAQanswerDesign"
+                    >
+                      Esto es una respuesta del FAQ Esto es una respuesta del
+                      Esto es una respuesta del FAQ Esto es una respuesta del
+                      Esto es una respuesta del FAQ Esto es una respuesta del
+                      Esto es una respuesta del FAQ Esto es una respuesta del
+                      Esto es una respuesta del FAQ Esto es una respuesta del
+                      FAQ{" "}
+                    </MDBCol>
+                  </MDBRow>
+                )} */}
                 <MDBRow>
                   <MDBCol
                     md="12"
@@ -153,7 +253,7 @@ export const TicketFormcard = () => {
                   <MDBCol md="12" className="mt-3">
                     <InputLabel
                       type="file"
-                      placeholder="Adjunta tu archivo"
+                      accept=".jpg, .png, .pdf"
                       name="data"
                       classDesign={
                         credentialsError.emailError === ""
