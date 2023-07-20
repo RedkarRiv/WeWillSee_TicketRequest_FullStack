@@ -20,6 +20,22 @@ module.exports = {
       theme_status: "Active",
 
     },
+    {
+      id: 4,
+      theme_name: 'Proveedores',
+      theme_status: "Active",
+    },
+    {
+      id: 5,
+      theme_name: 'Logística',
+      theme_status: "Active",
+
+    },      {
+      id: 6,
+      theme_name: 'RRHH',
+      theme_status: "Active",
+
+    },
   ]);
   },
 

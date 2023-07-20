@@ -12,7 +12,6 @@ authController.register = async (req, res) => {
     const checkEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{4,}$/;
 
-    console.log();
 
     if (!checkEmail.test(req.body.email)) {
       return res.status(400).json({

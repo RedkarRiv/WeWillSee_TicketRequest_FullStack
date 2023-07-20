@@ -11,7 +11,6 @@ module.exports = {
         requester: 1,
         SAT_assigned: 1,
         ticket_category_id: 1,
-        comments_id: 1,
         ticket_status: 1,
         ticket_timeline: new Date(),
         reassigned: false,

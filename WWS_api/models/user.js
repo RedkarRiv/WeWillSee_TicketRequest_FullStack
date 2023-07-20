@@ -10,11 +10,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+
+
       User.belongsTo(models.Role, { foreignKey: "role_id", targetKey: "id" });
       User.hasOne(models.SAT, { foreignKey: 'user_id',  onDelete: 'CASCADE'});
       User.hasMany(models.Ticket, { foreignKey: "requester"});
       User.hasMany(models.Message, { foreignKey: "id"});
 
+      
     }
   }
   User.init({

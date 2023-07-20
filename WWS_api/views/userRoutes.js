@@ -9,6 +9,7 @@ router.get('/inactivate', auth,  userController.inactivateOne);
 router.get('/activate', auth,  userController.activateOne);
 router.delete('/destroy/:id', auth, isAdmin,  userController.deleteOne);
 router.get('/themes', auth,  userController.getAllThemesByUser);
+router.post('/tickets/new', auth,  userController.newTicketByUser);
 
 
 

@@ -1,4 +1,4 @@
-const { User, Role, SAT, Theme, Category } = require("../models");
+const { User, Role, SAT, Theme, Category, Ticket } = require("../models");
 const userController = {};
 const bcrypt = require("bcrypt");
 const checkEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -204,6 +204,47 @@ userController.getAllThemesByUser = async (req, res) => {
     });
   }
 };
+
+userController.newTicketByUser = async (req, res) => {
+  try {
+
+const ticketTitle = req.body.title
+const ticketDescription = req.body.description
+const requesterId = req.userId
+// const SATassigned= ""
+const categoryId = req.body.categoryId
+const ticketTimeline = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
+
+
+
+
+    const newTicket = await Ticket.create({
+     ticket_title:ticketTitle,
+     ticket_description:ticketDescription,
+     requester: requesterId,
+     SAT_assigned: 1,
+     ticket_category_id: categoryId,
+     ticket_status: 1,
+     ticket_timeline: ticketTimeline,
+     reassigned: false,
+     createdAt: new Date(),
+     updatedUp: new Date()
+    });
+
+    return res.json({
+      success: true,
+      message: "Ticket creado con existo",
+      data: newTicket,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "El ticket no ha podido ser creado",
+      error: error.message,
+    });
+  }
+};
+
 
 
 module.exports = userController;

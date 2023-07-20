@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      
       Ticket.belongsTo(models.SAT, { foreignKey: "SAT_assigned"});
       Ticket.belongsTo(models.User, { foreignKey: "requester"});
       Ticket.belongsTo(models.Category, { foreignKey: "ticket_category_id"});
@@ -25,7 +26,6 @@ module.exports = (sequelize, DataTypes) => {
     requester: DataTypes.INTEGER,
     SAT_assigned: DataTypes.INTEGER,
     ticket_category_id: DataTypes.INTEGER,
-    comments_id: DataTypes.INTEGER,
     ticket_status: DataTypes.INTEGER,
     ticket_timeline: DataTypes.DATEONLY,
     reassigned: DataTypes.BOOLEAN

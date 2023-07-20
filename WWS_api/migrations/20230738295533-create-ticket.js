@@ -36,13 +36,6 @@ module.exports = {
           key: "id",
         },
       },
-      comments_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Messages",
-          key: "id",
-        },
-      },
       ticket_status: {
         type: Sequelize.INTEGER,
         references: {

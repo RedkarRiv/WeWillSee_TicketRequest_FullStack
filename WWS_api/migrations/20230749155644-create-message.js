@@ -11,6 +11,10 @@ module.exports = {
       },
       ticket_id: {
         type: Sequelize.INTEGER,
+        references:{
+          model: "Tickets",
+          key: "id"
+        }
       },
       comment_user_id: {
         type: Sequelize.INTEGER,
