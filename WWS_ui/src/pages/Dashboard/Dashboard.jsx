@@ -74,13 +74,12 @@ export const Dashboard = () => {
 
 
 
-{/* 
-<TicketFormcard/> */}
+<TicketFormcard/>
 
 
 
 
-            <CategoriesCard />
+            {/* <CategoriesCard /> */}
           </Row>
         </Col>
       </Row>

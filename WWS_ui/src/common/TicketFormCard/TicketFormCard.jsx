@@ -31,6 +31,13 @@ export const TicketFormcard = () => {
       [e.target.name + "Error"]: mensajeError,
     }));
   };
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleAnswer = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <MDBRow className="ticketFormCardContainer d-flex justify-content-center align-items-center p-0">
       <MDBCol>
@@ -38,6 +45,28 @@ export const TicketFormcard = () => {
           <MDBRow className="">
             <MDBCol lg="12">
               <MDBCardBody className="text-black d-flex flex-column justify-content-center m-0 p-0">
+                <MDBRow>
+                  <MDBCol
+                    md="12"
+                    className="mt-3 d-flex justify-content-center h5"
+                    onClick={toggleAnswer}
+                  >
+                    Esto es una pregunta del FAQ{" "}
+                  </MDBCol>
+                </MDBRow>
+
+                {isOpen && (
+                  <MDBRow>
+                    <MDBCol
+                      md="12"
+                      className="mt-3 d-flex justify-content-center"
+                    >
+                      Esto es una respuesta del FAQ Esto es una respuesta del
+                      FAQ{" "}
+                    </MDBCol>
+                  </MDBRow>
+                )}
+
                 <MDBRow>
                   <MDBCol
                     md="12"
@@ -79,6 +108,7 @@ export const TicketFormcard = () => {
                     />
                   </MDBCol>
                 </MDBRow>
+
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
                     <InputLabel
@@ -104,6 +134,22 @@ export const TicketFormcard = () => {
                       className={
                         credentialsError.emailError === ""
                           ? "commentDesign"
+                          : "errorDesign"
+                      }
+                      functionHandler={(e) => InputHandler(e)}
+                      onBlurFunction={(e) => InputCheck(e)}
+                    />
+                  </MDBCol>
+                </MDBRow>
+                <MDBRow>
+                  <MDBCol md="12" className="mt-3">
+                    <InputLabel
+                      type="file"
+                      placeholder="Adjunta tu archivo"
+                      name="data"
+                      classDesign={
+                        credentialsError.emailError === ""
+                          ? "inputFormDesign"
                           : "errorDesign"
                       }
                       functionHandler={(e) => InputHandler(e)}
