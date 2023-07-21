@@ -16,9 +16,17 @@ export const Dashboard = () => {
   const credentialCheck = credentialsRdx?.credentials?.token;
   const [ticketFormShow, setTicketFormShow] = useState(true);
   const [themeData, setThemeData] = useState([]);
+  const [categoryTicket, setCategoryTicket] = useState({});
+
+
+const loadForm = (categoryData) => {
+  setCategoryTicket(categoryData)
+  setTicketFormShow(!ticketFormShow)
+}
+
+
 
   const TakeAllThemes = () => {
-    console.log(credentialCheck);
     bringThemes(credentialCheck)
       .then((resultado) => {
         setThemeData(resultado);
@@ -106,7 +114,7 @@ export const Dashboard = () => {
                           <div
                             key={index}
                             className="categoryLabelDesign"
-                            onClick={() => setTicketFormShow(!ticketFormShow)}
+                            onClick={() => loadForm (category)}
                           >
                             {category.category_name}
                           </div>
@@ -117,7 +125,7 @@ export const Dashboard = () => {
                 </Col>
               ))
             ) : (
-              <TicketFormcard />
+              <TicketFormcard category={categoryTicket} />
             )}
           </Row>
         </Col>

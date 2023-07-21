@@ -7,7 +7,9 @@ import { userDataCheck } from "../../pages/userSlice";
 import { CheckError } from "../../services/useful";
 import { ticketMe } from "../../services/apiCalls";
 
-export const TicketFormcard = (category_id) => {
+export const TicketFormcard = ({category}) => {
+  console.log(category)
+
   const [faqItems, setFaqItems] = useState([
     {
       question: "Esto es una pregunta del FAQ1",
@@ -60,9 +62,8 @@ export const TicketFormcard = (category_id) => {
   const [newTicket, setNewTicket] = useState({
     title: "",
     description: "",
-    categoryId: category_id ?? 2,
+    categoryId: category.id ?? 2,
   });
-
   const InputHandler = (e) => {
     console.log(newTicket)
     setNewTicket((prevState) => ({
@@ -139,7 +140,7 @@ export const TicketFormcard = (category_id) => {
                   <MDBCol md="12" className="mt-3">
                     <InputLabel
                       type="text"
-                      placeholder="Categoría"
+                      placeholder={category.category_name}
                       name="category"
                       classDesign="inputFormDesign"
                       functionHandler={(e) => InputHandler(e)}
