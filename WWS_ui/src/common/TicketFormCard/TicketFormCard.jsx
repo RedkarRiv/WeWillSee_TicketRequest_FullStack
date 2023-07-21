@@ -7,8 +7,8 @@ import { userDataCheck } from "../../pages/userSlice";
 import { CheckError } from "../../services/useful";
 import { ticketMe } from "../../services/apiCalls";
 
-export const TicketFormcard = ({category}) => {
-  console.log(category)
+export const TicketFormcard = ({ category }) => {
+  console.log(category);
 
   const [faqItems, setFaqItems] = useState([
     {
@@ -48,12 +48,13 @@ export const TicketFormcard = ({category}) => {
     description: "",
   });
   const InputCheck = (e) => {
-    console.log(credentialsError)
+    console.log(credentialsError);
     let mensajeError = CheckError(e.target.name, e.target.value);
 
     setCredentialsError((prevState) => ({
       ...prevState,
-      [e.target.name + "Error"]: mensajeError,}));
+      [e.target.name + "Error"]: mensajeError,
+    }));
   };
 
   const credentialsRdx = useSelector(userDataCheck);
@@ -65,7 +66,7 @@ export const TicketFormcard = ({category}) => {
     categoryId: category.id ?? 2,
   });
   const InputHandler = (e) => {
-    console.log(newTicket)
+    console.log(newTicket);
     setNewTicket((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -124,7 +125,7 @@ export const TicketFormcard = ({category}) => {
                     </div>
                   ))}
 
-                  <MDBCol md="12" className="mt-5">
+                  {/* <MDBCol md="12" className="mt-5">
                     <InputLabel
                       type="text"
                       placeholder="Tema"
@@ -133,7 +134,7 @@ export const TicketFormcard = ({category}) => {
                       functionHandler={(e) => InputHandler(e)}
                       onBlurFunction={(e) => InputCheck(e)}
                     />
-                  </MDBCol>
+                  </MDBCol> */}
                 </MDBRow>
 
                 <MDBRow>

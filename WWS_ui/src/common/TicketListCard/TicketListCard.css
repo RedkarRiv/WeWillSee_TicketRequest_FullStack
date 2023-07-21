@@ -1,0 +1,23 @@
+.ticketListCardContainer {
+padding-right:2em;
+padding-left:2em;
+width: 100%;
+text-align: center;
+}
+
+.ticketListDesign {
+  border-top-right-radius: 0.3em;
+  border-top-left-radius: 0.3em;
+
+}
+
+
+@media (max-width: 768px) {
+    .ticketListCardContainer {
+      font-size: 75%;
+      padding-right:0.5em;
+padding-left:0.5em;
+    }
+  }
+  
+  
