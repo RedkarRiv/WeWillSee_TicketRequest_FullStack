@@ -1,0 +1,20 @@
+.titleContainer {
+  background-color: #454750;
+  border-top-right-radius: 0.3em;
+  border-top-left-radius: 0.3em;
+}
+
+.titleDesign {
+  color: white;
+  font-size: 130%;
+  font-weight: bold;
+  padding: 0.2em;
+}
+
+@media (min-width: 992px) {
+.titleDesign {
+    font-size: 180%;
+padding-top: 0.3em;
+padding-bottom: 0.3em;
+}
+}

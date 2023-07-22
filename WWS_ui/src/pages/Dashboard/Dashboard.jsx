@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { TicketFormcard } from "../../common/TicketFormCard/TicketFormCard";
 import { bringThemes } from "../../services/apiCalls";
 import { TicketListCard } from "../../common/TicketListCard/TicketListCard";
+import { TitleSectionCard } from "../../common/TitleSectionCard/TitleSectionCard";
 
 export const Dashboard = () => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -104,44 +105,46 @@ export const Dashboard = () => {
           </div>
         </Col>
         <Col className="dashboardContainer col-lg-9 col-md-12 my-1 d-flex justify-content-center align-items-start p-0">
-          <Row className="d-flex justify-content-around align-items-around w-100 pt-4">
-            {activeComponentView === 1
-              ? themeData?.data?.data
-                ? Object.values(themeData.data.data).map((theme, index) => (
-                    <Col
-                      key={index}
-                      className="themeContainer col-md-12 col-lg-3 d-flex flex-column mb-sm-4 mt-lg-4"
-                    >
-                      <div className="d-flex flex-row w-100 dropdownClick justify-content-center align-items-center px-2">
-                        <div className="logoCategory"></div>
-                        <div className="themeContainerTitle d-flex justify-content-center">
-                          {theme.theme_name.toUpperCase()}
+          <Row className="d-flex justify-content-around align-items-around w-100 pt-4 pb-4">
+            {activeComponentView === 1 ? (
+              <Row className="categoryListContainer d-flex justify-content-around p-0">
+                <TitleSectionCard title="Selecciona una categoría" />
+                {themeData?.data?.data
+                  ? Object.values(themeData.data.data).map((theme, index) => (
+                      <Col
+                        key={index}
+                        className="themeContainer col-md-12 col-lg-3 d-flex flex-column mb-sm-4 mt-lg-4"
+                      >
+                        <div className="d-flex flex-row w-100 dropdownClick justify-content-center align-items-center px-2">
+                          <div className="logoCategory"></div>
+                          <div className="themeContainerTitle d-flex justify-content-center">
+                            {theme.theme_name.toUpperCase()}
+                          </div>
                         </div>
-                      </div>
-                      <div className="w-100 dropdownContainer">
-                        <div className="categoryList d-flex flex-column justify-content-center align-items-center pt-2">
-                          {Object.values(theme?.Categories).map(
-                            (category, index) => (
-                              <div
-                                key={index}
-                                className="categoryLabelDesign"
-                                onClick={() => loadForm(category)}
-                              >
-                                {category.category_name}
-                              </div>
-                            )
-                          )}
+                        <div className="w-100 dropdownContainer">
+                          <div className="categoryList d-flex flex-column justify-content-center align-items-center pt-2">
+                            {Object.values(theme?.Categories).map(
+                              (category, index) => (
+                                <div
+                                  key={index}
+                                  className="categoryLabelDesign"
+                                  onClick={() => loadForm(category)}
+                                >
+                                  {category.category_name}
+                                </div>
+                              )
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    </Col>
-                  ))
-                : "Cargando"
-              : null}
+                      </Col>
+                    ))
+                  : "Cargando"}
+              </Row>
+            ) : null}
 
             {activeComponentView === 3 && (
               <TicketFormcard category={categoryTicket} />
             )}
-
             {activeComponentView === 2 && <TicketListCard />}
           </Row>
         </Col>

@@ -37,6 +37,11 @@
   border-radius: 0.5em;
   overflow: hidden;
 }
+.categoryListContainer {
+width: 90%;
+background-color: white;
+border-radius: 0.5em;
+}
 
 .profileAvatarContainer {
   height: 25%;
@@ -126,6 +131,9 @@
   .buttonDesignNew {
     font-size: 70%;
   }
+  .categoryListContainer {
+    background-color: transparent;
+    }
 }
 
 

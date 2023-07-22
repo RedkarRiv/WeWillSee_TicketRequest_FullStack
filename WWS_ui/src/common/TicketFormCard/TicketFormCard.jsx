@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { userDataCheck } from "../../pages/userSlice";
 import { CheckError } from "../../services/useful";
 import { ticketMe } from "../../services/apiCalls";
+import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 
 export const TicketFormcard = ({ category }) => {
   console.log(category);
@@ -86,15 +87,12 @@ export const TicketFormcard = ({ category }) => {
   return (
     <MDBRow className="ticketFormCardContainer d-flex justify-content-center align-items-center p-0">
       <MDBCol>
-        <MDBCard className="p-2 px-4">
-          <MDBRow className="">
+        <MDBCard className="d-flex justify-content-center align-items-center">
+          <TitleSectionCard title="Nuevo ticket" />
+
+          <MDBRow className="contentBoxSide">
             <MDBCol lg="12">
               <MDBCardBody className="d-flex flex-column justify-content-center">
-                <MDBRow className="mb-3">
-                  <MDBCol md="12" className="d-flex justify-content-center h3">
-                    Nuevo ticket
-                  </MDBCol>
-                </MDBRow>
                 <MDBRow>
                   {faqItems.map((item, index) => (
                     <div key={index}>

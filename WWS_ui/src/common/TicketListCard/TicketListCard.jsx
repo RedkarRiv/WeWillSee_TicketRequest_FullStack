@@ -7,10 +7,12 @@ import {
   MDBTableBody,
 } from "mdb-react-ui-kit";
 import "./TicketListCard.css";
+import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 
 export const TicketListCard = () => {
   return (
-    <div className="ticketListCardContainer ticketListDesign">
+    <div className="ticketListCardContainer ticketListDesign p-0">
+      <TitleSectionCard title="Mis tickets" />
       <MDBTable align="middle">
         <MDBTableHead>
           <tr>

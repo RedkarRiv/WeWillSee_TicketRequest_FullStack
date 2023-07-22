@@ -102,12 +102,18 @@
   align-items: center;
   text-align: center;
 }
-
+.contentBoxSide {
+  width: 80%;
+}
 @media (max-width: 576px) {
   .FAQquestionDesign {
     font-size: 90%;
   }
   .FAQanswerDesign {
     font-size: 70%;
+  }
+
+  .contentBoxSide {
+    width: 95%;
   }
 }
