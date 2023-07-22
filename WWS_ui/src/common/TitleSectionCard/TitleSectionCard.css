@@ -12,9 +12,9 @@
 }
 
 @media (min-width: 992px) {
-.titleDesign {
+  .titleDesign {
     font-size: 180%;
-padding-top: 0.3em;
-padding-bottom: 0.3em;
-}
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+  }
 }

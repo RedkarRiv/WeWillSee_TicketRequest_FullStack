@@ -110,7 +110,8 @@ export const Dashboard = () => {
               <Row className="categoryListContainer d-flex justify-content-around p-0">
                 <TitleSectionCard title="Selecciona una categoría" />
                 {themeData?.data?.data
-                  ? Object.values(themeData.data.data).map((theme, index) => (
+                  ? Object.values(themeData.data.data).map((theme, index) => 
+                  (
                       <Col
                         key={index}
                         className="themeContainer col-md-12 col-lg-3 d-flex flex-column mb-sm-4 mt-lg-4"
