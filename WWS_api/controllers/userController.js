@@ -1,4 +1,14 @@
-const { User, Role, SAT, Theme, Category, Ticket, sequelize } = require("../models");
+const {
+  User,
+  Role,
+  SAT,
+  Ticket,
+  Theme,
+  FAQ,
+  Category,
+  Message,
+  sequelize,
+} = require("../models");
 const userController = {};
 const bcrypt = require("bcrypt");
 const checkEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -247,5 +257,68 @@ console.log(ticketCounts)
     });
   }
 };
+
+userController.getAllTicketsByUser = async (req, res) => {
+  try {
+    const userId = req.userId;
+
+    const allTickets = await Ticket.findAll({
+      where: {
+        requester: userId,
+      },
+      include: [
+        {
+          model: User,
+        },
+
+        {
+          model: SAT,
+          include: [
+            {
+              model: User,
+            },
+          ],
+        },
+        {
+          model: Category,
+          include: [
+            {
+              model: Theme,
+            },
+            {
+              model: FAQ,
+            },
+          ],
+        },
+        {
+          model: Message,
+          include: [
+            {
+              model: User,
+              include: [
+                {
+                  model: Role,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    return res.json({
+      success: true,
+      message: "Todos los tickets recuperados",
+      data: allTickets,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Los datos no han podido ser recuperados",
+      error: error.message,
+    });
+  }
+};
+
 
 module.exports = userController;
