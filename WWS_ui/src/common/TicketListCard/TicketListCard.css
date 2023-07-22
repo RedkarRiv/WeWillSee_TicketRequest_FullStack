@@ -12,7 +12,7 @@ text-align: center;
 
 @media (max-width: 768px) {
     .ticketListCardContainer {
-      font-size: 75%;
+      font-size: 50%;
       padding-right:0.5em;
 padding-left:0.5em;
     }

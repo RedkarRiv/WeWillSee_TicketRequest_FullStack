@@ -11,6 +11,7 @@ import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { useSelector } from "react-redux";
 import { getAllTicketsByUser } from "../../services/apiCalls";
 import { userDataCheck } from "../../pages/userSlice";
+import moment from "moment";
 
 export const TicketListCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -43,7 +44,9 @@ export const TicketListCard = () => {
       <MDBTable align="middle">
         <MDBTableHead>
           <tr>
-            <th scope="col">Categoria</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">SAT</th>
+            {/* <th scope="col">Categoria</th> */}
             <th scope="col">Titulo</th>
             <th scope="col">Estado</th>
             <th scope="col">Acciones</th>
@@ -54,25 +57,33 @@ export const TicketListCard = () => {
             ? Object.values(ticketsData).map((ticket, index) => (
                 <tr key={index}>
                   <td>
+                    <p className="fw-normal mb-1">
+                      {moment(ticket?.createdAt).format("YYYY-MM-DD")}
+                    </p>
+                  </td>
+                  <td>
+                    <p className="fw-normal mb-1">{ticket?.SAT?.User?.name}</p>
+                  </td>
+                  {/* <td>
                     <div className="d-flex align-items-center justify-content-center">
                       <div>
                         <p className="fw-bold mb-1">
-                          {ticket.Category.category_name}
+                          {ticket?.Category?.category_name}
                         </p>
                       </div>
                     </div>
+                  </td> */}
+                  <td>
+                    <p className="fw-normal mb-1">{ticket?.ticket_title}</p>
                   </td>
                   <td>
-                    <p className="fw-normal mb-1">{ticket.ticket_title}</p>
-                  </td>
-                  <td>
-                    {ticket.ticket_status === 1 ? (
-                      <MDBBadge color="success" pill>
-                        Asignado{" "}
+                    {!ticket?.SAT?.User?.name ? (
+                      <MDBBadge color="danger" pill>
+                        No asignado{" "}
                       </MDBBadge>
                     ) : (
-                      <MDBBadge color="error" pill>
-                        No asignado{" "}
+                      <MDBBadge color="success" pill>
+                        Asignado{" "}
                       </MDBBadge>
                     )}
                   </td>
