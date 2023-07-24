@@ -82,15 +82,15 @@
     width: 95%;
   }
 }
-.inputBlocked {
-  background-color: rgb(127, 121, 113);
+.inputTicketDetail {
+  background-color: rgb(232, 225, 225);
   user-select: none;
  padding: 0.2em;
  border-radius: 0.5em;
  text-align: center; 
- color: white;
- font-weight: bold;
- text-shadow: black 0.05em 0.05em 0.1em;
+ color: rgb(67, 67, 69);
+ user-select: none;
+ font-weight: 700;
   }
 
   .commentDesign {
@@ -102,4 +102,11 @@
     border: rgba(91, 91, 95, 0.469) inset 0.05em;
     padding: 0.5em;
     text-align: start;
+
+  }
+
+  .commentTitleTicketDetail {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-bottom: 0.1em;
   }

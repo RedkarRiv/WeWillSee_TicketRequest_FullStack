@@ -46,27 +46,25 @@ export const TicketDetailCard = () => {
               <MDBCardBody className="d-flex flex-column justify-content-center mt-2">
                 <MDBRow>
                   <MDBCol md="12" className="mt-4">
-                    <div className="inputFormDesign inputBlocked">"TEMA"</div>
+                    <div className="inputTicketDetail">"TEMA"</div>
                   </MDBCol>
                 </MDBRow>
 
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
-                    <div className="inputFormDesign inputBlocked">
-                      "CATEGORIA"
-                    </div>
+                    <div className="inputTicketDetail">"CATEGORIA"</div>
                   </MDBCol>
                 </MDBRow>
 
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
-                    <div className="inputFormDesign inputBlocked">"TITULO"</div>
+                    <div className="inputTicketDetail">"TITULO"</div>
                   </MDBCol>
                 </MDBRow>
 
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
-                    <div className="commentDesign inputBlocked">
+                    <div className="inputTicketDetail p-3">
                       "Esta es la descripcion del ticket Esta es la descripcion
                       del ticket Esta es la descripcion del ticket Esta es la
                       descripcion del ticket Esta es la descripcion del ticket
@@ -77,21 +75,25 @@ export const TicketDetailCard = () => {
                 </MDBRow>
 
                 <MDBRow>
-                  <MDBCol md="12" className="my-3">
-                    <div className="inputFormDesign inputBlocked">
-                      "SAT ASIGNADO"
-                    </div>
+                  <MDBCol md="12" className="mt-3">
+                    <div className="inputTicketDetail">"SAT ASIGNADO"</div>
                   </MDBCol>
-                  <MDBCol md="12" className="mt-1">
+                  </MDBRow>
+
+                  <MDBRow>
+           <MDBCol md="12" className="mt-3">
+                    <div className="inputTicketDetail commentTitleTicketDetail">"COMENTARIOS"</div>
+                  </MDBCol>
+                  <MDBCol md="12" className="mt-0">
                     <CommentCard />{" "}
                   </MDBCol>
-                  <MDBCol md="12" className="mt-1">
+                  <MDBCol md="12" className="mt-2">
                     <CommentCard />{" "}
                   </MDBCol>
-                  <MDBCol md="12" className="mt-1">
+                  <MDBCol md="12" className="mt-2">
                     <CommentCard />{" "}
                   </MDBCol>
-                  <MDBCol md="12" className="mt-1">
+                  <MDBCol md="12" className="mt-2">
                     <CommentCard />{" "}
                   </MDBCol>
                 </MDBRow>
