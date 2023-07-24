@@ -1,11 +1,8 @@
 .titleContainer {
-  background-color: #09470d;
-  border-top-right-radius: 0.3em;
-  border-top-left-radius: 0.3em;
+  border-bottom: 0.1em solid  #4b4d4be4;
 }
 
 .titleDesign {
-  color: white;
   font-size: 130%;
   font-weight: bold;
   padding: 0.2em;

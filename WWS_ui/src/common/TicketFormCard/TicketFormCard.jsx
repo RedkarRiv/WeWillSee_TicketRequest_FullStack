@@ -8,8 +8,10 @@ import { CheckError } from "../../services/useful";
 import { ticketMe } from "../../services/apiCalls";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 
-export const TicketFormcard = ({ category }) => {
+export const TicketFormcard = ({ category, theme }) => {
+  console.log("esto es la categoria-------------------")
   console.log(category);
+  console.log(theme);
 
   const [faqItems, setFaqItems] = useState([
     {
@@ -123,16 +125,16 @@ export const TicketFormcard = ({ category }) => {
                     </div>
                   ))}
 
-                  {/* <MDBCol md="12" className="mt-5">
+                  <MDBCol md="12" className="mt-5">
                     <InputLabel
                       type="text"
-                      placeholder="Tema"
+                      placeholder={theme}
                       name="title"
                       classDesign="inputFormDesign"
                       functionHandler={(e) => InputHandler(e)}
                       onBlurFunction={(e) => InputCheck(e)}
                     />
-                  </MDBCol> */}
+                  </MDBCol>
                 </MDBRow>
 
                 <MDBRow>

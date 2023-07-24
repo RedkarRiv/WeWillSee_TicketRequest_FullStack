@@ -18,10 +18,13 @@ export const Dashboard = () => {
   const credentialCheck = credentialsRdx?.credentials?.token;
   const [themeData, setThemeData] = useState([]);
   const [categoryTicket, setCategoryTicket] = useState({});
+  const [themeTicket, setThemeTicket] = useState({});
+
   const [activeComponentView, setActiveComponentView] = useState(1);
 
-  const loadForm = (categoryData) => {
+  const loadForm = (categoryData, themeData) => {
     setCategoryTicket(categoryData);
+    setThemeTicket(themeData)
     setActiveComponentView(3);
   };
   const dinamicRenderHandler = (componentNumber) => {
@@ -31,6 +34,8 @@ export const Dashboard = () => {
   const TakeAllThemes = () => {
     bringThemes(credentialCheck)
       .then((resultado) => {
+        console.log("Esto es el themeData")
+        console.log(resultado)
         setThemeData(resultado);
       })
       .catch((error) => {
@@ -129,7 +134,7 @@ export const Dashboard = () => {
                                 <div
                                   key={index}
                                   className="categoryLabelDesign"
-                                  onClick={() => loadForm(category)}
+                                  onClick={() => loadForm(category, theme.theme_name)}
                                 >
                                   {category.category_name}
                                 </div>
@@ -144,7 +149,7 @@ export const Dashboard = () => {
             ) : null}
 
             {activeComponentView === 3 && (
-              <TicketFormcard category={categoryTicket} />
+              <TicketFormcard category={categoryTicket} theme={themeTicket} />
             )}
             {activeComponentView === 2 && <TicketListCard />}
           </Row>
