@@ -13,7 +13,7 @@ export const CommentCard = () => {
   return (
     <Row className="m-0 p-0 commentCardDesign d-flex flex-column flex-md-row">
       <Col className="col-md-2 col-sm-12 perfilCommentDesign">
-        <Row>
+        <Row className=" d-flex flex-column">
           <Col className="commentUserName">SAT demo</Col>
           <Col className="commentDateDesign">01/01/2020</Col>
         </Row>

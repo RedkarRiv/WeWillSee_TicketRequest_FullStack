@@ -29,6 +29,7 @@
 
 .inputFormDesign {
   border: rgba(91, 91, 95, 0.498) inset 0.05em;
+  font-size: 120%;
 }
 
 .inputFormDesign:focus,
@@ -107,18 +108,7 @@
 .contentBoxSide {
   width: 80%;
 }
-@media (max-width: 576px) {
-  .FAQquestionDesign {
-    font-size: 90%;
-  }
-  .FAQanswerDesign {
-    font-size: 70%;
-  }
 
-  .contentBoxSide {
-    width: 95%;
-  }
-}
 .inputBlocked {
   background-color: rgb(234, 137, 0);
   user-select: none;
@@ -128,4 +118,26 @@
  color: white;
  font-weight: bold;
  text-shadow: black 0.05em 0.05em 0.1em;
+  }
+
+  .cardBackgroundDesign {
+    background-color: transparent;
+    border: 0;
+  }
+
+
+  @media (max-width: 576px) {
+    .FAQquestionDesign {
+      font-size: 90%;
+    }
+    .FAQanswerDesign {
+      font-size: 70%;
+    }
+  
+    .contentBoxSide {
+      width: 95%;
+    }
+    .inputFormDesign {
+      font-size: 100%;
+    }
   }

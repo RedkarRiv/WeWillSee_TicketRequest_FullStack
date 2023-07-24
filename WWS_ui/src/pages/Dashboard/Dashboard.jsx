@@ -111,7 +111,7 @@ export const Dashboard = () => {
         </Col>
         <Col className="dashboardContainer col-lg-9 col-md-12 my-1 d-flex justify-content-center align-items-start p-0">
           <Row className="d-flex justify-content-around align-items-around w-100 pt-4 pb-4">
-{/* 
+
             {activeComponentView === 1 ? (
               <Row className="categoryListContainer d-flex justify-content-around p-0">
                 <TitleSectionCard title="Selecciona una categoría" />
@@ -153,8 +153,9 @@ export const Dashboard = () => {
             {activeComponentView === 3 && (
               <TicketFormcard category={categoryTicket} theme={themeTicket} />
             )}
-            {activeComponentView === 2 && <TicketListCard />} */}
-            <TicketDetailCard category={categoryTicket} theme={themeTicket}/>
+            {activeComponentView === 2 && <TicketListCard />}
+
+        <TicketDetailCard category={categoryTicket} theme={themeTicket}/>
 
           </Row>
         </Col>

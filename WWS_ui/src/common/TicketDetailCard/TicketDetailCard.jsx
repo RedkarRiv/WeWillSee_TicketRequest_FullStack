@@ -36,13 +36,14 @@ export const TicketDetailCard = () => {
   };
 
   return (
-    <MDBRow className="ticketFormCardContainer d-flex justify-content-center align-items-center p-0">
+  
+    <MDBRow className="ticketDetailCardContainer d-flex justify-content-center align-items-center p-0">
       <MDBCol>
-        <MDBCard className="d-flex justify-content-center align-items-center">
+        <MDBCard className="d-flex justify-content-center align-items-center cardDetailBackgroundDesign">
           <TitleSectionCard title="Ticket en detalle" />
 
           <MDBRow className="contentBoxSide">
-            <MDBCol lg="12">
+            <MDBCol lg="12" className="p-0">
               <MDBCardBody className="d-flex flex-column justify-content-center mt-2">
                 <MDBRow>
                   <MDBCol md="12" className="mt-4">
