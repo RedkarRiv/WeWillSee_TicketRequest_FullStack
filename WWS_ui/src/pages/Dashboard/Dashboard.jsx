@@ -11,6 +11,7 @@ import { TicketFormcard } from "../../common/TicketFormCard/TicketFormCard";
 import { bringThemes } from "../../services/apiCalls";
 import { TicketListCard } from "../../common/TicketListCard/TicketListCard";
 import { TitleSectionCard } from "../../common/TitleSectionCard/TitleSectionCard";
+import { TicketDetailCard } from "../../common/TicketDetailCard/TicketDetailCard";
 
 export const Dashboard = () => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -94,7 +95,6 @@ export const Dashboard = () => {
             </div>
           </div>
           <div className="profileButtons d-flex flex-column justify-content-center align-items-center pt-md-3">
-            <div className="buttonDesign">Mis datos</div>
             <div
               className="buttonDesign"
               onClick={() => dinamicRenderHandler(2)}
@@ -111,6 +111,7 @@ export const Dashboard = () => {
         </Col>
         <Col className="dashboardContainer col-lg-9 col-md-12 my-1 d-flex justify-content-center align-items-start p-0">
           <Row className="d-flex justify-content-around align-items-around w-100 pt-4 pb-4">
+{/* 
             {activeComponentView === 1 ? (
               <Row className="categoryListContainer d-flex justify-content-around p-0">
                 <TitleSectionCard title="Selecciona una categoría" />
@@ -145,13 +146,16 @@ export const Dashboard = () => {
                       </Col>
                     ))
                   : "Cargando"}
+
               </Row>
             ) : null}
 
             {activeComponentView === 3 && (
               <TicketFormcard category={categoryTicket} theme={themeTicket} />
             )}
-            {activeComponentView === 2 && <TicketListCard />}
+            {activeComponentView === 2 && <TicketListCard />} */}
+            <TicketDetailCard category={categoryTicket} theme={themeTicket}/>
+
           </Row>
         </Col>
       </Row>

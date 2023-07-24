@@ -163,18 +163,7 @@ export const TicketFormcard = ({ category, theme }) => {
                     />
                   </MDBCol>
                 </MDBRow>
-                <MDBRow>
-                  <MDBCol md="12" className="mt-3">
-                    <InputLabel
-                      type="file"
-                      accept=".jpg, .png, .pdf"
-                      name="data"
-                      classDesign="inputFormDesign"
-                      functionHandler={(e) => InputHandler(e)}
-                      onBlurFunction={(e) => InputCheck(e)}
-                    />
-                  </MDBCol>
-                </MDBRow>
+                
 
                 <MDBRow className="d-flex justify-content-center mt-4">
                   <div

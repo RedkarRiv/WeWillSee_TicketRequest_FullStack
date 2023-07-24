@@ -1,0 +1,105 @@
+.buttonSendTicket {
+  width: auto;
+  background-color: #13920d;
+  color: white;
+  border-radius: 0.3em;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  text-align: center;
+  padding-right: 0.8em;
+  padding-left: 0.8em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  font-weight: 650;
+  user-select: none;
+  cursor: pointer;
+  font-size: 90%;
+}
+
+.buttonCancelTicket {
+  width: auto;
+  background-color: #ff1c1c;
+  color: white;
+  border-radius: 0.3em;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  text-align: center;
+  padding-right: 0.8em;
+  padding-left: 0.8em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  font-weight: 650;
+  user-select: none;
+  cursor: pointer;
+  font-size: 90%;
+}
+
+
+
+.buttonSendTicket:active {
+  transform: scale(0.9);
+}
+
+.inputFormDesign {
+  border: rgba(91, 91, 95, 0.498) inset 0.05em;
+}
+
+.inputFormDesign:focus,
+.commentDesign:focus {
+  background-color: rgba(241, 241, 246, 0.564);
+  outline: none;
+  box-shadow: inset 0px -0.1em rgb(21, 54, 84);
+  color: black;
+}
+
+.inputFormDesign:focus::placeholder {
+  color: black;
+  font-size: auto;
+  text-align: center;
+}
+
+
+
+@media (min-width: 992px) {
+  .ticketFormCardContainer {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ticketFormCardContainer {
+    width: 60%;
+  }
+}
+
+.contentBoxSide {
+  width: 80%;
+}
+@media (max-width: 576px) {
+  .contentBoxSide {
+    width: 95%;
+  }
+}
+.inputBlocked {
+  background-color: rgb(127, 121, 113);
+  user-select: none;
+ padding: 0.2em;
+ border-radius: 0.5em;
+ text-align: center; 
+ color: white;
+ font-weight: bold;
+ text-shadow: black 0.05em 0.05em 0.1em;
+  }
+
+  .commentDesign {
+    min-height: 8em;
+    max-height: 16em;
+    width: 100%;
+    font-size: 100%;
+    border-radius: 0.5em;
+    border: rgba(91, 91, 95, 0.469) inset 0.05em;
+    padding: 0.5em;
+    text-align: start;
+  }
