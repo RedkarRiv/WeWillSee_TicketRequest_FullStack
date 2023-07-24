@@ -77,17 +77,23 @@ export const TicketListCard = () => {
                     <p className="fw-normal mb-1">{ticket?.ticket_title}</p>
                   </td>
                   <td>
-                    {!ticket?.SAT?.User?.name ? (
+                    {ticket?.TicketStatus.status_name === "En proceso" ? (
+                      <MDBBadge color="success" pill>
+                        {ticket.TicketStatus.status_name}
+                      </MDBBadge>
+                    ) : ticket?.TicketStatus.status_name === "Anulada" ? (
                       <MDBBadge color="danger" pill>
-                        No asignado{" "}
+                        {ticket.TicketStatus.status_name}
                       </MDBBadge>
                     ) : (
-                      <MDBBadge color="success" pill>
-                        Asignado{" "}
+                      <MDBBadge color="secondary" pill>
+                        {ticket.TicketStatus.status_name}
                       </MDBBadge>
                     )}
                   </td>
-                  <td>Ver</td>
+                  <td>
+                    <p className="detailTicketButton">Ver</p>
+                    </td>
                 </tr>
               ))
             : "CARGANDO"}

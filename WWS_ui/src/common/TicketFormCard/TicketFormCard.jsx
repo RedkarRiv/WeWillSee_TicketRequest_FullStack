@@ -9,10 +9,6 @@ import { ticketMe } from "../../services/apiCalls";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 
 export const TicketFormcard = ({ category, theme }) => {
-  console.log("esto es la categoria-------------------")
-  console.log(category);
-  console.log(theme);
-
   const [faqItems, setFaqItems] = useState([
     {
       question: "Esto es una pregunta del FAQ1",
@@ -94,7 +90,7 @@ export const TicketFormcard = ({ category, theme }) => {
 
           <MDBRow className="contentBoxSide">
             <MDBCol lg="12">
-              <MDBCardBody className="d-flex flex-column justify-content-center">
+              <MDBCardBody className="d-flex flex-column justify-content-center mt-2">
                 <MDBRow>
                   {faqItems.map((item, index) => (
                     <div key={index}>
@@ -124,29 +120,21 @@ export const TicketFormcard = ({ category, theme }) => {
                       )}
                     </div>
                   ))}
+                </MDBRow>
 
-                  <MDBCol md="12" className="mt-5">
-                    <InputLabel
-                      type="text"
-                      placeholder={theme}
-                      name="title"
-                      classDesign="inputFormDesign"
-                      functionHandler={(e) => InputHandler(e)}
-                      onBlurFunction={(e) => InputCheck(e)}
-                    />
+                <MDBRow>
+                  <MDBCol md="12" className="mt-4">
+                    <div className="inputFormDesign inputBlocked">
+                      {theme.toUpperCase()}
+                    </div>
                   </MDBCol>
                 </MDBRow>
 
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
-                    <InputLabel
-                      type="text"
-                      placeholder={category.category_name}
-                      name="category"
-                      classDesign="inputFormDesign"
-                      functionHandler={(e) => InputHandler(e)}
-                      onBlurFunction={(e) => InputCheck(e)}
-                    />
+                    <div className="inputFormDesign inputBlocked">
+                      {category.category_name.toUpperCase()}
+                    </div>
                   </MDBCol>
                 </MDBRow>
 
