@@ -7,6 +7,7 @@ const {
   FAQ,
   Category,
   Message,
+  TicketStatus,
   sequelize,
 } = require("../models");
 const userController = {};
@@ -238,7 +239,7 @@ console.log(ticketCounts)
       requester: requesterId,
       SAT_assigned: ticketCounts[0]?.SAT_assigned,
       ticket_category_id: categoryId,
-      ticket_status: 1,
+      ticket_status: 2,
       ticket_timeline: ticketTimeline,
       reassigned: false,
       createdAt: new Date(),
@@ -270,7 +271,9 @@ userController.getAllTicketsByUser = async (req, res) => {
         {
           model: User,
         },
-
+        {
+          model: TicketStatus,
+        },
         {
           model: SAT,
           include: [
