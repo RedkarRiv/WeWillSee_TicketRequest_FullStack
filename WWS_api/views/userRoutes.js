@@ -11,5 +11,7 @@ router.delete("/destroy/:id", auth, isAdmin, userController.deleteOne);
 router.get("/themes", auth, userController.getAllThemesByUser);
 router.post("/tickets/new", auth, userController.newTicketByUser);
 router.get("/tickets/all", auth, userController.getAllTicketsByUser);
+router.get("/tickets/sat/all", auth, userController.getAllTicketsBySAT);
+
 
 module.exports = router;

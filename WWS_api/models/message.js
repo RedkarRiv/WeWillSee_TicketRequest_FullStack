@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   Message.init({
     ticket_id: DataTypes.INTEGER,
     comment_user_id: DataTypes.INTEGER,
-    message_content: DataTypes.STRING,
+    message_content: DataTypes.TEXT,
   }, {
     sequelize,
     modelName: 'Message',

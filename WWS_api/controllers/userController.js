@@ -229,9 +229,9 @@ userController.newTicketByUser = async (req, res) => {
     const requesterId = req.userId;
     const categoryId = req.body.categoryId;
     const ticketTimeline = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
-    
-console.log("esto es el ticketCounts")
-console.log(ticketCounts)
+
+    console.log("esto es el ticketCounts");
+    console.log(ticketCounts);
 
     const newTicket = await Ticket.create({
       ticket_title: ticketTitle,
@@ -239,7 +239,7 @@ console.log(ticketCounts)
       requester: requesterId,
       SAT_assigned: ticketCounts[0]?.SAT_assigned,
       ticket_category_id: categoryId,
-      ticket_status: 2,
+      ticket_status: 1,
       ticket_timeline: ticketTimeline,
       reassigned: false,
       createdAt: new Date(),
@@ -323,5 +323,76 @@ userController.getAllTicketsByUser = async (req, res) => {
   }
 };
 
+userController.getAllTicketsBySAT = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const employeeData = await SAT.findAll({
+      where: {
+        user_id: userId,
+      },
+    });
+    console.log("esto es EMPLOYE.DATA-------------------")
+    console.log(employeeData)
+    console.log("Esto es el EMPLOYE.DAT.ID-----------------")
+    console.log(employeeData[0].id)
 
+    const allTickets = await Ticket.findAll({
+      where: {
+        SAT_assigned: employeeData[0].id,
+      },
+      include: [
+        {
+          model: User,
+        },
+        {
+          model: TicketStatus,
+        },
+        {
+          model: SAT,
+          include: [
+            {
+              model: User,
+            },
+          ],
+        },
+        {
+          model: Category,
+          include: [
+            {
+              model: Theme,
+            },
+            {
+              model: FAQ,
+            },
+          ],
+        },
+        {
+          model: Message,
+          include: [
+            {
+              model: User,
+              include: [
+                {
+                  model: Role,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    return res.json({
+      success: true,
+      message: "Todos los tickets recuperados",
+      data: allTickets,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Los datos no han podido ser recuperados",
+      error: error.message,
+    });
+  }
+};
 module.exports = userController;

@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       ticket_description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       requester: {
         type: Sequelize.INTEGER,
