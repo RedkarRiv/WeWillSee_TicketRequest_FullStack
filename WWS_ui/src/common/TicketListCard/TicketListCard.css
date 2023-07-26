@@ -10,14 +10,7 @@ text-align: center;
 }
 
 
-@media (max-width: 768px) {
-    .ticketListCardContainer {
-      font-size: 50%;
-      padding-right:0.5em;
-padding-left:0.5em;
-    }
-  }
-  
+
   .detailTicketButton {
     user-select: none;
     cursor: pointer;
@@ -31,3 +24,43 @@ padding-left:0.5em;
   .detailTicketButton:hover {
 text-decoration: underline;
   }
+
+  .closeButtonModal {
+    height: 2em;
+    width: 2em;
+    padding: 0;
+    margin:0;
+    border-top-right-radius: 1em;
+    background-color: rgb(169, 8, 8);
+    border:0;
+    user-select: none;
+    cursor: pointer;
+    font-weight: bold;
+    position: relative;
+    left: -2em;
+  }
+
+  .closeButtonModal:hover {
+    background-color: red;
+
+  }
+
+
+
+
+  @media (max-width: 768px) {
+    .ticketListCardContainer {
+      font-size: 50%;
+      padding-right:0.5em;
+padding-left:0.5em;
+    }
+    .closeButtonModal {
+      height: 2em;
+      width: 2em;
+padding: 0.1em;
+font-weight: 200;
+font-size: 90%;
+
+}
+}
+  

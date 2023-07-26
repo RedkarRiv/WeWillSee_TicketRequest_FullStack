@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { MDBCard, MDBCardBody, MDBRow, MDBCol } from "mdb-react-ui-kit";
+import { MDBCard, MDBCardBody, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
 import "./TicketDetailCard.css";
-import { InputLabel } from "../InputLabel/InputLabel";
 import { useSelector } from "react-redux";
 import { userDataCheck } from "../../pages/userSlice";
 import { CheckError } from "../../services/useful";
-import { ticketMe } from "../../services/apiCalls";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { CommentCard } from "../CommentCard/CommentCard";
 
-export const TicketDetailCard = () => {
+export const TicketDetailCard = ({ticket, onClose}) => {
   const [credentialsError, setCredentialsError] = useState({
     title: "",
     description: "",
@@ -23,12 +21,11 @@ export const TicketDetailCard = () => {
       [e.target.name + "Error"]: mensajeError,
     }));
   };
-
+console.log(ticket)
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
-
+  const [newComment, setNewComment] = useState("");
   const InputHandler = (e) => {
-    console.log(newTicket);
     setNewTicket((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -36,12 +33,17 @@ export const TicketDetailCard = () => {
   };
 
   return (
-  
     <MDBRow className="ticketDetailCardContainer d-flex justify-content-center align-items-center p-0">
-      <MDBCol>
+      <MDBCol className="p-0 m-0">
         <MDBCard className="d-flex justify-content-center align-items-center cardDetailBackgroundDesign">
           <TitleSectionCard title="Ticket en detalle" />
-
+          <MDBBtn
+            color="secondary"
+            className="closeButtonModal"
+            onClick={onClose}
+          >
+            X
+          </MDBBtn>
           <MDBRow className="contentBoxSide">
             <MDBCol lg="12" className="p-0">
               <MDBCardBody className="d-flex flex-column justify-content-center mt-2">
@@ -79,11 +81,13 @@ export const TicketDetailCard = () => {
                   <MDBCol md="12" className="mt-3">
                     <div className="inputTicketDetail">"SAT ASIGNADO"</div>
                   </MDBCol>
-                  </MDBRow>
+                </MDBRow>
 
-                  <MDBRow>
-           <MDBCol md="12" className="mt-3">
-                    <div className="inputTicketDetail commentTitleTicketDetail">"COMENTARIOS"</div>
+                <MDBRow>
+                  <MDBCol md="12" className="mt-3">
+                    <div className="inputTicketDetail commentTitleTicketDetail">
+                      "COMENTARIOS"
+                    </div>
                   </MDBCol>
                   <MDBCol md="12" className="mt-0">
                     <CommentCard />{" "}
@@ -105,6 +109,7 @@ export const TicketDetailCard = () => {
                       type="textarea"
                       placeholder="Nuevo comentario"
                       name="comment"
+                      contentEditable
                       maxLength={500}
                       className="commentDesign"
                       onChange={(e) => InputHandler(e)}

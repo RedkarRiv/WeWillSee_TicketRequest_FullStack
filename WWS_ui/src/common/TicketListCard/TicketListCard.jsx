@@ -5,6 +5,10 @@ import {
   MDBTable,
   MDBTableHead,
   MDBTableBody,
+  MDBModal,
+  MDBModalHeader,
+  MDBModalBody,
+  MDBModalFooter,
 } from "mdb-react-ui-kit";
 import "./TicketListCard.css";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
@@ -12,11 +16,14 @@ import { useSelector } from "react-redux";
 import { getAllTicketsByUser } from "../../services/apiCalls";
 import { userDataCheck } from "../../pages/userSlice";
 import moment from "moment";
+import { TicketDetailCard } from "../TicketDetailCard/TicketDetailCard";
 
 export const TicketListCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
   const [ticketsData, setTicketsData] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedTicket, setSelectedTicket] = useState(null);
 
   const getAllTickets = () => {
     getAllTicketsByUser(credentialCheck)
@@ -26,7 +33,6 @@ export const TicketListCard = () => {
           return;
         } else {
           setTicketsData(resultado.data.data);
-          console.log(credentialCheck);
           console.log("Esto es el ticketsData");
           console.log(ticketsData);
         }
@@ -34,19 +40,27 @@ export const TicketListCard = () => {
       .catch((error) => console.log(error));
   };
 
+  const takeTicketData = (ticket) => {
+    setSelectedTicket(ticket);
+    console.log(ticket);
+    setShowModal(true);
+  };
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   useEffect(() => {
     getAllTickets();
   }, [credentialsRdx]);
 
   return (
-    <div className="ticketListCardContainer ticketListDesign p-0">
-      <TitleSectionCard title="Mis tickets" />
+    <div className="ticketListCardContainer ticketListDesign d-flex justify-content-center align-items-center flex-column p-0">
+      <TitleSectionCard title="Mis tickets"/>
       <MDBTable align="middle">
         <MDBTableHead>
           <tr>
             <th scope="col">Fecha</th>
             <th scope="col">SAT</th>
-            {/* <th scope="col">Categoria</th> */}
             <th scope="col">Titulo</th>
             <th scope="col">Estado</th>
             <th scope="col">Acciones</th>
@@ -64,15 +78,6 @@ export const TicketListCard = () => {
                   <td>
                     <p className="fw-normal mb-1">{ticket?.SAT?.User?.name}</p>
                   </td>
-                  {/* <td>
-                    <div className="d-flex align-items-center justify-content-center">
-                      <div>
-                        <p className="fw-bold mb-1">
-                          {ticket?.Category?.category_name}
-                        </p>
-                      </div>
-                    </div>
-                  </td> */}
                   <td>
                     <p className="fw-normal mb-1">{ticket?.ticket_title}</p>
                   </td>
@@ -92,32 +97,29 @@ export const TicketListCard = () => {
                     )}
                   </td>
                   <td>
-                    <p className="detailTicketButton">Ver</p>
-                    </td>
+                    <p
+                      className="detailTicketButton"
+                      onClick={() => takeTicketData(ticket)}
+                    >
+                      Ver
+                    </p>
+                  </td>
                 </tr>
               ))
             : "CARGANDO"}
-
-          {/* <tr>
-            <td>
-              <div className="d-flex align-items-center justify-content-center">
-                <div>
-                  <p className="fw-bold mb-1">Nombre de categoria</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <p className="fw-normal mb-1">Titulo de la categoria</p>
-            </td>
-            <td>
-              <MDBBadge color="success" pill>
-                Asignado{" "}
-              </MDBBadge>
-            </td>
-            <td>Ver</td>
-          </tr> */}
         </MDBTableBody>
       </MDBTable>
+      <MDBModal show={showModal} onHide={() => setShowModal(false)}>
+        <MDBModalBody className="modalTicketDesign d-flex justify-content-center alig-items-center">
+          {selectedTicket && (
+            <TicketDetailCard
+              ticket={selectedTicket}
+              onClose={handleCloseModal}
+            />
+          )}
+        
+        </MDBModalBody>
+      </MDBModal>{" "}
     </div>
   );
 };

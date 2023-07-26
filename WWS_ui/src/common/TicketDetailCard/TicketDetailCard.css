@@ -63,7 +63,9 @@
 
 
   .ticketDetailCardContainer {
-    width: 80%;
+    width: 70%;
+  background-color: white;
+  border-radius: 1em;
   }
 
 
@@ -72,12 +74,12 @@
 }
 
 .inputTicketDetail {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(21, 54, 84);
+  color: white;
   user-select: none;
  padding: 0.2em;
  border-radius: 0.5em;
  text-align: center; 
- color: rgb(67, 67, 69);
  user-select: none;
  font-weight: 700;
  box-shadow: 0.05em 0.05em black;
@@ -105,16 +107,16 @@
   .cardDetailBackgroundDesign {
     background-color: transparent;
     border: 0;
+    width: 100%;
   }
   @media (max-width: 576px) {
     .contentBoxSide {
       width: 95%;
     }
     .ticketDetailCardContainer {
-      margin-top: 2em;
       width: 100%;
     }
     .inputTicketDetail {
-      font-size: 90%;
+      font-size: 120%;
       }
   }

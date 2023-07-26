@@ -11,7 +11,6 @@ import { TicketFormcard } from "../../common/TicketFormCard/TicketFormCard";
 import { bringThemes } from "../../services/apiCalls";
 import { TicketListCard } from "../../common/TicketListCard/TicketListCard";
 import { TitleSectionCard } from "../../common/TitleSectionCard/TitleSectionCard";
-import { TicketDetailCard } from "../../common/TicketDetailCard/TicketDetailCard";
 
 export const Dashboard = () => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -21,7 +20,7 @@ export const Dashboard = () => {
   const [categoryTicket, setCategoryTicket] = useState({});
   const [themeTicket, setThemeTicket] = useState({});
 
-  const [activeComponentView, setActiveComponentView] = useState(1);
+  const [activeComponentView, setActiveComponentView] = useState(2);
 
   const loadForm = (categoryData, themeData) => {
     setCategoryTicket(categoryData);
@@ -97,13 +96,13 @@ export const Dashboard = () => {
           <div className="profileButtons d-flex flex-column justify-content-center align-items-center pt-md-3">
             <div
               className="buttonDesign"
-              onClick={() => dinamicRenderHandler(2)}
+              onClick={() => dinamicRenderHandler(1)}
             >
               Mis tickets
             </div>
             <div
               className="buttonDesignNew"
-              onClick={() => dinamicRenderHandler(1)}
+              onClick={() => dinamicRenderHandler(2)}
             >
               New ticket
             </div>
@@ -112,7 +111,7 @@ export const Dashboard = () => {
         <Col className="dashboardContainer col-lg-9 col-md-12 my-1 d-flex justify-content-center align-items-start p-0">
           <Row className="d-flex justify-content-around align-items-around w-100 pt-4 pb-4">
 
-            {activeComponentView === 1 ? (
+            {activeComponentView === 2 ? (
               <Row className="categoryListContainer d-flex justify-content-around p-0">
                 <TitleSectionCard title="Selecciona una categoría" />
                 {themeData?.data?.data
@@ -153,10 +152,7 @@ export const Dashboard = () => {
             {activeComponentView === 3 && (
               <TicketFormcard category={categoryTicket} theme={themeTicket} />
             )}
-            {activeComponentView === 2 && <TicketListCard />}
-
-        <TicketDetailCard category={categoryTicket} theme={themeTicket}/>
-
+            {activeComponentView === 1 && <TicketListCard />}
           </Row>
         </Col>
       </Row>
