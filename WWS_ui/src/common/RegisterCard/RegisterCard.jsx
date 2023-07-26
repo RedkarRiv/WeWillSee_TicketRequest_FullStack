@@ -2,8 +2,16 @@ import React, { useState } from "react";
 import "./RegisterCard.css";
 import { InputLabel } from "../../common/InputLabel/InputLabel";
 import { CheckError } from "../../services/useful";
+import { loginMe, registerMe } from "../../services/apiCalls";
+import jwt_decode from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { login } from "../../pages/userSlice";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterCard = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [newCredentials, setNewCredentials] = useState({
     name: "",
     email: "",
@@ -32,6 +40,37 @@ export const RegisterCard = () => {
       ...prevState,
       [e.target.name + "Error"]: mensajeError,
     }));
+  };
+
+  const registerNewUser = (e) => {
+    e.preventDefault();
+    registerMe(newCredentials)
+      .then((resultado) => {
+        console.log(resultado);
+        const newUserCredentials = {
+        email: resultado.data.data.email,
+        password: newCredentials.password
+      }
+      loginMe(newUserCredentials)
+      .then((resultado) => {
+        let decoded = jwt_decode(resultado.data.token);
+        let datosBackend = {
+          token: resultado.data.token,
+          user: decoded,
+        };
+
+        dispatch(login({ credentials: datosBackend }));
+        console.log("esto son las credentialsRDX");
+        console.log(datosBackend);
+        navigate("/dashboard")
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -104,8 +143,10 @@ export const RegisterCard = () => {
           </div>
         </div>
       </div>
-      <div className="buttonLogin mt-4 mb-4">Enviar</div>
-
+      <div className="buttonLogin mt-4 mb-4"ç
+            onClick={(e) => registerNewUser(e)}
+            type="submit"
+      >Enviar</div>
     </>
   );
 };

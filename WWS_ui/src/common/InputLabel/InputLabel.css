@@ -19,10 +19,9 @@
 
 
 .InputLabel:focus {
-  background-color: rgba(241, 241, 246, 0.564);
   outline: none;
-  box-shadow: inset 0px -0.1em rgb(21, 54, 84);
   color: black;
+  box-shadow: 0 0 0.2em 0.1em rgba(203, 215, 255, 0.76);
 }
 
 .errorDesign {
