@@ -108,7 +108,7 @@ export const Dashboard = () => {
             </div>
           </div>
         </Col>
-        <Col className="dashboardContainer col-lg-9 col-md-12 my-1 d-flex justify-content-center align-items-start p-0">
+        <Col className="dashboardContainer col-lg-9 col-md-12  my-1 d-flex justify-content-center align-items-start p-0">
           <Row className="d-flex justify-content-around align-items-around w-100 pt-4 pb-4">
 
             {activeComponentView === 2 ? (

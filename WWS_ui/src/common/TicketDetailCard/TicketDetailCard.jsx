@@ -36,14 +36,16 @@ console.log(ticket)
     <MDBRow className="ticketDetailCardContainer d-flex justify-content-center align-items-center p-0">
       <MDBCol className="p-0 m-0">
         <MDBCard className="d-flex justify-content-center align-items-center cardDetailBackgroundDesign">
-          <TitleSectionCard title="Ticket en detalle" />
-          <MDBBtn
+        <MDBRow className="p-0 m-0 d-flex justify-content-end align-items-center w-100">
+        <MDBBtn
             color="secondary"
             className="closeButtonModal"
             onClick={onClose}
           >
             X
           </MDBBtn>
+                </MDBRow>
+         <TitleSectionCard title="Ticket en detalle"/>
           <MDBRow className="contentBoxSide">
             <MDBCol lg="12" className="p-0">
               <MDBCardBody className="d-flex flex-column justify-content-center mt-2">
