@@ -45,3 +45,12 @@ export const getAllTicketsByUser = async (credentialCheck) => {
     },
   });
 };
+
+
+export const getAllTicketsBySAT = async (credentialCheck) => {
+  return await axios.get(`${root}user/tickets/sat/all`, {
+    headers: {
+      authorization: "Bearer " + credentialCheck,
+    },
+  });
+};

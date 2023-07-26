@@ -13,7 +13,10 @@ import {
 import "./TicketListCard.css";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { useSelector } from "react-redux";
-import { getAllTicketsByUser } from "../../services/apiCalls";
+import {
+  getAllTicketsBySAT,
+  getAllTicketsByUser,
+} from "../../services/apiCalls";
 import { userDataCheck } from "../../pages/userSlice";
 import moment from "moment";
 import { TicketDetailCard } from "../TicketDetailCard/TicketDetailCard";
@@ -24,20 +27,36 @@ export const TicketListCard = () => {
   const [ticketsData, setTicketsData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState(null);
+  const roleCheck = credentialsRdx.credentials.user.roleId;
 
   const getAllTickets = () => {
-    getAllTicketsByUser(credentialCheck)
-      .then((resultado) => {
-        if (resultado.data.message == "Token invalido") {
-          navigate("/");
-          return;
-        } else {
-          setTicketsData(resultado.data.data);
-          console.log("Esto es el ticketsData");
-          console.log(ticketsData);
-        }
-      })
-      .catch((error) => console.log(error));
+    if (roleCheck === 2) {
+      getAllTicketsBySAT(credentialCheck)
+        .then((resultado) => {
+          if (resultado.data.message == "Token invalido") {
+            navigate("/");
+            return;
+          } else {
+            setTicketsData(resultado.data.data);
+            console.log("Esto es el ticketsData de SAT");
+            console.log(ticketsData);
+          }
+        })
+        .catch((error) => console.log(error));
+    } else {
+      getAllTicketsByUser(credentialCheck)
+        .then((resultado) => {
+          if (resultado.data.message == "Token invalido") {
+            navigate("/");
+            return;
+          } else {
+            setTicketsData(resultado.data.data);
+            console.log("Esto es el ticketsData");
+            console.log(ticketsData);
+          }
+        })
+        .catch((error) => console.log(error));
+    }
   };
 
   const takeTicketData = (ticket) => {
@@ -55,7 +74,7 @@ export const TicketListCard = () => {
 
   return (
     <div className="ticketListCardContainer ticketListDesign d-flex justify-content-center align-items-center flex-column p-0">
-      <TitleSectionCard title="Mis tickets"/>
+      <TitleSectionCard title="Mis tickets" />
       <MDBTable align="middle">
         <MDBTableHead>
           <tr>
@@ -117,7 +136,6 @@ export const TicketListCard = () => {
               onClose={handleCloseModal}
             />
           )}
-        
         </MDBModalBody>
       </MDBModal>{" "}
     </div>
