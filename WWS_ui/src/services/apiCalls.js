@@ -62,3 +62,12 @@ export const getAllUsersByAdmin = async (credentialCheck) => {
     },
   });
 };
+
+
+export const getAllTicketsByAdmin = async (credentialCheck) => {
+  return await axios.get(`${root}admin/tickets/all`, {
+    headers: {
+      authorization: "Bearer " + credentialCheck,
+    },
+  });
+};

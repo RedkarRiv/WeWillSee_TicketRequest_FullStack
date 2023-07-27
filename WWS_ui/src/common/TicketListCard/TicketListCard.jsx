@@ -14,6 +14,7 @@ import "./TicketListCard.css";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { useSelector } from "react-redux";
 import {
+  getAllTicketsByAdmin,
   getAllTicketsBySAT,
   getAllTicketsByUser,
 } from "../../services/apiCalls";
@@ -30,32 +31,49 @@ export const TicketListCard = () => {
   const roleCheck = credentialsRdx.credentials.user.roleId;
 
   const getAllTickets = () => {
-    if (roleCheck === 2) {
-      getAllTicketsBySAT(credentialCheck)
-        .then((resultado) => {
-          if (resultado.data.message == "Token invalido") {
-            navigate("/");
-            return;
-          } else {
-            setTicketsData(resultado.data.data);
-            console.log("Esto es el ticketsData de SAT");
-            console.log(ticketsData);
-          }
-        })
-        .catch((error) => console.log(error));
-    } else {
-      getAllTicketsByUser(credentialCheck)
-        .then((resultado) => {
-          if (resultado.data.message == "Token invalido") {
-            navigate("/");
-            return;
-          } else {
-            setTicketsData(resultado.data.data);
-            console.log("Esto es el ticketsData");
-            console.log(ticketsData);
-          }
-        })
-        .catch((error) => console.log(error));
+    switch (roleCheck) {
+      case 1:
+        getAllTicketsByUser(credentialCheck)
+          .then((resultado) => {
+            if (resultado.data.message == "Token invalido") {
+              navigate("/");
+              return;
+            } else {
+              setTicketsData(resultado.data.data);
+              console.log("Esto es el ticketsData");
+              console.log(ticketsData);
+            }
+          })
+          .catch((error) => console.log(error));
+        break;
+      case 2:
+        getAllTicketsBySAT(credentialCheck)
+          .then((resultado) => {
+            if (resultado.data.message == "Token invalido") {
+              navigate("/");
+              return;
+            } else {
+              setTicketsData(resultado.data.data);
+              console.log("Esto es el ticketsData de SAT");
+              console.log(ticketsData);
+            }
+          })
+          .catch((error) => console.log(error));
+        break;
+      case 3:
+        getAllTicketsByAdmin(credentialCheck)
+          .then((resultado) => {
+            if (resultado.data.message == "Token invalido") {
+              navigate("/");
+              return;
+            } else {
+              setTicketsData(resultado.data.data);
+              console.log("Esto es el ticketsData de Admin");
+              console.log(ticketsData);
+            }
+          })
+          .catch((error) => console.log(error));
+        break;
     }
   };
 
@@ -74,7 +92,7 @@ export const TicketListCard = () => {
 
   return (
     <div className="ticketListCardContainer ticketListDesign d-flex justify-content-center align-items-center flex-column p-0">
-      <TitleSectionCard title="Mis tickets" />
+      <TitleSectionCard title="Todos los tickets" />
       <MDBTable align="middle">
         <MDBTableHead>
           <tr>
@@ -91,7 +109,7 @@ export const TicketListCard = () => {
                 <tr key={index}>
                   <td>
                     <p className="fw-normal mb-1">
-                      {moment(ticket?.createdAt).format("YYYY-MM-DD")}
+                      {moment(ticket?.createdAt).format("YYYY-MM-DD")}{" "}
                     </p>
                   </td>
                   <td>
@@ -101,17 +119,17 @@ export const TicketListCard = () => {
                     <p className="fw-normal mb-1">{ticket?.ticket_title}</p>
                   </td>
                   <td>
-                    {ticket?.TicketStatus.status_name === "En proceso" ? (
+                    {ticket?.ticket_status === 1 ? (
                       <MDBBadge color="success" pill>
-                        {ticket.TicketStatus.status_name}
+                        En proceso
                       </MDBBadge>
-                    ) : ticket?.TicketStatus.status_name === "Anulada" ? (
+                    ) : ticket?.ticket_status === 3 ? (
                       <MDBBadge color="danger" pill>
-                        {ticket.TicketStatus.status_name}
+                        Anulado{" "}
                       </MDBBadge>
                     ) : (
                       <MDBBadge color="secondary" pill>
-                        {ticket.TicketStatus.status_name}
+                        Cerrado{" "}
                       </MDBBadge>
                     )}
                   </td>

@@ -23,10 +23,18 @@ export const Dashboard = () => {
   const roleCheck = credentialsRdx.credentials.user.roleId;
   let roleCheckId;
 
-  if (roleCheck === 1) {
-    roleCheckId = 2;
-  } else {
-    roleCheckId = 1;
+  switch (roleCheck) {
+    case 1:
+      roleCheckId = 2;
+      break;
+    case 2:
+      roleCheckId = 1;
+      break;
+    case 3:
+      roleCheckId = 5;
+      break;
+    default:
+      break;
   }
 
   const [activeComponentView, setActiveComponentView] = useState(roleCheckId);
@@ -125,9 +133,19 @@ export const Dashboard = () => {
               </>
             ) : (
               <>
-              <div className="buttonDesign">All users</div>
-              <div className="buttonDesign">All Data</div>
-              <div className="buttonDesign">New Data</div>
+                <div
+                  className="buttonDesign"
+                  onClick={() => dinamicRenderHandler(5)}
+                >
+                  All users
+                </div>
+                <div
+                  className="buttonDesign"
+                  onClick={() => dinamicRenderHandler(6)}
+                >
+                  All Data
+                </div>
+                <div className="buttonDesign">New Data</div>
               </>
             )}
           </div>
@@ -181,9 +199,8 @@ export const Dashboard = () => {
           </Col>
         ) : (
           <Col className="dashboardContainer h-75 col-lg-9 col-md-12  my-1 d-flex justify-content-center align-items-start p-0">
-
-<UsersListCard/>
-
+            {activeComponentView === 5 && <UsersListCard />}
+            {activeComponentView === 6 && <TicketListCard />}
           </Col>
         )}
       </Row>
