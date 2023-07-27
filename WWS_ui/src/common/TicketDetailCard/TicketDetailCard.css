@@ -46,14 +46,6 @@
   border: rgba(91, 91, 95, 0.498) inset 0.05em;
 }
 
-.inputFormDesign:focus,
-.commentDesign:focus {
-  background-color: rgba(241, 241, 246, 0.564);
-  outline: none;
-  box-shadow: inset 0px -0.1em rgb(21, 54, 84);
-  color: black;
-}
-
 .inputFormDesign:focus::placeholder {
   color: black;
   font-size: auto;

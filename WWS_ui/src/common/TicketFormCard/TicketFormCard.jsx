@@ -124,7 +124,7 @@ export const TicketFormcard = ({ category, theme }) => {
 
                 <MDBRow>
                   <MDBCol md="12" className="mt-4">
-                    <div className="inputFormDesign inputBlocked">
+                    <div className="inputBlocked">
                       {theme.toUpperCase()}
                     </div>
                   </MDBCol>
@@ -132,7 +132,7 @@ export const TicketFormcard = ({ category, theme }) => {
 
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
-                    <div className="inputFormDesign inputBlocked">
+                    <div className="inputBlocked">
                       {category.category_name.toUpperCase()}
                     </div>
                   </MDBCol>

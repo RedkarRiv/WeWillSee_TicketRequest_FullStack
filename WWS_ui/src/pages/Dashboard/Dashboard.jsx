@@ -11,6 +11,7 @@ import { TicketFormcard } from "../../common/TicketFormCard/TicketFormCard";
 import { bringThemes } from "../../services/apiCalls";
 import { TicketListCard } from "../../common/TicketListCard/TicketListCard";
 import { TitleSectionCard } from "../../common/TitleSectionCard/TitleSectionCard";
+import { UsersListCard } from "../../common/UsersListcard/UsersListCard";
 
 export const Dashboard = () => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -19,12 +20,20 @@ export const Dashboard = () => {
   const [themeData, setThemeData] = useState([]);
   const [categoryTicket, setCategoryTicket] = useState({});
   const [themeTicket, setThemeTicket] = useState({});
+  const roleCheck = credentialsRdx.credentials.user.roleId;
+  let roleCheckId;
 
-  const [activeComponentView, setActiveComponentView] = useState(2);
+  if (roleCheck === 1) {
+    roleCheckId = 2;
+  } else {
+    roleCheckId = 1;
+  }
+
+  const [activeComponentView, setActiveComponentView] = useState(roleCheckId);
 
   const loadForm = (categoryData, themeData) => {
     setCategoryTicket(categoryData);
-    setThemeTicket(themeData)
+    setThemeTicket(themeData);
     setActiveComponentView(3);
   };
   const dinamicRenderHandler = (componentNumber) => {
@@ -34,8 +43,8 @@ export const Dashboard = () => {
   const TakeAllThemes = () => {
     bringThemes(credentialCheck)
       .then((resultado) => {
-        console.log("Esto es el themeData")
-        console.log(resultado)
+        console.log("Esto es el themeData");
+        console.log(resultado);
         setThemeData(resultado);
       })
       .catch((error) => {
@@ -94,67 +103,89 @@ export const Dashboard = () => {
             </div>
           </div>
           <div className="profileButtons d-flex flex-column justify-content-center align-items-center pt-md-3">
-            <div
-              className="buttonDesign"
-              onClick={() => dinamicRenderHandler(1)}
-            >
-              Mis tickets
-            </div>
-            <div
-              className="buttonDesignNew"
-              onClick={() => dinamicRenderHandler(2)}
-            >
-              New ticket
-            </div>
+            {roleCheck !== 3 ? (
+              <>
+                <div
+                  className="buttonDesign"
+                  onClick={() => dinamicRenderHandler(1)}
+                >
+                  Mis tickets
+                </div>
+                {roleCheck === 1 && (
+                  <div
+                    className="buttonDesign"
+                    onClick={() => dinamicRenderHandler(2)}
+                  >
+                    New ticket
+                  </div>
+                )}
+                {roleCheck === 2 && (
+                  <div className="buttonDesign">Templates</div>
+                )}
+              </>
+            ) : (
+              <>
+              <div className="buttonDesign">All users</div>
+              <div className="buttonDesign">All Data</div>
+              <div className="buttonDesign">New Data</div>
+              </>
+            )}
           </div>
         </Col>
-        <Col className="dashboardContainer col-lg-9 col-md-12  my-1 d-flex justify-content-center align-items-start p-0">
-          <Row className="d-flex justify-content-around align-items-around w-100 pt-4 pb-4">
-
-            {activeComponentView === 2 ? (
-              <Row className="categoryListContainer d-flex justify-content-around p-0">
-                <TitleSectionCard title="Selecciona una categoría" />
-                {themeData?.data?.data
-                  ? Object.values(themeData.data.data).map((theme, index) => 
-                  (
-                      <Col
-                        key={index}
-                        className="themeContainer col-md-12 col-lg-3 d-flex flex-column mb-sm-4 mt-lg-4"
-                      >
-                        <div className="d-flex flex-row w-100 dropdownClick justify-content-center align-items-center px-2">
-                          <div className="logoCategory"></div>
-                          <div className="themeContainerTitle d-flex justify-content-center">
-                            {theme.theme_name.toUpperCase()}
+        {roleCheck !== 3 ? (
+          <Col className="dashboardContainer col-lg-9 col-md-12  my-1 d-flex justify-content-center align-items-start p-0">
+            <Row className="d-flex justify-content-around align-items-around w-100 pt-4 pb-4">
+              {activeComponentView === 2 ? (
+                <Row className="categoryListContainer d-flex justify-content-around p-0">
+                  <TitleSectionCard title="Selecciona una categoría" />
+                  {themeData?.data?.data
+                    ? Object.values(themeData.data.data).map((theme, index) => (
+                        <Col
+                          key={index}
+                          className="themeContainer col-md-12 col-lg-3 d-flex flex-column mb-sm-4 mt-lg-4"
+                        >
+                          <div className="d-flex flex-row w-100 dropdownClick justify-content-center align-items-center px-2">
+                            <div className="logoCategory"></div>
+                            <div className="themeContainerTitle d-flex justify-content-center">
+                              {theme.theme_name.toUpperCase()}
+                            </div>
                           </div>
-                        </div>
-                        <div className="w-100 dropdownContainer">
-                          <div className="categoryList d-flex flex-column justify-content-center align-items-center pt-2">
-                            {Object.values(theme?.Categories).map(
-                              (category, index) => (
-                                <div
-                                  key={index}
-                                  className="categoryLabelDesign"
-                                  onClick={() => loadForm(category, theme.theme_name)}
-                                >
-                                  {category.category_name}
-                                </div>
-                              )
-                            )}
+                          <div className="w-100 dropdownContainer">
+                            <div className="categoryList d-flex flex-column justify-content-center align-items-center pt-2">
+                              {Object.values(theme?.Categories).map(
+                                (category, index) => (
+                                  <div
+                                    key={index}
+                                    className="categoryLabelDesign"
+                                    onClick={() =>
+                                      loadForm(category, theme.theme_name)
+                                    }
+                                  >
+                                    {category.category_name}
+                                  </div>
+                                )
+                              )}
+                            </div>
                           </div>
-                        </div>
-                      </Col>
-                    ))
-                  : "Cargando"}
+                        </Col>
+                      ))
+                    : "Cargando"}
+                </Row>
+              ) : null}
 
-              </Row>
-            ) : null}
+              {activeComponentView === 3 && (
+                <TicketFormcard category={categoryTicket} theme={themeTicket} />
+              )}
+              {activeComponentView === 1 && <TicketListCard />}
+            </Row>
+          </Col>
+        ) : (
+          <Col className="dashboardContainer h-75 col-lg-9 col-md-12  my-1 d-flex justify-content-center align-items-start p-0">
 
-            {activeComponentView === 3 && (
-              <TicketFormcard category={categoryTicket} theme={themeTicket} />
-            )}
-            {activeComponentView === 1 && <TicketListCard />}
-          </Row>
-        </Col>
+<UsersListCard/>
+
+          </Col>
+        )}
       </Row>
     </Container>
   );

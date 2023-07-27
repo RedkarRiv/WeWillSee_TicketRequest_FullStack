@@ -340,7 +340,7 @@ userController.getAllTicketsBySAT = async (req, res) => {
       where: {
         SAT_assigned: employeeData[0].id,
       },
-      include: [
+      include: [  
         {
           model: User,
         },

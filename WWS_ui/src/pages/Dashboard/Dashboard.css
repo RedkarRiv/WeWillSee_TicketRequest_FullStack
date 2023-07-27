@@ -51,27 +51,12 @@ border-radius: 0.5em;
   }
 }
 
-.buttonDesign {
-  background-color: #0a0c90;
-  color: WHITE;
-  border-radius: 0.3em;
-  text-align: center;
-  padding-right: 1em;
-  padding-left: 1em;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
-  font-weight: 600;
-  user-select: none;
-  cursor: pointer;
-  font-size: 80%;
-  margin: 0.5em;
-  width: 8em;
-}
 
-.buttonDesignNew {
-  background-color: #257d06;
-  color: WHITE;
+.buttonDesign {
+  background-color: transparent;
+  color: rgb(19, 19, 19);
   border-radius: 0.3em;
+  border: 0.1em solid grey;
   text-align: center;
   padding-right: 1em;
   padding-left: 1em;
@@ -83,20 +68,94 @@ border-radius: 0.5em;
   font-size: 80%;
   margin: 0.5em;
   width: 8em;
+  /* transition: background-color 0.2s linear, color 0.2s linear; */
+
+  transition: background-color 0.5s cubic-bezier(0.25, 0.25, 0.25, 1);
+
 }
 
 .buttonDesign:active {
   transform: scale(0.9);
 }
+
 .buttonDesign:hover {
-  background-color: #1a1eec;
+  background-color:rgb(22, 78, 115);
+  color: white;
+  background-position: 100% 0; 
 }
-.buttonDesignNew:active {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .buttonDesign {
+  background-color: transparent;
+  color: rgb(19, 19, 19);
+  border-radius: 0.3em;
+  border: 0.1em solid grey;
+  text-align: center;
+  padding-right: 1em;
+  padding-left: 1em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  font-weight: 600;
+  user-select: none;
+  cursor: pointer;
+  font-size: 80%;
+  margin: 0.5em;
+  width: 8em;
+}
+
+
+
+.buttonDesign:active {
   transform: scale(0.9);
 }
-.buttonDesignNew:hover {
-  background-color: #35b906;
-}
+.buttonDesign:hover {
+  background-color: #040692;
+  color:white;
+} */
+
+
+
 
 .userTitle {
   font-size: 90%;

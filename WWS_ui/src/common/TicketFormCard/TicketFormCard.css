@@ -32,13 +32,6 @@
   font-size: 120%;
 }
 
-.inputFormDesign:focus,
-.commentDesign:focus {
-  background-color: rgba(241, 241, 246, 0.564);
-  outline: none;
-  box-shadow: inset 0px -0.1em rgb(21, 54, 84);
-  color: black;
-}
 
 .inputFormDesign:focus::placeholder {
   color: black;
@@ -55,6 +48,12 @@
   background-color: white;
   border: rgba(91, 91, 95, 0.469) inset 0.05em;
   padding: 0.5em;
+}
+
+.commentDesign:focus {  
+  outline: none;
+  color: black;
+  box-shadow: 0 0 0.3em 0.1em rgba(24, 143, 255, 0.88);
 }
 
 @media (min-width: 992px) {
@@ -110,14 +109,13 @@
 }
 
 .inputBlocked {
-  background-color: rgb(234, 137, 0);
+border: 0.1em solid grey;
   user-select: none;
  padding: 0.2em;
  border-radius: 0.5em;
  text-align: center; 
- color: white;
+ color: rgb(30, 30, 30);
  font-weight: bold;
- text-shadow: black 0.05em 0.05em 0.1em;
   }
 
   .cardBackgroundDesign {
