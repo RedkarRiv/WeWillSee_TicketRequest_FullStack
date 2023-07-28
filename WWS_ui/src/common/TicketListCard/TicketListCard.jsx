@@ -62,7 +62,7 @@ export const TicketListCard = () => {
           .catch((error) => console.log(error));
         break;
       case 2:
-        getAllTicketsBySAT(credentialCheck)
+        getAllTicketsBySAT(credentialCheck, criteria)
           .then((resultado) => {
             if (resultado.data.message == "Token invalido") {
               navigate("/");
