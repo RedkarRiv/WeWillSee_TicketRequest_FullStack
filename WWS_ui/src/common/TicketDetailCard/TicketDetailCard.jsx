@@ -41,13 +41,13 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
       <MDBCol className="p-0 m-0">
         <MDBCard className="d-flex justify-content-center align-items-center cardDetailBackgroundDesign">
           <MDBRow className="p-0 m-0 d-flex justify-content-end align-items-center w-100">
-            <MDBBtn
+            <div  
               color="secondary"
               className="closeButtonModal"
               onClick={onClose}
             >
               X
-            </MDBBtn>
+            </div>
           </MDBRow>
           <TitleSectionCard title="Ticket en detalle" />
           <MDBRow className="contentBoxSide">

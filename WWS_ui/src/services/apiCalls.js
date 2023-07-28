@@ -38,12 +38,20 @@ return await axios.post(`${root}user/tickets/new`,newTicketData, {
 }
 
 
-export const getAllTicketsByUser = async (credentialCheck) => {
-  return await axios.get(`${root}user/tickets/all`, {
-    headers: {
-      authorization: "Bearer " + credentialCheck,
-    },
-  });
+export const getAllTicketsByUser = async (credentialCheck, criteria) => {
+  if (!criteria) {
+    return await axios.get(`${root}user/tickets/all`, {
+      headers: {
+        authorization: "Bearer " + credentialCheck,
+      },
+    });
+  } else {
+    return await axios.get(`${root}user/tickets/all?${criteria}`, {
+      headers: {
+        authorization: "Bearer " + credentialCheck,
+      },
+    });
+  }
 };
 
 

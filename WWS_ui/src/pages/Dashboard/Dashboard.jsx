@@ -198,7 +198,7 @@ export const Dashboard = () => {
             </Row>
           </Col>
         ) : (
-          <Col className="dashboardContainer h-75 col-lg-9 col-md-12  my-1 d-flex justify-content-center align-items-start p-0">
+          <Col className="dashboardContainer col-lg-9 col-md-12  my-1 d-flex justify-content-center align-items-start p-0">
             {activeComponentView === 5 && <UsersListCard />}
             {activeComponentView === 6 && <TicketListCard />}
           </Col>

@@ -6,6 +6,8 @@ import {
   MDBTableBody,
   MDBModal,
   MDBModalBody,
+  MDBRow,
+  MDBCol,
 } from "mdb-react-ui-kit";
 import "./UsersListCard.css";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
@@ -14,6 +16,7 @@ import { getAllUsersByAdmin } from "../../services/apiCalls";
 import { userDataCheck } from "../../pages/userSlice";
 import moment from "moment";
 import { TicketDetailCard } from "../TicketDetailCard/TicketDetailCard";
+import Dropdown from "react-bootstrap/Dropdown";
 
 export const UsersListCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -22,6 +25,30 @@ export const UsersListCard = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState(null);
   const roleCheck = credentialsRdx.credentials.user.roleId;
+  const [filterOptions, setFilterOptions] = useState([
+    {
+      name: "Elegir filtro  ",
+      value: "string",
+    },
+    {
+      name: "Por nombre  ",
+      value: "string",
+    },
+    {
+      name: "Por mail  ",
+      value: "mail",
+    },
+    {
+      name: "Por role  ",
+      value: "name",
+    },
+    {
+      name: "Por estado  ",
+      value: "string",
+    },
+  ]);
+  const [selectedFilter, setSelectedFilter] = useState(null);
+  console.log(selectedFilter);
 
   const getAllUsers = () => {
     getAllUsersByAdmin(credentialCheck)
@@ -54,6 +81,61 @@ export const UsersListCard = () => {
   return (
     <div className="ticketListCardContainer ticketListDesign d-flex justify-content-center align-items-center flex-column p-0">
       <TitleSectionCard title="Todos los usuarios" />
+      <MDBRow className="d-flex justify-content-center mt-2">
+        <div
+          className="buttonSendTicket mx-2"
+          onClick={() => ticketMeHandler()}
+        >
+          Nuevo{" "}
+        </div>
+        <div
+          className="buttonSendTicket mx-2"
+          onClick={() => ticketMeHandler()}
+        >
+          Cargar XLS{" "}
+        </div>
+      </MDBRow>
+      <MDBRow className="d-flex justify-content-center searchContainerDesign my-3 p-0">
+        <MDBCol className="col-3 p-0 m-0">
+          <div className="d-flex justify-content-end align-items-center p-0 m-0 dropdownContainer">
+            <Dropdown className="p-0 h-100">
+              <Dropdown.Toggle
+                id="dropdown-basic"
+                className="searchOptionsDropdown m-0"
+              >
+                {!selectedFilter
+                  ? "Elegir filtro"
+                  : selectedFilter?.option?.name}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                {filterOptions.map((option, index) => (
+                  <Dropdown.Item key={index}>
+                    <div
+                      key={option.name}
+                      className="option"
+                      onClick={() => {
+                        setSelectedFilter({ option });
+                      }}
+                    >
+                      {option.name}
+                    </div>
+                  </Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+        </MDBCol>
+        <MDBCol className="col-7 d-flex justify-content-start p-0 m-0">
+          <input
+            className="inputSearchOptions h-100 w-100"
+            type={selectedFilter?.option?.value}
+          />
+        </MDBCol>
+        <MDBCol className="col-2 d-flex align-items-center px-2 m-0">
+          <div className="buttonSendSearch">Enviar</div>
+        </MDBCol>
+      </MDBRow>
       <MDBTable align="middle">
         <MDBTableHead>
           <tr>
@@ -82,11 +164,11 @@ export const UsersListCard = () => {
                       <MDBBadge color="success" pill>
                         {user?.user_status}
                       </MDBBadge>
-                    ) : 
+                    ) : (
                       <MDBBadge color="danger" pill>
                         {user?.user_status}
                       </MDBBadge>
-                    }
+                    )}
                   </td>
                   <td>
                     <p className="detailTicketButton">Ver</p>
