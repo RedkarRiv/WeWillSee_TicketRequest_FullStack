@@ -262,58 +262,143 @@ userController.newTicketByUser = async (req, res) => {
 userController.getAllTicketsByUser = async (req, res) => {
   try {
     const userId = req.userId;
+    const filters = {};
+    const query = req.query;
+    if (Object.keys(query).length > 0) {
+      if (query.SAT_assigned) {
+        filters.SAT_assigned = {
+          [Op.like]: `%${query.SAT_assigned}%`,
+        };
+      }
 
-    const allTickets = await Ticket.findAll({
-      where: {
-        requester: userId,
-      },
-      include: [
-        {
-          model: User,
-        },
-        {
-          model: TicketStatus,
-        },
-        {
-          model: SAT,
-          include: [
-            {
-              model: User,
-            },
-          ],
-        },
-        {
-          model: Category,
-          include: [
-            {
-              model: Theme,
-            },
-            {
-              model: FAQ,
-            },
-          ],
-        },
-        {
-          model: Message,
-          include: [
-            {
-              model: User,
-              include: [
-                {
-                  model: Role,
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    });
+      if (query.ticket_status) {
+        filters.ticket_status = {
+          [Op.like]: `%${query.ticket_status}%`,
+        };
+      }
+      if (query.ticket_title) {
+        filters.ticket_title = {
+          [Op.like]: `%${query.ticket_title}%`,
+        };
+      }
+      if (query.createdAt) {
+        filters.createdAt = {
+          [Op.like]: `%${query.createdAt}%`,
+        };
+      }
 
-    return res.json({
-      success: true,
-      message: "Todos los tickets recuperados",
-      data: allTickets,
-    });
+      const filteredTickets = await Ticket.findAll({
+        attributes: { exclude: ["password"] },
+        where: {
+          requester: userId,
+          ...filters,
+        },
+        include: [
+          {
+            model: User,
+          },
+          {
+            model: TicketStatus,
+          },
+          {
+            model: SAT,
+            include: [
+              {
+                model: User,
+              },
+            ],
+          },
+          {
+            model: Category,
+            include: [
+              {
+                model: Theme,
+              },
+              {
+                model: FAQ,
+              },
+            ],
+          },
+          {
+            model: Message,
+            include: [
+              {
+                model: User,
+                include: [
+                  {
+                    model: Role,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      });
+      if (filteredTickets.length === 0) {
+        return res.json({
+          success: true,
+          message: "No existen tickets con estos filtros",
+        });
+      }
+
+      return res.json({
+        success: true,
+        message: "Datos de tickets filtrados recuperados",
+        data: filteredTickets,
+      });
+    } else {
+      const allTickets = await Ticket.findAll({
+        where: {
+          requester: userId,
+        },
+        include: [
+          {
+            model: User,
+          },
+          {
+            model: TicketStatus,
+          },
+          {
+            model: SAT,
+            include: [
+              {
+                model: User,
+              },
+            ],
+          },
+          {
+            model: Category,
+            include: [
+              {
+                model: Theme,
+              },
+              {
+                model: FAQ,
+              },
+            ],
+          },
+          {
+            model: Message,
+            include: [
+              {
+                model: User,
+                include: [
+                  {
+                    model: Role,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      });
+
+      return res.json({
+        success: true,
+        message: "Todos los tickets recuperados",
+        data: allTickets,
+      });
+    }
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -331,16 +416,12 @@ userController.getAllTicketsBySAT = async (req, res) => {
         user_id: userId,
       },
     });
-    console.log("esto es EMPLOYE.DATA-------------------")
-    console.log(employeeData)
-    console.log("Esto es el EMPLOYE.DAT.ID-----------------")
-    console.log(employeeData[0].id)
 
     const allTickets = await Ticket.findAll({
       where: {
         SAT_assigned: employeeData[0].id,
       },
-      include: [  
+      include: [
         {
           model: User,
         },
