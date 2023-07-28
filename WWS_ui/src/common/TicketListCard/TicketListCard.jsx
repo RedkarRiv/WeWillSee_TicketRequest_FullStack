@@ -9,8 +9,11 @@ import {
   MDBModalHeader,
   MDBModalBody,
   MDBModalFooter,
+  MDBRow,
+  MDBCol,
 } from "mdb-react-ui-kit";
 import "./TicketListCard.css";
+import Dropdown from "react-bootstrap/Dropdown";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { useSelector } from "react-redux";
 import {
@@ -90,9 +93,69 @@ export const TicketListCard = () => {
     getAllTickets();
   }, [credentialsRdx]);
 
+  const [filterOptions, setFilterOptions] = useState([
+    {
+      name: "Por titulo",
+      value: "string",
+    },
+    {
+      name: "Por estado",
+      value: "string",
+    },
+    {
+      name: "Por fecha",
+      value: "date",
+    },
+  ]);
+  const [selectedFilter, setSelectedFilter] = useState(null);
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+  const [showDropdown, setShowDropdown] = useState(false);
+
   return (
     <div className="ticketListCardContainer ticketListDesign d-flex justify-content-center align-items-center flex-column p-0">
       <TitleSectionCard title="Todos los tickets" />
+      <MDBRow className="d-flex justify-content-center w-100 my-2">
+        <MDBCol className="col-6 p-0 m-0">
+          <div className="d-flex justify-content-end align-items-center p-0 m-0 dropdownContainer">
+            <Dropdown className="p-0 m-0 h-100">
+              <Dropdown.Toggle
+                id="dropdown-basic"
+                className="searchOptionsDropdown m-0"
+              >
+                Elige filtro{" "}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="#/action-1">Por fecha</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Por titulo</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Por SAT</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+
+            {/* <div className="dropdown-item">
+              {filterOptions.map((option) => (
+                <div
+                  key={option.name}
+                  className="option"
+                  onClick={() => {
+                    setSelectedFilter(option);
+                  }}
+                >
+                  {option.name}
+                </div>
+              ))}
+            </div> */}
+          </div>
+        </MDBCol>
+        <MDBCol className="col-6 d-flex justify-content-start p-0 m-0">
+          <input
+            className="inputSearchOptions h-100"
+            type={selectedFilter ? selectedFilter.value : "text"}
+          />
+        </MDBCol>
+      </MDBRow>
       <MDBTable align="middle">
         <MDBTableHead>
           <tr>
