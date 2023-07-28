@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 export const RegisterCard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [newCredentials, setNewCredentials] = useState({
     name: "",
@@ -48,28 +49,30 @@ export const RegisterCard = () => {
       .then((resultado) => {
         console.log(resultado);
         const newUserCredentials = {
-        email: resultado.data.data.email,
-        password: newCredentials.password
-      }
-      loginMe(newUserCredentials)
-      .then((resultado) => {
-        let decoded = jwt_decode(resultado.data.token);
-        let datosBackend = {
-          token: resultado.data.token,
-          user: decoded,
+          email: resultado.data.data.email,
+          password: newCredentials.password,
         };
+        loginMe(newUserCredentials)
+          .then((resultado) => {
+            let decoded = jwt_decode(resultado.data.token);
+            let datosBackend = {
+              token: resultado.data.token,
+              user: decoded,
+            };
 
-        dispatch(login({ credentials: datosBackend }));
-        console.log("esto son las credentialsRDX");
-        console.log(datosBackend);
-        navigate("/dashboard")
+            dispatch(login({ credentials: datosBackend }));
+            console.log("esto son las credentialsRDX");
+            console.log(datosBackend);
+            navigate("/dashboard");
+          })
+          .catch((error) => {
+            console.log(error);
+            setErrorMessage(error.response.data.message);
+          });
       })
       .catch((error) => {
         console.log(error);
-      });
-      })
-      .catch((error) => {
-        console.log(error);
+        setErrorMessage(error.response.data.message);
       });
   };
 
@@ -90,6 +93,9 @@ export const RegisterCard = () => {
               functionHandler={(e) => InputHandler(e)}
               onBlurFunction={(e) => InputCheck(e)}
             />
+          </div>{" "}
+          <div className="errorMessageDesign p-0 m-0">
+            {newCredentialsError.nameError}
           </div>
         </div>
 
@@ -107,6 +113,9 @@ export const RegisterCard = () => {
               onBlurFunction={(e) => InputCheck(e)}
             />
           </div>
+          <div className="errorMessageDesign p-0 m-0">
+            {newCredentialsError.emailError}
+          </div>
         </div>
 
         <div className="registerContainer mb-2">
@@ -122,6 +131,9 @@ export const RegisterCard = () => {
               functionHandler={(e) => InputHandler(e)}
               onBlurFunction={(e) => InputCheck(e)}
             />
+          </div>
+          <div className="errorMessageDesign p-0 m-0">
+            {newCredentialsError.passwordError}
           </div>
         </div>
 
@@ -141,12 +153,20 @@ export const RegisterCard = () => {
               onBlurFunction={(e) => InputCheck(e, newCredentials.password)}
             />
           </div>
+          <div className="errorMessageDesign p-0 m-0">
+            {newCredentialsError.doubleCheckPasswordError}
+          </div>
         </div>
       </div>
-      <div className="buttonLogin mt-4 mb-4"ç
-            onClick={(e) => registerNewUser(e)}
-            type="submit"
-      >Enviar</div>
+      <div className="errorMessageDesign p-0 m-0">{errorMessage}</div>
+      <div
+        className="buttonLogin mt-4 mb-4"
+        ç
+        onClick={(e) => registerNewUser(e)}
+        type="submit"
+      >
+        Enviar
+      </div>
     </>
   );
 };

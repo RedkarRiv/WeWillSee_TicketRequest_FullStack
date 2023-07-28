@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./LoginCard.css";
 import { InputLabel } from "../../common/InputLabel/InputLabel";
 import { CheckError } from "../../services/useful";
@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 export const LoginCard = () => {
   const navigate = useNavigate();
-
+  const [errorMessage, setErrorMessage] = useState("");
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -24,11 +24,8 @@ export const LoginCard = () => {
   const dispatch = useDispatch();
   const credentialsRdx = useSelector(userDataCheck);
 
-
-
-  
   const logMe = (e) => {
-    console.log(credentials)
+    console.log(credentials);
     e.preventDefault();
     loginMe(credentials)
       .then((resultado) => {
@@ -39,18 +36,16 @@ export const LoginCard = () => {
         };
 
         dispatch(login({ credentials: datosBackend }));
-        console.log("esto son las credentialsRDX");
-        console.log(datosBackend);
-        navigate("/dashboard")
+        navigate("/dashboard");
       })
       .catch((error) => {
         console.log(error);
+        setErrorMessage(error.response.data.message);
       });
   };
 
-
   const InputHandler = (e) => {
-    console.log(credentials)
+    console.log(credentials);
     setCredentials((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -58,14 +53,14 @@ export const LoginCard = () => {
   };
 
   const InputCheck = (e) => {
-    console.log(credentialsError)
+    console.log(credentialsError);
     let mensajeError = CheckError(e.target.name, e.target.value);
 
     setCredentialsError((prevState) => ({
       ...prevState,
-      [e.target.name + "Error"]: mensajeError,}));
+      [e.target.name + "Error"]: mensajeError,
+    }));
   };
-
 
   return (
     <>
@@ -78,14 +73,13 @@ export const LoginCard = () => {
               placeholder="Introduce tu email"
               name="email"
               classDesign={
-                credentialsError.emailError === ""
-                  ? ""
-                  : "errorDesign"
+                credentialsError.emailError === "" ? "" : "errorDesign"
               }
               functionHandler={(e) => InputHandler(e)}
               onBlurFunction={(e) => InputCheck(e)}
             />
           </div>
+
         </div>
         <div className="loginContainer">
           <div className="loginTitle mb-2">Password</div>
@@ -96,9 +90,7 @@ export const LoginCard = () => {
               placeholder="Introduce tu password"
               name="password"
               classDesign={
-                credentialsError.passwordError === ""
-                ? ""
-                : "errorDesign"
+                credentialsError.passwordError === "" ? "" : "errorDesign"
               }
               functionHandler={(e) => InputHandler(e)}
               onBlurFunction={(e) => InputCheck(e)}
@@ -106,13 +98,14 @@ export const LoginCard = () => {
           </div>
         </div>
       </div>
+      <div className="errorMessageDesign p-0 m-0">{errorMessage}</div>
       <div
-          className="buttonLogin  mt-4 mb-4"
-          onClick={(e) => logMe(e)}
-          type="submit"
-        >
-          Enviar
-        </div>
+        className="buttonLogin  mt-4 mb-4"
+        onClick={(e) => logMe(e)}
+        type="submit"
+      >
+        Enviar
+      </div>
     </>
   );
 };

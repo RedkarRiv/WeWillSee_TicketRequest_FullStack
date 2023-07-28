@@ -19,6 +19,12 @@
   user-select: none;
 }
 
+.errorMessageDesign{
+  font-size: 90%;
+  color: red;
+  font-weight: bold;
+}
+
 /* MEDIA PARA VERSION MOVIL */
 
 @media (max-width: 768px) {
