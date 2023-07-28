@@ -95,6 +95,10 @@ export const TicketListCard = () => {
 
   const [filterOptions, setFilterOptions] = useState([
     {
+      name: "Elegir filtro",
+      value: "string",
+    },
+    {
       name: "Por titulo",
       value: "string",
     },
@@ -107,15 +111,12 @@ export const TicketListCard = () => {
       value: "date",
     },
   ]);
-  const [selectedFilter, setSelectedFilter] = useState(null);
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState(filterOptions[0].name);
+  console.log(selectedFilter);
 
   return (
     <div className="ticketListCardContainer ticketListDesign d-flex justify-content-center align-items-center flex-column p-0">
-      <TitleSectionCard title="Todos los tickets" />
+      <TitleSectionCard title="Todos los tickets" />  
       <MDBRow className="d-flex justify-content-center w-100 my-2">
         <MDBCol className="col-6 p-0 m-0">
           <div className="d-flex justify-content-end align-items-center p-0 m-0 dropdownContainer">
@@ -124,28 +125,28 @@ export const TicketListCard = () => {
                 id="dropdown-basic"
                 className="searchOptionsDropdown m-0"
               >
-                Elige filtro{" "}
+                {selectedFilter}
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Por fecha</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Por titulo</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Por SAT</Dropdown.Item>
+                {filterOptions.map((option, index) => (
+                  <Dropdown.Item key={index}>
+                    <div
+                      key={option.name}
+                      className="option"
+                      onClick={() => {
+                        setSelectedFilter(option.name);
+                      }}
+                    >
+                      {option.name}
+                    </div>
+                  </Dropdown.Item>
+                ))}
               </Dropdown.Menu>
             </Dropdown>
 
             {/* <div className="dropdown-item">
-              {filterOptions.map((option) => (
-                <div
-                  key={option.name}
-                  className="option"
-                  onClick={() => {
-                    setSelectedFilter(option);
-                  }}
-                >
-                  {option.name}
-                </div>
-              ))}
+             
             </div> */}
           </div>
         </MDBCol>
