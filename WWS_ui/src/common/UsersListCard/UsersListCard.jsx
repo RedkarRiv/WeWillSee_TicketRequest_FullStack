@@ -132,9 +132,6 @@ export const UsersListCard = () => {
             type={selectedFilter?.option?.value}
           />
         </MDBCol>
-        <MDBCol className="col-2 d-flex align-items-center px-2 m-0">
-          <div className="buttonSendSearch">Enviar</div>
-        </MDBCol>
       </MDBRow>
       <MDBTable align="middle">
         <MDBTableHead>

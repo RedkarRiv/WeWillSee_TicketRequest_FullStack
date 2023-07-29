@@ -81,3 +81,36 @@ export const getAllTicketsByAdmin = async (credentialCheck) => {
     },
   });
 };
+
+export const inactivateTicket = async (credentialCheck, id) => {
+  return await axios.put(
+    `${root}user/inactivate/ticket/${id}`,
+    {},
+    {
+      headers: {
+        authorization: "Bearer " + credentialCheck,
+      },
+    }
+  );
+};
+
+export const activateTicket = async (credentialCheck, id) => {
+  return await axios.put(
+    `${root}user/activate/ticket/${id}`,
+    {},
+    {
+      headers: {
+        authorization: "Bearer " + credentialCheck,
+      },
+    }
+  );
+};
+
+
+export const getAllTicketsStatus = async (credentialCheck) => {
+  return await axios.get(`${root}user/tickets/status`, {
+    headers: {
+      authorization: "Bearer " + credentialCheck,
+    },
+  });
+};

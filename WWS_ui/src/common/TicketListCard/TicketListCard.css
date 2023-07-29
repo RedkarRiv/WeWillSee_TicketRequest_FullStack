@@ -28,19 +28,18 @@
   padding: 0.2em;
   margin: 0;
   margin-top: 0.1em;
-  margin-right: 0.2em;
+  margin-right: 0.1em;
   border-radius: 50%;
   border: 0;
   user-select: none;
   cursor: pointer;
   font-weight: bold;
   position: relative;
-}
-
-.closeButtonModal:hover {
   background-color: rgb(169, 8, 8);
   color: white;
 }
+
+
 .closeButtonModal:active {
 transform: scale(0.9);
 }
@@ -119,6 +118,16 @@ transform: scale(0.9);
   width: 75%;
 }
 
+.labelStatusDesign {
+  font-size: 80%;
+  border-radius: 0.3em;
+  background-color: rgb(246, 171, 117);
+  padding: 0.3em;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  font-weight: 600;
+
+}
 
 @media (max-width: 768px) {
   .ticketListCardContainer {
@@ -128,9 +137,7 @@ transform: scale(0.9);
     width: 90%;
   }
   .closeButtonModal {
-    height: 2em;
-    width: 2em;
-    padding: 0.1em;
+    padding: 0.2em;
     font-weight: 200;
     font-size: 90%;
   }

@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { MDBCard, MDBCardBody, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
+import { MDBCard, MDBCardBody, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import "./TicketDetailCard.css";
 import { useSelector } from "react-redux";
 import { userDataCheck } from "../../pages/userSlice";
-import { CheckError } from "../../services/useful";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { CommentCard } from "../CommentCard/CommentCard";
+import { activateTicket, inactivateTicket } from "../../services/apiCalls";
 
 export const TicketDetailCard = ({ ticket, onClose }) => {
-  const [closeComment, setCloseComment] = useState(false);
   const credentialsRdx = useSelector(userDataCheck);
-
+  const credentialCheck = credentialsRdx?.credentials?.token;
   const roleCheck = credentialsRdx.credentials.user.roleId;
-  console.log(roleCheck);
   const [newComment, setNewComment] = useState("");
-  console.log(newComment);
-
   const InputHandler = (e) => {
     setNewComment(e.target.value);
   };
@@ -24,6 +20,27 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
     setNewComment("");
     onClose();
   };
+
+  const inactivateTicketHandler = () => {
+    inactivateTicket(credentialCheck, ticket.id)
+      .then((resultado) => {
+        console.log(resultado);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const activateTicketHandler = () => {
+    activateTicket(credentialCheck, ticket.id)
+      .then((resultado) => {
+        console.log(resultado);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 
   return (
     <MDBRow className="ticketDetailCardContainer d-flex justify-content-center align-items-center p-0">
@@ -98,7 +115,7 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                       <MDBCol className="categoryLabel px-2">
                         SAT asignado
                       </MDBCol>
-                      <MDBCol className="contentLabel pt-2">
+                      <MDBCol className="contentLabel px-2">
                         {" "}
                         {ticket?.SAT?.User?.name}
                       </MDBCol>
@@ -141,11 +158,14 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                     />
                   </MDBCol>
                 </MDBRow>
-                <MDBRow>
-                  <MDBCol md="12" className="mt-3">
-                    <div className="inputTicketDetail">TEMPLATES</div>
-                  </MDBCol>
-                </MDBRow>
+                {roleCheck === 2 && (
+                  <MDBRow>
+                    <MDBCol md="12" className="mt-3">
+                      <div className="inputTicketDetail">TEMPLATES</div>
+                    </MDBCol>
+                  </MDBRow>
+                )}
+
                 <MDBRow className="d-flex justify-content-center mt-4">
                   <div
                     className="buttonSendTicket mx-2"
@@ -153,12 +173,22 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                   >
                     Enviar comentario
                   </div>
-                  <div
-                    className="buttonCancelTicket mx-2"
-                    onClick={() => ticketMeHandler()}
-                  >
-                    Anular
-                  </div>
+                  {ticket?.ticket_status === 1 ? (
+                    <div
+                      className="buttonCancelTicket mx-2"
+                      onClick={() => inactivateTicketHandler()}
+                    >
+                      Anular
+                    </div>
+                  ) : (
+                    <div
+                      className="buttonActiveTicket mx-2"
+                      onClick={() => activateTicketHandler()}
+                    >
+                      Activar
+                    </div>
+                  )}
+
                   {roleCheck === 2 ? (
                     <div
                       className="buttonSendTicket mx-2"

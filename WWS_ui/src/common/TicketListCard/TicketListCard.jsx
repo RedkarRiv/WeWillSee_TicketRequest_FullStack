@@ -17,6 +17,7 @@ import {
   getAllTicketsByAdmin,
   getAllTicketsBySAT,
   getAllTicketsByUser,
+  getAllTicketsStatus,
 } from "../../services/apiCalls";
 import { userDataCheck } from "../../pages/userSlice";
 import moment from "moment";
@@ -32,11 +33,28 @@ export const TicketListCard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [criteria, setCriteria] = useState(null);
   const [pageNumbers, setPageNumbers] = useState([]);
+  const [ticketStatus, setTicketStatus] = useState([]);
   const itemsPerPage = 10;
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
+  const handlerTicketStatus = () => {
+    getAllTicketsStatus(credentialCheck)
+      .then((resultado) => {
+        console.log("esto es el resultado de ticket status");
+        console.log(resultado.data.data);
+        setTicketStatus(resultado.data.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  useEffect(() => {
+    handlerTicketStatus();
+  }, []);
 
   const getCurrentPageItems = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -107,7 +125,6 @@ export const TicketListCard = () => {
   };
   const handleCloseModal = () => {
     setShowModal(false);
-    
   };
 
   useEffect(() => {
@@ -123,8 +140,16 @@ export const TicketListCard = () => {
   }, [ticketsData]);
 
   useEffect(() => {
-     getAllTickets();
+    getAllTickets();
   }, [credentialsRdx, criteria]);
+
+  const [selectedStatus, setSelectedStatus] = useState(null);
+
+  const handleStatusSelect = (status) => {
+    setSelectedStatus(status);
+    const criteriaURLdesign = `ticket_status=${status}`;
+    setCriteria(criteriaURLdesign);
+  };
 
   const [filterOptions, setFilterOptions] = useState([
     {
@@ -149,7 +174,7 @@ export const TicketListCard = () => {
     },
   ]);
   const [selectedFilter, setSelectedFilter] = useState(null);
-  console.log(selectedFilter);
+  console.log(ticketsData);
   return (
     <div className="ticketListCardContainer ticketListDesign d-flex justify-content-center align-items-center flex-column p-0">
       <TitleSectionCard title="Todos los tickets" />
@@ -184,20 +209,36 @@ export const TicketListCard = () => {
             </Dropdown>
           </div>
         </MDBCol>
-        <MDBCol className="col-6 d-flex p-0 me-1 me-md-4">
-          <input
-            className="inputSearchOptions h-100 w-100"
-            name={selectedFilter?.option?.fieldName}
-            type={selectedFilter?.option?.value}
-            onChange={criteriaHandler}
-            onBlur={()=>getAllTickets()}
-          />
-        </MDBCol>
-        <MDBCol className="col-2 d-flex align-items-center p-0 m-0">
-          <div className="buttonSendSearch"
-                   
-          >Filtrar</div>
-        </MDBCol>
+
+        {selectedFilter?.option?.name !== "Por estado  " ? (
+          <MDBCol className="col-6 d-flex p-0 me-1 me-md-4">
+            <input
+              className="inputSearchOptions h-100 w-100"
+              name={selectedFilter?.option?.fieldName}
+              type={selectedFilter?.option?.value}
+              onChange={criteriaHandler}
+              onBlur={() => getAllTickets()}
+            />
+          </MDBCol>
+        ) : (
+          <MDBCol className="col-8 d-flex p-0 me-1 me-md-4 d-flex justify-content-center align-items-center">
+            {ticketStatus?.map((status) => (
+              <label
+                key={status.id}
+                className="d-flex justify-content-center align-items-center mx-2 labelStatusDesign"
+              >
+                <input
+                  type="radio"
+                  name="ticket_status"
+                  value={status.id}
+                  checked={selectedStatus === status.id}
+                  onChange={() => handleStatusSelect(status.id)}
+                />
+                <div className="mx-1"> {status.status_name} </div>
+              </label>
+            ))}
+          </MDBCol>
+        )}
       </MDBRow>
       <MDBTable align="middle">
         <MDBTableHead>
@@ -210,48 +251,50 @@ export const TicketListCard = () => {
           </tr>
         </MDBTableHead>
         <MDBTableBody>
-          {ticketsData ? (getCurrentPageItems().map((ticket, index) => (
-            <tr key={index}>
-              <td>
-                <p className="fw-normal mb-1">
-                  {moment(ticket?.createdAt).format("YYYY-MM-DD")}{" "}
-                </p>
-              </td>
-              <td>
-                <p className="fw-normal mb-1">{ticket?.SAT?.User?.name}</p>
-              </td>
-              <td>
-                <p className="fw-normal mb-1">{ticket?.ticket_title}</p>
-              </td>
-              <td>
-                {ticket?.ticket_status === 1 ? (
-                  <MDBBadge color="success" pill>
-                    En proceso
-                  </MDBBadge>
-                ) : ticket?.ticket_status === 3 ? (
-                  <MDBBadge color="danger" pill>
-                    Anulado{" "}
-                  </MDBBadge>
-                ) : (
-                  <MDBBadge color="secondary" pill>
-                    Cerrado{" "}
-                  </MDBBadge>
-                )}
-              </td>
-              <td>
-                <p
-                  className="detailTicketButton"
-                  onClick={() => takeTicketData(ticket)}
-                >
-                  Ver
-                </p>
-              </td>
-            </tr>
-          ))): 
-          <div className="noResultMessage w-100 d-flex justify-content-center align-items-center">
-          NO HAY RESULTADOS
-          </div>
-          }
+          {ticketsData ? (
+            getCurrentPageItems().map((ticket, index) => (
+              <tr key={index}>
+                <td>
+                  <p className="fw-normal mb-1">
+                    {moment(ticket?.createdAt).format("YYYY-MM-DD")}{" "}
+                  </p>
+                </td>
+                <td>
+                  <p className="fw-normal mb-1">{ticket?.SAT?.User?.name}</p>
+                </td>
+                <td>
+                  <p className="fw-normal mb-1">{ticket?.ticket_title}</p>
+                </td>
+                <td>
+                  {ticket?.ticket_status === 1 ? (
+                    <MDBBadge color="success" pill>
+                      En proceso
+                    </MDBBadge>
+                  ) : ticket?.ticket_status === 3 ? (
+                    <MDBBadge color="danger" pill>
+                      Anulado{" "}
+                    </MDBBadge>
+                  ) : (
+                    <MDBBadge color="secondary" pill>
+                      Cerrado{" "}
+                    </MDBBadge>
+                  )}
+                </td>
+                <td>
+                  <p
+                    className="detailTicketButton"
+                    onClick={() => takeTicketData(ticket)}
+                  >
+                    Ver
+                  </p>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <div className="noResultMessage w-100 d-flex justify-content-center align-items-center">
+              NO HAY RESULTADOS
+            </div>
+          )}
         </MDBTableBody>
       </MDBTable>
       <div className="mb-3 w-100 d-flex justify-content-center">
@@ -268,7 +311,7 @@ export const TicketListCard = () => {
           : null}
       </div>
       <MDBModal show={showModal} onHide={() => setShowModal(false)}>
-        <MDBModalBody className="modalTicketDesign d-flex justify-content-center alig-items-center">
+        <MDBModalBody className="d-flex justify-content-center alig-items-center">
           {selectedTicket && (
             <TicketDetailCard
               ticket={selectedTicket}
