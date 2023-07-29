@@ -107,6 +107,7 @@ export const TicketListCard = () => {
   };
   const handleCloseModal = () => {
     setShowModal(false);
+    
   };
 
   useEffect(() => {
