@@ -264,7 +264,7 @@ userController.getAllTicketsByUser = async (req, res) => {
   try {
     const userId = req.userId;
     const filters = {};
-   const query = req.query;
+    const query = req.query;
 
     if (Object.keys(query).length > 0) {
       if (query.SAT_assigned) {
@@ -284,9 +284,13 @@ userController.getAllTicketsByUser = async (req, res) => {
         };
       }
       if (query.createdAt) {
-        const startDate = moment(query.createdAt).startOf('day').format('YYYY-MM-DD HH:mm:ss');
-        const endDate = moment(query.createdAt).endOf('day').format('YYYY-MM-DD HH:mm:ss');
-      
+        const startDate = moment(query.createdAt)
+          .startOf("day")
+          .format("YYYY-MM-DD HH:mm:ss");
+        const endDate = moment(query.createdAt)
+          .endOf("day")
+          .format("YYYY-MM-DD HH:mm:ss");
+
         filters.createdAt = {
           [Op.gte]: startDate,
           [Op.lt]: endDate,
@@ -443,8 +447,16 @@ userController.getAllTicketsBySAT = async (req, res) => {
         };
       }
       if (query.createdAt) {
+        const startDate = moment(query.createdAt)
+          .startOf("day")
+          .format("YYYY-MM-DD HH:mm:ss");
+        const endDate = moment(query.createdAt)
+          .endOf("day")
+          .format("YYYY-MM-DD HH:mm:ss");
+
         filters.createdAt = {
-          [Op.like]: `%${query.createdAt}%`,
+          [Op.gte]: startDate,
+          [Op.lt]: endDate,
         };
       }
 
@@ -561,4 +573,174 @@ userController.getAllTicketsBySAT = async (req, res) => {
     });
   }
 };
+
+userController.inactivateTicket = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const ticketId = req.params.id;
+    const ticketCheck = await Ticket.findAll({
+      where: {
+        id: ticketId,
+        requester: userId,
+      },
+    });
+
+    if (!ticketCheck) {
+      return res.json({
+        success: true,
+        message: "El ticket no existe",
+      });
+    }
+    const inactivateTicket = await Ticket.update(
+      { ticket_status: 3 },
+      {
+        where: {
+          id: ticketId,
+        },
+      }
+    );
+    return res.json({
+      success: true,
+      message: "El ticket ha sido anulado",
+      data: inactivateTicket,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "El ticket no ha podido ser anulado",
+      error: error.message,
+    });
+  }
+};
+
+userController.activateTicket = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const ticketId = req.params.id;
+    const ticketCheck = await Ticket.findAll({
+      where: {
+        id: ticketId,
+        requester: userId,
+      },
+    });
+
+    if (!ticketCheck) {
+      return res.json({
+        success: true,
+        message: "El ticket no existe",
+      });
+    }
+    const inactivateTicket = await Ticket.update(
+      { ticket_status: 1 },
+      {
+        where: {
+          id: ticketId,
+        },
+      }
+    );
+    return res.json({
+      success: true,
+      message: "El ticket ha sido activado",
+      data: inactivateTicket,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "El ticket no ha podido ser activado",
+      error: error.message,
+    });
+  }
+};
+
+userController.closeTicket = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const ticketId = req.params.id;
+    const ticketCheck = await Ticket.findAll({
+      where: {
+        id: ticketId,
+        requester: userId,
+      },
+    });
+
+    if (!ticketCheck) {
+      return res.json({
+        success: true,
+        message: "El ticket no existe",
+      });
+    }
+    const inactivateTicket = await Ticket.update(
+      { ticket_status: 2 },
+      {
+        where: {
+          id: ticketId,
+        },
+      }
+    );
+    return res.json({
+      success: true,
+      message: "El ticket ha sido cerrado",
+      data: inactivateTicket,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "El ticket no ha podido ser cerrado",
+      error: error.message,
+    });
+  }
+};
+
+userController.getTicketStatus = async (req, res) => {
+  try {
+    const ticketStatusData = await TicketStatus.findAll({
+      attributes: {
+        exclude: ['createdAt', 'updatedAt'],
+      },
+    });
+
+    return res.json({
+      success: true,
+      message: "Los estados de los tickets han sido recuperados",
+      data: ticketStatusData,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "No se han podido importar los estados de los tickets",
+      error: error.message,
+    });
+  }
+};
+
+userController.newComment = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const ticketId = req.body.ticket;
+    const newMessage = req.body.message;
+
+
+    const newComment = await Message.create({
+      ticket_id: ticketId,
+      comment_user_id: userId,
+message_content: newMessage,
+      createdAt: new Date(),
+      updatedUp: new Date(),
+    });
+    return res.json({
+      success: true,
+      message: "Comentario creado con existo",
+      data: newComment,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "El Comentario no ha podido ser creado",
+      error: error.message,
+    });
+  }
+};
+
+
+
 module.exports = userController;

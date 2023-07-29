@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const auth = (req, res, next) => {
   try {
     const bearerToken = req.headers.authorization;
+    console.log("Esto es el req.headers.authorization-----------")
+    console.log(req.headers.authorization)
     if (!bearerToken) {
       return res.status(501).json({
         success: true,
