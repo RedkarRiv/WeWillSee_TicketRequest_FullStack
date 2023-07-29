@@ -12,6 +12,7 @@ const {
 } = require("../models");
 const userController = {};
 const bcrypt = require("bcrypt");
+const moment = require("moment/moment");
 const checkEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{4,}$/;
 const { Op } = require("sequelize");
@@ -263,7 +264,8 @@ userController.getAllTicketsByUser = async (req, res) => {
   try {
     const userId = req.userId;
     const filters = {};
-    const query = req.query;
+   const query = req.query;
+
     if (Object.keys(query).length > 0) {
       if (query.SAT_assigned) {
         filters.SAT_assigned = {
@@ -282,8 +284,12 @@ userController.getAllTicketsByUser = async (req, res) => {
         };
       }
       if (query.createdAt) {
+        const startDate = moment(query.createdAt).startOf('day').format('YYYY-MM-DD HH:mm:ss');
+        const endDate = moment(query.createdAt).endOf('day').format('YYYY-MM-DD HH:mm:ss');
+      
         filters.createdAt = {
-          [Op.like]: `%${query.createdAt}%`,
+          [Op.gte]: startDate,
+          [Op.lt]: endDate,
         };
       }
 
@@ -411,11 +417,90 @@ userController.getAllTicketsByUser = async (req, res) => {
 userController.getAllTicketsBySAT = async (req, res) => {
   try {
     const userId = req.userId;
+    const filters = {};
+    const query = req.query;
     const employeeData = await SAT.findAll({
       where: {
         user_id: userId,
       },
     });
+
+    if (Object.keys(query).length > 0) {
+      if (query.SAT_assigned) {
+        filters.SAT_assigned = {
+          [Op.like]: `%${query.SAT_assigned}%`,
+        };
+      }
+
+      if (query.ticket_status) {
+        filters.ticket_status = {
+          [Op.like]: `%${query.ticket_status}%`,
+        };
+      }
+      if (query.ticket_title) {
+        filters.ticket_title = {
+          [Op.like]: `%${query.ticket_title}%`,
+        };
+      }
+      if (query.createdAt) {
+        filters.createdAt = {
+          [Op.like]: `%${query.createdAt}%`,
+        };
+      }
+
+      const allTickets = await Ticket.findAll({
+        where: {
+          SAT_assigned: employeeData[0].id,
+          ...filters,
+        },
+        include: [
+          {
+            model: User,
+          },
+          {
+            model: TicketStatus,
+          },
+          {
+            model: SAT,
+            include: [
+              {
+                model: User,
+              },
+            ],
+          },
+          {
+            model: Category,
+            include: [
+              {
+                model: Theme,
+              },
+              {
+                model: FAQ,
+              },
+            ],
+          },
+          {
+            model: Message,
+            include: [
+              {
+                model: User,
+                include: [
+                  {
+                    model: Role,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      });
+
+      return res.json({
+        success: true,
+        message: "Todos los tickets recuperados",
+        data: allTickets,
+      });
+    }
 
     const allTickets = await Ticket.findAll({
       where: {
