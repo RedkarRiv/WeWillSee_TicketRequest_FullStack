@@ -34,6 +34,10 @@ export const ticketMe = async (credentialCheck, newTicketData) => {
   });
 };
 
+
+
+
+
 export const getAllTicketsByUser = async (credentialCheck, criteria) => {
   if (!criteria) {
     return await axios.get(`${root}user/tickets/all`, {
@@ -109,6 +113,15 @@ export const activateTicket = async (credentialCheck, id) => {
 
 export const getAllTicketsStatus = async (credentialCheck) => {
   return await axios.get(`${root}user/tickets/status`, {
+    headers: {
+      authorization: "Bearer " + credentialCheck,
+    },
+  });
+};
+
+
+export const newTicketComment = async (credentialCheck, data) => {
+  return await axios.post(`${root}user/tickets/new/comment`, data, {
     headers: {
       authorization: "Bearer " + credentialCheck,
     },

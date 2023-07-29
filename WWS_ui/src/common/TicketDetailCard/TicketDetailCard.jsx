@@ -5,16 +5,29 @@ import { useSelector } from "react-redux";
 import { userDataCheck } from "../../pages/userSlice";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { CommentCard } from "../CommentCard/CommentCard";
-import { activateTicket, inactivateTicket } from "../../services/apiCalls";
+import { activateTicket, inactivateTicket, newTicketComment } from "../../services/apiCalls";
 
 export const TicketDetailCard = ({ ticket, onClose }) => {
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
   const roleCheck = credentialsRdx.credentials.user.roleId;
   const [newComment, setNewComment] = useState("");
+  const [messageData, setMessageData] = useState({
+    ticket:ticket.id,
+    message:"",
+  });
+
   const InputHandler = (e) => {
     setNewComment(e.target.value);
+    setMessageData(() => ({
+      ...messageData,
+      message: e.target.value,
+    }));
+    console.log(newComment)
+    console.log(messageData)
+
   };
+
 
   const resetCommentHandler = () => {
     setNewComment("");
@@ -41,6 +54,15 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
       });
   };
 
+  const sendNewComment = () => {
+    newTicketComment(credentialCheck, messageData)
+    .then((resultado) => {
+      console.log(resultado);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
 
   return (
     <MDBRow className="ticketDetailCardContainer d-flex justify-content-center align-items-center p-0">
@@ -169,7 +191,7 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                 <MDBRow className="d-flex justify-content-center mt-4">
                   <div
                     className="buttonSendTicket mx-2"
-                    onClick={() => ticketMeHandler()}
+                    onClick={() => sendNewComment()}
                   >
                     Enviar comentario
                   </div>
