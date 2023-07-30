@@ -10,8 +10,6 @@ export const registerMe = async (newCredentials) => {
   return await axios.post(`${root}auth/register`, newCredentials);
 };
 
-
-
 export const registNewSAT = async (credentialCheck, newCredentials) => {
   return await axios.post(`${root}admin/newSAT`, newCredentials, {
     headers: {
@@ -29,6 +27,14 @@ export const registNewUser = async (credentialCheck, newCredentials) => {
   });
 };
 
+export const newCategory = async (credentialCheck, data) => {
+  return await axios.post(`${root}admin/newCategory`, data, {
+    headers: {
+      authorization: "Bearer " + credentialCheck,
+    },
+  });
+};
+
 
 export const bringThemes = async (credentialCheck) => {
   return await axios.get(`${root}user/themes`, {
@@ -37,6 +43,15 @@ export const bringThemes = async (credentialCheck) => {
     },
   });
 };
+
+export const bringThemesByAdmin = async (credentialCheck) => {
+  return await axios.get(`${root}admin/themes/all`, {
+    headers: {
+      authorization: "Bearer " + credentialCheck,
+    },
+  });
+};
+
 
 export const getOneUser = async (credentialCheck) => {
   return await axios.get(`${root}user/myprofile`, {
@@ -53,9 +68,6 @@ export const ticketMe = async (credentialCheck, newTicketData) => {
     },
   });
 };
-
-
-
 
 
 export const getAllTicketsByUser = async (credentialCheck, criteria) => {
@@ -214,6 +226,35 @@ export const getAllTemplates = async (credentialCheck) => {
     return await axios.put(`${root}user/tickets/reassign`, data, {
       headers: {
         authorization: "Bearer " + credentialCheck,
+      },
+    });
+  };
+
+
+  export const getFAQs = async (credentialCheck, id) => {
+    return await axios.put(
+      `${root}admin/getFAQs/${id}`,
+      {},
+      {
+        headers: {
+          authorization: "Bearer " + credentialCheck,
+        },
+      }
+    );
+  };
+  
+  export const inactivateCategory = async (credentialCheck, id) => {
+    return await axios.get(`${root}admin/inactivateCat/${id}`, {
+      headers: {
+        Authorization: "Bearer " + credentialCheck,
+      },
+    });
+  };
+
+  export const activateCategory = async (credentialCheck, id) => {
+    return await axios.get(`${root}admin/activateCat/${id}`, {
+      headers: {
+        Authorization: "Bearer " + credentialCheck,
       },
     });
   };

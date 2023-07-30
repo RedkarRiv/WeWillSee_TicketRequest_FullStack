@@ -14,6 +14,7 @@ import { TitleSectionCard } from "../../common/TitleSectionCard/TitleSectionCard
 import { UsersListCard } from "../../common/UsersListcard/UsersListCard";
 import logoBackWWS from "../../img/logoWhiteWWS.png";
 import { TemplateListCard } from "../../common/TemplateListCard/TemplateListCard";
+import { ThemeListCard } from "../../common/ThemeListCard/ThemeListCard";
 
 export const Dashboard = () => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -154,7 +155,7 @@ export const Dashboard = () => {
                 </div>
                 <div
                   className="buttonDesign"
-                  onClick={() => dinamicRenderHandler(6)}
+                  onClick={() => dinamicRenderHandler(7)}
                 >
                   All themes
                 </div>              </>
@@ -223,6 +224,7 @@ export const Dashboard = () => {
           <Col className="dashboardContainer col-lg-9 col-md-12  my-1 d-flex justify-content-center align-items-start p-0">
             {activeComponentView === 5 && <UsersListCard />}
             {activeComponentView === 6 && <TicketListCard />}
+            {activeComponentView === 7 && <ThemeListCard />}
           </Col>
         )}
       </Row>

@@ -1,0 +1,29 @@
+.FAQLabel {
+    background-color: rgb(233, 232, 232);
+    color: black;
+    border-radius: 0.3em;
+    font-size: 80%;
+  }
+
+  .FAQquestion {
+    font-weight: bold;
+    border-bottom: solid 0.1em grey;
+    margin-bottom: 0.5em;
+    padding:0.3em;
+  }
+
+  .FAQTitleTicketDetail {
+    border-radius: 0.5em;
+  }
+
+  .inactiveContent{
+    color:red;
+    border-radius: 0.3em;
+    background-color: rgb(233, 233, 233);
+  }
+
+  .activeContent{
+    color:rgb(22, 144, 0);
+    border-radius: 0.3em;
+    background-color: rgb(233, 233, 233);
+  }

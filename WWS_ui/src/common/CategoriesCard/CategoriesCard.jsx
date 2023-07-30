@@ -3,9 +3,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./CategoriesCard.css";
 import { Col } from "react-bootstrap";
 import { userDataCheck } from "../../pages/userSlice";
-import { bringThemes, } from "../../services/apiCalls";
+import { bringThemes } from "../../services/apiCalls";
 import { useSelector } from "react-redux";
-
 
 export const CategoriesCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -27,7 +26,6 @@ export const CategoriesCard = () => {
     TakeAllThemes();
   }, []);
 
-
   return (
     <>
       {themeData?.data?.data &&
@@ -45,7 +43,10 @@ export const CategoriesCard = () => {
             <div className="w-100 dropdownContainer">
               <div className="categoryList d-flex flex-column justify-content-center align-items-center pt-2">
                 {Object.values(theme?.Categories).map((category, index) => (
-                  <div key={index} className="categoryLabelDesign" onClick={() => setTicketFormShow(!ticketFormShow)}
+                  <div
+                    key={index}
+                    className="categoryLabelDesign"
+                    onClick={() => setTicketFormShow(!ticketFormShow)}
                   >
                     {category.category_name}
                   </div>

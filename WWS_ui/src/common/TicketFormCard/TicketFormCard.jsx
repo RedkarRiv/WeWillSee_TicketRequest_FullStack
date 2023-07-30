@@ -24,9 +24,6 @@ console.log(theme)
       isOpen: false,
     },
   ]);
-
-
-
 const getCategoryDataHandler = () => {
   getOneCategory(credentialCheck, category.id)
   .then((resultado) => {
@@ -37,7 +34,6 @@ const getCategoryDataHandler = () => {
     const updateFAQData = FAQData.map((faq) => ({
       question: faq.question,
       answer: faq.answer,
-      isOpen: false,
     }));
     setFaqItems(updateFAQData)
   })
@@ -117,7 +113,7 @@ useEffect(() => {
                       <MDBRow className="d-flex justify-content-center align-items-center">
                         <MDBCol
                           md="12"
-                          className={`mt-1 d-flex justify-content-between FAQquestionDesign ${
+                          className={`mt-1 d-flex justify-content-center text-center FAQquestionDesign ${
                             item.isOpen ? "active" : ""
                           }`}
                           onClick={() => toggleAnswer(index)}
