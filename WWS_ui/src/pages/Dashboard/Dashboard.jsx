@@ -22,7 +22,7 @@ export const Dashboard = () => {
   const [themeData, setThemeData] = useState([]);
   const [categoryTicket, setCategoryTicket] = useState({});
   const [themeTicket, setThemeTicket] = useState({});
-  const roleCheck = credentialsRdx.credentials.user.roleId;
+  const roleCheck = credentialsRdx?.credentials.user.roleId;
   let roleCheckId;
 
   switch (roleCheck) {

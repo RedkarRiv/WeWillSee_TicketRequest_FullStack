@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { MDBCard, MDBCardBody, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import "./TemplateFormCard.css";
 import { InputLabel } from "../InputLabel/InputLabel";
@@ -7,9 +7,13 @@ import { userDataCheck } from "../../pages/userSlice";
 import { CheckError } from "../../services/useful";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { createNewTemplate } from "../../services/apiCalls";
+import { useNavigate } from "react-router-dom";
+import { MessageContext } from "../../services/messageContext";
 
 export const TemplateFormCard = () => {
 
+  const navigate = useNavigate();
+  const { setMessage } = useContext(MessageContext);
 
  
   const [credentialsError, setCredentialsError] = useState({
@@ -45,7 +49,8 @@ export const TemplateFormCard = () => {
     createNewTemplate(credentialCheck, newTemplate)
       .then((resultado) => {
         console.log(resultado);
-
+        setMessage("EL TEMPLATE HA SIDO CREADO");
+        navigate("/m")
       })
       .catch((error) => {
         console.log(error);

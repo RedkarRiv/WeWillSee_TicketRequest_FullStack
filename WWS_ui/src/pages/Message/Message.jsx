@@ -1,15 +1,21 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Message.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { MessageContext } from "../../services/messageContext";
+import { useNavigate } from "react-router-dom";
 
 export const Message = () => {
     const  {message}  = useContext(MessageContext);
-console.log("esto es message")
 console.log(message)
+const navigate = useNavigate();
 
-
+useEffect(() => {
+  const timeout = setTimeout(() => {
+    navigate("/dashboard"); 
+  }, 2500);
+  return () => clearTimeout(timeout);
+}, []); 
 
   return (
     <Container fluid className="p-0 m-0 d-flex">

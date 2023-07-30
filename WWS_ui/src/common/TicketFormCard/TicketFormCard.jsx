@@ -82,7 +82,7 @@ export const TicketFormcard = ({ category, theme}) => {
     ticketMe(credentialCheck, newTicket)
       .then((resultado) => {
         console.log(resultado);
-        setMessage("Este es el mensaje que quiero pasar");
+        setMessage("EL TICKET HA SIDO CREADO");
         navigate("/m")
       })
       .catch((error) => {
