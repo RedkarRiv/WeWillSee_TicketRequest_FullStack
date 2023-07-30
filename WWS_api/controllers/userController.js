@@ -8,6 +8,7 @@ const {
   Category,
   Message,
   TicketStatus,
+  Template,
   sequelize,
 } = require("../models");
 const userController = {};
@@ -695,7 +696,7 @@ userController.getTicketStatus = async (req, res) => {
   try {
     const ticketStatusData = await TicketStatus.findAll({
       attributes: {
-        exclude: ['createdAt', 'updatedAt'],
+        exclude: ["createdAt", "updatedAt"],
       },
     });
 
@@ -719,11 +720,10 @@ userController.newComment = async (req, res) => {
     const ticketId = req.body.ticket;
     const newMessage = req.body.message;
 
-
     const newComment = await Message.create({
       ticket_id: ticketId,
       comment_user_id: userId,
-message_content: newMessage,
+      message_content: newMessage,
       createdAt: new Date(),
       updatedUp: new Date(),
     });
@@ -741,6 +741,125 @@ message_content: newMessage,
   }
 };
 
+userController.getAllTemplates = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const employeeData = await SAT.findAll({
+      where: {
+        user_id: userId,
+      },
+    });
+    const allTemplates = await Template.findAll({
+      where: {
+        SAT_id: employeeData[0].id,
+      },
+    });
 
+    return res.json({
+      success: true,
+      message: "Todas los templates recuperados",
+      data: allTemplates,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Los templates no han podido ser recuperados",
+      error: error.message,
+    });
+  }
+};
+
+userController.newTemplate = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const newTitleTemplate = req.body.template_title;
+    const newDescriptionTemplate = req.body.template_description;
+    const employeeData = await SAT.findAll({
+      where: {
+        user_id: userId,
+      },
+    });
+    const newComment = await Template.create({
+      SAT_id: employeeData[0].id,
+      template_title: newTitleTemplate,
+      template_description: newDescriptionTemplate,
+      createdAt: new Date(),
+      updatedUp: new Date(),
+    });
+    return res.json({
+      success: true,
+      message: "Template creado con existo",
+      data: newComment,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "El template no ha podido ser creado",
+      error: error.message,
+    });
+  }
+};
+
+userController.reassignTicketBySAT = async (req, res) => {
+  try {
+    const userId = req.userId;
+
+    const employeeData = await SAT.findAll({
+      where: {
+        user_id: userId,
+      },
+    });
+
+    if (!employeeData[0].id) {
+      return res.json({
+        success: false,
+        message: "No tienes permiso para continuar",
+      });
+    }
+    const excludedSAT = employeeData[0].id;
+
+    const ticketCounts = await Ticket.findAll({
+      attributes: ["SAT_assigned", [sequelize.fn("COUNT", "id"), "count"]],
+      where: {
+        SAT_assigned: {
+          [Op.ne]: excludedSAT,
+        },
+      },
+      group: "SAT_assigned",
+      order: sequelize.literal("count ASC"),
+      limit: 1,
+    });
+
+    const ticketId = req.body.id;
+    const ticketTimeline = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
+
+    const updateTicket = await Ticket.update(
+      {
+        SAT_assigned: ticketCounts[0]?.SAT_assigned,
+        ticket_status: 1,
+        ticket_timeline: ticketTimeline,
+        reassigned: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        where: {
+          id: ticketId,
+        },
+      }
+    );
+    return res.json({
+      success: true,
+      message: "Ticket reasignado con exito",
+      data: updateTicket,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "El ticket no ha podido ser reasignado",
+      error: error.message,
+    });
+  }
+};
 
 module.exports = userController;

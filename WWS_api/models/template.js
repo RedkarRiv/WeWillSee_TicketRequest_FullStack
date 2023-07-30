@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Template.init({
     SAT_id: DataTypes.INTEGER,
     template_title: DataTypes.STRING,
-    template_description: DataTypes.STRING
+    template_description: DataTypes.TEXT
   }, {
     sequelize,
     modelName: 'Template',
