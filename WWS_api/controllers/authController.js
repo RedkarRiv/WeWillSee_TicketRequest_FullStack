@@ -12,7 +12,6 @@ authController.register = async (req, res) => {
     const checkEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{4,}$/;
 
-
     if (!checkEmail.test(req.body.email)) {
       return res.status(400).json({
         success: false,
@@ -39,14 +38,13 @@ authController.register = async (req, res) => {
     });
 
     const role = await Role.findByPk(newUser.role_id);
-await newUser.setRole(role);
+    await newUser.setRole(role);
 
     return res.status(200).json({
-        success: true,
-        message: "La cuenta se ha creado con exito",
-        data: newUser,
-      });
-
+      success: true,
+      message: "La cuenta se ha creado con exito",
+      data: newUser,
+    });
   } catch (error) {
     return res.status(404).json({
       success: false,
@@ -73,6 +71,12 @@ authController.login = async (req, res) => {
         message: "Usuario incorrecto",
       });
     }
+    if (user.user_status == "Inactive") {
+      return res.status(501).json({
+        success: true,
+        message: "Usuario inactivo",
+      });
+    }
 
     const isMatch = bcrypt.compareSync(password, user.password);
 
@@ -87,7 +91,7 @@ authController.login = async (req, res) => {
         userId: user.id,
         roleId: user.role_id,
         email: user.email,
-        name: user.name
+        name: user.name,
       },
       "resolutio",
       {
@@ -104,7 +108,7 @@ authController.login = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "El usuario no ha podido logearse",
-      error: error
+      error: error,
     });
   }
 };

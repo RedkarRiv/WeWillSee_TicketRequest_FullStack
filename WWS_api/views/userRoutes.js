@@ -20,6 +20,7 @@ router.get("/tickets/status", auth, userController.getTicketStatus);
 router.get("/templates", auth, isSAT, userController.getAllTemplates);
 router.post("/templates/new", auth, isSAT, userController.newTemplate);
 router.put("/tickets/reassign", auth, isSAT, userController.reassignTicketBySAT);
+router.put("/category/:id", auth, userController.getOneCategory);
 
 router.get("/tickets/sat/all", auth, userController.getAllTicketsBySAT);
 

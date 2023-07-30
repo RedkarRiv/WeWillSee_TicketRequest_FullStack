@@ -278,8 +278,6 @@ adminController.getAllUsers = async (req, res) => {
         };
       }
       const filteredUsers = await User.findAll({
-        
-        attributes: { exclude: ["password"] },
         where: {
           ...filters,
         },
@@ -287,7 +285,8 @@ adminController.getAllUsers = async (req, res) => {
           {
             attributes: { exclude: ["id"] },
             model: Role,
-          },]
+          },
+        ],
       });
       if (filteredUsers.length === 0) {
         return res.json({
@@ -303,6 +302,8 @@ adminController.getAllUsers = async (req, res) => {
       });
     } else {
       const allUsers = await User.findAll({
+        attributes: { exclude: ["password"] },
+
         include: [
           {
             attributes: { exclude: ["id"] },
@@ -568,6 +569,11 @@ adminController.getAllThemes = async (req, res) => {
       include: [
         {
           model: Category,
+          include: [
+            {
+              model: FAQ,
+            },
+          ],
         },
       ],
     });
@@ -669,4 +675,77 @@ adminController.newFAQ = async (req, res) => {
   }
 };
 
+adminController.getAllFAQs = async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+    const oneFAQ = await FAQ.findByPk({
+      where: {
+        category_id: categoryId,
+      },
+    });
+
+    return res.json({
+      success: true,
+      message: "Todas los temas recuperados",
+      data: oneFAQ,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Los datos no han podido ser recuperados",
+      error: error.message,
+    });
+  }
+};
+
+adminController.inactivateCategory = async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+
+    const inactivateCategory = await Category.update(
+      { category_status: "Inactive" },
+      {
+        where: {
+          id: categoryId,
+        },
+      }
+    );
+    return res.json({
+      success: true,
+      message: "La categoria ha sido desactivada por el admin",
+      data: inactivateCategory,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "La categoria  no ha podido ser desactivada por el admin",
+      error: error.message,
+    });
+  }
+};
+adminController.activateCategory = async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+
+    const inactivateCategory = await Category.update(
+      { category_status: "Active" },
+      {
+        where: {
+          id: categoryId,
+        },
+      }
+    );
+    return res.json({
+      success: true,
+      message: "La categoria ha sido desactivada por el admin",
+      data: inactivateCategory,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "La categoria  no ha podido ser desactivada por el admin",
+      error: error.message,
+    });
+  }
+};
 module.exports = adminController;

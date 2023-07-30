@@ -20,7 +20,7 @@ module.exports = {
       id: 3,
       category_name: 'Acceso a aplicaciones ',
       theme_id: 1,
-      category_status: "Active"
+      category_status: "Inactive"
     },
     {
       id: 4,

@@ -863,4 +863,32 @@ userController.reassignTicketBySAT = async (req, res) => {
   }
 };
 
+
+userController.getOneCategory = async (req, res) => {
+  try {
+    const categoryId = req.params.id
+    const allCategories = await Category.findAll({
+      include: [
+        {
+          model: FAQ,
+        },
+      ],
+      where : {
+        id:categoryId
+      }
+    });
+
+    return res.json({
+      success: true,
+      message: "Categoria recuperada",
+      data: allCategories,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Los datos no han podido ser recuperados",
+      error: error.message,
+    });
+  }
+};
 module.exports = userController;
