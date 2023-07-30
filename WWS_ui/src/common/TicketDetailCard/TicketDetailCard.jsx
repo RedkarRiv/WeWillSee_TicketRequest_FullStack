@@ -8,9 +8,11 @@ import { CommentCard } from "../CommentCard/CommentCard";
 import {
   activateTicket,
   closeTicket,
+  getAllTemplates,
   inactivateTicket,
   newTicketComment,
 } from "../../services/apiCalls";
+import { TemplateCard } from "../TemplateCard/TemplateCard";
 
 export const TicketDetailCard = ({ ticket, onClose }) => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -21,7 +23,7 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
     ticket: ticket.id,
     message: "",
   });
-
+  const [templateData, setTemplateData] = useState([]);
   const InputHandler = (e) => {
     setNewComment(e.target.value);
     setMessageData(() => ({
@@ -31,7 +33,20 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
     console.log(newComment);
     console.log(messageData);
   };
-
+  const bringAllTemplates = () => {
+    getAllTemplates(credentialCheck)
+      .then((resultado) => {
+        if (resultado.data.message == "Token invalido") {
+          navigate("/");
+          return;
+        } else {
+          setTemplateData(resultado.data.data);
+          console.log("Esto es el template data");
+          console.log(templateData);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
   const resetCommentHandler = () => {
     setNewComment("");
     onClose();
@@ -46,6 +61,23 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
         console.log(error);
       });
   };
+
+  const takeTemplates = () => {
+    if (templateData.length === 0) {
+      bringAllTemplates();
+      console.log("Holaaaaaaaaaaaaaa")
+
+    } else {
+      setTemplateData([])
+
+    }
+
+
+  }
+
+
+
+
 
   const activateTicketHandler = () => {
     activateTicket(credentialCheck, ticket.id)
@@ -199,9 +231,18 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                 {roleCheck === 2 && (
                   <MDBRow>
                     <MDBCol md="12" className="mt-3">
-                      <div className="inputTicketDetail">TEMPLATES</div>
+                      <div className="inputTicketDetail"
+                      onClick={()=>takeTemplates()}>TEMPLATES</div>
                     </MDBCol>
-                  </MDBRow>
+                    {templateData.length > 0 && templateData.map((template, index) => (
+                      <MDBCol md="12" className="mt-0 templateList" key={index}>
+                        <TemplateCard
+                          title={template.template_title}
+                          description={template.template_description}
+                        />{" "}
+                      </MDBCol>
+                    ))}
+                  </MDBRow> 
                 )}
 
                 <MDBRow className="d-flex justify-content-center mt-4">
@@ -219,14 +260,15 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                       >
                         Anular
                       </div>
-      
                     </>
-                  ) :                 <div
-                  className="buttonActiveTicket mx-2"
-                  onClick={() => activateTicketHandler()}
-                >
-                  Activar
-                </div>}
+                  ) : (
+                    <div
+                      className="buttonActiveTicket mx-2"
+                      onClick={() => activateTicketHandler()}
+                    >
+                      Activar
+                    </div>
+                  )}
 
                   {roleCheck === 2 ? (
                     <>
