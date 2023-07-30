@@ -6,17 +6,42 @@ import { userDataCheck } from "../../pages/userSlice";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { useNavigate } from "react-router-dom";
 import { MessageContext } from "../../services/messageContext";
+import { activateUser, inactivateUser } from "../../services/apiCalls";
 
 export const UserDetailCard = ({ onClose, user }) => {
-  // const credentialsRdx = useSelector(userDataCheck);
-  // const credentialCheck = credentialsRdx?.credentials?.token;
-  // const roleCheck = credentialsRdx.credentials.user.roleId;
-  // const navigate = useNavigate();
-  // const { setMessage } = useContext(MessageContext);
-
-console.log(user)
+  const credentialsRdx = useSelector(userDataCheck);
+  const credentialCheck = credentialsRdx?.credentials?.token;
+  const navigate = useNavigate();
+  const { setMessage } = useContext(MessageContext);
 
 
+  const inactivateUserHandler = () => {
+    inactivateUser(credentialCheck, user.id)
+      .then((resultado) => {
+        if (resultado.data.message == "Token invalido") {
+          navigate("/");
+          return;
+        } else {
+           setMessage("EL USUARIO HA SIDO DESACTIVADO");
+          navigate("/m")
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const activateUserHandler = () => {
+    activateUser(credentialCheck, user.id)
+      .then((resultado) => {
+        if (resultado.data.message == "Token invalido") {
+          navigate("/");
+          return;
+        } else {
+          setMessage("EL USUARIO HA SIDO ACTIVADO");
+          navigate("/m")
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 
   const resetCommentHandler = () => {
     onClose();
@@ -51,7 +76,10 @@ console.log(user)
                   <MDBCol md="12" className="mt-3">
                     <MDBRow className="inputTicketDetail d-flex m-0">
                       <MDBCol className="categoryLabel px-2">NOMBRE</MDBCol>
-                      <MDBCol className="contentLabel px-2"> {user.name} </MDBCol>
+                      <MDBCol className="contentLabel px-2">
+                        {" "}
+                        {user.name}{" "}
+                      </MDBCol>
                     </MDBRow>
                   </MDBCol>
                 </MDBRow>
@@ -59,7 +87,10 @@ console.log(user)
                   <MDBCol md="12" className="mt-3">
                     <MDBRow className="inputTicketDetail d-flex m-0">
                       <MDBCol className="categoryLabel px-2">MAIL</MDBCol>
-                      <MDBCol className="contentLabel px-2">  {user.email}  </MDBCol>
+                      <MDBCol className="contentLabel px-2">
+                        {" "}
+                        {user.email}{" "}
+                      </MDBCol>
                     </MDBRow>
                   </MDBCol>
                 </MDBRow>
@@ -68,7 +99,10 @@ console.log(user)
                   <MDBCol md="12" className="mt-3">
                     <MDBRow className="inputTicketDetail d-flex m-0">
                       <MDBCol className="categoryLabel px-2">ROLE</MDBCol>
-                      <MDBCol className="contentLabel px-2">  {user.role_id}  </MDBCol>
+                      <MDBCol className="contentLabel px-2">
+                        {" "}
+                        {user.role_id}{" "}
+                      </MDBCol>
                     </MDBRow>
                   </MDBCol>
                 </MDBRow>
@@ -77,7 +111,10 @@ console.log(user)
                   <MDBCol md="12" className="mt-3">
                     <MDBRow className="inputTicketDetail d-flex m-0">
                       <MDBCol className="categoryLabel px-2">STATUS</MDBCol>
-                      <MDBCol className="contentLabel px-2">  {user.user_status} </MDBCol>
+                      <MDBCol className="contentLabel px-2">
+                        {" "}
+                        {user.user_status}{" "}
+                      </MDBCol>
                     </MDBRow>
                   </MDBCol>
                 </MDBRow>
@@ -86,12 +123,30 @@ console.log(user)
                   <MDBCol md="12" className="mt-3">
                     <MDBRow className="inputTicketDetail d-flex m-0">
                       <MDBCol className="categoryLabel px-2">CREACIÓN </MDBCol>
-                      <MDBCol className="contentLabel px-2">  {user.createdAt}  </MDBCol>
+                      <MDBCol className="contentLabel px-2">
+                        {" "}
+                        {user.createdAt}{" "}
+                      </MDBCol>
                     </MDBRow>
                   </MDBCol>
                 </MDBRow>
                 <MDBRow className="d-flex justify-content-center align-items-center">
-                  <div className="buttonCloseTicket mx-2 mt-4">Desactivar</div>
+                  {user.user_status == "Active" && (
+                    <div
+                      className="buttonCloseTicket mx-2 mt-4"
+                      onClick={() => inactivateUserHandler()}
+                    >
+                      Desactivar
+                    </div>
+                  )}
+                  {user.user_status == "Inactive" && (
+                    <div
+                      className="buttonCloseTicket mx-2 mt-4"
+                      onClick={() => activateUserHandler()}
+                    >
+                      Activar
+                    </div>
+                  )}
                 </MDBRow>
               </MDBCardBody>
             </MDBCol>

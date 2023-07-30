@@ -36,8 +36,7 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
       ...messageData,
       message: e.target.value,
     }));
-    console.log(newComment);
-    console.log(messageData);
+
   };
   const bringAllTemplates = () => {
     getAllTemplates(credentialCheck)
@@ -47,8 +46,6 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
           return;
         } else {
           setTemplateData(resultado.data.data);
-          console.log("Esto es el template data");
-          console.log(templateData);
         }
       })
       .catch((error) => console.log(error));
@@ -61,7 +58,6 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
   const inactivateTicketHandler = () => {
     inactivateTicket(credentialCheck, ticket.id)
       .then((resultado) => {
-        console.log(resultado);
         setMessage("EL TICKET HA SIDO ANULADO");
         navigate("/m")
       })
@@ -80,7 +76,6 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
   const activateTicketHandler = () => {
     activateTicket(credentialCheck, ticket.id)
       .then((resultado) => {
-        console.log(resultado);
         setMessage("EL TICKET HA SIDO ACTIVADO");
         navigate("/m")
       })
@@ -93,13 +88,11 @@ const reassignHandler = () => {
   const reassignData = { id: ticket.id }
   reassignTicket(credentialCheck, reassignData)
   .then((resultado) => {
-    console.log(resultado);
     setMessage("EL TICKET HA SIDO REASIGNADO");
     navigate("/m")
   })
   .catch((error) => {
     console.log(error);
-    console.log(ticket.id);
 
   });
 }
@@ -107,7 +100,6 @@ const reassignHandler = () => {
   const closeTicketHandler = () => {
     closeTicket(credentialCheck, ticket.id)
       .then((resultado) => {
-        console.log(resultado);
         setMessage("EL TICKET HA SIDO CERRADO");
         navigate("/m")
       })
@@ -119,7 +111,6 @@ const reassignHandler = () => {
   const sendNewComment = () => {
     newTicketComment(credentialCheck, messageData)
       .then((resultado) => {
-        console.log(resultado);
         setMessage("NUEVO COMENTARIO CREADO CORRECTAMENTE");
         navigate("/m")
       })

@@ -54,7 +54,7 @@ export const CategoryFormCard = ({ onClose }) => {
       new_category_name: categorySelected.category_name,
       theme: themeSelected.theme_id,
     };
-    console.log(newCategoryData)
+
     newCategory(credentialCheck, newCategoryData)
       .then((resultado) => {
         if (resultado.data.message == "Token invalido") {
@@ -76,8 +76,7 @@ export const CategoryFormCard = ({ onClose }) => {
           return;
         } else {
           setThemeData(resultado?.data?.data);
-          console.log("Esto son los temas----------------");
-          console.log(themeData);
+
         }
       })
       .catch((error) => console.log(error));
@@ -87,7 +86,6 @@ export const CategoryFormCard = ({ onClose }) => {
       theme_name: theme.theme_name,
       theme_id: theme.id,
     });
-    console.log(selectedTheme, newCredentials);
   };
 
   useEffect(() => {

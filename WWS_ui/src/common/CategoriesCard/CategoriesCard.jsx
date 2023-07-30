@@ -12,7 +12,6 @@ export const CategoriesCard = () => {
   const credentialCheck = credentialsRdx?.credentials?.token;
 
   const TakeAllThemes = () => {
-    console.log(credentialCheck);
     bringThemes(credentialCheck)
       .then((resultado) => {
         setThemeData(resultado);

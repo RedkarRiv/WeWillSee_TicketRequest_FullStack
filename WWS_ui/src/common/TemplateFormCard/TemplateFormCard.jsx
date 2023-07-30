@@ -21,7 +21,6 @@ export const TemplateFormCard = () => {
     description: "",
   });
   const InputCheck = (e) => {
-    console.log(credentialsError);
     let mensajeError = CheckError(e.target.name, e.target.value);
 
     setCredentialsError((prevState) => ({
@@ -38,7 +37,6 @@ export const TemplateFormCard = () => {
     template_description:""
   });
   const InputHandler = (e) => {
-    console.log(newTemplate);
     setNewTemplate((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -48,7 +46,6 @@ export const TemplateFormCard = () => {
   const templateMeHandler = () => {
     createNewTemplate(credentialCheck, newTemplate)
       .then((resultado) => {
-        console.log(resultado);
         setMessage("EL TEMPLATE HA SIDO CREADO");
         navigate("/m")
       })

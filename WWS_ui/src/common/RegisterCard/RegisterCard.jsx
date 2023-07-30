@@ -15,7 +15,6 @@ export const RegisterCard = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
-  console.log(credentialCheck);
   const [newCredentials, setNewCredentials] = useState({
     name: "",
     email: "",
@@ -50,7 +49,6 @@ export const RegisterCard = () => {
     e.preventDefault();
     registerMe(newCredentials)
       .then((resultado) => {
-        console.log(resultado);
         const newUserCredentials = {
           email: resultado.data.data.email,
           password: newCredentials.password,
@@ -64,8 +62,6 @@ export const RegisterCard = () => {
             };
 
             dispatch(login({ credentials: datosBackend }));
-            console.log("esto son las credentialsRDX");
-            console.log(datosBackend);
             navigate("/dashboard");
           })
           .catch((error) => {

@@ -104,7 +104,6 @@ export const getAllTicketsBySAT = async (credentialCheck, criteria) => {
 
 
 export const getAllUsersByAdmin = async (credentialCheck, criteria) => {
-  console.log(criteria)
 
   if (!criteria) {
     return await axios.get(`${root}admin/all`, {
@@ -257,4 +256,28 @@ export const getAllTemplates = async (credentialCheck) => {
         Authorization: "Bearer " + credentialCheck,
       },
     });
+  };
+
+  
+  export const inactivateUser = async (credentialCheck, id) => {
+    return await axios.get(
+      `${root}admin/inactivateUser/${id}`,
+      {
+        headers: {
+          authorization: "Bearer " + credentialCheck,
+        },
+      }
+    );
+  };
+
+
+  export const activateUser = async (credentialCheck, id) => {
+    return await axios.get(
+      `${root}admin/activateUser/${id}`,
+      {
+        headers: {
+          authorization: "Bearer " + credentialCheck,
+        },
+      }
+    );
   };

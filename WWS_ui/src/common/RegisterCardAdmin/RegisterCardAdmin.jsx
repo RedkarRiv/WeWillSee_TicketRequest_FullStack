@@ -20,7 +20,6 @@ export const RegisterCardAdmin = ({ onClose, user }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
-  console.log(credentialCheck);
   const [newCredentials, setNewCredentials] = useState({
     name: "",
     email: "",
@@ -57,7 +56,6 @@ export const RegisterCardAdmin = ({ onClose, user }) => {
     if (user == 2) {
       registNewSAT(credentialCheck, newCredentials)
       .then((resultado) => {
-        console.log(resultado);
         setMessage("EL SAT SE HA CREADO CON EXITO");
         navigate("/m")
       })
@@ -68,7 +66,6 @@ export const RegisterCardAdmin = ({ onClose, user }) => {
     } else {
       registNewUser(credentialCheck, newCredentials)
       .then((resultado) => {
-        console.log(resultado)
         setMessage("EL USUARIO SE HA CREADO CON EXITO");
         navigate("/m")
       })

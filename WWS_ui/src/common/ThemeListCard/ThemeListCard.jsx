@@ -40,8 +40,6 @@ export const ThemeListCard = () => {
           return;
         } else {
           setThemeData(resultado.data.data);
-          console.log("Esto son los temas----------------");
-          console.log(themeData);
         }
       })
       .catch((error) => console.log(error));
@@ -50,7 +48,6 @@ export const ThemeListCard = () => {
   const takeCategoryData = (ticket) => {
     setActiveComponentView(1)
     setSelectedCategory(ticket);
-    console.log(selectedCategory);
     setShowModal(true);
   };
 

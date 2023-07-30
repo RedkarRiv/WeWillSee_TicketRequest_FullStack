@@ -25,7 +25,6 @@ export const LoginCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
 
   const logMe = (e) => {
-    console.log(credentials);
     e.preventDefault();
     loginMe(credentials)
       .then((resultado) => {
@@ -45,7 +44,6 @@ export const LoginCard = () => {
   };
 
   const InputHandler = (e) => {
-    console.log(credentials);
     setCredentials((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -53,7 +51,6 @@ export const LoginCard = () => {
   };
 
   const InputCheck = (e) => {
-    console.log(credentialsError);
     let mensajeError = CheckError(e.target.name, e.target.value);
 
     setCredentialsError((prevState) => ({

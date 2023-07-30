@@ -13,8 +13,6 @@ import { MessageContext } from "../../services/messageContext";
 export const TicketFormcard = ({ category, theme}) => {
   const navigate = useNavigate();
   const { setMessage } = useContext(MessageContext);
-console.log(category.id)
-console.log(theme)
 
   const [faqItems, setFaqItems] = useState([
     {
@@ -27,8 +25,7 @@ console.log(theme)
 const getCategoryDataHandler = () => {
   getOneCategory(credentialCheck, category.id)
   .then((resultado) => {
-    console.log(resultado.data.data[0]);
-    console.log(resultado.data.data[0].FAQs);
+
     const FAQData = resultado.data.data[0].FAQs
 
     const updateFAQData = FAQData.map((faq) => ({
@@ -60,7 +57,6 @@ useEffect(() => {
     description: "",
   });
   const InputCheck = (e) => {
-    console.log(credentialsError);
     let mensajeError = CheckError(e.target.name, e.target.value);
 
     setCredentialsError((prevState) => ({
@@ -79,7 +75,6 @@ useEffect(() => {
     categoryId: category.id ?? 2,
   });
   const InputHandler = (e) => {
-    console.log(newTicket);
     setNewTicket((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -89,7 +84,6 @@ useEffect(() => {
   const ticketMeHandler = () => {
     ticketMe(credentialCheck, newTicket)
       .then((resultado) => {
-        console.log(resultado);
         setMessage("EL TICKET HA SIDO CREADO");
         navigate("/m")
       })

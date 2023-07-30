@@ -44,8 +44,6 @@ export const TicketListCard = () => {
   const handlerTicketStatus = () => {
     getAllTicketsStatus(credentialCheck)
       .then((resultado) => {
-        console.log("esto es el resultado de ticket status");
-        console.log(resultado.data.data);
         setTicketStatus(resultado.data.data);
       })
       .catch((error) => {
@@ -72,10 +70,7 @@ export const TicketListCard = () => {
               navigate("/");
               return;
             } else {
-              console.log(criteria);
               setTicketsData(resultado.data.data);
-              console.log("Esto es el ticketsData");
-              console.log(ticketsData);
             }
           })
           .catch((error) => console.log(error));
@@ -88,8 +83,6 @@ export const TicketListCard = () => {
               return;
             } else {
               setTicketsData(resultado.data.data);
-              console.log("Esto es el ticketsData de SAT");
-              console.log(ticketsData);
             }
           })
           .catch((error) => console.log(error));
@@ -102,9 +95,7 @@ export const TicketListCard = () => {
               return;
             } else {
               setTicketsData(resultado.data.data);
-              console.log("Esto es el ticketsData de Admin");
-              console.log(ticketsData);
-            }
+               }
           })
           .catch((error) => console.log(error));
         break;
@@ -114,14 +105,10 @@ export const TicketListCard = () => {
     const { value, name } = e.target;
     const criteriaURLdesign = `${name}=${value}`;
     setCriteria(criteriaURLdesign);
-    console.log("esto es criteria---------");
-    console.log(criteriaURLdesign);
-    console.log(name);
   };
 
   const takeTicketData = (ticket) => {
     setSelectedTicket(ticket);
-    console.log(ticket);
     setShowModal(true);
   };
   const handleCloseModal = () => {
@@ -202,7 +189,6 @@ export const TicketListCard = () => {
     },
   ]);
   const [selectedFilter, setSelectedFilter] = useState(null);
-  console.log(ticketsData);
   return (
     <div className="ticketListCardContainer ticketListDesign d-flex justify-content-center align-items-center flex-column p-0">
       <TitleSectionCard title="Todos los tickets" />

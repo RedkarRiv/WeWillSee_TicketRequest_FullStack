@@ -8,13 +8,12 @@ import logoBackWWS from "../../img/logoWhiteWWS.png";
 
 export const Message = () => {
   const { message } = useContext(MessageContext);
-  console.log(message);
   const navigate = useNavigate();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       navigate("/dashboard");
-    }, 2500);
+    }, 1500);
     return () => clearTimeout(timeout);
   }, []);  
 

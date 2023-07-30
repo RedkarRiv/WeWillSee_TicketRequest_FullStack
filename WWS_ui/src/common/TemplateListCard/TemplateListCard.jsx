@@ -47,8 +47,6 @@ export const TemplateListCard = () => {
           return;
         } else {
           setTemplateData(resultado.data.data);
-          console.log("Esto es el template data");
-          console.log(templateData);
         }
       })
       .catch((error) => console.log(error));

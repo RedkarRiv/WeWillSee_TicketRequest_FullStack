@@ -57,7 +57,6 @@ export const UsersListCard = () => {
     },
   ]);
   const [selectedFilter, setSelectedFilter] = useState(null);
-  console.log(selectedFilter);
 
   const criteriaHandler = (e) => {
     const { value } = e.target;
@@ -65,9 +64,6 @@ export const UsersListCard = () => {
     const criteriaURLdesign = `${selectedFieldName}=${value}`;
 
     setCriteria(criteriaURLdesign);
-    console.log("esto es criteria---------");
-    console.log(criteriaURLdesign);
-    console.log(selectedFieldName);
   };
   const getAllUsers = () => {
     getAllUsersByAdmin(credentialCheck, criteria)
@@ -77,8 +73,6 @@ export const UsersListCard = () => {
           return;
         } else {
           setUsersData(resultado.data.data);
-          console.log("Esto son los usuarios");
-          console.log(usersData);
         }
       })
       .catch((error) => console.log(error));
@@ -86,6 +80,9 @@ export const UsersListCard = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setTimeout(() => {
+      setActiveComponentView(1);
+    }, 500);
   };
 
   const handleOpenModalUser = () => {
@@ -99,14 +96,11 @@ export const UsersListCard = () => {
   };
 
   const handleOpenModalDetail = (user) => {
-    console.log(user)
     setUserSelected(user);
 
     setActiveComponentView(2);
     setShowModal(true);
   };
-
-  console.log(userSelected);
 
   useEffect(() => {
     getAllUsers();

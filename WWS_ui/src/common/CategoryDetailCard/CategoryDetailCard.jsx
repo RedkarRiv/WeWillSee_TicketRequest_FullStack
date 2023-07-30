@@ -25,7 +25,6 @@ export const CategoryDetailCard = ({ category, onClose }) => {
   const inactivateCategoryHandler = () => {
     inactivateCategory(credentialCheck, category?.id)
       .then((resultado) => {
-        console.log(resultado);
         setMessage("LA CATEGORIA HA SIDO ANULADA");
         navigate("/m");
       })
@@ -37,7 +36,6 @@ export const CategoryDetailCard = ({ category, onClose }) => {
   const activateCategoryHandler = () => {
     activateCategory(credentialCheck, category?.id)
       .then((resultado) => {
-        console.log(resultado);
         setMessage("LA CATEGORIA HA SIDO ACTIVADA");
         navigate("/m");
       })

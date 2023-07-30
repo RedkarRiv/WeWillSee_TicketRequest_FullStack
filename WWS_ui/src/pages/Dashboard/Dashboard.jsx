@@ -54,8 +54,7 @@ export const Dashboard = () => {
   const TakeAllThemes = () => {
     bringThemes(credentialCheck)
       .then((resultado) => {
-        console.log("Esto es el themeData");
-        console.log(resultado);
+    
         setThemeData(resultado);
       })
       .catch((error) => {
