@@ -110,6 +110,18 @@ export const activateTicket = async (credentialCheck, id) => {
   );
 };
 
+export const closeTicket = async (credentialCheck, id) => {
+  return await axios.put(
+    `${root}user/close/ticket/${id}`,
+    {},
+    {
+      headers: {
+        authorization: "Bearer " + credentialCheck,
+      },
+    }
+  );
+};
+
 
 export const getAllTicketsStatus = async (credentialCheck) => {
   return await axios.get(`${root}user/tickets/status`, {
@@ -127,3 +139,20 @@ export const newTicketComment = async (credentialCheck, data) => {
     },
   });
 };
+
+export const getAllTemplates = async (credentialCheck) => {
+    return await axios.get(`${root}user/templates`, {
+      headers: {
+        authorization: "Bearer " + credentialCheck,
+      },
+    });
+  };
+
+
+  export const createNewTemplate = async (credentialCheck, data) => {
+    return await axios.post(`${root}user/templates/new`, data, {
+      headers: {
+        authorization: "Bearer " + credentialCheck,
+      },
+    });
+  };

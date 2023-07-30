@@ -12,6 +12,8 @@ import { bringThemes } from "../../services/apiCalls";
 import { TicketListCard } from "../../common/TicketListCard/TicketListCard";
 import { TitleSectionCard } from "../../common/TitleSectionCard/TitleSectionCard";
 import { UsersListCard } from "../../common/UsersListcard/UsersListCard";
+import logoBackWWS from "../../img/logoWhiteWWS.png";
+import { TemplateListCard } from "../../common/TemplateListCard/TemplateListCard";
 
 export const Dashboard = () => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -98,14 +100,14 @@ export const Dashboard = () => {
       <Row className="dashboardBackground d-flex flex-column flex-md-row justify-content-center align-items-start px-1 m-0 pt-md-5">
         <Col className="profileBar col-md-2 col-sm-12 my-1 mx-md-1 d-flex flex-lg-column flex-md-row  pt-md-4 pb-md-4">
           <div className="profileAvatarContainer d-flex  flex-column  m-0 align-items-sm-center justify-content-sm-center align-items-md-center justify-content-md-start">
-            <div className="m-0 d-flex p-1 justify-content-center align-items-center">
+            <div className="mt-1 d-flex justify-content-center align-items-center">
               <img
-                src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
+                src={logoBackWWS}
                 alt="Avatar logo"
                 className="profileAvatar"
               />
             </div>
-            <div className="userTitle pt-md-2">{userData.name}</div>
+            <div className="userTitle pt-md-2 mt-2">{userData.name}</div>
             <div className="logoutDesign" onClick={() => logOut()}>
               Logout
             </div>
@@ -128,7 +130,12 @@ export const Dashboard = () => {
                   </div>
                 )}
                 {roleCheck === 2 && (
-                  <div className="buttonDesign">Templates</div>
+                  <div
+                    className="buttonDesign"
+                    onClick={() => dinamicRenderHandler(4)}
+                  >
+                    Templates
+                  </div>
                 )}
               </>
             ) : (
@@ -150,7 +157,7 @@ export const Dashboard = () => {
             )}
           </div>
         </Col>
-        {roleCheck !== 3 ? (
+        {roleCheck === 1 && (
           <Col className="dashboardContainer col-lg-9 col-md-12  my-1 d-flex justify-content-center align-items-start p-0">
             <Row className="d-flex justify-content-around align-items-around w-100 pt-4 pb-4">
               {activeComponentView === 2 ? (
@@ -197,7 +204,18 @@ export const Dashboard = () => {
               {activeComponentView === 1 && <TicketListCard />}
             </Row>
           </Col>
-        ) : (
+        )}
+
+        {roleCheck === 2 && (
+          <Col className="dashboardContainer col-lg-9 col-md-12  my-1 d-flex justify-content-center align-items-start p-0">
+            <Row className="d-flex justify-content-around align-items-around w-100 pt-4 pb-4">
+              {activeComponentView === 1 && <TicketListCard />}
+              {activeComponentView === 4 && <TemplateListCard />}
+            </Row>
+          </Col>
+        )}
+
+        {roleCheck === 3 && (
           <Col className="dashboardContainer col-lg-9 col-md-12  my-1 d-flex justify-content-center align-items-start p-0">
             {activeComponentView === 5 && <UsersListCard />}
             {activeComponentView === 6 && <TicketListCard />}

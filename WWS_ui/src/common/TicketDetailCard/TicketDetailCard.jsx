@@ -5,7 +5,12 @@ import { useSelector } from "react-redux";
 import { userDataCheck } from "../../pages/userSlice";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { CommentCard } from "../CommentCard/CommentCard";
-import { activateTicket, inactivateTicket, newTicketComment } from "../../services/apiCalls";
+import {
+  activateTicket,
+  closeTicket,
+  inactivateTicket,
+  newTicketComment,
+} from "../../services/apiCalls";
 
 export const TicketDetailCard = ({ ticket, onClose }) => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -13,8 +18,8 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
   const roleCheck = credentialsRdx.credentials.user.roleId;
   const [newComment, setNewComment] = useState("");
   const [messageData, setMessageData] = useState({
-    ticket:ticket.id,
-    message:"",
+    ticket: ticket.id,
+    message: "",
   });
 
   const InputHandler = (e) => {
@@ -23,11 +28,9 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
       ...messageData,
       message: e.target.value,
     }));
-    console.log(newComment)
-    console.log(messageData)
-
+    console.log(newComment);
+    console.log(messageData);
   };
-
 
   const resetCommentHandler = () => {
     setNewComment("");
@@ -54,15 +57,25 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
       });
   };
 
+  const closeTicketHandler = () => {
+    closeTicket(credentialCheck, ticket.id)
+      .then((resultado) => {
+        console.log(resultado);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const sendNewComment = () => {
     newTicketComment(credentialCheck, messageData)
-    .then((resultado) => {
-      console.log(resultado);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+      .then((resultado) => {
+        console.log(resultado);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <MDBRow className="ticketDetailCardContainer d-flex justify-content-center align-items-center p-0">
@@ -80,9 +93,9 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
           <TitleSectionCard title="Ticket en detalle" />
           <MDBRow className="contentBoxSide">
             <MDBCol lg="12" className="p-0">
-              <MDBCardBody className="d-flex flex-column justify-content-center mt-2">
+              <MDBCardBody className="d-flex flex-column justify-content-center">
                 <MDBRow>
-                  <MDBCol md="12" className="mt-4">
+                  <MDBCol md="12" className="mt-1">
                     <MDBRow className="inputTicketDetail d-flex m-0">
                       <MDBCol className="categoryLabel px-2">Tema</MDBCol>
                       <MDBCol className="contentLabel px-2">
@@ -167,19 +180,22 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                     </div>
                   )}
                 </MDBRow>
-                <MDBRow>
-                  <MDBCol md="12" className="mt-3">
-                    <textarea
-                      type="textarea"
-                      placeholder="Nuevo comentario"
-                      name="comment"
-                      value={newComment}
-                      maxLength={500}
-                      className="commentDesign"
-                      onChange={(e) => InputHandler(e)}
-                    />
-                  </MDBCol>
-                </MDBRow>
+                {ticket?.ticket_status === 1 ? (
+                  <MDBRow>
+                    <MDBCol md="12" className="mt-3">
+                      <textarea
+                        type="textarea"
+                        placeholder="Nuevo comentario"
+                        name="comment"
+                        value={newComment}
+                        maxLength={500}
+                        className="commentDesign"
+                        onChange={(e) => InputHandler(e)}
+                      />
+                    </MDBCol>
+                  </MDBRow>
+                ) : null}
+
                 {roleCheck === 2 && (
                   <MDBRow>
                     <MDBCol md="12" className="mt-3">
@@ -189,35 +205,44 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                 )}
 
                 <MDBRow className="d-flex justify-content-center mt-4">
-                  <div
-                    className="buttonSendTicket mx-2"
-                    onClick={() => sendNewComment()}
-                  >
-                    Enviar comentario
-                  </div>
                   {ticket?.ticket_status === 1 ? (
-                    <div
-                      className="buttonCancelTicket mx-2"
-                      onClick={() => inactivateTicketHandler()}
-                    >
-                      Anular
-                    </div>
-                  ) : (
-                    <div
-                      className="buttonActiveTicket mx-2"
-                      onClick={() => activateTicketHandler()}
-                    >
-                      Activar
-                    </div>
-                  )}
+                    <>
+                      <div
+                        className="buttonSendTicket mx-2"
+                        onClick={() => sendNewComment()}
+                      >
+                        Enviar comentario
+                      </div>
+                      <div
+                        className="buttonCancelTicket mx-2"
+                        onClick={() => inactivateTicketHandler()}
+                      >
+                        Anular
+                      </div>
+      
+                    </>
+                  ) :                 <div
+                  className="buttonActiveTicket mx-2"
+                  onClick={() => activateTicketHandler()}
+                >
+                  Activar
+                </div>}
 
                   {roleCheck === 2 ? (
-                    <div
-                      className="buttonSendTicket mx-2"
-                      onClick={() => ticketMeHandler()}
-                    >
-                      Reasignar
-                    </div>
+                    <>
+                      <div
+                        className="buttonCloseTicket mx-2"
+                        onClick={() => closeTicketHandler()}
+                      >
+                        Cerrar
+                      </div>
+                      <div
+                        className="buttonActiveTicket mx-2"
+                        onClick={() => ticketMeHandler()}
+                      >
+                        Reasignar
+                      </div>
+                    </>
                   ) : null}
                 </MDBRow>
               </MDBCardBody>

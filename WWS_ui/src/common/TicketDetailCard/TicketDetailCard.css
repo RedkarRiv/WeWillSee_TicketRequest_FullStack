@@ -36,6 +36,25 @@
   font-size: 90%;
 }
 
+.buttonCloseTicket {
+  width: auto;
+  background-color: #3d3b3b;
+  color: white;
+  border-radius: 0.3em;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  text-align: center;
+  padding-right: 0.8em;
+  padding-left: 0.8em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  font-weight: 650;
+  user-select: none;
+  cursor: pointer;
+  font-size: 90%;
+}
+
 .buttonActiveTicket {
   width: auto;
   background-color: #13920d;
@@ -53,8 +72,8 @@
   user-select: none;
   cursor: pointer;
   font-size: 90%;
-
 }
+
 
 
 .buttonSendTicket:active {

@@ -144,6 +144,7 @@ export const TicketFormcard = ({ category, theme }) => {
                       type="text"
                       placeholder="Titulo del ticket"
                       name="title"
+                      Length="50"
                       classDesign="inputFormDesign"
                       functionHandler={(e) => InputHandler(e)}
                       onBlurFunction={(e) => InputCheck(e)}

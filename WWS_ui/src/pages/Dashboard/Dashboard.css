@@ -13,12 +13,16 @@
 
 .profileAvatar {
   border-radius: 50%;
-  height: 12vh;
-  width: 12vh;
-  background-size: contain;
-  background-position: center;
-  margin: 0;
+  height: 10vh;
+  width: 10vh;
+  background-color: black;
 }
+
+
+
+
+
+
 
 @media (max-width: 992px) {
   .profileBar {
@@ -42,7 +46,7 @@ border-radius: 0.5em;
 }
 
 .profileAvatarContainer {
-  height: 25%;
+  height: 100%;
 }
 
 @media (max-width: 992px) {
