@@ -14,7 +14,7 @@
     margin-bottom: 1em;
   }
   
-  .registerTitle {
+  .registerTitle {  
     font-size: 130%;
     user-select: none;
   }
@@ -27,5 +27,6 @@
     }
 
   }
+
 
   

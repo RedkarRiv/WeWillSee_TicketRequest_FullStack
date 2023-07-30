@@ -4,15 +4,18 @@ import { InputLabel } from "../../common/InputLabel/InputLabel";
 import { CheckError } from "../../services/useful";
 import { loginMe, registerMe } from "../../services/apiCalls";
 import jwt_decode from "jwt-decode";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../pages/userSlice";
 import { useNavigate } from "react-router-dom";
+import { userDataCheck } from "../../pages/userSlice";
 
 export const RegisterCard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
-
+  const credentialsRdx = useSelector(userDataCheck);
+  const credentialCheck = credentialsRdx?.credentials?.token;
+  console.log(credentialCheck);
   const [newCredentials, setNewCredentials] = useState({
     name: "",
     email: "",
@@ -80,6 +83,7 @@ export const RegisterCard = () => {
     <>
       <div className="registerCard">
         <div className="registerContainer mb-2">
+          <div className="p-0 m-0 d-flex justify-content-end align-items-center w-100"></div>
           <div className="registerTitle mb-1">Nombre</div>
           <div className="inputDesign">
             <InputLabel
@@ -161,7 +165,6 @@ export const RegisterCard = () => {
       <div className="errorMessageDesign p-0 m-0">{errorMessage}</div>
       <div
         className="buttonLogin mt-4 mb-4"
-        ç
         onClick={(e) => registerNewUser(e)}
         type="submit"
       >

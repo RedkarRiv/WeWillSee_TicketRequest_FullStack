@@ -15,16 +15,16 @@ import { useSelector } from "react-redux";
 import { getAllUsersByAdmin } from "../../services/apiCalls";
 import { userDataCheck } from "../../pages/userSlice";
 import moment from "moment";
-import { TicketDetailCard } from "../TicketDetailCard/TicketDetailCard";
+import { RegisterCard } from "../RegisterCard/RegisterCard";
 import Dropdown from "react-bootstrap/Dropdown";
+import { RegisterCardAdmin } from "../RegisterCardAdmin/RegisterCardAdmin";
 
 export const UsersListCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
   const [usersData, setUsersData] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedTicket, setSelectedTicket] = useState(null);
-  const roleCheck = credentialsRdx.credentials.user.roleId;
+  const [newUserRole, setNewUserRole] = useState("")
   const [filterOptions, setFilterOptions] = useState([
     {
       name: "Elegir filtro  ",
@@ -70,9 +70,20 @@ export const UsersListCard = () => {
   //     console.log(ticket);
   //     setShowModal(true);
   //   };
-  //   const handleCloseModal = () => {
-  //     setShowModal(false);
-  //   };
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+
+  const handleOpenModalUser = () => {
+    setNewUserRole(1)
+    setShowModal(true);
+  };
+
+  const handleOpenModalSAT = () => {
+    setNewUserRole(2)
+    setShowModal(true);
+  };
 
   useEffect(() => {
     getAllUsers();
@@ -84,9 +95,15 @@ export const UsersListCard = () => {
       <MDBRow className="d-flex justify-content-center mt-2">
         <div
           className="buttonSendTicket mx-2"
-          onClick={() => ticketMeHandler()}
+          onClick={() => handleOpenModalUser()}
         >
           Nuevo usuario{" "}
+        </div>
+        <div
+          className="buttonSendTicket mx-2"
+          onClick={() => handleOpenModalSAT()}
+        >
+          Nuevo SAT{" "}
         </div>
       </MDBRow>
       <MDBRow className="d-flex justify-content-center searchContainerDesign my-3 p-0">
@@ -169,16 +186,13 @@ export const UsersListCard = () => {
             : "CARGANDO"}
         </MDBTableBody>
       </MDBTable>
-      {/* <MDBModal show={showModal} onHide={() => setShowModal(false)}>
-        <MDBModalBody className="modalTicketDesign d-flex justify-content-center alig-items-center">
-          {selectedTicket && (
-            <TicketDetailCard
-              ticket={selectedTicket}
-              onClose={handleCloseModal}
-            />
-          )}
+      <MDBModal show={showModal} onHide={() => setShowModal(false)}>
+        <MDBModalBody className="modalTicketDesign d-flex justify-content-center alig-items-center ">
+          <div className="registerAdminContainer m-0 p-0 d-flex justify-content-center align-items-center flex-column">
+            {<RegisterCardAdmin onClose={handleCloseModal} user={newUserRole} />}
+          </div>
         </MDBModalBody>
-      </MDBModal>{" "} */}
+      </MDBModal>{" "}
     </div>
   );
 };

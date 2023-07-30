@@ -1,0 +1,12 @@
+.registerAdminContainer {
+    background-color: white;
+    width: 60%;
+    border-radius: 1em;
+}
+
+@media (max-width:768px) {
+
+    .registerAdminContainer {
+        width: 90%;
+    }
+}

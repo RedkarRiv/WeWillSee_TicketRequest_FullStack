@@ -10,6 +10,26 @@ export const registerMe = async (newCredentials) => {
   return await axios.post(`${root}auth/register`, newCredentials);
 };
 
+
+
+export const registNewSAT = async (credentialCheck, newCredentials) => {
+  return await axios.post(`${root}admin/newSAT`, newCredentials, {
+    headers: {
+      authorization: "Bearer " + credentialCheck,
+    },
+  });
+};
+
+
+export const registNewUser = async (credentialCheck, newCredentials) => {
+  return await axios.post(`${root}admin/newUser`, newCredentials, {
+    headers: {
+      authorization: "Bearer " + credentialCheck,
+    },
+  });
+};
+
+
 export const bringThemes = async (credentialCheck) => {
   return await axios.get(`${root}user/themes`, {
     headers: {
