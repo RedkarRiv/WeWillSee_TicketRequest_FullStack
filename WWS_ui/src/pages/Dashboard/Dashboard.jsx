@@ -11,7 +11,7 @@ import { TicketFormcard } from "../../common/TicketFormCard/TicketFormCard";
 import { bringThemes } from "../../services/apiCalls";
 import { TicketListCard } from "../../common/TicketListCard/TicketListCard";
 import { TitleSectionCard } from "../../common/TitleSectionCard/TitleSectionCard";
-import { UsersListCard } from "../../common/UsersListcard/UsersListCard";
+import { UsersListCard } from "../../common/UsersListCard/UsersListCard";
 import logoBackWWS from "../../img/logoWhiteWWS.png";
 import { TemplateListCard } from "../../common/TemplateListCard/TemplateListCard";
 import { ThemeListCard } from "../../common/ThemeListCard/ThemeListCard";
