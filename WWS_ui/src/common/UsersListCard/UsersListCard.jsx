@@ -18,15 +18,18 @@ import moment from "moment";
 import { RegisterCard } from "../RegisterCard/RegisterCard";
 import Dropdown from "react-bootstrap/Dropdown";
 import { RegisterCardAdmin } from "../RegisterCardAdmin/RegisterCardAdmin";
+import { UserDetailCard } from "../UserDetailCard/UserDetailCard";
 
 export const UsersListCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
   const [usersData, setUsersData] = useState([]);
-    const [criteria, setCriteria] = useState(null);
+  const [activeComponentView, setActiveComponentView] = useState(1);
 
+  const [criteria, setCriteria] = useState(null);
+  const [userSelected, setUserSelected] = useState({});
   const [showModal, setShowModal] = useState(false);
-  const [newUserRole, setNewUserRole] = useState("")
+  const [newUserRole, setNewUserRole] = useState("");
   const [filterOptions, setFilterOptions] = useState([
     {
       name: "Elegir filtro  ",
@@ -35,24 +38,22 @@ export const UsersListCard = () => {
     {
       name: "Por nombre  ",
       value: "string",
-      fieldName: "name"
+      fieldName: "name",
     },
     {
       name: "Por mail  ",
       value: "mail",
-      fieldName: "email"
+      fieldName: "email",
     },
     {
       name: "Por role  ",
       value: "string",
-      fieldName: "role_id"
-
+      fieldName: "role_id",
     },
     {
       name: "Por estado  ",
       value: "string",
-      fieldName: "user_status"
-
+      fieldName: "user_status",
     },
   ]);
   const [selectedFilter, setSelectedFilter] = useState(null);
@@ -62,7 +63,7 @@ export const UsersListCard = () => {
     const { value } = e.target;
     const selectedFieldName = selectedFilter?.option?.fieldName;
     const criteriaURLdesign = `${selectedFieldName}=${value}`;
-  
+
     setCriteria(criteriaURLdesign);
     console.log("esto es criteria---------");
     console.log(criteriaURLdesign);
@@ -87,16 +88,25 @@ export const UsersListCard = () => {
     setShowModal(false);
   };
 
-
   const handleOpenModalUser = () => {
-    setNewUserRole(1)
+    setNewUserRole(1);
     setShowModal(true);
   };
 
   const handleOpenModalSAT = () => {
-    setNewUserRole(2)
+    setNewUserRole(2);
     setShowModal(true);
   };
+
+  const handleOpenModalDetail = (user) => {
+    console.log(user)
+    setUserSelected(user);
+
+    setActiveComponentView(2);
+    setShowModal(true);
+  };
+
+  console.log(userSelected);
 
   useEffect(() => {
     getAllUsers();
@@ -154,9 +164,9 @@ export const UsersListCard = () => {
           <input
             className="inputSearchOptions h-100 w-100"
             type={selectedFilter?.option?.value}
-                          name={selectedFilter?.option?.fieldName}
-              onChange={criteriaHandler}
-              onBlur={() => getAllUsers()}
+            name={selectedFilter?.option?.fieldName}
+            onChange={criteriaHandler}
+            onBlur={() => getAllUsers()}
           />
         </MDBCol>
       </MDBRow>
@@ -195,7 +205,12 @@ export const UsersListCard = () => {
                     )}
                   </td>
                   <td>
-                    <p className="detailTicketButton">Ver</p>
+                    <p
+                      className="detailTicketButton"
+                      onClick={() => handleOpenModalDetail(user)}
+                    >
+                      Ver
+                    </p>
                   </td>
                 </tr>
               ))
@@ -205,7 +220,15 @@ export const UsersListCard = () => {
       <MDBModal show={showModal} onHide={() => setShowModal(false)}>
         <MDBModalBody className="modalTicketDesign d-flex justify-content-center alig-items-center ">
           <div className="registerAdminContainer m-0 p-0 d-flex justify-content-center align-items-center flex-column">
-            {<RegisterCardAdmin onClose={handleCloseModal} user={newUserRole} />}
+            {activeComponentView == 1 && (
+              <RegisterCardAdmin
+                onClose={handleCloseModal}
+                user={newUserRole}
+              />
+            )}
+            {activeComponentView == 2 && (
+              <UserDetailCard onClose={handleCloseModal} user={userSelected} />
+            )}
           </div>
         </MDBModalBody>
       </MDBModal>{" "}

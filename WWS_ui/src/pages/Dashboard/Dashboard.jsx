@@ -158,7 +158,8 @@ export const Dashboard = () => {
                   onClick={() => dinamicRenderHandler(7)}
                 >
                   All themes
-                </div>              </>
+                </div>{" "}
+              </>
             )}
           </div>
         </Col>
@@ -183,17 +184,22 @@ export const Dashboard = () => {
                           <div className="w-100 dropdownContainer">
                             <div className="categoryList d-flex flex-column justify-content-center align-items-center pt-2">
                               {Object.values(theme?.Categories).map(
-                                (category, index) => (
-                                  <div
-                                    key={index}
-                                    className="categoryLabelDesign"
-                                    onClick={() =>
-                                      loadForm(category, theme.theme_name)
-                                    }
-                                  >
-                                    {category.category_name}
-                                  </div>
-                                )
+                                (category, index) => {
+                                  if (category.category_status !== "Inactive") {
+                                    return (
+                                      <div
+                                        key={index}
+                                        className="categoryLabelDesign"
+                                        onClick={() =>
+                                          loadForm(category, theme.theme_name)
+                                        }
+                                      >
+                                        {category.category_name}
+                                      </div>
+                                    );
+                                  }
+                                  return null;
+                                }
                               )}
                             </div>
                           </div>
@@ -206,7 +212,7 @@ export const Dashboard = () => {
               {activeComponentView === 3 && (
                 <TicketFormcard category={categoryTicket} theme={themeTicket} />
               )}
-              {activeComponentView === 1 && <TicketListCard/>}
+              {activeComponentView === 1 && <TicketListCard />}
             </Row>
           </Col>
         )}
