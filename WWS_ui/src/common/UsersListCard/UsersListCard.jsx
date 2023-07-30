@@ -23,6 +23,8 @@ export const UsersListCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
   const [usersData, setUsersData] = useState([]);
+    const [criteria, setCriteria] = useState(null);
+
   const [showModal, setShowModal] = useState(false);
   const [newUserRole, setNewUserRole] = useState("")
   const [filterOptions, setFilterOptions] = useState([
@@ -33,25 +35,41 @@ export const UsersListCard = () => {
     {
       name: "Por nombre  ",
       value: "string",
+      fieldName: "name"
     },
     {
       name: "Por mail  ",
       value: "mail",
+      fieldName: "email"
     },
     {
       name: "Por role  ",
-      value: "name",
+      value: "string",
+      fieldName: "role_id"
+
     },
     {
       name: "Por estado  ",
       value: "string",
+      fieldName: "user_status"
+
     },
   ]);
   const [selectedFilter, setSelectedFilter] = useState(null);
   console.log(selectedFilter);
 
+  const criteriaHandler = (e) => {
+    const { value } = e.target;
+    const selectedFieldName = selectedFilter?.option?.fieldName;
+    const criteriaURLdesign = `${selectedFieldName}=${value}`;
+  
+    setCriteria(criteriaURLdesign);
+    console.log("esto es criteria---------");
+    console.log(criteriaURLdesign);
+    console.log(selectedFieldName);
+  };
   const getAllUsers = () => {
-    getAllUsersByAdmin(credentialCheck)
+    getAllUsersByAdmin(credentialCheck, criteria)
       .then((resultado) => {
         if (resultado.data.message == "Token invalido") {
           navigate("/");
@@ -65,11 +83,6 @@ export const UsersListCard = () => {
       .catch((error) => console.log(error));
   };
 
-  //   const takeTicketData = (ticket) => {
-  //     setSelectedTicket(ticket);
-  //     console.log(ticket);
-  //     setShowModal(true);
-  //   };
   const handleCloseModal = () => {
     setShowModal(false);
   };
@@ -87,7 +100,7 @@ export const UsersListCard = () => {
 
   useEffect(() => {
     getAllUsers();
-  }, [credentialsRdx]);
+  }, [credentialsRdx, criteria]);
 
   return (
     <div className="ticketListCardContainer ticketListDesign d-flex justify-content-center align-items-center flex-column p-0">
@@ -141,6 +154,9 @@ export const UsersListCard = () => {
           <input
             className="inputSearchOptions h-100 w-100"
             type={selectedFilter?.option?.value}
+                          name={selectedFilter?.option?.fieldName}
+              onChange={criteriaHandler}
+              onBlur={() => getAllUsers()}
           />
         </MDBCol>
       </MDBRow>
@@ -165,7 +181,7 @@ export const UsersListCard = () => {
                     <p className="fw-normal mb-1">{user?.email}</p>
                   </td>
                   <td>
-                    <p className="fw-normal mb-1">{user?.Role.role_name}</p>
+                    <p className="fw-normal mb-1">{user?.Role?.role_name}</p>
                   </td>
                   <td>
                     {user?.user_status === "Active" ? (
@@ -183,7 +199,7 @@ export const UsersListCard = () => {
                   </td>
                 </tr>
               ))
-            : "CARGANDO"}
+            : "No hay datos"}
         </MDBTableBody>
       </MDBTable>
       <MDBModal show={showModal} onHide={() => setShowModal(false)}>

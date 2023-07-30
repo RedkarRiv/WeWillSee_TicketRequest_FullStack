@@ -95,7 +95,7 @@ export const TicketListCard = () => {
           .catch((error) => console.log(error));
         break;
       case 3:
-        getAllTicketsByAdmin(credentialCheck)
+        getAllTicketsByAdmin(credentialCheck, criteria)
           .then((resultado) => {
             if (resultado.data.message == "Token invalido") {
               navigate("/");
@@ -174,6 +174,33 @@ export const TicketListCard = () => {
       fieldName: "createdAt",
     },
   ]);
+  const [filterOptionsAdmin, setFilterOptionsAdmin] = useState([
+    {
+      name: "Elegir filtro  ",
+      value: "string",
+      fieldName: "",
+    },
+    {
+      name: "Por titulo  ",
+      value: "string",
+      fieldName: "ticket_title",
+    },
+    {
+      name: "Por SAT id  ",
+      value: "string",
+      fieldName: "SAT_assigned",
+    },
+    {
+      name: "Por estado  ",
+      value: "string",
+      fieldName: "ticket_status",
+    },
+    {
+      name: "Por fecha  ",
+      value: "date",
+      fieldName: "createdAt",
+    },
+  ]);
   const [selectedFilter, setSelectedFilter] = useState(null);
   console.log(ticketsData);
   return (
@@ -193,19 +220,33 @@ export const TicketListCard = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                {filterOptions.map((option, index) => (
-                  <Dropdown.Item key={index}>
-                    <div
-                      key={option.name}
-                      className="option"
-                      onClick={() => {
-                        setSelectedFilter({ option });
-                      }}
-                    >
-                      {option.name}
-                    </div>
-                  </Dropdown.Item>
-                ))}
+                {roleCheck !== 3
+                  ? filterOptions.map((option, index) => (
+                      <Dropdown.Item key={index}>
+                        <div
+                          key={option.name}
+                          className="option"
+                          onClick={() => {
+                            setSelectedFilter({ option });
+                          }}
+                        >
+                          {option.name}
+                        </div>
+                      </Dropdown.Item>
+                    ))
+                  : filterOptionsAdmin.map((option, index) => (
+                      <Dropdown.Item key={index}>
+                        <div
+                          key={option.name}
+                          className="option"
+                          onClick={() => {
+                            setSelectedFilter({ option });
+                          }}
+                        >
+                          {option.name}
+                        </div>
+                      </Dropdown.Item>
+                    ))}
               </Dropdown.Menu>
             </Dropdown>
           </div>
@@ -246,6 +287,7 @@ export const TicketListCard = () => {
           <tr>
             <th scope="col">Fecha</th>
             <th scope="col">SAT</th>
+            {roleCheck === 3 && <th scope="col">SAT id</th>}
             <th scope="col">Titulo</th>
             <th scope="col">Estado</th>
             <th scope="col">Acciones</th>
@@ -263,6 +305,11 @@ export const TicketListCard = () => {
                 <td>
                   <p className="fw-normal mb-1">{ticket?.SAT?.User?.name}</p>
                 </td>
+                {roleCheck === 3 && (
+                  <td>
+                    <p className="fw-normal mb-1">{ticket?.SAT?.id}</p>
+                  </td>
+                )}
                 <td>
                   <p className="fw-normal mb-1">{ticket?.ticket_title}</p>
                 </td>

@@ -150,10 +150,14 @@ export const Dashboard = () => {
                   className="buttonDesign"
                   onClick={() => dinamicRenderHandler(6)}
                 >
-                  All Data
+                  All tickets
                 </div>
-                <div className="buttonDesign">New Data</div>
-              </>
+                <div
+                  className="buttonDesign"
+                  onClick={() => dinamicRenderHandler(6)}
+                >
+                  All themes
+                </div>              </>
             )}
           </div>
         </Col>
