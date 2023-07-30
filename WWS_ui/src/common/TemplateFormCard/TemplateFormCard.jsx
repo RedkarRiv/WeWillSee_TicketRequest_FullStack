@@ -111,10 +111,4 @@ export const TemplateFormCard = () => {
     </MDBRow>
   );
 };
-{
-  /* <MDBRow>
-                  <MDBCol md="12" className="errorMessageDesign">
-                    {errorMessage}
-                  </MDBCol>
-                </MDBRow> */
-}
+

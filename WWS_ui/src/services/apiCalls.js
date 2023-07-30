@@ -156,3 +156,12 @@ export const getAllTemplates = async (credentialCheck) => {
       },
     });
   };
+
+
+    export const reassignTicket = async (credentialCheck, data) => {
+    return await axios.put(`${root}user/tickets/reassign`, data, {
+      headers: {
+        authorization: "Bearer " + credentialCheck,
+      },
+    });
+  };

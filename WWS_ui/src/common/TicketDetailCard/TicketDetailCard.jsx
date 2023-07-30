@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { MDBCard, MDBCardBody, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import "./TicketDetailCard.css";
 import { useSelector } from "react-redux";
@@ -11,9 +11,11 @@ import {
   getAllTemplates,
   inactivateTicket,
   newTicketComment,
+  reassignTicket,
 } from "../../services/apiCalls";
 import { TemplateCard } from "../TemplateCard/TemplateCard";
-
+import { useNavigate } from "react-router-dom";
+import { MessageContext } from "../../services/messageContext";
 export const TicketDetailCard = ({ ticket, onClose }) => {
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
@@ -24,6 +26,10 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
     message: "",
   });
   const [templateData, setTemplateData] = useState([]);
+  const navigate = useNavigate();
+  const { setMessage } = useContext(MessageContext);
+
+ 
   const InputHandler = (e) => {
     setNewComment(e.target.value);
     setMessageData(() => ({
@@ -56,6 +62,8 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
     inactivateTicket(credentialCheck, ticket.id)
       .then((resultado) => {
         console.log(resultado);
+        setMessage("EL TICKET HA SIDO ANULADO");
+        navigate("/m")
       })
       .catch((error) => {
         console.log(error);
@@ -65,7 +73,6 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
   const takeTemplates = () => {
     if (templateData.length === 0) {
       bringAllTemplates();
-      console.log("Holaaaaaaaaaaaaaa");
     } else {
       setTemplateData([]);
     }
@@ -74,16 +81,35 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
     activateTicket(credentialCheck, ticket.id)
       .then((resultado) => {
         console.log(resultado);
+        setMessage("EL TICKET HA SIDO ACTIVADO");
+        navigate("/m")
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+const reassignHandler = () => {
+  const reassignData = { id: ticket.id }
+  reassignTicket(credentialCheck, reassignData)
+  .then((resultado) => {
+    console.log(resultado);
+    setMessage("EL TICKET HA SIDO REASIGNADO");
+    navigate("/m")
+  })
+  .catch((error) => {
+    console.log(error);
+    console.log(ticket.id);
+
+  });
+}
+
   const closeTicketHandler = () => {
     closeTicket(credentialCheck, ticket.id)
       .then((resultado) => {
         console.log(resultado);
+        setMessage("EL TICKET HA SIDO CERRADO");
+        navigate("/m")
       })
       .catch((error) => {
         console.log(error);
@@ -94,6 +120,8 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
     newTicketComment(credentialCheck, messageData)
       .then((resultado) => {
         console.log(resultado);
+        setMessage("NUEVO COMENTARIO CREADO CORRECTAMENTE");
+        navigate("/m")
       })
       .catch((error) => {
         console.log(error);
@@ -254,28 +282,37 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                         Anular
                       </div>
                     </>
-                  ) : (
+                  ) : ticket?.ticket_status === 3 ? (
                     <div
                       className="buttonActiveTicket mx-2"
                       onClick={() => activateTicketHandler()}
                     >
                       Activar
                     </div>
-                  )}
+                  ): null}
                   {roleCheck === 2 ? (
                     <>
-                      <div
-                        className="buttonCloseTicket mx-2"
-                        onClick={() => closeTicketHandler()}
-                      >
-                        Cerrar
-                      </div>
+                    {ticket?.ticket_status !== 2
+                    &&           <div
+                    className="buttonCloseTicket mx-2"
+                    onClick={() => closeTicketHandler()}
+                  >
+                    Cerrar
+                  </div>
+                    }
+            
                       <div
                         className="buttonActiveTicket mx-2"
-                        onClick={() => ticketMeHandler()}
+                        onClick={() => reassignHandler()}
                       >
                         Reasignar
                       </div>
+                      <div
+                      className="buttonActiveTicket mx-2"
+                      onClick={() => activateTicketHandler()}
+                    >
+                      Activar
+                    </div>
                     </>
                   ) : null}
                 </MDBRow>

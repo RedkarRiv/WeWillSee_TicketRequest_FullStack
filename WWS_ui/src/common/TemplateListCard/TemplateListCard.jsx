@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 
 import {
@@ -18,6 +18,8 @@ import { getAllTemplates } from "../../services/apiCalls";
 import { userDataCheck } from "../../pages/userSlice";
 import { TicketFormcard } from "../TicketFormCard/TicketFormCard";
 import { TemplateFormCard } from "../TemplateFormCard/TemplateFormCard";
+import { useNavigate } from "react-router-dom";
+import { MessageContext } from "../../services/messageContext";
 
 export const TemplateListCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
