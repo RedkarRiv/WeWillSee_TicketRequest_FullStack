@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MDBCard, MDBCardBody, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import "./TicketDetailCard.css";
 import { useSelector } from "react-redux";
@@ -65,11 +65,11 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
   const takeTemplates = () => {
     if (templateData.length === 0) {
       bringAllTemplates();
-      console.log("Holaaaaaaaaaaaaaa")
+      console.log("Holaaaaaaaaaaaaaa");
     } else {
-      setTemplateData([])
+      setTemplateData([]);
     }
-  }
+  };
   const activateTicketHandler = () => {
     activateTicket(credentialCheck, ticket.id)
       .then((resultado) => {
@@ -128,7 +128,6 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                     </MDBRow>
                   </MDBCol>
                 </MDBRow>
-
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
                     <MDBRow className="inputTicketDetail d-flex m-0">
@@ -140,7 +139,6 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                     </MDBRow>
                   </MDBCol>
                 </MDBRow>
-
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
                     <MDBRow className="inputTicketDetail d-flex m-0">
@@ -152,7 +150,6 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                     </MDBRow>
                   </MDBCol>
                 </MDBRow>
-
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
                     <MDBRow className="inputTicketDetail d-flex m-0">
@@ -166,7 +163,6 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                     </MDBRow>
                   </MDBCol>
                 </MDBRow>
-
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
                     <MDBRow className="inputTicketDetail d-flex m-0">
@@ -180,7 +176,6 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                     </MDBRow>
                   </MDBCol>
                 </MDBRow>
-
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
                     <div className="inputTicketDetail commentTitleTicketDetail">
@@ -218,24 +213,31 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                     </MDBCol>
                   </MDBRow>
                 ) : null}
-
                 {roleCheck === 2 && (
                   <MDBRow>
                     <MDBCol md="12" className="mt-3">
-                      <div className="inputTicketDetail dropdownTemplatesDesign"
-                      onClick={()=>takeTemplates()}>TEMPLATES ▼</div>
+                      <div
+                        className="inputTicketDetail dropdownTemplatesDesign"
+                        onClick={() => takeTemplates()}
+                      >
+                        TEMPLATES ▼
+                      </div>
                     </MDBCol>
-                    {templateData.length > 0 && templateData.map((template, index) => (
-                      <MDBCol md="12" className="mt-0 templateList" key={index}>
-                        <TemplateCard
-                          title={template.template_title}
-                          description={template.template_description}
-                        />{" "}
-                      </MDBCol>
-                    ))}
-                  </MDBRow> 
+                    {templateData.length > 0 &&
+                      templateData.map((template, index) => (
+                        <MDBCol
+                          md="12"
+                          className="mt-0 templateList"
+                          key={index}
+                        >
+                          <TemplateCard
+                            title={template.template_title}
+                            description={template.template_description}
+                          />{" "}
+                        </MDBCol>
+                      ))}
+                  </MDBRow>
                 )}
-
                 <MDBRow className="d-flex justify-content-center mt-4">
                   {ticket?.ticket_status === 1 ? (
                     <>
@@ -260,7 +262,6 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                       Activar
                     </div>
                   )}
-
                   {roleCheck === 2 ? (
                     <>
                       <div
@@ -286,10 +287,3 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
     </MDBRow>
   );
 };
-{
-  /* <MDBRow>
-                  <MDBCol md="12" className="errorMessageDesign">
-                    {errorMessage}
-                  </MDBCol>
-                </MDBRow> */
-}

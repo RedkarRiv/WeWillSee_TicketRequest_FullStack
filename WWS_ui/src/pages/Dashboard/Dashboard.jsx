@@ -201,7 +201,7 @@ export const Dashboard = () => {
               {activeComponentView === 3 && (
                 <TicketFormcard category={categoryTicket} theme={themeTicket} />
               )}
-              {activeComponentView === 1 && <TicketListCard />}
+              {activeComponentView === 1 && <TicketListCard/>}
             </Row>
           </Col>
         )}

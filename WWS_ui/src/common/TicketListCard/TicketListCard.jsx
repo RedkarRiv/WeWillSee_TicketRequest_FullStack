@@ -26,10 +26,11 @@ import { TicketDetailCard } from "../TicketDetailCard/TicketDetailCard";
 export const TicketListCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
+  const roleCheck = credentialsRdx.credentials.user.roleId;
+
   const [ticketsData, setTicketsData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState(null);
-  const roleCheck = credentialsRdx.credentials.user.roleId;
   const [currentPage, setCurrentPage] = useState(1);
   const [criteria, setCriteria] = useState(null);
   const [pageNumbers, setPageNumbers] = useState([]);

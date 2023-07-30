@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { MDBCard, MDBCardBody, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import "./TicketFormCard.css";
 import { InputLabel } from "../InputLabel/InputLabel";
@@ -7,8 +7,13 @@ import { userDataCheck } from "../../pages/userSlice";
 import { CheckError } from "../../services/useful";
 import { ticketMe } from "../../services/apiCalls";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
+import { useNavigate } from "react-router-dom";
+import { MessageContext } from "../../services/messageContext";
 
-export const TicketFormcard = ({ category, theme }) => {
+export const TicketFormcard = ({ category, theme}) => {
+  const navigate = useNavigate();
+  const { setMessage } = useContext(MessageContext);
+
   const [faqItems, setFaqItems] = useState([
     {
       question: "Esto es una pregunta del FAQ1",
@@ -58,6 +63,7 @@ export const TicketFormcard = ({ category, theme }) => {
 
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
+  const roleCheck = credentialsRdx.credentials.user.roleId;
 
   const [newTicket, setNewTicket] = useState({
     title: "",
@@ -76,6 +82,8 @@ export const TicketFormcard = ({ category, theme }) => {
     ticketMe(credentialCheck, newTicket)
       .then((resultado) => {
         console.log(resultado);
+        setMessage("Este es el mensaje que quiero pasar");
+        navigate("/m")
       })
       .catch((error) => {
         console.log(error);
@@ -170,6 +178,7 @@ export const TicketFormcard = ({ category, theme }) => {
                   <div
                     className="buttonSendTicket"
                     onClick={() => ticketMeHandler()}
+                    
                   >
                     Enviar ticket
                   </div>

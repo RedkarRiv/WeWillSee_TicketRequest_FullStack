@@ -86,13 +86,7 @@ export const UsersListCard = () => {
           className="buttonSendTicket mx-2"
           onClick={() => ticketMeHandler()}
         >
-          Nuevo{" "}
-        </div>
-        <div
-          className="buttonSendTicket mx-2"
-          onClick={() => ticketMeHandler()}
-        >
-          Cargar XLS{" "}
+          Nuevo usuario{" "}
         </div>
       </MDBRow>
       <MDBRow className="d-flex justify-content-center searchContainerDesign my-3 p-0">
