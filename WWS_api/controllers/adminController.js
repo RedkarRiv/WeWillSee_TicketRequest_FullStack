@@ -7,12 +7,62 @@ const {
   FAQ,
   Category,
   Message,
+  TicketStatus,
   sequelize,
 } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { Op } = require("sequelize");
 
 const adminController = {};
+
+adminController.userRegister = async (req, res) => {
+  try {
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+    const checkEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{4,}$/;
+
+    if (!checkEmail.test(req.body.email)) {
+      return res.status(400).json({
+        success: false,
+        message: "El correo no tiene un formato valido",
+      });
+    }
+
+    if (!regex.test(password)) {
+      return res.json({
+        success: true,
+        message:
+          "La contraseña debe tener una mayuscula, una minuscula y un número. Su longitud nunca puede ser inferior a 4.",
+      });
+    }
+
+    const newPassword = bcrypt.hashSync(password, 8);
+    const newUser = await User.create({
+      name: name,
+      email: email,
+      password: newPassword,
+      password_validation: true,
+      role_id: 1,
+      user_status: "Active",
+    });
+    return res.status(200).json({
+      success: true,
+      message: "La cuenta se ha creado con exito",
+      data: {
+        newUserDATA: newUser,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "No ha sido posible crear la cuenta",
+      error: error.message,
+    });
+  }
+};
 
 adminController.SATregister = async (req, res) => {
   try {
@@ -21,8 +71,6 @@ adminController.SATregister = async (req, res) => {
     const password = req.body.password;
     const checkEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{4,}$/;
-
-    console.log();
 
     if (!checkEmail.test(req.body.email)) {
       return res.status(400).json({
@@ -48,8 +96,12 @@ adminController.SATregister = async (req, res) => {
       role_id: 2,
       user_status: "Active",
     });
+
     const newSAT = await SAT.create({
       user_id: newUser.id,
+      sat_status: "Active",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     });
 
     const role = await Role.findByPk(newUser.role_id);
@@ -64,7 +116,7 @@ adminController.SATregister = async (req, res) => {
       },
     });
   } catch (error) {
-    return res.status(404).json({
+    return res.status(500).json({
       success: false,
       message: "No ha sido posible crear la cuenta",
       error: error.message,
@@ -220,10 +272,22 @@ adminController.getAllUsers = async (req, res) => {
           [Op.like]: `%${query.role_id}%`,
         };
       }
-
+      if (query.user_status) {
+        filters.user_status = {
+          [Op.like]: `%${query.user_status}%`,
+        };
+      }
       const filteredUsers = await User.findAll({
+        
         attributes: { exclude: ["password"] },
-        where: filters,
+        where: {
+          ...filters,
+        },
+        include: [
+          {
+            attributes: { exclude: ["id"] },
+            model: Role,
+          },]
       });
       if (filteredUsers.length === 0) {
         return res.json({
@@ -288,52 +352,141 @@ adminController.getAllSAT = async (req, res) => {
 
 adminController.getAllTickets = async (req, res) => {
   try {
-    const allTickets = await Ticket.findAll({
-      include: [
-        {
-          model: User,
+    const filters = {};
+    const query = req.query;
+
+    if (Object.keys(query).length > 0) {
+      if (query.SAT_assigned) {
+        filters.SAT_assigned = {
+          [Op.like]: `%${query.SAT_assigned}%`,
+        };
+      }
+
+      if (query.ticket_status) {
+        filters.ticket_status = {
+          [Op.like]: `%${query.ticket_status}%`,
+        };
+      }
+      if (query.ticket_title) {
+        filters.ticket_title = {
+          [Op.like]: `%${query.ticket_title}%`,
+        };
+      }
+      if (query.createdAt) {
+        const startDate = moment(query.createdAt)
+          .startOf("day")
+          .format("YYYY-MM-DD HH:mm:ss");
+        const endDate = moment(query.createdAt)
+          .endOf("day")
+          .format("YYYY-MM-DD HH:mm:ss");
+
+        filters.createdAt = {
+          [Op.gte]: startDate,
+          [Op.lt]: endDate,
+        };
+      }
+
+      const allTickets = await Ticket.findAll({
+        attributes: { exclude: ["password"] },
+        where: {
+          ...filters,
         },
 
-        {
-          model: SAT,
-          include: [
-            {
-              model: User,
-            },
-          ],
-        },
-        {
-          model: Category,
-          include: [
-            {
-              model: Theme,
-            },
-            {
-              model: FAQ,
-            },
-          ],
-        },
-        {
-          model: Message,
-          include: [
-            {
-              model: User,
-              include: [
-                {
-                  model: Role,
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    });
+        include: [
+          {
+            model: User,
+          },
 
-    return res.json({
-      success: true,
-      message: "Todos los tickets recuperados",
-      data: allTickets,
-    });
+          {
+            model: SAT,
+            include: [
+              {
+                model: User,
+              },
+            ],
+          },
+          {
+            model: Category,
+            include: [
+              {
+                model: Theme,
+              },
+              {
+                model: FAQ,
+              },
+            ],
+          },
+          {
+            model: Message,
+            include: [
+              {
+                model: User,
+                include: [
+                  {
+                    model: Role,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      });
+
+      return res.json({
+        success: true,
+        message: "Todos los tickets recuperados",
+        data: allTickets,
+      });
+    } else {
+      const allTickets = await Ticket.findAll({
+        include: [
+          {
+            model: User,
+          },
+          {
+            model: TicketStatus,
+          },
+          {
+            model: SAT,
+            include: [
+              {
+                model: User,
+              },
+            ],
+          },
+          {
+            model: Category,
+            include: [
+              {
+                model: Theme,
+              },
+              {
+                model: FAQ,
+              },
+            ],
+          },
+          {
+            model: Message,
+            include: [
+              {
+                model: User,
+                include: [
+                  {
+                    model: Role,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      });
+
+      return res.json({
+        success: true,
+        message: "Todos los tickets recuperados",
+        data: allTickets,
+      });
+    }
   } catch (error) {
     return res.status(500).json({
       success: false,

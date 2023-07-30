@@ -267,7 +267,8 @@ userController.getAllTicketsByUser = async (req, res) => {
     const filters = {};
     const query = req.query;
 
-    if (Object.keys(query).length > 0) {
+    if (Object.keys(query).length > 0) 
+    {
       if (query.SAT_assigned) {
         filters.SAT_assigned = {
           [Op.like]: `%${query.SAT_assigned}%`,

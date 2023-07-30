@@ -21,5 +21,6 @@ router.post('/new_category', auth, isAdmin,  adminController.newCategory);
 router.post('/new_faq', auth, isAdmin,  adminController.newFAQ);
 router.post('/newSAT', auth, isAdmin,  adminController.SATregister);
 router.delete('/deleteSAT/:id', auth, isAdmin,  adminController.SATdelete);
+router.post('/newUser', auth, isAdmin,  adminController.userRegister);
 
 module.exports = router;
