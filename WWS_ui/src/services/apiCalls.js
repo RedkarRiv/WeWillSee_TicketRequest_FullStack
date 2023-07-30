@@ -150,6 +150,18 @@ export const activateTicket = async (credentialCheck, id) => {
   );
 };
 
+export const getOneCategory = async (credentialCheck, id) => {
+  return await axios.put(
+    `${root}user/category/${id}`,
+    {},
+    {
+      headers: {
+        authorization: "Bearer " + credentialCheck,
+      },
+    }
+  );
+};
+
 export const closeTicket = async (credentialCheck, id) => {
   return await axios.put(
     `${root}user/close/ticket/${id}`,

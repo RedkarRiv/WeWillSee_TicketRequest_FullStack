@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { MDBCard, MDBCardBody, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import "./TicketFormCard.css";
 import { InputLabel } from "../InputLabel/InputLabel";
 import { useSelector } from "react-redux";
 import { userDataCheck } from "../../pages/userSlice";
 import { CheckError } from "../../services/useful";
-import { ticketMe } from "../../services/apiCalls";
+import { ticketMe, getOneCategory } from "../../services/apiCalls";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { useNavigate } from "react-router-dom";
 import { MessageContext } from "../../services/messageContext";
@@ -13,6 +13,8 @@ import { MessageContext } from "../../services/messageContext";
 export const TicketFormcard = ({ category, theme}) => {
   const navigate = useNavigate();
   const { setMessage } = useContext(MessageContext);
+console.log(category.id)
+console.log(theme)
 
   const [faqItems, setFaqItems] = useState([
     {
@@ -21,21 +23,31 @@ export const TicketFormcard = ({ category, theme}) => {
         "Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del",
       isOpen: false,
     },
-    {
-      question: "Esto es una pregunta del FAQ2",
-      answer:
-        "Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del",
-      isOpen: false,
-    },
-
-    {
-      question: "Esto es una pregunta del FAQ3",
-      answer:
-        "Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del",
-      isOpen: false,
-    },
   ]);
 
+
+
+const getCategoryDataHandler = () => {
+  getOneCategory(credentialCheck, category.id)
+  .then((resultado) => {
+    console.log(resultado.data.data[0]);
+    console.log(resultado.data.data[0].FAQs);
+    const FAQData = resultado.data.data[0].FAQs
+
+    const updateFAQData = FAQData.map((faq) => ({
+      question: faq.question,
+      answer: faq.answer,
+      isOpen: false,
+    }));
+    setFaqItems(updateFAQData)
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
+useEffect(() => {
+  getCategoryDataHandler();
+}, []);
   const toggleAnswer = (index) => {
     setFaqItems((prevFaqItems) => {
       const updatedFaqItems = prevFaqItems.map((faqItem, i) => {
