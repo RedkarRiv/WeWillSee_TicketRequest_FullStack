@@ -151,7 +151,9 @@
     border-bottom-left-radius: 0;
     margin-bottom: 0.1em;
   }
-
+.dropdownTemplatesDesign {
+  background-color: rgb(8, 92, 172);
+}
 
   .cardDetailBackgroundDesign {
     background-color: transparent;

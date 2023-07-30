@@ -66,19 +66,10 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
     if (templateData.length === 0) {
       bringAllTemplates();
       console.log("Holaaaaaaaaaaaaaa")
-
     } else {
       setTemplateData([])
-
     }
-
-
   }
-
-
-
-
-
   const activateTicketHandler = () => {
     activateTicket(credentialCheck, ticket.id)
       .then((resultado) => {
@@ -231,8 +222,8 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                 {roleCheck === 2 && (
                   <MDBRow>
                     <MDBCol md="12" className="mt-3">
-                      <div className="inputTicketDetail"
-                      onClick={()=>takeTemplates()}>TEMPLATES</div>
+                      <div className="inputTicketDetail dropdownTemplatesDesign"
+                      onClick={()=>takeTemplates()}>TEMPLATES ▼</div>
                     </MDBCol>
                     {templateData.length > 0 && templateData.map((template, index) => (
                       <MDBCol md="12" className="mt-0 templateList" key={index}>

@@ -52,7 +52,10 @@ transform: scale(0.9);
 .searchOptionsDropdown {
   width: 100%;
   background-color: rgb(2, 125, 182);
-  border-radius: 0.3em;
+  border-top-left-radius: 0.3em;
+  border-bottom-left-radius: 0.3em;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
   color: white;
   padding-top: 0;
   padding-bottom: 0;
@@ -64,7 +67,8 @@ transform: scale(0.9);
 }
 .inputSearchOptions {
   width: 70%;
-  border-radius: 0.3em;
+  border-top-right-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
   border: 0.05em inset grey;
   padding-right: 1em;
   padding-left: 1em;
