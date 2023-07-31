@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Home.css";
 import { LoginCard } from "../../common/LoginCard/LoginCard";
 import { RegisterCard } from "../../common/RegisterCard/RegisterCard";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { userDataCheck } from "../../pages/userSlice";
 
 export const Home = () => {
