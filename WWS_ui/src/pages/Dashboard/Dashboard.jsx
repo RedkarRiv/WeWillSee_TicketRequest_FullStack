@@ -110,7 +110,7 @@ export const Dashboard = () => {
             </div>
             <div className="userTitle pt-md-2 mt-2">{userData.name}</div>
             <div className="logoutDesign" onClick={() => logOut()}>
-              Logout
+              Desconectar
             </div>
           </div>
           <div className="profileButtons d-flex flex-column justify-content-center align-items-center pt-md-3">
@@ -127,7 +127,7 @@ export const Dashboard = () => {
                     className="buttonDesign"
                     onClick={() => dinamicRenderHandler(2)}
                   >
-                    New ticket
+                    Nuevo ticket
                   </div>
                 )}
                 {roleCheck === 2 && (
@@ -135,7 +135,7 @@ export const Dashboard = () => {
                     className="buttonDesign"
                     onClick={() => dinamicRenderHandler(4)}
                   >
-                    Templates
+                    Plantillas
                   </div>
                 )}
               </>
@@ -145,19 +145,19 @@ export const Dashboard = () => {
                   className="buttonDesign"
                   onClick={() => dinamicRenderHandler(5)}
                 >
-                  All users
+                  Usuarios
                 </div>
                 <div
                   className="buttonDesign"
                   onClick={() => dinamicRenderHandler(6)}
                 >
-                  All tickets
+                  Tickets
                 </div>
                 <div
                   className="buttonDesign"
                   onClick={() => dinamicRenderHandler(7)}
                 >
-                  All themes
+                  Categorías
                 </div>{" "}
               </>
             )}

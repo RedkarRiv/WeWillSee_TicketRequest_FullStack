@@ -33,7 +33,7 @@ export const TemplateFormCard = () => {
   const templateMeHandler = () => {
     createNewTemplate(credentialCheck, newTemplate)
       .then((resultado) => {
-        setMessage("EL TEMPLATE HA SIDO CREADO");
+        setMessage("LA PLANTILLA HA SIDO CREADA");
         navigate("/m")
       })
       .catch((error) => {
@@ -45,7 +45,7 @@ export const TemplateFormCard = () => {
     <MDBRow className="templateFormCardContainer d-flex justify-content-center align-items-center p-0">
       <MDBCol>
         <MDBCard className="d-flex justify-content-center align-items-center cardBackgroundDesign">
-          <TitleSectionCard title="Nuevo template" />
+          <TitleSectionCard title="Nueva plantilla" />
 
           <MDBRow className="contentBoxSide">
           <MDBCol lg="12" className="p-0">
@@ -55,7 +55,7 @@ export const TemplateFormCard = () => {
                   <MDBCol md="12" className="mt-3">
                     <InputLabel
                       type="text"
-                      placeholder="Titulo del template"
+                      placeholder="Titulo de la plantilla"
                       name="template_title"
                       Length="50"
                       classDesign="inputFormDesign"
@@ -66,7 +66,7 @@ export const TemplateFormCard = () => {
                   <MDBCol md="12" className="mt-3">
                     <textarea
                       type="textarea"
-                      placeholder="Descripción del template"
+                      placeholder="Descripción de la plantilla"
                       name="template_description"
                       maxLength={500}
                       className="commentDesign"

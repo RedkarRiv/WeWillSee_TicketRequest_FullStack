@@ -236,7 +236,7 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                         className="inputTicketDetail dropdownTemplatesDesign"
                         onClick={() => takeTemplates()}
                       >
-                        TEMPLATES ▼
+                        PLANTILLAS ▼
                       </div>
                     </MDBCol>
                     {templateData.length > 0 &&

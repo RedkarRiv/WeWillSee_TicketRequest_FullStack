@@ -63,14 +63,14 @@ export const TemplateListCard = () => {
     <div className="templateListCardContainer text-center d-flex justify-content-center align-items-center flex-column p-0">
       {activeComponentView === 1 && (
         <>
-          <TitleSectionCard title="Todos los templates" />
+          <TitleSectionCard title="Todas las plantillas" />
           <MDBRow>
             <div
               className="buttonSendTicket my-3 
         "
               onClick={() => dinamicRenderHandler(2)}
             >
-              New Template
+              Nueva plantilla
             </div>
           </MDBRow>
 
