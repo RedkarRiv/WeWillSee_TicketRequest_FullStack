@@ -7,7 +7,7 @@ const PORT = 7000;
 
 
 app.use(cors({
-    origin: 'https://we-will-see-ticket-request-full-stack.vercel.app/',
+    origin: 'https://we-will-see-ticket-request-full-stack.vercel.app',
 }));
 
 app.use(express.json());
