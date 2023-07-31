@@ -1,3 +1,11 @@
+.messageContainerDesign {
+        height: fit-content;
+        background-color: rgb(239, 239, 239);
+        border-radius: 0.5em;
+        padding: 1em;
+}
+
+
 .messageTextDesign{
     font-size: 200%;
     font-weight: bold;
@@ -8,4 +16,18 @@
 width: 30%;
 background-color: black;
 border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+    .messageTextDesign{
+        font-size: 100%;
+        font-weight: bold;
+    }
+    
+    
+    .logoMessageDesign {
+    width: 20%;
+    background-color: black;
+    border-radius: 50%;
+    }
 }
