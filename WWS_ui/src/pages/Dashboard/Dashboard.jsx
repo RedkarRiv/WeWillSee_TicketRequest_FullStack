@@ -205,7 +205,7 @@ export const Dashboard = () => {
                           </div>
                         </Col>
                       ))
-                    :         <img alt="loading gif" src={loadingImg} className="loadingDesign"></img>
+                    :         <img alt="loading gif" src={loadingImg} className="loadingDashboardDesign"></img>
 }
                 </Row>
               ) : null}

@@ -41,3 +41,8 @@
 .categoryNameDesign:hover {
     background-color: rgb(222, 221, 221);
 }
+
+.mapThemeContainer {
+    width: 100%;
+}
+

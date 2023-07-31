@@ -12,9 +12,7 @@ import {
 import "./ThemeListCard.css";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { useSelector } from "react-redux";
-import {
-  bringThemesByAdmin,
-} from "../../services/apiCalls";
+import { bringThemesByAdmin } from "../../services/apiCalls";
 import { userDataCheck } from "../../pages/userSlice";
 import { CategoryDetailCard } from "../CategoryDetailCard/CategoryDetailCard";
 import { CategoryFormCard } from "../CategoryFormCard/CategoryFormCard";
@@ -43,22 +41,19 @@ export const ThemeListCard = () => {
   };
 
   const takeCategoryData = (ticket) => {
-    setActiveComponentView(1)
+    setActiveComponentView(1);
     setSelectedCategory(ticket);
     setShowModal(true);
   };
 
-  const handleNewCategory = ()=> {
-    setActiveComponentView(2)
+  const handleNewCategory = () => {
+    setActiveComponentView(2);
     setShowModal(true);
-
-  }
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
-
-
 
   const handleExpandTheme = (themeId) => {
     setExpandedThemes((prevExpanded) => ({
@@ -75,14 +70,16 @@ export const ThemeListCard = () => {
     <div className="ticketListCardContainer ticketListDesign d-flex justify-content-center align-items-center flex-column p-0">
       <TitleSectionCard title="Todos las categorias" />
       <MDBRow className="d-flex justify-content-center mt-2">
-        <div className="buttonSendTicket mx-2"
-                            onClick={() => handleNewCategory()}
-
-        >Nueva categoria </div>
+        <div
+          className="buttonSendTicket mx-2"
+          onClick={() => handleNewCategory()}
+        >
+          Nueva categoria{" "}
+        </div>
       </MDBRow>
       <MDBRow className="cardThemesContainer w-100 d-flex flex-column my-3 p-0">
         <div className="mapThemeContainer my-4 d-flex flex-column justify-content-center align-items-center">
-          {themeData?.length > 0
+          {themeData?.length < 0
             ? themeData?.map((theme, index) => (
                 <MDBCol className="col-8 my-2" key={index}>
                   <div
@@ -109,8 +106,7 @@ export const ThemeListCard = () => {
                   </div>
                 </MDBCol>
               ))
-            :         <img alt="loading gif" src={loadingImg} className="loadingDesign"></img>
-          }
+            : "Cargando"}
         </div>
       </MDBRow>
       <MDBModal show={showModal} onHide={() => setShowModal(false)}>
@@ -127,19 +123,9 @@ export const ThemeListCard = () => {
           )}
           {activeComponentView == 2 && (
             <div className="registerAdminContainer m-0 p-0 d-flex justify-content-center align-items-center flex-column">
-              {
-                <CategoryFormCard
-                  onClose={handleCloseModal}
-                />
-              }
+              {<CategoryFormCard onClose={handleCloseModal} />}
             </div>
           )}
-
-
-
-
-
-
         </MDBModalBody>
       </MDBModal>{" "}
     </div>

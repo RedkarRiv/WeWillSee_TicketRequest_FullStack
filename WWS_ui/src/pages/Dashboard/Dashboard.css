@@ -86,7 +86,11 @@ border-radius: 0.5em;
   background-position: 100% 0; 
 }
 
-
+.loadingDashboardDesign{
+  width: 6em;
+  height: auto;
+}
+ 
 
 
 
