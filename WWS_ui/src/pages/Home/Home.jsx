@@ -3,9 +3,25 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./Home.css";
 import { LoginCard } from "../../common/LoginCard/LoginCard";
 import { RegisterCard } from "../../common/RegisterCard/RegisterCard";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userDataCheck } from "../../pages/userSlice";
 
 export const Home = () => {
   const [credentialsShow, setCredentialsSow] = useState(true);
+  const credentialsRdx = useSelector(userDataCheck);
+  const credentialCheck = credentialsRdx?.credentials?.token;
+  const navigate = useNavigate();
+
+const credentialsActive = () => {
+  if (credentialCheck) {
+    navigate("/dashboard")
+  }
+}
+useEffect(() => {
+  credentialsActive();
+}, []);
+
 
   const LoginCredentialsSlide = () => {
     return (

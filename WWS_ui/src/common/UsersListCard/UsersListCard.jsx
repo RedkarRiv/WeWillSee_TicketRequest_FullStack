@@ -151,6 +151,10 @@ export const UsersListCard = () => {
                 ))}
               </Dropdown.Menu>
             </Dropdown>
+
+            <div className="buttonSendDesign">
+              Reset
+            </div>
           </div>
         </MDBCol>
         <MDBCol className="col-7 d-flex justify-content-start p-0 m-0">
