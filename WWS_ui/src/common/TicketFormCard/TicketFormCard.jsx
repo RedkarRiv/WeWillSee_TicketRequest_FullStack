@@ -16,7 +16,7 @@ export const TicketFormcard = ({ category, theme}) => {
 
   const [faqItems, setFaqItems] = useState([
     {
-      question: "",
+      question: "....cargando",
       answer:"",
       isOpen: false,
     },
