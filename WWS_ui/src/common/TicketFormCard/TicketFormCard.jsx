@@ -16,9 +16,8 @@ export const TicketFormcard = ({ category, theme}) => {
 
   const [faqItems, setFaqItems] = useState([
     {
-      question: "Esto es una pregunta del FAQ1",
-      answer:
-        "Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del Esto es una respuesta del FAQ Esto es una respuesta del",
+      question: "",
+      answer:"",
       isOpen: false,
     },
   ]);
