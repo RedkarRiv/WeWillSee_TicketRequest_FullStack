@@ -29,14 +29,12 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
   const navigate = useNavigate();
   const { setMessage } = useContext(MessageContext);
 
- 
   const InputHandler = (e) => {
     setNewComment(e.target.value);
     setMessageData(() => ({
       ...messageData,
       message: e.target.value,
     }));
-
   };
   const bringAllTemplates = () => {
     getAllTemplates(credentialCheck)
@@ -59,7 +57,7 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
     inactivateTicket(credentialCheck, ticket.id)
       .then((resultado) => {
         setMessage("EL TICKET HA SIDO ANULADO");
-        navigate("/m")
+        navigate("/m");
       })
       .catch((error) => {
         console.log(error);
@@ -77,31 +75,30 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
     activateTicket(credentialCheck, ticket.id)
       .then((resultado) => {
         setMessage("EL TICKET HA SIDO ACTIVADO");
-        navigate("/m")
+        navigate("/m");
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-const reassignHandler = () => {
-  const reassignData = { id: ticket.id }
-  reassignTicket(credentialCheck, reassignData)
-  .then((resultado) => {
-    setMessage("EL TICKET HA SIDO REASIGNADO");
-    navigate("/m")
-  })
-  .catch((error) => {
-    console.log(error);
-
-  });
-}
+  const reassignHandler = () => {
+    const reassignData = { id: ticket.id };
+    reassignTicket(credentialCheck, reassignData)
+      .then((resultado) => {
+        setMessage("EL TICKET HA SIDO REASIGNADO");
+        navigate("/m");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const closeTicketHandler = () => {
     closeTicket(credentialCheck, ticket.id)
       .then((resultado) => {
         setMessage("EL TICKET HA SIDO CERRADO");
-        navigate("/m")
+        navigate("/m");
       })
       .catch((error) => {
         console.log(error);
@@ -112,7 +109,7 @@ const reassignHandler = () => {
     newTicketComment(credentialCheck, messageData)
       .then((resultado) => {
         setMessage("NUEVO COMENTARIO CREADO CORRECTAMENTE");
-        navigate("/m")
+        navigate("/m");
       })
       .catch((error) => {
         console.log(error);
@@ -280,18 +277,18 @@ const reassignHandler = () => {
                     >
                       Activar
                     </div>
-                  ): null}
+                  ) : null}
                   {roleCheck === 2 ? (
                     <>
-                    {ticket?.ticket_status !== 2
-                    &&           <div
-                    className="buttonCloseTicket mx-2"
-                    onClick={() => closeTicketHandler()}
-                  >
-                    Cerrar
-                  </div>
-                    }
-            
+                      {ticket?.ticket_status !== 2 && (
+                        <div
+                          className="buttonCloseTicket mx-2"
+                          onClick={() => closeTicketHandler()}
+                        >
+                          Cerrar
+                        </div>
+                      )}
+
                       <div
                         className="buttonActiveTicket mx-2"
                         onClick={() => reassignHandler()}
@@ -299,11 +296,11 @@ const reassignHandler = () => {
                         Reasignar
                       </div>
                       <div
-                      className="buttonActiveTicket mx-2"
-                      onClick={() => activateTicketHandler()}
-                    >
-                      Activar
-                    </div>
+                        className="buttonActiveTicket mx-2"
+                        onClick={() => activateTicketHandler()}
+                      >
+                        Activar
+                      </div>
                     </>
                   ) : null}
                 </MDBRow>

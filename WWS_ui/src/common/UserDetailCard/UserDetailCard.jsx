@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { MDBCard, MDBCardBody, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import "./UserDetailCard.css";
 import { useSelector } from "react-redux";
@@ -14,7 +14,6 @@ export const UserDetailCard = ({ onClose, user }) => {
   const navigate = useNavigate();
   const { setMessage } = useContext(MessageContext);
 
-
   const inactivateUserHandler = () => {
     inactivateUser(credentialCheck, user.id)
       .then((resultado) => {
@@ -22,8 +21,8 @@ export const UserDetailCard = ({ onClose, user }) => {
           navigate("/");
           return;
         } else {
-           setMessage("EL USUARIO HA SIDO DESACTIVADO");
-          navigate("/m")
+          setMessage("EL USUARIO HA SIDO DESACTIVADO");
+          navigate("/m");
         }
       })
       .catch((error) => console.log(error));
@@ -37,7 +36,7 @@ export const UserDetailCard = ({ onClose, user }) => {
           return;
         } else {
           setMessage("EL USUARIO HA SIDO ACTIVADO");
-          navigate("/m")
+          navigate("/m");
         }
       })
       .catch((error) => console.log(error));

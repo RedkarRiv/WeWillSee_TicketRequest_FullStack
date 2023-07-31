@@ -14,7 +14,6 @@ export const RegisterCard = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
   const credentialsRdx = useSelector(userDataCheck);
-  const credentialCheck = credentialsRdx?.credentials?.token;
   const [newCredentials, setNewCredentials] = useState({
     name: "",
     email: "",

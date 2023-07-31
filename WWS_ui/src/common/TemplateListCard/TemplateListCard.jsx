@@ -1,25 +1,13 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 
-import {
-  MDBBadge,
-  MDBTable,
-  MDBTableHead,
-  MDBTableBody,
-  MDBModal,
-  MDBModalBody,
-  MDBRow,
-  MDBCol,
-} from "mdb-react-ui-kit";
+import { MDBTable, MDBTableHead, MDBTableBody, MDBRow } from "mdb-react-ui-kit";
 import "./TemplateListCard.css";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { useSelector } from "react-redux";
 import { getAllTemplates } from "../../services/apiCalls";
 import { userDataCheck } from "../../pages/userSlice";
-import { TicketFormcard } from "../TicketFormCard/TicketFormCard";
 import { TemplateFormCard } from "../TemplateFormCard/TemplateFormCard";
-import { useNavigate } from "react-router-dom";
-import { MessageContext } from "../../services/messageContext";
 
 export const TemplateListCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -132,8 +120,7 @@ export const TemplateListCard = () => {
           </div>
         </>
       )}
-      {activeComponentView === 2 && <TemplateFormCard/>
-}
+      {activeComponentView === 2 && <TemplateFormCard />}
     </div>
   );
 };

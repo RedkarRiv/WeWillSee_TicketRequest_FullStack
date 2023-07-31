@@ -2,10 +2,8 @@ import React, { useState, useContext } from "react";
 import "./RegisterCardAdmin.css";
 import { InputLabel } from "../../common/InputLabel/InputLabel";
 import { CheckError } from "../../services/useful";
-import { loginMe, registNewSAT, registNewUser, registerMe } from "../../services/apiCalls";
-import jwt_decode from "jwt-decode";
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../pages/userSlice";
+import { registNewSAT, registNewUser } from "../../services/apiCalls";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userDataCheck } from "../../pages/userSlice";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
@@ -13,7 +11,6 @@ import { MDBCardBody, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import { MessageContext } from "../../services/messageContext";
 
 export const RegisterCardAdmin = ({ onClose, user }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { setMessage } = useContext(MessageContext);
 
@@ -74,7 +71,6 @@ export const RegisterCardAdmin = ({ onClose, user }) => {
         setErrorMessage(error.response.data.message);
       });
     }
-   
   };
 
   return (

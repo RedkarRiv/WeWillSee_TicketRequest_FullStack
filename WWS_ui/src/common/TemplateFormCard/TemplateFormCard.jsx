@@ -15,19 +15,6 @@ export const TemplateFormCard = () => {
   const navigate = useNavigate();
   const { setMessage } = useContext(MessageContext);
 
- 
-  const [credentialsError, setCredentialsError] = useState({
-    title: "",
-    description: "",
-  });
-  const InputCheck = (e) => {
-    let mensajeError = CheckError(e.target.name, e.target.value);
-
-    setCredentialsError((prevState) => ({
-      ...prevState,
-      [e.target.name + "Error"]: mensajeError,
-    }));
-  };
 
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
@@ -72,8 +59,6 @@ export const TemplateFormCard = () => {
                       name="template_title"
                       Length="50"
                       classDesign="inputFormDesign"
-                      functionHandler={(e) => InputHandler(e)}
-                      onBlurFunction={(e) => InputCheck(e)}
                     />
                   </MDBCol>
                 </MDBRow>
@@ -85,8 +70,6 @@ export const TemplateFormCard = () => {
                       name="template_description"
                       maxLength={500}
                       className="commentDesign"
-                      onChange={(e) => InputHandler(e)}
-                      onBlur={(e) => InputCheck(e)}
                     />
                   </MDBCol>
                 </MDBRow>

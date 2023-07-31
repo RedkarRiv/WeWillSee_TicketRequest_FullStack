@@ -10,36 +10,35 @@ import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { useNavigate } from "react-router-dom";
 import { MessageContext } from "../../services/messageContext";
 
-export const TicketFormcard = ({ category, theme}) => {
+export const TicketFormcard = ({ category, theme }) => {
   const navigate = useNavigate();
   const { setMessage } = useContext(MessageContext);
 
   const [faqItems, setFaqItems] = useState([
     {
       question: "....cargando",
-      answer:"",
+      answer: "",
       isOpen: false,
     },
   ]);
-const getCategoryDataHandler = () => {
-  getOneCategory(credentialCheck, category.id)
-  .then((resultado) => {
+  const getCategoryDataHandler = () => {
+    getOneCategory(credentialCheck, category.id)
+      .then((resultado) => {
+        const FAQData = resultado.data.data[0].FAQs;
 
-    const FAQData = resultado.data.data[0].FAQs
-
-    const updateFAQData = FAQData.map((faq) => ({
-      question: faq.question,
-      answer: faq.answer,
-    }));
-    setFaqItems(updateFAQData)
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-}
-useEffect(() => {
-  getCategoryDataHandler();
-}, []);
+        const updateFAQData = FAQData.map((faq) => ({
+          question: faq.question,
+          answer: faq.answer,
+        }));
+        setFaqItems(updateFAQData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    getCategoryDataHandler();
+  }, []);
   const toggleAnswer = (index) => {
     setFaqItems((prevFaqItems) => {
       const updatedFaqItems = prevFaqItems.map((faqItem, i) => {
@@ -66,7 +65,6 @@ useEffect(() => {
 
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
-  const roleCheck = credentialsRdx.credentials.user.roleId;
 
   const [newTicket, setNewTicket] = useState({
     title: "",
@@ -84,7 +82,7 @@ useEffect(() => {
     ticketMe(credentialCheck, newTicket)
       .then((resultado) => {
         setMessage("EL TICKET HA SIDO CREADO");
-        navigate("/m")
+        navigate("/m");
       })
       .catch((error) => {
         console.log(error);
@@ -98,7 +96,7 @@ useEffect(() => {
           <TitleSectionCard title="Nuevo ticket" />
 
           <MDBRow className="contentBoxSide">
-          <MDBCol lg="12" className="p-0">
+            <MDBCol lg="12" className="p-0">
               <MDBCardBody className="d-flex flex-column justify-content-center mt-2">
                 <MDBRow>
                   {faqItems.map((item, index) => (
@@ -133,9 +131,7 @@ useEffect(() => {
 
                 <MDBRow>
                   <MDBCol md="12" className="mt-4">
-                    <div className="inputBlocked">
-                      {theme.toUpperCase()}
-                    </div>
+                    <div className="inputBlocked">{theme.toUpperCase()}</div>
                   </MDBCol>
                 </MDBRow>
 
@@ -173,13 +169,11 @@ useEffect(() => {
                     />
                   </MDBCol>
                 </MDBRow>
-                
 
                 <MDBRow className="d-flex justify-content-center mt-4">
                   <div
                     className="buttonSendTicket"
                     onClick={() => ticketMeHandler()}
-                    
                   >
                     Enviar ticket
                   </div>

@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  MDBBadge,
-  MDBTable,
-  MDBTableHead,
-  MDBTableBody,
   MDBModal,
   MDBModalBody,
   MDBRow,
@@ -16,7 +12,6 @@ import { bringThemesByAdmin } from "../../services/apiCalls";
 import { userDataCheck } from "../../pages/userSlice";
 import { CategoryDetailCard } from "../CategoryDetailCard/CategoryDetailCard";
 import { CategoryFormCard } from "../CategoryFormCard/CategoryFormCard";
-import loadingImg from "../../img/loadingGif.webp";
 
 export const ThemeListCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
