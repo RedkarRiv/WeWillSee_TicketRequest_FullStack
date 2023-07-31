@@ -147,7 +147,7 @@ export const TicketFormcard = ({ category, theme }) => {
                   <MDBCol md="12" className="mt-3">
                     <InputLabel
                       type="text"
-                      placeholder="Titulo del ticket"
+                      placeholder="Título del ticket"
                       name="title"
                       Length="50"
                       classDesign="inputFormDesign"
