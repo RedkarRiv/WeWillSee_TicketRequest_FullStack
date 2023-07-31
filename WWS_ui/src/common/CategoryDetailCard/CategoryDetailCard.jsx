@@ -100,7 +100,7 @@ export const CategoryDetailCard = ({ category, onClose }) => {
                             <div>Respuesta: {faq?.answer}</div>
                           </div>
                         ))
-                      : null}
+                      : "No hay FAQs para esta categoría"}
                   </MDBCol>
                 </MDBRow>
                 <MDBRow className="d-flex justify-content-center mt-4">
