@@ -18,7 +18,7 @@ export const Message = () => {
   }, []);  
 
   return (
-    <Container fluid className="p-0 m-0 d-flex">
+    <Container fluid className="p-0 m-0 d-flex justify-content-center align-items-center">
       <Row className="dashboardBackground d-flex flex-md-row justify-content-center align-items-start px-1 m-0 pt-md-5">
         <Col className="messageContainerDesign col-md-8 col-sm-12 d-flex flex-column justify-content-center pt-md-4 pb-md-4">
           <div className="w-100 d-flex mb-md-5 justify-content-center">
