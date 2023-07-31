@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   MDBBadge,
   MDBTable,
@@ -23,6 +23,7 @@ export const UsersListCard = () => {
   const credentialCheck = credentialsRdx?.credentials?.token;
   const [usersData, setUsersData] = useState([]);
   const [activeComponentView, setActiveComponentView] = useState(1);
+  const inputRef = useRef(null);
 
   const [criteria, setCriteria] = useState(null);
   const [userSelected, setUserSelected] = useState({});
@@ -56,6 +57,12 @@ export const UsersListCard = () => {
     },
   ]);
   const [selectedFilter, setSelectedFilter] = useState(null);
+  const resetFiltersHandler = () => {
+    setCriteria(null);
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
+  };
 
   const criteriaHandler = (e) => {
     const { value } = e.target;
@@ -151,10 +158,6 @@ export const UsersListCard = () => {
                 ))}
               </Dropdown.Menu>
             </Dropdown>
-
-            <div className="buttonSendDesign">
-              Reset
-            </div>
           </div>
         </MDBCol>
         <MDBCol className="col-7 d-flex justify-content-start p-0 m-0">
@@ -164,7 +167,16 @@ export const UsersListCard = () => {
             name={selectedFilter?.option?.fieldName}
             onChange={criteriaHandler}
             onBlur={() => getAllUsers()}
+            ref={inputRef}
           />
+        </MDBCol>
+        <MDBCol className="col-2 col-xxl-1 p-1 d-flex justify-content-center align-items-center">
+          <div
+            className="deleteFiltersData d-flex justify-content-center"
+            onClick={() => resetFiltersHandler()}
+          >
+            Reset
+          </div>
         </MDBCol>
       </MDBRow>
       <MDBTable align="middle">

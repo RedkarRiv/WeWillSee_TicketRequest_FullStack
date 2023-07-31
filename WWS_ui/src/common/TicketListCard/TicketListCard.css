@@ -39,9 +39,8 @@
   color: white;
 }
 
-
 .closeButtonModal:active {
-transform: scale(0.9);
+  transform: scale(0.9);
 }
 .dropdown {
   padding-right: 2em;
@@ -73,7 +72,6 @@ transform: scale(0.9);
   padding-right: 1em;
   padding-left: 1em;
 }
-
 
 .dropdownSimbol {
   height: 100%;
@@ -116,21 +114,32 @@ transform: scale(0.9);
 }
 
 .buttonSendSearch:active {
-transform: scale(0.9);
+  transform: scale(0.9);
 }
 .searchContainerDesign {
-  width: 75%;
+  width: 90%;
 }
 
 .labelStatusDesign {
   font-size: 80%;
   border-radius: 0.3em;
-  background-color: rgb(246, 171, 117);
+  background-color: rgb(165, 198, 249);
   padding: 0.3em;
   padding-right: 0.5em;
   padding-left: 0.5em;
   font-weight: 600;
+  user-select: none;
+  cursor: pointer;
+}
 
+.labelStatusDesign:hover {
+  background-color: rgb(120, 151, 198);
+  color: white;
+}
+
+.labelStatusDesign.selected {
+  background-color: rgb(10, 74, 171);
+  color: white;
 }
 
 @media (max-width: 768px) {
@@ -148,4 +157,17 @@ transform: scale(0.9);
   .searchContainerDesign {
     width: 100%;
   }
+}
+
+.deleteFiltersData {
+  background-color: rgb(230, 122, 28);
+  color: white;
+  border-radius: 0.3em;
+  width: 80%;
+  user-select: none;
+  cursor: pointer;
+}
+
+.deleteFiltersData:active {
+  transform: scale(0.9);
 }

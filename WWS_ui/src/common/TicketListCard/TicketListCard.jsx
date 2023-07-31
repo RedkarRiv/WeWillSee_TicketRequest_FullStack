@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   MDBBadge,
   MDBTable,
@@ -28,7 +28,6 @@ export const TicketListCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
   const roleCheck = credentialsRdx.credentials.user.roleId;
-
   const [ticketsData, setTicketsData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState(null);
@@ -37,6 +36,7 @@ export const TicketListCard = () => {
   const [pageNumbers, setPageNumbers] = useState([]);
   const [ticketStatus, setTicketStatus] = useState([]);
   const itemsPerPage = 10;
+  const inputRef = useRef(null);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -190,16 +190,24 @@ export const TicketListCard = () => {
     },
   ]);
   const [selectedFilter, setSelectedFilter] = useState(null);
+
+  const resetFiltersHandler = () => {
+    setCriteria(null);
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
+  };
+
   return (
     <div className="ticketListCardContainer ticketListDesign d-flex justify-content-center align-items-center flex-column p-0">
       <TitleSectionCard title="Todos los tickets" />
       <MDBRow className="d-flex justify-content-center searchContainerDesign my-3 m-0 p-0">
-        <MDBCol className="col-3 p-0 m-0 d-flex justify-content-center items-align-center">
+        <MDBCol className="col-2 p-0 m-0 d-flex justify-content-center items-align-center">
           <div className="d-flex justify-content-end align-items-center p-0 m-0 dropdownContainer">
             <Dropdown className="p-0 h-100 w-100 ">
               <Dropdown.Toggle
                 id="dropdown-basic"
-                className="searchOptionsDropdown m-0 "
+                className="searchOptionsDropdown m-0 px-1"
               >
                 {!selectedFilter
                   ? "Elegir filtro"
@@ -240,25 +248,29 @@ export const TicketListCard = () => {
         </MDBCol>
 
         {selectedFilter?.option?.name !== "Por estado  " ? (
-          <MDBCol className="col-6 d-flex p-0 me-1 me-md-4">
+          <MDBCol className="col-6 d-flex p-0">
             <input
               className="inputSearchOptions h-100 w-100"
               name={selectedFilter?.option?.fieldName}
               type={selectedFilter?.option?.value}
               onChange={criteriaHandler}
               onBlur={() => getAllTickets()}
+              ref={inputRef}
             />
           </MDBCol>
         ) : (
-          <MDBCol className="col-8 d-flex p-0 me-1 me-md-4 d-flex justify-content-center align-items-center">
+          <MDBCol className="col-6 d-flex p-0 d-flex justify-content-around align-items-center">
             {ticketStatus?.map((status) => (
               <label
                 key={status.id}
-                className="d-flex justify-content-center align-items-center mx-2 labelStatusDesign"
+                className={`d-flex justify-content-center align-items-center mx-1 labelStatusDesign ${
+                  selectedStatus === status.id ? "selected" : ""
+                }`}
               >
                 <input
                   type="radio"
                   name="ticket_status"
+                  ref={inputRef}
                   value={status.id}
                   checked={selectedStatus === status.id}
                   onChange={() => handleStatusSelect(status.id)}
@@ -268,6 +280,14 @@ export const TicketListCard = () => {
             ))}
           </MDBCol>
         )}
+        <MDBCol className="col-2 col-xxl-1 p-1 d-flex justify-content-center align-items-center">
+          <div
+            className="deleteFiltersData d-flex justify-content-center"
+            onClick={() => resetFiltersHandler()}
+          >
+            Reset
+          </div>
+        </MDBCol>
       </MDBRow>
       <MDBTable align="middle">
         <MDBTableHead>
@@ -281,58 +301,50 @@ export const TicketListCard = () => {
           </tr>
         </MDBTableHead>
         <MDBTableBody>
-          {ticketsData ? (
-            ticketsData.length > 0 ? (
-              getCurrentPageItems().map((ticket, index) => (
-                <tr key={index}>
+          {ticketsData.length > 0 ? (
+            getCurrentPageItems().map((ticket, index) => (
+              <tr key={index}>
+                <td>
+                  <p className="fw-normal mb-1">
+                    {moment(ticket?.createdAt).format("YYYY-MM-DD")}{" "}
+                  </p>
+                </td>
+                <td>
+                  <p className="fw-normal mb-1">{ticket?.SAT?.User?.name}</p>
+                </td>
+                {roleCheck === 3 && (
                   <td>
-                    <p className="fw-normal mb-1">
-                      {moment(ticket?.createdAt).format("YYYY-MM-DD")}{" "}
-                    </p>
+                    <p className="fw-normal mb-1">{ticket?.SAT?.id}</p>
                   </td>
-                  <td>
-                    <p className="fw-normal mb-1">{ticket?.SAT?.User?.name}</p>
-                  </td>
-                  {roleCheck === 3 && (
-                    <td>
-                      <p className="fw-normal mb-1">{ticket?.SAT?.id}</p>
-                    </td>
+                )}
+                <td>
+                  <p className="fw-normal mb-1">{ticket?.ticket_title}</p>
+                </td>
+                <td>
+                  {ticket?.ticket_status === 1 ? (
+                    <MDBBadge color="success" pill>
+                      En proceso
+                    </MDBBadge>
+                  ) : ticket?.ticket_status === 3 ? (
+                    <MDBBadge color="danger" pill>
+                      Anulado{" "}
+                    </MDBBadge>
+                  ) : (
+                    <MDBBadge color="secondary" pill>
+                      Cerrado{" "}
+                    </MDBBadge>
                   )}
-                  <td>
-                    <p className="fw-normal mb-1">{ticket?.ticket_title}</p>
-                  </td>
-                  <td>
-                    {ticket?.ticket_status === 1 ? (
-                      <MDBBadge color="success" pill>
-                        En proceso
-                      </MDBBadge>
-                    ) : ticket?.ticket_status === 3 ? (
-                      <MDBBadge color="danger" pill>
-                        Anulado{" "}
-                      </MDBBadge>
-                    ) : (
-                      <MDBBadge color="secondary" pill>
-                        Cerrado{" "}
-                      </MDBBadge>
-                    )}
-                  </td>
-                  <td>
-                    <p
-                      className="detailTicketButton"
-                      onClick={() => takeTicketData(ticket)}
-                    >
-                      Ver
-                    </p>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <img
-                alt="loading gif"
-                src={loadingImg}
-                className="loadingDashboardDesign"
-              ></img>
-            )
+                </td>
+                <td>
+                  <p
+                    className="detailTicketButton"
+                    onClick={() => takeTicketData(ticket)}
+                  >
+                    Ver
+                  </p>
+                </td>
+              </tr>
+            ))
           ) : (
             <div className="noResultMessage w-100 d-flex justify-content-center align-items-center">
               NO HAY RESULTADOS
