@@ -25,6 +25,8 @@ export const LoginCard = () => {
 
   const dispatch = useDispatch();
   const credentialsRdx = useSelector(userDataCheck);
+console.log(activeLoading)
+console.log(errorMessage)
 
   const logMe = (e) => {
     setActiveLoading(true);

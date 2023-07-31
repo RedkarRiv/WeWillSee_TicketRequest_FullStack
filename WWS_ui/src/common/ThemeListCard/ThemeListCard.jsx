@@ -14,14 +14,11 @@ import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { useSelector } from "react-redux";
 import {
   bringThemesByAdmin,
-  getAllUsersByAdmin,
 } from "../../services/apiCalls";
 import { userDataCheck } from "../../pages/userSlice";
-import Dropdown from "react-bootstrap/Dropdown";
-import { RegisterCardAdmin } from "../RegisterCardAdmin/RegisterCardAdmin";
-import { TicketDetailCard } from "../TicketDetailCard/TicketDetailCard";
 import { CategoryDetailCard } from "../CategoryDetailCard/CategoryDetailCard";
 import { CategoryFormCard } from "../CategoryFormCard/CategoryFormCard";
+import loadingImg from "../../img/loadingGif.webp";
 
 export const ThemeListCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -112,7 +109,8 @@ export const ThemeListCard = () => {
                   </div>
                 </MDBCol>
               ))
-            : "Cargando"}
+            :         <img alt="loading gif" src={loadingImg} className="loadingDesign"></img>
+          }
         </div>
       </MDBRow>
       <MDBModal show={showModal} onHide={() => setShowModal(false)}>

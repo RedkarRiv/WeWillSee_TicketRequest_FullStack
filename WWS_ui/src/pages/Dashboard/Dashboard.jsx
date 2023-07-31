@@ -15,6 +15,7 @@ import { UsersListCard } from "../../common/UsersListCard/UsersListCard";
 import logoBackWWS from "../../img/logoWhiteWWS.png";
 import { TemplateListCard } from "../../common/TemplateListCard/TemplateListCard";
 import { ThemeListCard } from "../../common/ThemeListCard/ThemeListCard";
+import loadingImg from "../../img/loadingGif.webp";
 
 export const Dashboard = () => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -204,7 +205,8 @@ export const Dashboard = () => {
                           </div>
                         </Col>
                       ))
-                    : "Cargando"}
+                    :         <img alt="loading gif" src={loadingImg} className="loadingDesign"></img>
+}
                 </Row>
               ) : null}
 
