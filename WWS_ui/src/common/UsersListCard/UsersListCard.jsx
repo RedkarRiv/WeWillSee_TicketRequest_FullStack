@@ -16,6 +16,7 @@ import { getAllUsersByAdmin } from "../../services/apiCalls";
 import { userDataCheck } from "../../pages/userSlice";
 import Dropdown from "react-bootstrap/Dropdown";
 import { RegisterCardAdmin } from "../RegisterCardAdmin/RegisterCardAdmin";
+import { UserDetailCard } from "../UserDetailCard/UserDetailCard";
 
 export const UsersListCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
