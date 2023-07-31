@@ -31,6 +31,7 @@ export const UsersListCard = () => {
     {
       name: "Elegir filtro  ",
       value: "string",
+      fieldName: "name",
     },
     {
       name: "Por nombre  ",
