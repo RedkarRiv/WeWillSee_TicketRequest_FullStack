@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const root = "http://localhost:7000/";
+const root = "https://we-will-see-ticket-request-full-stack-ayvl.vercel.app/";
 
 export const loginMe = async (credentials) => {
   return await axios.post(`${root}auth/login`, credentials);
