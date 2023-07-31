@@ -7,10 +7,12 @@ import { login, userDataCheck } from "../../pages/userSlice";
 import { loginMe } from "../../services/apiCalls";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import loadingImg from "../../img/loadingGif.webp";
 
 export const LoginCard = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
+  const [activeLoading, setActiveLoading] = useState(false);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -25,6 +27,7 @@ export const LoginCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
 
   const logMe = (e) => {
+    setActiveLoading(true);
     e.preventDefault();
     loginMe(credentials)
       .then((resultado) => {
@@ -76,7 +79,6 @@ export const LoginCard = () => {
               onBlurFunction={(e) => InputCheck(e)}
             />
           </div>
-
         </div>
         <div className="loginContainer">
           <div className="loginTitle mb-2">Password</div>
@@ -96,6 +98,9 @@ export const LoginCard = () => {
         </div>
       </div>
       <div className="errorMessageDesign p-0 m-0">{errorMessage}</div>
+      {activeLoading && errorMessage == "" &&  (
+        <img alt="loading gif" src={loadingImg} className="loadingDesign"></img>
+      )}
       <div
         className="buttonLogin  mt-4 mb-4"
         onClick={(e) => logMe(e)}
