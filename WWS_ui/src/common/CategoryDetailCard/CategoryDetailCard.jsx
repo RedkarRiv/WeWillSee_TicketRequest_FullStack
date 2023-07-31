@@ -58,7 +58,7 @@ export const CategoryDetailCard = ({ category, onClose }) => {
               X
             </div>
           </MDBRow>
-          <TitleSectionCard title="Ticket en detalle" />
+          <TitleSectionCard title="Categoria en detalle" />
           <MDBRow className="contentBoxSide">
             <MDBCol lg="12" className="p-0">
               <MDBCardBody className="d-flex flex-column justify-content-center">
@@ -100,7 +100,7 @@ export const CategoryDetailCard = ({ category, onClose }) => {
                             <div>Respuesta: {faq?.answer}</div>
                           </div>
                         ))
-                      : <img alt="loading gif" src={loadingImg} className="loadingDashboardDesign"></img>}
+                      : null}
                   </MDBCol>
                 </MDBRow>
                 <MDBRow className="d-flex justify-content-center mt-4">
