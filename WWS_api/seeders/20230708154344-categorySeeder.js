@@ -42,7 +42,7 @@ module.exports = {
     },
     {
       id: 7,
-      category_name: 'Reclamaciones de clientes',
+      category_name: 'Clientes',
       theme_id: 3,
       category_status: "Active"
     },
@@ -66,7 +66,7 @@ module.exports = {
     },
     {
       id: 11,
-      category_name: 'Contratos con proveedores',
+      category_name: 'Proveedores',
       theme_id: 4,
       category_status: "Active"
     },

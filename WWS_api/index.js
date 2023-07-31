@@ -6,7 +6,10 @@ const app = express();
 const PORT = 7000;
 
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://we-will-see-ticket-request-full-stack.vercel.app/',
+}));
+
 app.use(express.json());
 app.use(router);
 

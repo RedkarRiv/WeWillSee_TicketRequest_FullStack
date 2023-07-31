@@ -12,7 +12,7 @@ const sequelize = new Sequelize(
     dialect: "mysql",
     dialectModule: mysql2,
     operatorAliases: false,
-    
+
     pool: {
       max: 5, //maximum number of connection in pool
       min: 0, //minimum number of connection in pool
@@ -23,6 +23,6 @@ const sequelize = new Sequelize(
 );
 
 module.exports = sequelize.authenticate().then((db) => {
-  console.log("MYSQL connected");
+  console.log(`MYSQL connected on port ${config.development.port}`);
   return db;
 });
