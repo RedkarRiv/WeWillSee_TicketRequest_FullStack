@@ -20,7 +20,7 @@ module.exports = {
       id: 3,
       category_name: 'Acceso a aplicaciones ',
       theme_id: 1,
-      category_status: "Inactive"
+      category_status: "Active"
     },
     {
       id: 4,
@@ -68,7 +68,7 @@ module.exports = {
       id: 11,
       category_name: 'Proveedores',
       theme_id: 4,
-      category_status: "Active"
+      category_status: "Inactive"
     },
     {
       id: 12,
@@ -110,7 +110,13 @@ module.exports = {
       id: 18,
       category_name: 'Destinos y rutas',
       theme_id: 6,
-      category_status: "Active"
+      category_status: "Inactive"
+    },
+    {
+      id: 19,
+      category_name: 'I.A.',
+      theme_id: 1,
+      category_status: "Inactive"
     },
   ]);
   },

@@ -11,7 +11,7 @@ module.exports = {
     },
     {
       id: 2,
-      theme_name: 'Sistemas',
+      theme_name: 'Sístemas',
       theme_status: "Active",
 
     },      {
