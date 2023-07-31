@@ -79,7 +79,7 @@ export const ThemeListCard = () => {
       </MDBRow>
       <MDBRow className="cardThemesContainer w-100 d-flex flex-column my-3 p-0">
         <div className="mapThemeContainer my-4 d-flex flex-column justify-content-center align-items-center">
-          {themeData?.length < 0
+          {themeData?.length > 0
             ? themeData?.map((theme, index) => (
                 <MDBCol className="col-8 my-2" key={index}>
                   <div

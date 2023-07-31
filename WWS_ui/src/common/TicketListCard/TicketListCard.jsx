@@ -22,6 +22,7 @@ import {
 import { userDataCheck } from "../../pages/userSlice";
 import moment from "moment";
 import { TicketDetailCard } from "../TicketDetailCard/TicketDetailCard";
+import loadingImg from "../../img/loadingGif.webp";
 
 export const TicketListCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -95,7 +96,7 @@ export const TicketListCard = () => {
               return;
             } else {
               setTicketsData(resultado.data.data);
-               }
+            }
           })
           .catch((error) => console.log(error));
         break;
@@ -280,50 +281,59 @@ export const TicketListCard = () => {
           </tr>
         </MDBTableHead>
         <MDBTableBody>
-          {ticketsData ? (
-            getCurrentPageItems().map((ticket, index) => (
-              <tr key={index}>
-                <td>
-                  <p className="fw-normal mb-1">
-                    {moment(ticket?.createdAt).format("YYYY-MM-DD")}{" "}
-                  </p>
-                </td>
-                <td>
-                  <p className="fw-normal mb-1">{ticket?.SAT?.User?.name}</p>
-                </td>
-                {roleCheck === 3 && (
+          {ticketsData ? 
+          (
+            ticketsData.length > 0 ? (
+              getCurrentPageItems().map((ticket, index) => (
+                <tr key={index}>
                   <td>
-                    <p className="fw-normal mb-1">{ticket?.SAT?.id}</p>
+                    <p className="fw-normal mb-1">
+                      {moment(ticket?.createdAt).format("YYYY-MM-DD")}{" "}
+                    </p>
                   </td>
-                )}
-                <td>
-                  <p className="fw-normal mb-1">{ticket?.ticket_title}</p>
-                </td>
-                <td>
-                  {ticket?.ticket_status === 1 ? (
-                    <MDBBadge color="success" pill>
-                      En proceso
-                    </MDBBadge>
-                  ) : ticket?.ticket_status === 3 ? (
-                    <MDBBadge color="danger" pill>
-                      Anulado{" "}
-                    </MDBBadge>
-                  ) : (
-                    <MDBBadge color="secondary" pill>
-                      Cerrado{" "}
-                    </MDBBadge>
+                  <td>
+                    <p className="fw-normal mb-1">{ticket?.SAT?.User?.name}</p>
+                  </td>
+                  {roleCheck === 3 && (
+                    <td>
+                      <p className="fw-normal mb-1">{ticket?.SAT?.id}</p>
+                    </td>
                   )}
-                </td>
-                <td>
-                  <p
-                    className="detailTicketButton"
-                    onClick={() => takeTicketData(ticket)}
-                  >
-                    Ver
-                  </p>
-                </td>
-              </tr>
-            ))
+                  <td>
+                    <p className="fw-normal mb-1">{ticket?.ticket_title}</p>
+                  </td>
+                  <td>
+                    {ticket?.ticket_status === 1 ? (
+                      <MDBBadge color="success" pill>
+                        En proceso
+                      </MDBBadge>
+                    ) : ticket?.ticket_status === 3 ? (
+                      <MDBBadge color="danger" pill>
+                        Anulado{" "}
+                      </MDBBadge>
+                    ) : (
+                      <MDBBadge color="secondary" pill>
+                        Cerrado{" "}
+                      </MDBBadge>
+                    )}
+                  </td>
+                  <td>
+                    <p
+                      className="detailTicketButton"
+                      onClick={() => takeTicketData(ticket)}
+                    >
+                      Ver
+                    </p>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <img
+                alt="loading gif"
+                src={loadingImg}
+                className="loadingDashboardDesign"
+              ></img>
+            )
           ) : (
             <div className="noResultMessage w-100 d-flex justify-content-center align-items-center">
               NO HAY RESULTADOS

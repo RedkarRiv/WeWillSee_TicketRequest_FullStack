@@ -7,6 +7,7 @@ import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { activateCategory, inactivateCategory } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
 import { MessageContext } from "../../services/messageContext";
+import loadingImg from "../../img/loadingGif.webp";
 
 export const CategoryDetailCard = ({ category, onClose }) => {
   const credentialsRdx = useSelector(userDataCheck);
@@ -99,7 +100,7 @@ export const CategoryDetailCard = ({ category, onClose }) => {
                             <div>Respuesta: {faq?.answer}</div>
                           </div>
                         ))
-                      : null}
+                      : <img alt="loading gif" src={loadingImg} className="loadingDashboardDesign"></img>}
                   </MDBCol>
                 </MDBRow>
                 <MDBRow className="d-flex justify-content-center mt-4">
