@@ -235,6 +235,21 @@ userController.newTicketByUser = async (req, res) => {
     console.log("esto es el ticketCounts");
     console.log(ticketCounts);
 
+    if (!ticketTitle || ticketTitle == "") {
+      return res.json({
+        success: true,
+        message: "No puedes crear un ticket sin título",
+      });
+    }
+
+    if (!ticketDescription || ticketDescription == "") {
+      return res.json({
+        success: true,
+        message: "No puedes crear un ticket sin descripción",
+      });
+    }
+
+
     const newTicket = await Ticket.create({
       ticket_title: ticketTitle,
       ticket_description: ticketDescription,
