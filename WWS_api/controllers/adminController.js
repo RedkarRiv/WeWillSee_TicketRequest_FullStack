@@ -23,12 +23,14 @@ adminController.userRegister = async (req, res) => {
     const password = req.body.password;
     const checkEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{4,}$/;
+
     if (!name || !email || !password) {
       return res.status(400).json({
         success: false,
         message: "Tienes que rellenar todos los campos",
       });
     }
+
     if (!checkEmail.test(req.body.email)) {
       return res.status(400).json({
         success: false,
@@ -43,8 +45,6 @@ adminController.userRegister = async (req, res) => {
           "La contraseña debe tener una mayuscula, una minuscula y un número. Su longitud nunca puede ser inferior a 4.",
       });
     }
-
-
 
     const newPassword = bcrypt.hashSync(password, 8);
     const newUser = await User.create({
@@ -78,6 +78,12 @@ adminController.SATregister = async (req, res) => {
     const password = req.body.password;
     const checkEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{4,}$/;
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Tienes que rellenar todos los campos",
+      });
+    }
 
     if (!checkEmail.test(req.body.email)) {
       return res.status(400).json({
