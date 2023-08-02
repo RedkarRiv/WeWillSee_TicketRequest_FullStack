@@ -69,7 +69,7 @@ export const TicketFormcard = ({ category, theme }) => {
   const [newTicket, setNewTicket] = useState({
     title: "",
     description: "",
-    categoryId: category.id ?? 2,
+    categoryId: category.id,
   });
   const InputHandler = (e) => {
     setNewTicket((prevState) => ({
@@ -81,8 +81,9 @@ export const TicketFormcard = ({ category, theme }) => {
   const ticketMeHandler = () => {
     ticketMe(credentialCheck, newTicket)
       .then((resultado) => {
-        setMessage("EL TICKET HA SIDO CREADO");
-        navigate("/m");
+        console.log(resultado)
+        // setMessage("EL TICKET HA SIDO CREADO");
+        // navigate("/m");
       })
       .catch((error) => {
         console.log(error);
