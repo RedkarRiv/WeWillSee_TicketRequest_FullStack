@@ -26,7 +26,14 @@ export const Dashboard = () => {
   const [themeTicket, setThemeTicket] = useState({});
   const roleCheck = credentialsRdx?.credentials.user.roleId;
   let roleCheckId;
-
+  const credentialsActive = () => {
+    if (!credentialsRdx) {
+      navigate("/");
+    }
+  };
+  useEffect(() => {
+    credentialsActive();
+  }, []);
   if (roleCheck) {
     switch (roleCheck) {
       case 1:
@@ -42,10 +49,7 @@ export const Dashboard = () => {
         break;
     }
   }
-  useEffect(() => {
-    credentialsActive();
-    TakeAllThemes();
-  }, []);
+
   const [activeComponentView, setActiveComponentView] = useState(roleCheckId);
 
   const loadForm = (categoryData, themeData) => {
@@ -82,11 +86,7 @@ export const Dashboard = () => {
       })
       .catch((error) => console.log(error));
   };
-  const credentialsActive = () => {
-    if (!credentialsRdx) {
-      navigate("/");
-    }
-  };
+
   useEffect(() => {
     getMyProfile();
   }, [credentialsRdx]);
@@ -96,6 +96,9 @@ export const Dashboard = () => {
     navigate("/");
   };
 
+  useEffect(() => {
+    TakeAllThemes();
+  }, []);
   return (
     <Container fluid className="p-0 m-0 d-flex">
       <Row className="dashboardBackground d-flex flex-column flex-md-row justify-content-center align-items-start px-1 m-0 pt-md-5">
