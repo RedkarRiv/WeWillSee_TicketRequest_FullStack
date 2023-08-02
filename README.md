@@ -151,4 +151,4 @@ Este proyecto no podría haberse llevado a cabo sin la inestimable ayuda del equ
 ## Licencia
 
 - Este proyecto se ha realizado bajo la **licencia MIT**.
-- Las imágenes utilizadas en el desarrollo de este proyecto son propiedad freepik.es
+- Las imágenes utilizadas en el desarrollo de este proyecto son propiedad freepik.es.
