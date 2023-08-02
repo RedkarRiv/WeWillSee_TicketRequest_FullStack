@@ -47,8 +47,8 @@ export const CategoryFormCard = ({ onClose }) => {
           navigate("/");
           return;
         } else {
-          console.log("Esto es la nueva categoría");
-          console.log(resultado);
+          setMessage("LA CATEGORÍA HA SIDO CREADA");
+          navigate("/m");
         }
       })
       .catch((error) => console.log(error));
