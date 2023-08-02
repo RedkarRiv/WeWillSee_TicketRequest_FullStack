@@ -39,6 +39,7 @@ export const TicketFormcard = ({ category, theme }) => {
   useEffect(() => {
     getCategoryDataHandler();
   }, []);
+
   const toggleAnswer = (index) => {
     setFaqItems((prevFaqItems) => {
       const updatedFaqItems = prevFaqItems.map((faqItem, i) => {
@@ -84,8 +85,10 @@ export const TicketFormcard = ({ category, theme }) => {
         console.log(resultado);
         console.log(resultado.data.message);
         setValidationCheck(resultado.data.message);
-        // setMessage("EL TICKET HA SIDO CREADO");
-        // navigate("/m");
+        if (resultado.data.message == "Ticket creado con exito") {
+          setMessage("EL TICKET HA SIDO CREADO");
+          navigate("/m");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -172,11 +175,11 @@ export const TicketFormcard = ({ category, theme }) => {
                     />
                   </MDBCol>
                 </MDBRow>
-<MDBRow>
-  <MDBCol>
-    <div className="validationMessage">{validationCheck}</div>
-  </MDBCol>
-</MDBRow>
+                <MDBRow>
+                  <MDBCol className="d-flex justify-content-center">
+                    <div className="validationMessage">{validationCheck}</div>
+                  </MDBCol>
+                </MDBRow>
                 <MDBRow className="d-flex justify-content-center mt-4">
                   <div
                     className="buttonSendTicket"
