@@ -16,6 +16,7 @@ import {
 import { TemplateCard } from "../TemplateCard/TemplateCard";
 import { useNavigate } from "react-router-dom";
 import { MessageContext } from "../../services/messageContext";
+
 export const TicketDetailCard = ({ ticket, onClose }) => {
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
@@ -36,6 +37,7 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
       message: e.target.value,
     }));
   };
+
   const bringAllTemplates = () => {
     getAllTemplates(credentialCheck)
       .then((resultado) => {
@@ -108,6 +110,9 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
   const sendNewComment = () => {
     newTicketComment(credentialCheck, messageData)
       .then((resultado) => {
+        if (!messageData || messageData == "") {
+          return;
+        }
         setMessage("NUEVO COMENTARIO CREADO CORRECTAMENTE");
         navigate("/m");
       })

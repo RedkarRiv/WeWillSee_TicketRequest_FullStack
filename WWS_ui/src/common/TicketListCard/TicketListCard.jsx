@@ -22,7 +22,6 @@ import {
 import { userDataCheck } from "../../pages/userSlice";
 import moment from "moment";
 import { TicketDetailCard } from "../TicketDetailCard/TicketDetailCard";
-import loadingImg from "../../img/loadingGif.webp";
 
 export const TicketListCard = () => {
   const credentialsRdx = useSelector(userDataCheck);
