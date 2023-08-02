@@ -82,7 +82,11 @@ export const Dashboard = () => {
       })
       .catch((error) => console.log(error));
   };
-
+  const credentialsActive = () => {
+    if (!credentialCheck) {
+      navigate("/")
+    }
+  }
   useEffect(() => {
     if (!credentialsRdx) {
       navigate("/");
