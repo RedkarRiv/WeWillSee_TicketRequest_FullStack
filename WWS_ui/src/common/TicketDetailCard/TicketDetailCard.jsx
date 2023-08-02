@@ -29,6 +29,7 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
   const [templateData, setTemplateData] = useState([]);
   const navigate = useNavigate();
   const { setMessage } = useContext(MessageContext);
+  const [validationCheck, setValidationCheck] = useState("");
 
   const InputHandler = (e) => {
     setNewComment(e.target.value);
@@ -108,11 +109,12 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
   };
 
   const sendNewComment = () => {
+    if (!messageData || messageData == "") {
+      setValidationCheck("No puedes enviar un comentario vacio");
+      return;
+    }
     newTicketComment(credentialCheck, messageData)
       .then((resultado) => {
-        if (!messageData || messageData == "") {
-          return;
-        }
         setMessage("NUEVO COMENTARIO CREADO CORRECTAMENTE");
         navigate("/m");
       })
@@ -259,6 +261,12 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                       ))}
                   </MDBRow>
                 )}
+
+                <MDBRow>
+                  <MDBCol className="d-flex justify-content-center">
+                    <div className="validationMessage">{validationCheck}</div>
+                  </MDBCol>
+                </MDBRow>
                 <MDBRow className="d-flex justify-content-center mt-4">
                   {ticket?.ticket_status === 1 ? (
                     <>
