@@ -24,7 +24,8 @@ export const UsersListCard = () => {
   const [usersData, setUsersData] = useState([]);
   const [activeComponentView, setActiveComponentView] = useState(1);
   const inputRef = useRef(null);
-
+  console.log("esto es usersData")
+console.log(usersData)
   const [criteria, setCriteria] = useState(null);
   const [userSelected, setUserSelected] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -160,6 +161,11 @@ export const UsersListCard = () => {
             </Dropdown>
           </div>
         </MDBCol>
+
+
+
+
+
         <MDBCol className="col-7 d-flex justify-content-start p-0 m-0">
           <input
             className="inputSearchOptions h-100 w-100"
@@ -170,6 +176,8 @@ export const UsersListCard = () => {
             ref={inputRef}
           />
         </MDBCol>
+
+
         <MDBCol className="col-2 col-xxl-1 p-1 d-flex justify-content-center align-items-center">
           <div
             className="deleteFiltersData d-flex justify-content-center"
@@ -178,6 +186,9 @@ export const UsersListCard = () => {
             Reset
           </div>
         </MDBCol>
+
+
+
       </MDBRow>
       <MDBTable align="middle">
         <MDBTableHead>

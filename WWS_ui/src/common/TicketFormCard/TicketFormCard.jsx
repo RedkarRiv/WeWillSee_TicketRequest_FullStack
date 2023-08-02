@@ -79,21 +79,31 @@ export const TicketFormcard = ({ category, theme }) => {
     }));
   };
 
+
+
+
   const ticketMeHandler = () => {
     ticketMe(credentialCheck, newTicket)
       .then((resultado) => {
+
         console.log(resultado);
         console.log(resultado.data.message);
         setValidationCheck(resultado.data.message);
         if (resultado.data.message == "Ticket creado con exito") {
           setMessage("EL TICKET HA SIDO CREADO");
           navigate("/m");
+
+          
         }
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+
+
+  
 
   return (
     <MDBRow className="ticketFormCardContainer d-flex justify-content-center align-items-center p-0">
@@ -175,11 +185,21 @@ export const TicketFormcard = ({ category, theme }) => {
                     />
                   </MDBCol>
                 </MDBRow>
+
+
+
+
                 <MDBRow>
                   <MDBCol className="d-flex justify-content-center">
                     <div className="validationMessage">{validationCheck}</div>
                   </MDBCol>
                 </MDBRow>
+
+
+
+
+
+
                 <MDBRow className="d-flex justify-content-center mt-4">
                   <div
                     className="buttonSendTicket"
