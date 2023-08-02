@@ -7,7 +7,6 @@ import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { useNavigate } from "react-router-dom";
 import { MessageContext } from "../../services/messageContext";
 import { InputLabel } from "../InputLabel/InputLabel";
-import { CheckError } from "../../services/useful";
 import { bringThemesByAdmin, newCategory } from "../../services/apiCalls";
 import "bootstrap/dist/css/bootstrap.css";
 import { Dropdown } from "react-bootstrap";
@@ -26,10 +25,6 @@ export const CategoryFormCard = ({ onClose }) => {
     category_name: "",
   });
 
-  const [newCredentialsError, setNewCredentialsError] = useState({
-    category_nameError: "",
-  });
-
   const resetCommentHandler = () => {
     onClose();
   };
@@ -37,15 +32,6 @@ export const CategoryFormCard = ({ onClose }) => {
     setNewCredentials((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
-    }));
-  };
-
-  const InputCheck = (e) => {
-    let mensajeError = CheckError(e.target.name, e.target.value);
-
-    setNewCredentialsError((prevState) => ({
-      ...prevState,
-      [e.target.name + "Error"]: mensajeError,
     }));
   };
 
@@ -76,7 +62,6 @@ export const CategoryFormCard = ({ onClose }) => {
           return;
         } else {
           setThemeData(resultado?.data?.data);
-
         }
       })
       .catch((error) => console.log(error));
@@ -142,12 +127,16 @@ export const CategoryFormCard = ({ onClose }) => {
                 </MDBRow>
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
-                    {!selectedTheme.theme_name &&            <div className="inputBlockedEmpty">
-                      No hay tema seleccionado
-                    </div> }
-                    {selectedTheme.theme_name &&            <div className="inputBlocked">
-                      {selectedTheme.theme_name}
-                    </div> }
+                    {selectedTheme.theme_name == "" && (
+                      <div className="inputBlockedEmpty">
+                        No hay tema seleccionado
+                      </div>
+                    )}
+                    {selectedTheme.theme_name && (
+                      <div className="inputBlocked">
+                        {selectedTheme.theme_name}
+                      </div>
+                    )}
                   </MDBCol>
                   <MDBCol md="12" className="mt-3">
                     <MDBRow className="inputTicketDetail d-flex m-0">
@@ -158,13 +147,9 @@ export const CategoryFormCard = ({ onClose }) => {
                         <InputLabel
                           type="string"
                           placeholder="Titulo de la categoría"
-                          name="category_name"ç
+                          name="category_name"
                           Length={20}
-                          classDesign={
-                            newCredentialsError.category_nameError === ""
-                              ? ""
-                              : "errorDesign"
-                          }
+                          classDesign=""
                           functionHandler={(e) => InputHandler(e)}
                           onBlurFunction={(e) => InputCheck(e)}
                         />{" "}
@@ -177,7 +162,9 @@ export const CategoryFormCard = ({ onClose }) => {
                   <>
                     <div
                       className="buttonActiveTicket mx-2"
-                      onClick={() => sendNewCategory(selectedTheme, newCredentials)}
+                      onClick={() =>
+                        sendNewCategory(selectedTheme, newCredentials)
+                      }
                     >
                       Crear categoría
                     </div>

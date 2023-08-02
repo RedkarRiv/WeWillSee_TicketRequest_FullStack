@@ -40,6 +40,7 @@ export const CheckError = (name, value, password) => {
 
     default:
       console.log("Unknown format");
+      return "";
   }
 };
   
