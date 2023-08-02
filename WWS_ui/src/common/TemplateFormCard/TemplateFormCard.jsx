@@ -47,7 +47,7 @@ export const TemplateFormCard = () => {
       setValidationCheck("No puedes crear una plantilla sin descripcion");
       return;
     }
-    if (newTemplate.template_title) {
+    if (newTemplate.template_title  == "") {
       console.log(newTemplate);
 
       setValidationCheck("No puedes crear una plantilla sin título");
