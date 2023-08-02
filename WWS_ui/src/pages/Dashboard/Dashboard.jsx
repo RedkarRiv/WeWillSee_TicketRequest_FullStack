@@ -26,6 +26,7 @@ export const Dashboard = () => {
   const [themeTicket, setThemeTicket] = useState({});
   const roleCheck = credentialsRdx?.credentials?.user?.roleId;
   let roleCheckId;
+  
   const credentialsActive = () => {
     if (!credentialsRdx) {
       navigate("/");
