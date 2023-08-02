@@ -761,4 +761,23 @@ adminController.activateCategory = async (req, res) => {
     });
   }
 };
+
+// adminController.getAllRoles = async (req, res) => {
+//   try {
+//     const allRoles = await Role.findAll({});
+
+//     return res.json({
+//       success: true,
+//       message: "Todas los roles recuperados",
+//       data: allRoles,
+//     });
+//   } catch (error) {
+//     return res.status(500).json({
+//       success: false,
+//       message: "Los roles no han podido ser recuperados",
+//       error: error.message,
+//     });
+//   }
+// };
+
 module.exports = adminController;
