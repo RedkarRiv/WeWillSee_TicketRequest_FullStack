@@ -8,6 +8,7 @@ import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { createNewTemplate } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
 import { MessageContext } from "../../services/messageContext";
+import { CheckError } from "../../services/useful";
 
 export const TemplateFormCard = () => {
   const navigate = useNavigate();
