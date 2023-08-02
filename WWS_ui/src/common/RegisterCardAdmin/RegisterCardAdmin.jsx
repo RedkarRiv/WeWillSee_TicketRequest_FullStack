@@ -132,7 +132,7 @@ export const RegisterCardAdmin = ({ onClose, user }) => {
                           ? ""
                           : "errorDesign"
                       }
-                      Length="15"
+                      Length="30"
                       functionHandler={(e) => InputHandler(e)}
                       onBlurFunction={(e) => InputCheck(e)}
                     />
@@ -157,7 +157,7 @@ export const RegisterCardAdmin = ({ onClose, user }) => {
                           ? ""
                           : "errorDesign"
                       }
-                      Length="15"
+                      Length="30"
                       functionHandler={(e) => InputHandler(e)}
                       onBlurFunction={(e) => InputCheck(e)}
                     />
@@ -179,7 +179,7 @@ export const RegisterCardAdmin = ({ onClose, user }) => {
                           ? ""
                           : "errorDesign"
                       }
-                      Length="15"
+                      Length="30"
                       functionHandler={(e) => InputHandler(e)}
                       onBlurFunction={(e) =>
                         InputCheck(e, newCredentials?.password)
