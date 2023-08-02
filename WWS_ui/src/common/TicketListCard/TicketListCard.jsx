@@ -253,7 +253,6 @@ export const TicketListCard = () => {
           <tr>
             <th scope="col">Fecha</th>
             <th scope="col">SAT</th>
-            {roleCheck === 3 && <th scope="col">SAT id</th>}
             <th scope="col">Titulo</th>
             <th scope="col">Estado</th>
             <th scope="col">Acciones</th>
@@ -271,11 +270,7 @@ export const TicketListCard = () => {
                 <td>
                   <p className="fw-normal mb-1">{ticket?.SAT?.User?.name}</p>
                 </td>
-                {roleCheck === 3 && (
-                  <td>
-                    <p className="fw-normal mb-1">{ticket?.SAT?.id}</p>
-                  </td>
-                )}
+
                 <td>
                   <p className="fw-normal mb-1">{ticket?.ticket_title}</p>
                 </td>
