@@ -259,7 +259,7 @@ export const TicketListCard = () => {
           </tr>
         </MDBTableHead>
         <MDBTableBody>
-          {ticketsData.length > 0 ? (
+          {ticketsData && ticketsData.length > 0 ? (
             getCurrentPageItems().map((ticket, index) => (
               <tr key={index}>
                 <td>
