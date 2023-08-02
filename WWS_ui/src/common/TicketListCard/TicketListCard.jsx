@@ -161,33 +161,7 @@ export const TicketListCard = () => {
       fieldName: "createdAt",
     },
   ]);
-  const [filterOptionsAdmin, setFilterOptionsAdmin] = useState([
-    {
-      name: "Elegir filtro  ",
-      value: "string",
-      fieldName: "",
-    },
-    {
-      name: "Por titulo  ",
-      value: "string",
-      fieldName: "ticket_title",
-    },
-    {
-      name: "Por SAT id  ",
-      value: "string",
-      fieldName: "SAT_assigned",
-    },
-    {
-      name: "Por estado  ",
-      value: "string",
-      fieldName: "ticket_status",
-    },
-    {
-      name: "Por fecha  ",
-      value: "date",
-      fieldName: "createdAt",
-    },
-  ]);
+
   const [selectedFilter, setSelectedFilter] = useState(null);
 
   const resetFiltersHandler = () => {
@@ -214,33 +188,19 @@ export const TicketListCard = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                {roleCheck !== 3
-                  ? filterOptions.map((option, index) => (
-                      <Dropdown.Item key={index}>
-                        <div
-                          key={option.name}
-                          className="option"
-                          onClick={() => {
-                            setSelectedFilter({ option });
-                          }}
-                        >
-                          {option.name}
-                        </div>
-                      </Dropdown.Item>
-                    ))
-                  : filterOptionsAdmin.map((option, index) => (
-                      <Dropdown.Item key={index}>
-                        <div
-                          key={option.name}
-                          className="option"
-                          onClick={() => {
-                            setSelectedFilter({ option });
-                          }}
-                        >
-                          {option.name}
-                        </div>
-                      </Dropdown.Item>
-                    ))}
+                {filterOptions.map((option, index) => (
+                  <Dropdown.Item key={index}>
+                    <div
+                      key={option.name}
+                      className="option"
+                      onClick={() => {
+                        setSelectedFilter({ option });
+                      }}
+                    >
+                      {option.name}
+                    </div>
+                  </Dropdown.Item>
+                ))}
               </Dropdown.Menu>
             </Dropdown>
           </div>
