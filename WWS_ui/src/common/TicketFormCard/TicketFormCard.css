@@ -23,6 +23,8 @@
 
 .validationMessage {
   color: red;
+  width: 100%;
+  height: auto;
 }
 
 .buttonSendTicket:active {
