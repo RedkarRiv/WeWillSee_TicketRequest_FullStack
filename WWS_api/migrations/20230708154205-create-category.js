@@ -10,9 +10,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       category_name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       theme_id: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references:{
           model: "Themes",
@@ -20,6 +22,7 @@ module.exports = {
         }
       },
       category_status: {
+        allowNull: false,
         type: Sequelize.STRING
       },
     });
