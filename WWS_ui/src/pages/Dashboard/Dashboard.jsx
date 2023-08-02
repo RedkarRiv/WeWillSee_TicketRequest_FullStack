@@ -64,8 +64,8 @@ export const Dashboard = () => {
   };
 
   useEffect(() => {
-    TakeAllThemes();
     credentialsActive();
+    TakeAllThemes();
   }, []);
 
   const dispatch = useDispatch();
