@@ -31,7 +31,18 @@ export const TemplateFormCard = () => {
   };
 
   const templateMeHandler = () => {
+
+
+
     createNewTemplate(credentialCheck, newTemplate)
+    if (newTemplate.template_description == "") {
+      setValidationCheck("No puedes crear una plantilla sin descripcion");
+      return;
+    }
+    if (newTemplate.template_title) {
+      setValidationCheck("No puedes crear una plantilla sin título");
+      return;
+    }
       .then((resultado) => {
         setMessage("LA PLANTILLA HA SIDO CREADA");
         navigate("/m")

@@ -109,8 +109,7 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
   };
 
   const sendNewComment = () => {
-
-    if (messageData.message == '') {
+    if (messageData.message == "") {
       setValidationCheck("No puedes enviar un comentario vacio");
       return;
     }
@@ -237,6 +236,11 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                     </MDBCol>
                   </MDBRow>
                 ) : null}
+                <MDBRow>
+                  <MDBCol className="d-flex justify-content-center">
+                    <div className="validationMessage">{validationCheck}</div>
+                  </MDBCol>
+                </MDBRow>
                 {roleCheck === 2 && (
                   <MDBRow>
                     <MDBCol md="12" className="mt-3">
@@ -263,11 +267,6 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
                   </MDBRow>
                 )}
 
-                <MDBRow>
-                  <MDBCol className="d-flex justify-content-center">
-                    <div className="validationMessage">{validationCheck}</div>
-                  </MDBCol>
-                </MDBRow>
                 <MDBRow className="d-flex justify-content-center mt-4">
                   {ticket?.ticket_status === 1 ? (
                     <>
