@@ -151,7 +151,6 @@ export const CategoryFormCard = ({ onClose }) => {
                           Length={20}
                           classDesign=""
                           functionHandler={(e) => InputHandler(e)}
-                          onBlurFunction={(e) => InputCheck(e)}
                         />{" "}
                       </MDBCol>
                     </MDBRow>
