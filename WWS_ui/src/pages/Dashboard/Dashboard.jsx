@@ -24,23 +24,29 @@ export const Dashboard = () => {
   const [themeData, setThemeData] = useState([]);
   const [categoryTicket, setCategoryTicket] = useState({});
   const [themeTicket, setThemeTicket] = useState({});
-  const roleCheck = credentialsRdx?.credentials.user.roleId;
-  let roleCheckId;
 
-  switch (roleCheck) {
-    case 1:
-      roleCheckId = 2;
-      break;
-    case 2:
-      roleCheckId = 1;
-      break;
-    case 3:
-      roleCheckId = 5;
-      break;
-    default:
-      break;
+  if (roleCheck) {
+    const roleCheck = credentialsRdx?.credentials.user.roleId;
+    let roleCheckId;
+
+    switch (roleCheck) {
+      case 1:
+        roleCheckId = 2;
+        break;
+      case 2:
+        roleCheckId = 1;
+        break;
+      case 3:
+        roleCheckId = 5;
+        break;
+      default:
+        break;
+    }
   }
-
+  useEffect(() => {
+    credentialsActive();
+    TakeAllThemes();
+  }, []);
   const [activeComponentView, setActiveComponentView] = useState(roleCheckId);
 
   const loadForm = (categoryData, themeData) => {
@@ -55,7 +61,6 @@ export const Dashboard = () => {
   const TakeAllThemes = () => {
     bringThemes(credentialCheck)
       .then((resultado) => {
-    
         setThemeData(resultado);
       })
       .catch((error) => {
@@ -63,10 +68,7 @@ export const Dashboard = () => {
       });
   };
 
-  useEffect(() => {
-    credentialsActive();
-    TakeAllThemes();
-  }, []);
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -85,11 +87,10 @@ export const Dashboard = () => {
   };
   const credentialsActive = () => {
     if (!credentialsRdx) {
-      navigate("/")
+      navigate("/");
     }
-  }
+  };
   useEffect(() => {
-
     getMyProfile();
   }, [credentialsRdx]);
 
@@ -171,44 +172,49 @@ export const Dashboard = () => {
               {activeComponentView === 2 ? (
                 <Row className="categoryListContainer d-flex justify-content-around p-0">
                   <TitleSectionCard title="Selecciona una categoría" />
-                  {themeData?.data?.data
-                    ? Object.values(themeData.data.data).map((theme, index) => (
-                        <Col
-                          key={index}
-                          className="themeContainer col-md-12 col-lg-3 d-flex flex-column mb-sm-4 mt-lg-4"
-                        >
-                          <div className="d-flex flex-row w-100 dropdownClick justify-content-center align-items-center px-2">
-                            <div className="logoCategory"></div>
-                            <div className="themeContainerTitle d-flex justify-content-center">
-                              {theme.theme_name.toUpperCase()}
-                            </div>
+                  {themeData?.data?.data ? (
+                    Object.values(themeData.data.data).map((theme, index) => (
+                      <Col
+                        key={index}
+                        className="themeContainer col-md-12 col-lg-3 d-flex flex-column mb-sm-4 mt-lg-4"
+                      >
+                        <div className="d-flex flex-row w-100 dropdownClick justify-content-center align-items-center px-2">
+                          <div className="logoCategory"></div>
+                          <div className="themeContainerTitle d-flex justify-content-center">
+                            {theme.theme_name.toUpperCase()}
                           </div>
-                          <div className="w-100 dropdownContainer">
-                            <div className="categoryList d-flex flex-column justify-content-center align-items-center pt-2">
-                              {Object.values(theme?.Categories).map(
-                                (category, index) => {
-                                  if (category.category_status !== "Inactive") {
-                                    return (
-                                      <div
-                                        key={index}
-                                        className="categoryLabelDesign"
-                                        onClick={() =>
-                                          loadForm(category, theme.theme_name)
-                                        }
-                                      >
-                                        {category.category_name}
-                                      </div>
-                                    );
-                                  }
-                                  return null;
+                        </div>
+                        <div className="w-100 dropdownContainer">
+                          <div className="categoryList d-flex flex-column justify-content-center align-items-center pt-2">
+                            {Object.values(theme?.Categories).map(
+                              (category, index) => {
+                                if (category.category_status !== "Inactive") {
+                                  return (
+                                    <div
+                                      key={index}
+                                      className="categoryLabelDesign"
+                                      onClick={() =>
+                                        loadForm(category, theme.theme_name)
+                                      }
+                                    >
+                                      {category.category_name}
+                                    </div>
+                                  );
                                 }
-                              )}
-                            </div>
+                                return null;
+                              }
+                            )}
                           </div>
-                        </Col>
-                      ))
-                    :         <img alt="loading gif" src={loadingImg} className="loadingDashboardDesign"></img>
-}
+                        </div>
+                      </Col>
+                    ))
+                  ) : (
+                    <img
+                      alt="loading gif"
+                      src={loadingImg}
+                      className="loadingDashboardDesign"
+                    ></img>
+                  )}
                 </Row>
               ) : null}
 
