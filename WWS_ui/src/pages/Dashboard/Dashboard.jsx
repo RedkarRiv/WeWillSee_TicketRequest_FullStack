@@ -24,11 +24,10 @@ export const Dashboard = () => {
   const [themeData, setThemeData] = useState([]);
   const [categoryTicket, setCategoryTicket] = useState({});
   const [themeTicket, setThemeTicket] = useState({});
+  const roleCheck = credentialsRdx?.credentials.user.roleId;
+  let roleCheckId;
 
   if (roleCheck) {
-    const roleCheck = credentialsRdx?.credentials.user.roleId;
-    let roleCheckId;
-
     switch (roleCheck) {
       case 1:
         roleCheckId = 2;
@@ -67,8 +66,6 @@ export const Dashboard = () => {
         console.log(error);
       });
   };
-
-
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
