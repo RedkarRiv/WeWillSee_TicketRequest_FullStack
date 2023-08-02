@@ -237,14 +237,14 @@ userController.newTicketByUser = async (req, res) => {
 
     if (!ticketTitle || ticketTitle == "") {
       return res.json({
-        success: true,
+        success: false,
         message: "No puedes crear un ticket sin título",
       });
     }
 
     if (!ticketDescription || ticketDescription == "") {
       return res.json({
-        success: true,
+        success: false,
         message: "No puedes crear un ticket sin descripción",
       });
     }
@@ -264,7 +264,7 @@ userController.newTicketByUser = async (req, res) => {
     });
     return res.json({
       success: true,
-      message: "Ticket creado con existo",
+      message: "Ticket creado con exito",
       data: newTicket,
     });
   } catch (error) {
