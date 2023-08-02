@@ -142,9 +142,12 @@ export const CategoryFormCard = ({ onClose }) => {
                 </MDBRow>
                 <MDBRow>
                   <MDBCol md="12" className="mt-3">
-                    <div className="inputBlocked">
+                    {!selectedTheme.theme_name &&            <div className="inputBlockedEmpty">
+                      No hay tema seleccionado
+                    </div> }
+                    {selectedTheme.theme_name &&            <div className="inputBlocked">
                       {selectedTheme.theme_name}
-                    </div>
+                    </div> }
                   </MDBCol>
                   <MDBCol md="12" className="mt-3">
                     <MDBRow className="inputTicketDetail d-flex m-0">
