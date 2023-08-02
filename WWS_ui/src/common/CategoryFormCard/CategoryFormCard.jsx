@@ -10,6 +10,7 @@ import { InputLabel } from "../InputLabel/InputLabel";
 import { bringThemesByAdmin, newCategory } from "../../services/apiCalls";
 import "bootstrap/dist/css/bootstrap.css";
 import { Dropdown } from "react-bootstrap";
+import { CheckError } from "../../services/useful";
 
 export const CategoryFormCard = ({ onClose }) => {
   const credentialsRdx = useSelector(userDataCheck);
