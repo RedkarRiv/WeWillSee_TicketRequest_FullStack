@@ -39,7 +39,7 @@ adminController.userRegister = async (req, res) => {
       });
     }
 
-if (!name || !email || password) {
+if (!name || !email || !password) {
   return res.status(400).json({
     success: false,
     message: "Tienes que rellenar todos los campos",
