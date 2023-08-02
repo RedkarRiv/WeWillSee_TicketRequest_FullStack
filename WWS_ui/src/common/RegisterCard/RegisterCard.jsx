@@ -105,6 +105,7 @@ export const RegisterCard = () => {
               type="email"
               placeholder="Introduce tu email"
               name="email"
+              Length="30"
               classDesign={
                 newCredentialsError.emailError === "" ? "" : "errorDesign"
               }
@@ -124,6 +125,7 @@ export const RegisterCard = () => {
               type="password"
               placeholder="Introduce tu password"
               name="password"
+              Length="30"
               classDesign={
                 newCredentialsError.passwordError === "" ? "" : "errorDesign"
               }
@@ -141,6 +143,7 @@ export const RegisterCard = () => {
           <div className="inputDesign">
             <InputLabel
               type="password"
+              Length="30"
               placeholder="Repite la password"
               name="doubleCheckPassword"
               classDesign={

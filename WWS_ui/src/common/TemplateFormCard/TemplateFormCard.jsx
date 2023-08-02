@@ -103,7 +103,7 @@ export const TemplateFormCard = () => {
                     className="buttonSendTicket"
                     onClick={() => templateMeHandler()}
                   >
-                    Crear template
+                    Crear plantilla
                   </div>
                 </MDBRow>
               </MDBCardBody>
