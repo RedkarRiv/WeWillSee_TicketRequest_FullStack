@@ -23,7 +23,12 @@ adminController.userRegister = async (req, res) => {
     const password = req.body.password;
     const checkEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{4,}$/;
-
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Tienes que rellenar todos los campos",
+      });
+    }
     if (!checkEmail.test(req.body.email)) {
       return res.status(400).json({
         success: false,
@@ -39,12 +44,7 @@ adminController.userRegister = async (req, res) => {
       });
     }
 
-if (!name || !email || !password) {
-  return res.status(400).json({
-    success: false,
-    message: "Tienes que rellenar todos los campos",
-  });
-}
+
 
     const newPassword = bcrypt.hashSync(password, 8);
     const newUser = await User.create({
