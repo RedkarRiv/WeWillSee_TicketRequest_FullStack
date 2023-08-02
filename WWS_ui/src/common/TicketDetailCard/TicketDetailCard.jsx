@@ -110,7 +110,7 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
 
   const sendNewComment = () => {
 
-    if (!messageData.message || messageData-message == '') {
+    if (messageData.message == '') {
       setValidationCheck("No puedes enviar un comentario vacio");
       return;
     }
