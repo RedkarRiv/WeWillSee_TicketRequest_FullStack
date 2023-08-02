@@ -13,10 +13,20 @@ export const TemplateFormCard = () => {
   const navigate = useNavigate();
   const { setMessage } = useContext(MessageContext);
   const [validationCheck, setValidationCheck] = useState("");
-
+  const [credentialsError, setCredentialsError] = useState({
+    template_title: "",
+    template_description: "",
+  });
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
+  const InputCheck = (e) => {
+    let mensajeError = CheckError(e.target.name, e.target.value);
 
+    setCredentialsError((prevState) => ({
+      ...prevState,
+      [e.target.name + "Error"]: mensajeError,
+    }));
+  };
   const [newTemplate, setNewTemplate] = useState({
     template_title: "",
     template_description: "",
@@ -70,7 +80,7 @@ export const TemplateFormCard = () => {
                       Length="50"
                       classDesign="inputFormDesign"
                       functionHandler={(e) => InputHandler(e)}
-                    />
+                      onBlurFunction={(e) => InputCheck(e)}                    />
                   </MDBCol>
                 </MDBRow>
                 <MDBRow>
