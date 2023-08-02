@@ -24,6 +24,18 @@ export const CategoryFormCard = ({ onClose }) => {
   const [newCredentials, setNewCredentials] = useState({
     category_name: "",
   });
+  const [credentialsError, setCredentialsError] = useState({
+    title: "",
+    description: "",
+  });
+  const InputCheck = (e) => {
+    let mensajeError = CheckError(e.target.name, e.target.value);
+
+    setCredentialsError((prevState) => ({
+      ...prevState,
+      [e.target.name + "Error"]: mensajeError,
+    }));
+  };
 
   const resetCommentHandler = () => {
     onClose();
@@ -151,6 +163,7 @@ export const CategoryFormCard = ({ onClose }) => {
                           Length={20}
                           classDesign=""
                           functionHandler={(e) => InputHandler(e)}
+                          onBlurFunction={(e)=>InputCheck(e)}
                         />{" "}
                       </MDBCol>
                     </MDBRow>
