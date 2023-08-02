@@ -109,6 +109,9 @@ export const TicketDetailCard = ({ ticket, onClose }) => {
   };
 
   const sendNewComment = () => {
+    console.log("esto es messageData");
+    console.log(messageData);
+
     if (!messageData || messageData == "") {
       setValidationCheck("No puedes enviar un comentario vacio");
       return;
