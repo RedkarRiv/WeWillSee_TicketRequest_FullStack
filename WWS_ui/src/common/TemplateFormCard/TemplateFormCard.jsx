@@ -4,7 +4,6 @@ import "./TemplateFormCard.css";
 import { InputLabel } from "../InputLabel/InputLabel";
 import { useSelector } from "react-redux";
 import { userDataCheck } from "../../pages/userSlice";
-import { CheckError } from "../../services/useful";
 import { TitleSectionCard } from "../TitleSectionCard/TitleSectionCard";
 import { createNewTemplate } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +13,7 @@ export const TemplateFormCard = () => {
 
   const navigate = useNavigate();
   const { setMessage } = useContext(MessageContext);
+  const [validationCheck, setValidationCheck] = useState("");
 
 
   const credentialsRdx = useSelector(userDataCheck);
@@ -31,10 +31,6 @@ export const TemplateFormCard = () => {
   };
 
   const templateMeHandler = () => {
-
-
-
-    createNewTemplate(credentialCheck, newTemplate)
     if (newTemplate.template_description == "") {
       setValidationCheck("No puedes crear una plantilla sin descripcion");
       return;
@@ -43,6 +39,7 @@ export const TemplateFormCard = () => {
       setValidationCheck("No puedes crear una plantilla sin título");
       return;
     }
+    createNewTemplate(credentialCheck, newTemplate)
       .then((resultado) => {
         setMessage("LA PLANTILLA HA SIDO CREADA");
         navigate("/m")
@@ -84,7 +81,11 @@ export const TemplateFormCard = () => {
                     />
                   </MDBCol>
                 </MDBRow>
-                
+                <MDBRow>
+                  <MDBCol className="d-flex justify-content-center">
+                    <div className="validationMessage">{validationCheck}</div>
+                  </MDBCol>
+                </MDBRow>
 
                 <MDBRow className="d-flex justify-content-center mt-4">
                   <div
