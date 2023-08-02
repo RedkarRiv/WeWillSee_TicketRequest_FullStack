@@ -40,16 +40,11 @@ export const TemplateFormCard = () => {
   };
 
   const templateMeHandler = () => {
-    console.log(newTemplate);
-
     if (newTemplate.template_description == "") {
-      console.log(newTemplate);
       setValidationCheck("No puedes crear una plantilla sin descripcion");
       return;
     }
-    if (newTemplate.template_title  == "") {
-      console.log(newTemplate);
-
+    if (newTemplate.template_title == "") {
       setValidationCheck("No puedes crear una plantilla sin título");
       return;
     }
@@ -81,7 +76,8 @@ export const TemplateFormCard = () => {
                       Length="50"
                       classDesign="inputFormDesign"
                       functionHandler={(e) => InputHandler(e)}
-                      onBlurFunction={(e) => InputCheck(e)}                    />
+                      onBlurFunction={(e) => InputCheck(e)}
+                    />
                   </MDBCol>
                 </MDBRow>
                 <MDBRow>
