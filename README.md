@@ -1,5 +1,4 @@
 <h1 align="center">WWS Helpdesk - Full Stack Developer</h1>
-<h2 align="center">Frontend</h2>
 
 ## Tabla de contenidos 📝
 
@@ -133,15 +132,19 @@ La aplicación dispone de 3 tipos de roles distintos, cuyas funcionalidades esta
 Este proyecto no podría haberse llevado a cabo sin la inestimable ayuda del equipo docente durante todo el curso:
 
 - **David**  
+
   <a href="https://github.com/Dave86dev" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=red" target="_blank"></a>
 
 - **Mara**  
+
   <a href="https://github.com/MaraScampini" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=blue" target="_blank"></a>
 
 - **Dani**
+
   <a href="https://github.com/Datata" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=lime" target="_blank"></a>
 
 - **Jose**  
+
   <a href="https://github.com/JoseMarin" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=yellow" target="_blank"></a>
 
 ## Contacto
