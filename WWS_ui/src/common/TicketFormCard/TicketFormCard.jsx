@@ -65,7 +65,7 @@ export const TicketFormcard = ({ category, theme }) => {
 
   const credentialsRdx = useSelector(userDataCheck);
   const credentialCheck = credentialsRdx?.credentials?.token;
-
+  const [validationCheck, setValidationCheck] = useState("");
   const [newTicket, setNewTicket] = useState({
     title: "",
     description: "",
@@ -81,7 +81,9 @@ export const TicketFormcard = ({ category, theme }) => {
   const ticketMeHandler = () => {
     ticketMe(credentialCheck, newTicket)
       .then((resultado) => {
-        console.log(resultado)
+        console.log(resultado);
+        console.log(resultado.data.message);
+        setValidationCheck(resultado.data.message);
         // setMessage("EL TICKET HA SIDO CREADO");
         // navigate("/m");
       })
@@ -170,7 +172,11 @@ export const TicketFormcard = ({ category, theme }) => {
                     />
                   </MDBCol>
                 </MDBRow>
-
+<MDBRow>
+  <MDBCol>
+    <div className="validationMessage">{validationCheck}</div>
+  </MDBCol>
+</MDBRow>
                 <MDBRow className="d-flex justify-content-center mt-4">
                   <div
                     className="buttonSendTicket"

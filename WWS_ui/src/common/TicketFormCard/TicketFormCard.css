@@ -21,7 +21,9 @@
   font-size: 90%;
 }
 
-
+.validationMessage {
+  color: red;
+}
 
 .buttonSendTicket:active {
   transform: scale(0.9);
