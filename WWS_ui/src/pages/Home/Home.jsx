@@ -38,7 +38,7 @@ useEffect(() => {
             onClick={() => setCredentialsSow(!credentialsShow)}
           >
             {" "}
-            Registrate.
+            Registrate aquí.
           </div>
         </div>
       </div>
